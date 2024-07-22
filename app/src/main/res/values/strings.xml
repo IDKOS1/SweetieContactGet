@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">SweetContactGet</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Common String -->
+
+
+    <!-- MainActivity -->
+
+
+    <!-- Contact Fragment -->
+
+
+    <!-- AllContact Fragment -->
+
+
+    <!-- Bookmark Fragment -->
+
+
+    <!-- Detail Fragment -->
+
+
+    <!-- Random Fragment -->
+
+
+    <!-- RandomCall Fragment -->
+
+
+    <!-- RecentRandomCall Fragment -->
+
+
+    <!-- MyPage Fragment -->
+
+
+
 </resources>
