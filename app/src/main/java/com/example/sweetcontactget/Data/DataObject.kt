@@ -10,7 +10,7 @@ object DataObject {
         1 to Contact(
             imgSrc = R.drawable.img_sweetie_1,
             name = "감우",
-            number = "010-2345-3495",
+            number = "010-2345-3444",
             relationship = "친구",
             memo = "멍청하다.",
             heart = 0,
