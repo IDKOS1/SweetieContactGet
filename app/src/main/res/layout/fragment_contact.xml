@@ -7,13 +7,47 @@
     android:background="@drawable/img_background_light"
     tools:context=".Fragments.Contact.ContactFragment">
 
-    <com.google.android.material.search.SearchBar
-        android:id="@+id/sb_contact_search"
+    <LinearLayout
+        android:id="@+id/ll_contact_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="32dp"
+        android:background="@drawable/shape_corner_radius_12dp"
+        android:backgroundTint="@color/secondary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/secondary"
+            android:contentDescription="@string/contact_search"
+            android:src="@drawable/ic_search"
+            app:tint="@color/primary" />
+
+        <EditText
+            android:id="@+id/et_contact_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints="name"
+            android:background="@null"
+            android:hint="@string/contact_search"
+            android:imeOptions="actionSearch"
+            android:includeFontPadding="false"
+            android:inputType="text"
+            android:paddingTop="5dp"
+            android:textAppearance="@style/body" />
+
+    </LinearLayout>
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_contact_tab"
@@ -23,7 +57,7 @@
         android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sb_contact_search"
+        app:layout_constraintTop_toBottomOf="@id/ll_contact_search"
         app:layout_constraintWidth_percent=".5"
         app:tabIndicator="@drawable/shape_rectangle_background"
         app:tabIndicatorColor="@color/primary"
