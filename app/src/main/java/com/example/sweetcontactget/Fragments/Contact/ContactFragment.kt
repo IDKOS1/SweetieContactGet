@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.sweetcontactget.Fragments.Contact.Adapter.ViewPagerAdapter
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.databinding.FragmentContactBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +21,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ContactFragment : Fragment() {
+    private var _binding: FragmentContactBinding? = null
+    private val binding get() = _binding!!
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -33,9 +39,26 @@ class ContactFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact, container, false)
+    ): View {
+        _binding = FragmentContactBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.vpContactViewPager.adapter = ViewPagerAdapter(this)
+        TabLayoutMediator(binding.tlContactTab, binding.vpContactViewPager) { tab, position ->
+            tab.text = when (position) {
+                in 0..1 -> resources.getStringArray(R.array.contact_tab)[position]
+                else -> throw IllegalStateException("Unexpected position: $position")
+            }
+        }.attach()
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     companion object {

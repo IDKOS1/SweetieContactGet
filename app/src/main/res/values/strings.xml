@@ -9,7 +9,10 @@
 
 
     <!-- Contact Fragment -->
-
+    <string-array name="contact_tab">
+        <item>전체 연락처</item>
+        <item>즐겨찾기</item>
+    </string-array>
 
     <!-- AllContact Fragment -->
 
