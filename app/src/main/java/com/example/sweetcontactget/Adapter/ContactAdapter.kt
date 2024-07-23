@@ -2,16 +2,17 @@ package com.example.sweetcontactget.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.setMargins
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.Data.Contact
+import com.example.sweetcontactget.Data.DataObject.contactData
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
 
-class ContactAdapter(val items : MutableList<Contact> ) : ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>(){
+class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>(){
     override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
         return oldItem == newItem
     }
@@ -19,7 +20,7 @@ class ContactAdapter(val items : MutableList<Contact> ) : ListAdapter<Contact, R
     override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
         return oldItem == newItem
     }
-}){
+}), Filterable {
 
     inner class IndexHolder(private val binding: IndexHolderBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(item: Contact.ContactIndex){
@@ -57,7 +58,7 @@ class ContactAdapter(val items : MutableList<Contact> ) : ListAdapter<Contact, R
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = items[position]
+        val item = getItem(position)
         when(item){
             is Contact.ContactIndex -> {
                 val indexHolder = holder as IndexHolder
@@ -66,19 +67,37 @@ class ContactAdapter(val items : MutableList<Contact> ) : ListAdapter<Contact, R
             is Contact.SweetieInfo ->{
                 val personInfoHolder = holder as PersonInfoHolder
                 personInfoHolder.bind(item)
-
             }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(items[position]){
+        return when(getItem(position)){
             is Contact.ContactIndex -> VIEW_TYPE_HEADER
             is Contact.SweetieInfo -> VIEW_TYPE_LIST
         }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence?): FilterResults {
+                return FilterResults().apply {
+                    values = if (charSequence.isNullOrBlank()) contactData else onFilter(contactData, charSequence.toString())
+                }
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(
+                charSequence: CharSequence?,
+                filterResults: FilterResults
+            ) {
+                val results = filterResults.values as ArrayList<Contact>
+                submitList(results)
+            }
+        }
+    }
+
+    private fun onFilter(list: List<Contact>, constraint: String): List<Contact> {
+        return list.filter { it is Contact.SweetieInfo && it.name.lowercase().contains(constraint.lowercase()) }
     }
 }

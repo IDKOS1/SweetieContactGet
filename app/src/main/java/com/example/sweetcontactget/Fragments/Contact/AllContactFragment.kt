@@ -1,6 +1,5 @@
 package com.example.sweetcontactget.Fragments.Contact
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +20,7 @@ class AllContactFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private val contactAdapter by lazy { ContactAdapter().apply { submitList(contactData.toList()) } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,24 +33,17 @@ class AllContactFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentAllContactBinding.inflate(inflater, container, false)
-
         val recyclerView = binding.rvAllContactFragment
 
-
         recyclerView.apply {
-            adapter = ContactAdapter(contactData)
+            adapter = contactAdapter
             layoutManager = LinearLayoutManager(this.context)
-
             val dividerColor = ContextCompat.getColor(context,R.color.secondary)
-                val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor,0f ,100f)
+            val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor,0f ,100f)
             addItemDecoration(itemDecoration)
         }
-
-
-
-
 
         return binding.root
     }
@@ -65,5 +58,9 @@ class AllContactFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    fun search(searchTarget: String) {
+        contactAdapter.filter.filter(searchTarget)
     }
 }
