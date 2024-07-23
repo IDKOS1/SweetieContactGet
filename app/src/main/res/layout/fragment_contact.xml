@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="64dp"
     android:background="@drawable/img_background_light"
     tools:context=".Fragments.Contact.ContactFragment">
 
@@ -12,7 +13,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginVertical="32dp"
         android:background="@drawable/shape_corner_radius_12dp"
         android:backgroundTint="@color/secondary"
         android:gravity="center_vertical"
