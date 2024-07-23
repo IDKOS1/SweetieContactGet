@@ -9,6 +9,7 @@
 
 
     <!-- Contact Fragment -->
+    <string name="contact_add_button">연락처 추가</string>
 
 
     <!-- AllContact Fragment -->
