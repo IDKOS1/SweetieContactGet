@@ -3,11 +3,8 @@ package com.example.sweetcontactget
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.sweetcontactget.Fragments.Contact.AllContactFragment
-import com.example.sweetcontactget.Fragments.Contact.ContactFragment
 import com.example.sweetcontactget.Fragments.MyPageFragment
 import com.example.sweetcontactget.Fragments.RandomCall.RandomFragment
 import com.example.sweetcontactget.databinding.ActivityMainBinding
@@ -55,4 +52,5 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frame_layout, fragment).commit()
     }
+
 }
