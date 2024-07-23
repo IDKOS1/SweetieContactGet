@@ -6,7 +6,15 @@
     <string name="main_bottom_bar_my_profile_text">내 프로필</string>
 
     <!-- Common String -->
-
+    <string name="common_cancel">취소</string>
+    <string name="common_save">저장</string>
+    <string name="common_phone_number">전화번호</string>
+    <string name="common_name">이름</string>
+    <string name="common_event_information">이벤트 정보</string>
+    <string name="common_likeability">호감도</string>
+    <string name="common_relationship">관계</string>
+    <string name="common_group">그룹</string>
+    <string name="common_memo">메모</string>
 
     <!-- MainActivity -->
 
@@ -34,5 +42,17 @@
 
     <!-- MyPage Fragment -->
 
-
+    <!-- Dialog -->
+    <string name="dialog_change_theme">색상 테마를 변경하시겠습니까?</string>
+    <string name="dialog_edit_name">이름 편집</string>
+    <string name="dialog_main_phone_number">대표</string>
+    <string name="dialog_add_phone_number">+&#160;&#160;&#160;&#160;전화번호 추가</string>
+    <string name="dialog_placeholder_name">이름 입력</string>
+    <string name="dialog_placeholder_phone_number">전화번호 입력</string>
+    <string name="dialog_placeholder_event_information">이벤트 정보 입력</string>
+    <string name="dialog_placeholder_relationship">관계 입력</string>
+    <string name="dialog_placeholder_group">그룹 지정</string>
+    <string name="dialog_placeholder_memo">메모 입력</string>
+    <string name="dialog_make_a_call">>&#160;&#160;&#160;전화 걸기</string>
+    <string name="dialog_make_a_call_cancel">>&#160;&#160;&#160;전화 걸지 않기</string>
 </resources>
