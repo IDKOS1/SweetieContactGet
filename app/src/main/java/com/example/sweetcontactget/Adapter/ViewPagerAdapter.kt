@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Fragments.Contact.Adapter
+package com.example.sweetcontactget.Adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
