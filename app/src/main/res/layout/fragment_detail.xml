@@ -44,13 +44,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp">
 
             <ImageView
                 android:id="@+id/iv_detail_profile"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="32dp"
+
                 android:background="@drawable/background_mypage_image"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
@@ -86,7 +87,7 @@
                     android:fontFamily="@font/yeonaesidae"
                     android:gravity="center"
                     android:padding="12dp"
-                    android:text="메세지"
+                    android:text="@string/detail_message"
                     android:textColor="@color/white"
                     android:textSize="25sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -101,9 +102,9 @@
                     android:gravity="center"
                     android:fontFamily="@font/yeonaesidae"
                     android:padding="12dp"
-                    android:text="전화"
+                    android:text="@string/detail_call"
                     android:textColor="@color/white"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -162,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="이벤트 정보"
+                    android:text="@string/detail_event"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -171,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="이벤트 정보가 없습니다."
+                    android:text="@string/detail_event_content"
                     android:textColor="@color/white"
                     android:textFontWeight="700"
                     android:textSize="24sp" />
@@ -191,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="호감도"
+                    android:text="@string/detail_heart"
                     android:textColor="@color/black" />
 
                 <RatingBar
@@ -221,7 +222,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="관계"
+                    android:text="@string/detail_relationship"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -230,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="관계 정보가 없습니다."
+                    android:text="@string/detail_relationship_content"
                     android:textColor="@color/white"
                     android:textFontWeight="700"
                     android:textSize="24sp" />
@@ -250,7 +251,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="메모"
+                    android:text="@string/detail_memo"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -259,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="저장된 메모가 없습니다."
+                    android:text="@string/detail_memo_content"
                     android:textColor="@color/white"
                     android:textFontWeight="700"
                     android:textSize="24sp" />
