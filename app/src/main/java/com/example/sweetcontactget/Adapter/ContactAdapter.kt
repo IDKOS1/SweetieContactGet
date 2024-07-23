@@ -78,10 +78,6 @@ class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : Di
         }
     }
 
-//    override fun getItemCount(): Int {
-//        return items.size
-//    }
-
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {

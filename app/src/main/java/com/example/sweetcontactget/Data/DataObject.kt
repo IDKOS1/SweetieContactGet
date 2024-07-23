@@ -1,5 +1,7 @@
 package com.example.sweetcontactget.Data
 
+import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.sweetcontactget.Data.DataObject.contactData
 import com.example.sweetcontactget.R
 import java.time.LocalDate
 import java.util.Collections.addAll
@@ -530,55 +532,20 @@ object DataObject {
 
     val randomCallList = mutableListOf<Int>()
 
-
-    val gaList: MutableList<Contact.SweetieInfo> = filterByIndex("ㄱ", contactMap)
-    val naList: MutableList<Contact.SweetieInfo> = filterByIndex("ㄴ", contactMap)
-    val daList: MutableList<Contact.SweetieInfo> = filterByIndex("ㄷ", contactMap)
-    val laList: MutableList<Contact.SweetieInfo> = filterByIndex("ㄹ", contactMap)
-    val maList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅁ", contactMap)
-    val baList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅂ", contactMap)
-    val saList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅅ", contactMap)
-    val ahList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅇ", contactMap)
-    val jaList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅈ", contactMap)
-    val chaList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅊ", contactMap)
-    val kaList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅋ", contactMap)
-    val taList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅌ", contactMap)
-    val paList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅍ", contactMap)
-    val haList: MutableList<Contact.SweetieInfo> = filterByIndex("ㅎ", contactMap)
-
     val contactData : MutableList<Contact> = mutableListOf()
 
     init {
-        contactData.apply {
-            add(Contact.ContactIndex("ㄱ"))
-            addAll(gaList)
-            add(Contact.ContactIndex("ㄴ"))
-            addAll(naList)
-            add(Contact.ContactIndex("ㄷ"))
-            addAll(daList)
-            add(Contact.ContactIndex("ㄹ"))
-            addAll(laList)
-            add(Contact.ContactIndex("ㅁ"))
-            addAll(maList)
-            add(Contact.ContactIndex("ㅂ"))
-            addAll(baList)
-            add(Contact.ContactIndex("ㅅ"))
-            addAll(saList)
-            add(Contact.ContactIndex("ㅇ"))
-            addAll(ahList)
-            add(Contact.ContactIndex("ㅈ"))
-            addAll(jaList)
-            add(Contact.ContactIndex("ㅊ"))
-            addAll(chaList)
-            add(Contact.ContactIndex("ㅋ"))
-            addAll(kaList)
-            add(Contact.ContactIndex("ㅌ"))
-            addAll(taList)
-            add(Contact.ContactIndex("ㅍ"))
-            addAll(paList)
-            add(Contact.ContactIndex("ㅎ"))
-            addAll(haList)
+        val consonants = listOf("ga","na","da","la","ma","ba","sa","ah","ja","cha","ka","ta","pa","ha")
+        val consonantMap = mapOf(
+            "ga" to "ㄱ", "na" to "ㄴ", "da" to "ㄷ", "la" to "ㄹ", "ma" to "ㅁ", "ba" to "ㅂ",
+            "sa" to "ㅅ", "ah" to "ㅇ", "ja" to "ㅈ", "cha" to "ㅊ", "ka" to "ㅋ", "ta" to "ㅌ",
+            "pa" to "ㅍ", "ha" to "ㅎ"
+        )
+
+        for (i in consonants){
+            filterByIndex(i, contactMap,consonantMap)
         }
+
     }
 
 
@@ -589,9 +556,7 @@ object DataObject {
 
 
 fun getIndex(char: Char): String {
-    val initialConsonants = listOf(
-        'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
-    )
+
     val indexList = listOf("ㄱ","ㄱ", "ㄴ", "ㄷ","ㄷ", "ㄹ", "ㅁ", "ㅂ","ㅂ" ,"ㅅ", "ㅅ","ㅇ", "ㅈ","ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ")
 
     val start = '가'
@@ -605,20 +570,25 @@ fun getIndex(char: Char): String {
     return char.toString()
 }
 
-fun filterByIndex(
-    index: String,
-    contactMap: MutableMap<Int, Contact>
-): MutableList<Contact.SweetieInfo> {
-
+fun filterByIndex(index: String, contactMap: MutableMap<Int, Contact>, consonantMap: Map<String, String>) {
     val filteredList = mutableListOf<Contact.SweetieInfo>()
 
     for (contact in contactMap.values) {
         if (contact is Contact.SweetieInfo) {
-            if (getIndex(contact.name.first()) == index) {
+            if (getIndex(contact.name.first()) == consonantMap[index]) {
                 filteredList.add(contact)
             }
         }
     }
-    return filteredList
+
+    if (filteredList.isNotEmpty()) {
+        contactData.add(Contact.ContactIndex(consonantMap[index]!!))
+        contactData.addAll(filteredList)
+    }
 }
+
+
+
+
+
 
