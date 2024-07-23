@@ -47,13 +47,15 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.vpContactViewPager.adapter = ViewPagerAdapter(this)
-        TabLayoutMediator(binding.tlContactTab, binding.vpContactViewPager) { tab, position ->
-            tab.text = when (position) {
-                in 0..1 -> resources.getStringArray(R.array.contact_tab)[position]
-                else -> throw IllegalStateException("Unexpected position: $position")
-            }
-        }.attach()
+        with (binding) {
+            vpContactViewPager.adapter = ViewPagerAdapter(this@ContactFragment)
+            TabLayoutMediator(tlContactTab, vpContactViewPager) { tab, position ->
+                tab.text = when (position) {
+                    in 0..1 -> resources.getStringArray(R.array.contact_tab)[position]
+                    else -> throw IllegalStateException("Unexpected position: $position")
+                }
+            }.attach()
+        }
     }
 
     override fun onDestroyView() {
