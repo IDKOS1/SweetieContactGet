@@ -2,6 +2,8 @@ package com.example.sweetcontactget.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.setMargins
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -64,6 +66,7 @@ class ContactAdapter(val items : MutableList<Contact> ) : ListAdapter<Contact, R
             is Contact.SweetieInfo ->{
                 val personInfoHolder = holder as PersonInfoHolder
                 personInfoHolder.bind(item)
+
             }
         }
     }

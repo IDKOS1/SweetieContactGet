@@ -8,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentContainer
 import androidx.fragment.app.FragmentTransaction
 import com.example.sweetcontactget.Fragments.Contact.AllContactFragment
+import com.example.sweetcontactget.Fragments.Contact.ContactFragment
 import com.example.sweetcontactget.databinding.ActivityTestBinding
 
 class TestActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class TestActivity : AppCompatActivity() {
             insets
         }
 
-        val fragment = AllContactFragment()
+        val fragment = ContactFragment()
         supportFragmentManager.beginTransaction().add(R.id.test,fragment).commit()
 
     }
