@@ -48,5 +48,8 @@
         <item name="android:textFontWeight">500</item>
     </style>
 
+    <style name="HeartRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar_heart</item>
+    </style>
 
 </resources>
