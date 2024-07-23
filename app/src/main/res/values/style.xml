@@ -3,50 +3,53 @@
     <style name="headline_b">
         <item name="fontFamily">@font/yeonaesidae</item>
         <item name="android:textSize">36sp</item>
-        <item name="fontWeight">700</item>
+        <item name="android:textFontWeight">700</item>
     </style>
 
     <style name="headline">
         <item name="fontFamily">@font/yeonaesidae</item>
         <item name="android:textSize">36sp</item>
-        <item name="fontWeight">500</item>
+        <item name="android:textFontWeight">500</item>
     </style>
 
     <style name="subtitle_b">
         <item name="fontFamily">@font/yeonaesidae</item>
         <item name="android:textSize">24sp</item>
-        <item name="fontWeight">700</item>
+        <item name="android:textFontWeight">700</item>
     </style>
 
     <style name="subtitle">
         <item name="fontFamily">@font/yeonaesidae</item>
         <item name="android:textSize">24sp</item>
-        <item name="fontWeight">500</item>
+        <item name="android:textFontWeight">300</item>
     </style>
 
     <style name="body_b">
         <item name="fontFamily">@font/yeonaesidae</item>
         <item name="android:textSize">16sp</item>
-        <item name="fontWeight">700</item>
+        <item name="android:textFontWeight">700</item>
     </style>
 
     <style name="body">
         <item name="fontFamily">@font/yeonaesidae</item>
         <item name="android:textSize">16sp</item>
-        <item name="fontWeight">500</item>
+        <item name="android:textFontWeight">500</item>
     </style>
 
     <style name="description_b">
         <item name="fontFamily">@font/yeonaesidae</item>
         <item name="android:textSize">12sp</item>
-        <item name="fontWeight">700</item>
+        <item name="android:textFontWeight">700</item>
     </style>
 
     <style name="description">
         <item name="fontFamily">@font/yeonaesidae</item>
         <item name="android:textSize">12sp</item>
-        <item name="fontWeight">500</item>
+        <item name="android:textFontWeight">500</item>
     </style>
 
+    <style name="BottomNavigationViewTextStyle">
+        <item name="android:fontFamily">@font/yeonaesidae</item>
+    </style>
 
 </resources>

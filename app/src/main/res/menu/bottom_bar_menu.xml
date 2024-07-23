@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/randomItem"
+        android:icon="@drawable/ic_phone"
+        android:title="@string/main_bottom_bar_random_call"/>
+    <item
+        android:id="@+id/contactsItem"
+        android:icon="@drawable/ic_book"
+        android:title="@string/main_bottom_bar_contacts_text"/>
+    <item
+        android:id="@+id/myProfileItem"
+        android:icon="@drawable/ic_person"
+        android:title="@string/main_bottom_bar_my_profile_text"/>
+
+
+
+</menu>
