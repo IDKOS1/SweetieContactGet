@@ -1,13 +1,12 @@
 package com.example.sweetcontactget.Fragments.Contact
 
-import android.graphics.drawable.Drawable
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.Adapter.ContactAdapter
 import com.example.sweetcontactget.Data.DataObject.contactData
@@ -43,11 +42,9 @@ class AllContactFragment : Fragment() {
         recyclerView.apply {
             adapter = ContactAdapter(contactData)
             layoutManager = LinearLayoutManager(this.context)
-            var itemDecoration = DividerItemDecoration(this.context,DividerItemDecoration.VERTICAL)
-            val customDivider = ContextCompat.getDrawable(this.context, R.drawable.custom_divider)
-            if(customDivider != null){
-                itemDecoration.setDrawable(customDivider)
-            }
+
+            val dividerColor = ContextCompat.getColor(context,R.color.secondary)
+                val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor,0f ,100f)
             addItemDecoration(itemDecoration)
         }
 
