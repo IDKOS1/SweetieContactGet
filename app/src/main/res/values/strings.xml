@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">SweetContactGet</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="main_bottom_bar_random_call">랜덤 전화걸기</string>
-    <string name="main_bottom_bar_contacts_text">연락처</string>
-    <string name="main_bottom_bar_my_profile_text">내 프로필</string>
+
 
     <!-- Common String -->
     <string name="common_phone_number">전화번호</string>
@@ -18,7 +16,9 @@
     <string name="common_memo">메모</string>
 
     <!-- MainActivity -->
-
+    <string name="main_bottom_bar_random_call">랜덤으로 전화걸기</string>
+    <string name="main_bottom_bar_contacts_text">연락처</string>
+    <string name="main_bottom_bar_my_profile_text">내 프로필</string>
 
     <!-- Contact Fragment -->
     <string-array name="contact_tab">
@@ -46,7 +46,10 @@
     <string name="detail_memo_content">저장된 메모가 없습니다.</string>
 
     <!-- Random Fragment -->
-
+    <string-array name="random_tab">
+        <item>랜덤 전화 걸기</item>
+        <item>최근 랜덤 전화</item>
+    </string-array>
 
     <!-- RandomCall Fragment -->
 

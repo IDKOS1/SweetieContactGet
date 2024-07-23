@@ -5,9 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/img_background_light"
     tools:context=".MainActivity">
 
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_frame_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -20,10 +21,10 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
+        android:background="@color/secondary"
+        app:itemActiveIndicatorStyle="@null"
         app:itemIconTint="@color/white"
         app:itemRippleColor="@color/secondary"
-        app:itemActiveIndicatorStyle="@null"
         app:itemTextAppearanceActive="@style/BottomNavigationViewTextStyle"
         app:itemTextAppearanceInactive="@style/BottomNavigationViewTextStyle"
         app:itemTextColor="@color/white"
