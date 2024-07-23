@@ -1,14 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/img_background_light"
     tools:context=".Fragments.Contact.ContactFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <LinearLayout
+        android:id="@+id/ll_contact_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="32dp"
+        android:background="@drawable/shape_corner_radius_12dp"
+        android:backgroundTint="@color/secondary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/secondary"
+            android:contentDescription="@string/contact_search"
+            android:src="@drawable/ic_search"
+            app:tint="@color/primary" />
+
+        <EditText
+            android:id="@+id/et_contact_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints="name"
+            android:background="@null"
+            android:hint="@string/contact_search"
+            android:imeOptions="actionSearch"
+            android:includeFontPadding="false"
+            android:inputType="text"
+            android:paddingTop="5dp"
+            android:textAppearance="@style/body" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_contact_tab"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_contact_search"
+        app:layout_constraintWidth_percent=".5"
+        app:tabIndicator="@drawable/shape_rectangle_background"
+        app:tabIndicatorColor="@color/primary"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorHeight="4dp"
+        app:tabPaddingEnd="0dp"
+        app:tabPaddingStart="0dp"
+        app:tabRippleColor="@null"
+        app:tabSelectedTextColor="@color/primary"
+        app:tabTextAppearance="@style/body_b"
+        app:tabTextColor="@color/gray">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="전체 연락처" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="즐겨찾기" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <View
+        android:id="@+id/v_contact_line"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/secondary"
+        android:translationZ="-1dp"
+        app:layout_constraintBottom_toBottomOf="@id/tl_contact_tab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_contact_view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_contact_line" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_contact_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/shape_circle_background"
+        android:backgroundTint="@color/secondary"
+        android:contentDescription="@string/contact_add_button"
+        android:scaleType="center"
+        android:src="@drawable/ic_plus"
+        android:tint="@color/primary"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        app:fabCustomSize="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="48dp"
+        app:shapeAppearance="@drawable/shape_circle_background"
+        app:tint="@color/primary" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
