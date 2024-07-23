@@ -13,6 +13,7 @@
         <item>전체 연락처</item>
         <item>즐겨찾기</item>
     </string-array>
+    <string name="contact_add_button">연락처 추가</string>
 
     <!-- AllContact Fragment -->
 
