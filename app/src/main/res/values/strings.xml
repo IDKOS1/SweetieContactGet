@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">SweetContactGet</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_bottom_bar_random_call">랜덤 전화걸기</string>
+    <string name="main_bottom_bar_contacts_text">연락처</string>
+    <string name="main_bottom_bar_my_profile_text">내 프로필</string>
 
     <!-- Common String -->
     <string name="common_phone_number">전화번호</string>
@@ -38,7 +41,7 @@
 
 
     <!-- MyPage Fragment -->
-    <string name="mypage_name">이 름</string>
+    <string name="common_name">이 름</string>
     <string name="mypage_birthday">생일</string>
     <string name="mypage_birthday_content">생일 정보가 없습니다.</string>
     <string name="mypage_address">주소</string>
