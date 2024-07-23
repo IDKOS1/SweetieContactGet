@@ -48,5 +48,8 @@
         <item name="android:textFontWeight">500</item>
     </style>
 
+    <style name="BottomNavigationViewTextStyle">
+        <item name="android:fontFamily">@font/yeonaesidae</item>
+    </style>
 
 </resources>
