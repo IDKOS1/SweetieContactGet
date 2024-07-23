@@ -26,7 +26,8 @@
         android:layout_height="33dp"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/shape_gradient_secondary"
+        android:paddingTop="5dp"
+        android:background="@drawable/img_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -40,7 +41,8 @@
         android:layout_height="33dp"
         android:layout_marginStart="50dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/shape_gradient_secondary"
+        android:paddingTop="5dp"
+        android:background="@drawable/img_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_theme_change_cancel"/>
 

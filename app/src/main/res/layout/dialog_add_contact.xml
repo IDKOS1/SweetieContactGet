@@ -67,11 +67,12 @@
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="18dp"
-                android:gravity="center"
                 android:text="@string/dialog_main_phone_number"
                 android:textSize="10dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/yeonaesidae_b"
+                android:drawableStart="@drawable/ic_check"
+                android:paddingTop="4dp"
                 android:background="@drawable/shape_corner_radius_12dp_bg"
                 app:layout_constraintTop_toBottomOf="@id/cl_add_contact_name"
                 app:layout_constraintBottom_toTopOf="@id/cl_add_contact_phone_number"
@@ -293,7 +294,8 @@
                 android:layout_width="125dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/shape_gradient_secondary"
+                android:paddingTop="5dp"
+                android:background="@drawable/img_btn"
                 app:layout_constraintTop_toBottomOf="@id/cl_add_contact_memo"
                 app:layout_constraintStart_toStartOf="@id/cl_add_contact_memo"/>
 
@@ -305,7 +307,8 @@
                 android:fontFamily="@font/yeonaesidae_b"
                 android:layout_width="125dp"
                 android:layout_height="50dp"
-                android:background="@drawable/shape_gradient_secondary"
+                android:paddingTop="5dp"
+                android:background="@drawable/img_btn"
                 app:layout_constraintTop_toTopOf="@id/btn_add_contact_cancel"
                 app:layout_constraintEnd_toEndOf="@id/cl_add_contact_memo"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

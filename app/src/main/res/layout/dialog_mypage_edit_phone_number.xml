@@ -41,7 +41,8 @@
         android:layout_height="33dp"
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/shape_gradient_secondary"
+        android:paddingTop="5dp"
+        android:background="@drawable/img_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
