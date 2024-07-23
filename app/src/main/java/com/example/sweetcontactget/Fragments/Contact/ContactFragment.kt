@@ -1,6 +1,8 @@
 package com.example.sweetcontactget.Fragments.Contact
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,7 @@ private const val ARG_PARAM2 = "param2"
 class ContactFragment : Fragment() {
     private var _binding: FragmentContactBinding? = null
     private val binding get() = _binding!!
+    private val vpAdapter: ViewPagerAdapter by lazy { ViewPagerAdapter(this) }
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -47,15 +50,8 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with (binding) {
-            vpContactViewPager.adapter = ViewPagerAdapter(this@ContactFragment)
-            TabLayoutMediator(tlContactTab, vpContactViewPager) { tab, position ->
-                tab.text = when (position) {
-                    in 0..1 -> resources.getStringArray(R.array.contact_tab)[position]
-                    else -> throw IllegalStateException("Unexpected position: $position")
-                }
-            }.attach()
-        }
+        setViewPager()
+        setSearch()
     }
 
     override fun onDestroyView() {
@@ -81,5 +77,27 @@ class ContactFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun setViewPager() {
+        with (binding) {
+            vpContactViewPager.adapter = vpAdapter
+            TabLayoutMediator(tlContactTab, vpContactViewPager) { tab, position ->
+                tab.text = when (position) {
+                    in 0..1 -> resources.getStringArray(R.array.contact_tab)[position]
+                    else -> throw IllegalStateException("Unexpected position: $position")
+                }
+            }.attach()
+        }
+    }
+
+    private fun setSearch() {
+        binding.etContactSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {
+                (vpAdapter.fragments[0] as AllContactFragment).search(binding.etContactSearch.text.toString())
+            }
+        })
     }
 }
