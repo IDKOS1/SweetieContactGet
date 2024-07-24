@@ -6,8 +6,6 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.sweetcontactget.Fragments.Contact.AllContactFragment
 import com.example.sweetcontactget.Fragments.Contact.ContactFragment
