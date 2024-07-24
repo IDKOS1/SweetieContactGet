@@ -24,13 +24,23 @@
             app:tint="@color/primary" />
 
         <ImageView
+            android:id="@+id/iv_detail_delete"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_setting"
+            android:src="@drawable/ic_delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/primary" />
+
+        <ImageView
+            android:id="@+id/iv_detail_mark"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_heart_empty"
+            app:layout_constraintBottom_toBottomOf="@id/iv_detail_delete"
+            app:layout_constraintEnd_toStartOf="@id/iv_detail_delete"
+            app:layout_constraintTop_toTopOf="@id/iv_detail_delete" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,6 +88,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_name">
 
                 <TextView
+                    android:id="@+id/tv_detail_message"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/background_button"
@@ -93,6 +104,7 @@
                     app:layout_constraintWidth_percent="0.45" />
 
                 <TextView
+                    android:id="@+id/tv_detail_call"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/background_button"
