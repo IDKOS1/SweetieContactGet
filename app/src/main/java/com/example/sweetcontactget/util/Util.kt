@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Util
+package com.example.sweetcontactget.util
 
 import android.content.Context
 import android.content.Intent

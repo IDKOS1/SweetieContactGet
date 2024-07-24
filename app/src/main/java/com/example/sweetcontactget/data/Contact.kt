@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Data
+package com.example.sweetcontactget.data
 
 sealed class Contact {
     data class SweetiesID(val key: Int, val value: SweetieInfo) : Contact()

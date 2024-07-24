@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Fragments.Contact
+package com.example.sweetcontactget.fragments.Contact
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sweetcontactget.Adapter.ContactAdapter
+import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentBookmarkBinding
+import com.example.sweetcontactget.util.CustomDividerDecoration
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

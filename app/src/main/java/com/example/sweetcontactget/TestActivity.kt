@@ -1,16 +1,14 @@
 package com.example.sweetcontactget
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.sweetcontactget.Dialog.EditTextDialog
-import com.example.sweetcontactget.Dialog.MainDialog
-import com.example.sweetcontactget.Dialog.RandomCallDialog
-import com.example.sweetcontactget.Dialog.ThemeDialog
+import com.example.sweetcontactget.dialog.EditTextDialog
+import com.example.sweetcontactget.dialog.MainDialog
+import com.example.sweetcontactget.dialog.RandomCallDialog
+import com.example.sweetcontactget.dialog.ThemeDialog
 import com.example.sweetcontactget.databinding.ActivityTestBinding
 
 class TestActivity : AppCompatActivity() {

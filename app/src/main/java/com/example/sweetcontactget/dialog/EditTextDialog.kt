@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Dialog
+package com.example.sweetcontactget.dialog
 
 import android.app.Dialog
 import android.content.Context
@@ -8,34 +8,18 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.ThemeUtils
-import com.example.sweetcontactget.databinding.DialogMyPageThemeBinding
+import com.example.sweetcontactget.databinding.DialogMyPageEditTextBinding
 
-class ThemeDialog(context: Context) : Dialog(context) {
-    private lateinit var binding : DialogMyPageThemeBinding
+class EditTextDialog(context: Context) : Dialog(context) {
+    private lateinit var binding : DialogMyPageEditTextBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogMyPageThemeBinding.inflate(layoutInflater)
+        binding = DialogMyPageEditTextBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setCancelable(false)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        dialogResize(context,this@ThemeDialog, 0.8f, 0.2f)
-
-        binding.btnThemeChangeCancel.setOnClickListener {
-            changeTheme(AppCompatDelegate.MODE_NIGHT_NO)
-            dismiss()
-        }
-        binding.btnThemeChangeSave.setOnClickListener {
-            changeTheme(AppCompatDelegate.MODE_NIGHT_YES)
-            dismiss()
-        }
-    }
-
-    private fun changeTheme(mode: Int) {
-        AppCompatDelegate.setDefaultNightMode(mode)
+        setCancelable(false)
+        dialogResize(context,this@EditTextDialog, 0.8f, 0.2f)
     }
 
     fun dialogResize(context: Context, dialog: Dialog, width: Float, height: Float){

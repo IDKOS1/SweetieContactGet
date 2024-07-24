@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Data
+package com.example.sweetcontactget.data
 
 import java.time.LocalDate
 

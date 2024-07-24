@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Fragments.Contact
+package com.example.sweetcontactget.util
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,9 +6,8 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.view.View
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sweetcontactget.Adapter.ContactAdapter.Companion.VIEW_TYPE_HEADER
+import com.example.sweetcontactget.adapter.ContactAdapter.Companion.VIEW_TYPE_HEADER
 
 class CustomDividerDecoration (context: Context,private val height : Float, private val color : Int, private val padding : Float, private val endMargin: Float) : RecyclerView.ItemDecoration(){
 

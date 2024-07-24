@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Fragments.RandomCall
+package com.example.sweetcontactget.fragments.RandomCall
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.adapter.RandomViewPageAdapter
 import com.example.sweetcontactget.databinding.FragmentRandomBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

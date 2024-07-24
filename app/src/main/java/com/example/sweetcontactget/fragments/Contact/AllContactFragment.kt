@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Fragments.Contact
+package com.example.sweetcontactget.fragments.Contact
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sweetcontactget.Adapter.ContactAdapter
-import com.example.sweetcontactget.Data.Contact
-import com.example.sweetcontactget.Data.DataObject.contactData
+import com.example.sweetcontactget.adapter.ContactAdapter
+import com.example.sweetcontactget.data.Contact
+import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
+import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
-import com.reddit.indicatorfastscroll.FastScrollerView
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
