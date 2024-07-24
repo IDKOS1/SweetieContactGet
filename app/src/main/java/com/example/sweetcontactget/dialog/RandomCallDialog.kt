@@ -1,16 +1,12 @@
-package com.example.sweetcontactget.Dialog
+package com.example.sweetcontactget.dialog
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Point
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
-import com.example.sweetcontactget.Data.Contact
-import com.example.sweetcontactget.Data.DataObject
+import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.DialogRandomCallBinding
 import kotlin.random.Random
 import kotlin.random.nextInt

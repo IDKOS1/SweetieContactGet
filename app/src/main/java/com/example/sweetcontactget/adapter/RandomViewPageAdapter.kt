@@ -1,7 +1,9 @@
-package com.example.sweetcontactget.Fragments.RandomCall
+package com.example.sweetcontactget.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.sweetcontactget.fragments.RandomCall.RandomCallFragment
+import com.example.sweetcontactget.fragments.RandomCall.RecentRancdomCallFragment
 
 class RandomViewPageAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 2

@@ -1,7 +1,7 @@
-package com.example.sweetcontactget.Data
+package com.example.sweetcontactget.data
 
 import com.example.sweetcontactget.R
-import com.example.sweetcontactget.Util.KoreanMatcher.groupByIndex
+import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
 import java.time.LocalDate
 
 object DataObject {

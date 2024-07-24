@@ -1,6 +1,6 @@
-package com.example.sweetcontactget.Util
+package com.example.sweetcontactget.util
 
-import com.example.sweetcontactget.Data.Contact
+import com.example.sweetcontactget.data.Contact
 
 object KoreanMatcher {
     private const val KOREAN_UNICODE_START = 44032 // 가

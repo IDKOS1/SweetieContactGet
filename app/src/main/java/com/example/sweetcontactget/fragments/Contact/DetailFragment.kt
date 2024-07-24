@@ -1,14 +1,12 @@
-package com.example.sweetcontactget.Fragments.Contact
+package com.example.sweetcontactget.fragments.Contact
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
-import com.example.sweetcontactget.Data.DataObject
-import com.example.sweetcontactget.R
-import com.example.sweetcontactget.Util.Util
+import com.example.sweetcontactget.data.DataObject
+import com.example.sweetcontactget.util.Util
 import com.example.sweetcontactget.databinding.FragmentDetailBinding
 
 private const val ARG_SWEETIE_ID = "userId"

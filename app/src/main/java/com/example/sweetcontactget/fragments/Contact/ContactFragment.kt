@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Fragments.Contact
+package com.example.sweetcontactget.fragments.Contact
 
 import android.os.Bundle
 import android.text.Editable
@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.sweetcontactget.Adapter.ViewPagerAdapter
+import com.example.sweetcontactget.adapter.ViewPagerAdapter
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentContactBinding
 import com.google.android.material.tabs.TabLayoutMediator

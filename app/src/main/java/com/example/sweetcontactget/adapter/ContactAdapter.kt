@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.Adapter
+package com.example.sweetcontactget.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sweetcontactget.Data.Contact
-import com.example.sweetcontactget.Data.DataObject.contactData
-import com.example.sweetcontactget.Util.KoreanMatcher
+import com.example.sweetcontactget.data.Contact
+import com.example.sweetcontactget.data.DataObject.contactData
+import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
 
