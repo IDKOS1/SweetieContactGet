@@ -1,26 +1,34 @@
 package com.example.sweetcontactget.Fragments.RandomCall
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.databinding.FragmentRandomCallBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RandomCallFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RandomCallFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private var firstAnimate = true
+    private var secondAnimate = true
+
+    private var _binding: FragmentRandomCallBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,21 +41,27 @@ class RandomCallFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_random_call, container, false)
+    ): View {
+        _binding = FragmentRandomCallBinding.inflate(inflater, container, false)
+
+//        loadGif(firstAnimate, R.raw.gacha1, binding.ivFirstGif)
+
+        binding.btnRandomCall.setOnClickListener {
+            loadGif(firstAnimate, R.raw.gacha1, binding.ivFirstGif)
+            binding.ivFirstGif.visibility = View.VISIBLE
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.ivFirstGif.visibility = View.INVISIBLE
+                loadGif(secondAnimate, R.raw.gacha2, binding.ivSecondGif)
+
+                //TODO 전화걸기 intent
+            }, 2000)
+        }
+
+//        Glide.with(this).load(R.raw.gacha2).into(binding.ivSecondGif)
+        return binding.root
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RandomCallFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             RandomCallFragment().apply {
@@ -57,4 +71,37 @@ class RandomCallFragment : Fragment() {
                 }
             }
     }
+
+    private fun loadGif(isAnimationActive: Boolean, loadGif: Int, imageView: ImageView) {
+        if (isAnimationActive) {
+            Glide.with(this).asGif().load(loadGif)
+                .listener(object : RequestListener<GifDrawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<GifDrawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: GifDrawable?,
+                        model: Any?,
+                        target: Target<GifDrawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        resource?.setLoopCount(1)
+                        return false
+                    }
+
+                }).into(imageView)
+//            firstAnimate = false
+        } else {
+            Glide.with(this).asBitmap().load(R.raw.gacha1).into(binding.ivFirstGif)
+//            firstAnimate = true
+        }
+    }
+
 }
