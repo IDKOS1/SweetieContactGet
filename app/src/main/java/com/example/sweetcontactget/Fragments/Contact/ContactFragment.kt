@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.example.sweetcontactget.Adapter.ViewPagerAdapter
+import com.example.sweetcontactget.Data.BookmarkViewModel
+import com.example.sweetcontactget.Data.DataObject.contactMap
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentContactBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,6 +28,7 @@ private const val ARG_PARAM2 = "param2"
 class ContactFragment : Fragment() {
     private var _binding: FragmentContactBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: BookmarkViewModel by activityViewModels()
     private val vpAdapter: ViewPagerAdapter by lazy { ViewPagerAdapter(this) }
 
     // TODO: Rename and change types of parameters
@@ -52,6 +56,14 @@ class ContactFragment : Fragment() {
 
         setViewPager()
         setSearch()
+
+        // TODO: 즐겨찾기 테스트용 임시 동작 지정
+        with (binding.fabContactAdd) {
+            setOnClickListener {
+                val randomIndex = contactMap.keys.random()
+                viewModel.addToBookmark(randomIndex)
+            }
+        }
     }
 
     override fun onDestroyView() {

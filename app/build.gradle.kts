@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.bumptech.glide)
     implementation(libs.androidx.viewpager2)
+    implementation("androidx.fragment:fragment-ktx:1.5.7")
+    implementation("androidx.activity:activity-ktx:1.7.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
