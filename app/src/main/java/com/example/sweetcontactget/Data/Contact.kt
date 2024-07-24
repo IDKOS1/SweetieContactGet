@@ -1,6 +1,10 @@
 package com.example.sweetcontactget.Data
 
 sealed class Contact {
+    data class SweetiesID(val key: Int, val value: SweetieInfo) : Contact()
+    data class ContactIndex(
+        val letter: String
+    ) : Contact()
 
     data class SweetieInfo(
         val imgSrc: Int,
@@ -11,11 +15,6 @@ sealed class Contact {
         var heart: Int,
         var isMarked: Boolean
     ) : Contact()
-    data class ContactIndex(
-        val letter : String
-    ) : Contact()
-
 }
-
 
 

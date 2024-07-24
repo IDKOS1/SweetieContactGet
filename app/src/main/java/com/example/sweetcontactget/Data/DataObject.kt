@@ -1,11 +1,8 @@
 package com.example.sweetcontactget.Data
 
-import androidx.lifecycle.viewmodel.CreationExtras
-import com.example.sweetcontactget.Data.DataObject.contactData
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.Util.KoreanMatcher.groupByIndex
 import java.time.LocalDate
-import java.util.Collections.addAll
-
 
 object DataObject {
     fun getSweetieInfo(sweetieId: Int): Contact.SweetieInfo {
@@ -535,53 +532,11 @@ object DataObject {
 
     val randomCallList = mutableListOf<Int>()
 
-    val contactData : MutableList<Contact> = mutableListOf()
+    val contactData: MutableList<Contact> = mutableListOf()
+    val bookmarkData get() = contactMap.filter { it.value.isMarked }
 
     init {
-        val consonants = listOf("ga","na","da","la","ma","ba","sa","ah","ja","cha","ka","ta","pa","ha")
-        val consonantMap = mapOf(
-            "ga" to "ㄱ", "na" to "ㄴ", "da" to "ㄷ", "la" to "ㄹ", "ma" to "ㅁ", "ba" to "ㅂ",
-            "sa" to "ㅅ", "ah" to "ㅇ", "ja" to "ㅈ", "cha" to "ㅊ", "ka" to "ㅋ", "ta" to "ㅌ",
-            "pa" to "ㅍ", "ha" to "ㅎ"
-        )
-
-        for (i in consonants){
-            filterByIndex(i, contactMap,consonantMap)
-        }
-
-    }
-}
-
-
-
-
-fun getIndex(char: Char): String {
-
-    val indexList = listOf("ㄱ","ㄱ", "ㄴ", "ㄷ","ㄷ", "ㄹ", "ㅁ", "ㅂ","ㅂ" ,"ㅅ", "ㅅ","ㅇ", "ㅈ","ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ")
-
-    val start = '가'
-    val end = '힣'
-    val base = 588
-
-    if (char in start..end) {
-        val index = (char - start) / base
-        return indexList[index]
-    }
-    return char.toString()
-}
-
-fun filterByIndex(index: String, contactMap: MutableMap<Int, Contact.SweetieInfo>, consonantMap: Map<String, String>) {
-    val filteredList = mutableListOf<Contact.SweetieInfo>()
-
-    for (contact in contactMap.values) {
-        if (getIndex(contact.name.first()) == consonantMap[index]) {
-            filteredList.add(contact)
-        }
-    }
-
-    if (filteredList.isNotEmpty()) {
-        contactData.add(Contact.ContactIndex(consonantMap[index]!!))
-        contactData.addAll(filteredList)
+        contactData.apply { addAll(groupByIndex(contactMap)) }
     }
 }
 

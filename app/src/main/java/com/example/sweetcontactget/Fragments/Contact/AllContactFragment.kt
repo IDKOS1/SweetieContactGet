@@ -23,6 +23,8 @@ class AllContactFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var _binding: FragmentAllContactBinding? = null
+    private val binding get() = _binding!!
     private val contactAdapter by lazy { ContactAdapter().apply { submitList(contactData.toList()) } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +39,7 @@ class AllContactFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentAllContactBinding.inflate(inflater, container, false)
-
+        _binding = FragmentAllContactBinding.inflate(inflater, container, false)
         val recyclerView = binding.rvAllContactFragment
 
         recyclerView.apply {
@@ -63,7 +64,10 @@ class AllContactFragment : Fragment() {
         return binding.root
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
     companion object {
         // TODO: Rename and change types and number of parameters
@@ -77,7 +81,7 @@ class AllContactFragment : Fragment() {
             }
     }
 
-    fun search(searchTarget: String) {
+    fun search(searchTarget: CharSequence?) {
         contactAdapter.filter.filter(searchTarget)
     }
 }
