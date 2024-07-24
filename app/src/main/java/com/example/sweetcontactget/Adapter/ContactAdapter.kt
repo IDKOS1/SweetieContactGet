@@ -11,6 +11,7 @@ import com.example.sweetcontactget.Data.Contact
 import com.example.sweetcontactget.Data.DataObject.contactData
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
+import com.reddit.indicatorfastscroll.FastScrollerView
 
 class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>(){
     override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
@@ -103,5 +104,8 @@ class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : Di
     private fun onFilter(list: List<Contact>, constraint: String): List<Contact> {
         return list.filter { it is Contact.SweetieInfo && it.name.lowercase().contains(constraint.lowercase()) }
     }
+
+
+
 }
 
