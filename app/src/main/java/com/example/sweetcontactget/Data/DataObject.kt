@@ -8,10 +8,15 @@ import java.util.Collections.addAll
 
 
 object DataObject {
+    fun getSweetieInfo(sweetieId: Int): Contact.SweetieInfo {
+        return contactMap[sweetieId]!!
+    }
 
-    val contactMap: MutableMap<Int, Contact> = mutableMapOf(
+    fun deleteSweetieInfo(sweetieId: Int) {
+        contactMap.remove(sweetieId)
+    }
 
-
+    private val contactMap: MutableMap<Int, Contact.SweetieInfo> = mutableMapOf(
         1 to Contact.SweetieInfo(
             imgSrc = R.drawable.img_sweetie_1,
             name = "감우",
@@ -567,14 +572,12 @@ fun getIndex(char: Char): String {
     return char.toString()
 }
 
-fun filterByIndex(index: String, contactMap: MutableMap<Int, Contact>, consonantMap: Map<String, String>) {
+fun filterByIndex(index: String, contactMap: MutableMap<Int, Contact.SweetieInfo>, consonantMap: Map<String, String>) {
     val filteredList = mutableListOf<Contact.SweetieInfo>()
 
     for (contact in contactMap.values) {
-        if (contact is Contact.SweetieInfo) {
-            if (getIndex(contact.name.first()) == consonantMap[index]) {
-                filteredList.add(contact)
-            }
+        if (getIndex(contact.name.first()) == consonantMap[index]) {
+            filteredList.add(contact)
         }
     }
 
