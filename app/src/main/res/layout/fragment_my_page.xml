@@ -15,15 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/primary" />
-
-        <ImageView
+            android:id="@+id/iv_mypage_setting"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_setting"
@@ -37,6 +29,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_mypage_top_bar">
@@ -112,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="생일"
+                    android:text="@string/mypage_birthday"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -121,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="생일 정보가 없습니다."
+                    android:text="@string/mypage_birthday_content"
                     android:textColor="@color/white"
                     android:textFontWeight="700"
                     android:textSize="24sp" />
@@ -141,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="주소"
+                    android:text="@string/mypage_address"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -150,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yeonaesidae"
-                    android:text="주소 정보가 없습니다."
+                    android:text="@string/mypage_address_content"
                     android:textColor="@color/white"
                     android:textFontWeight="700"
                     android:textSize="24sp" />

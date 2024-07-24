@@ -1,5 +1,6 @@
 package com.example.sweetcontactget.Adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -9,72 +10,94 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.Data.Contact
 import com.example.sweetcontactget.Data.DataObject.contactData
+import com.example.sweetcontactget.Util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
 
-class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>(){
-    override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-        return oldItem == newItem
-    }
+class ContactAdapter :
+    ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>() {
+        override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
+            return oldItem == newItem
+        }
 
-    override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-        return oldItem == newItem
-    }
-}), Filterable {
+        override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
+            return oldItem == newItem
+        }
+    }), Filterable {
 
-    inner class IndexHolder(private val binding: IndexHolderBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(item: Contact.ContactIndex){
+    inner class IndexHolder(private val binding: IndexHolderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Contact.ContactIndex) {
             binding.apply {
                 tvIndexLetter.text = item.letter
             }
         }
 
     }
-    inner class PersonInfoHolder(private val binding: PersonInfoHolderBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(item: Contact.SweetieInfo){
+
+    inner class PersonInfoHolder(private val binding: PersonInfoHolderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Contact.SweetiesID) {
             binding.apply {
-                ivSweetiePhoto.setImageResource(item.imgSrc)
-                tvSweetieName.text = item.name
+                with(item.value) {
+                    ivSweetiePhoto.setImageResource(imgSrc)
+                    tvSweetieName.text = name
+                    pbHeart.progress = heart
+                    tvHeart.text = heart.toString() + "%"
+                }
+
+                itemView.setOnClickListener { Log.d("CLICKED", item.key.toString()) }
             }
         }
     }
 
-    companion object{
+    companion object {
         const val VIEW_TYPE_HEADER = 1
         const val VIEW_TYPE_LIST = 2
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType){
+        return when (viewType) {
             VIEW_TYPE_HEADER -> {
-                val binding = IndexHolderBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                val binding =
+                    IndexHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 IndexHolder(binding)
             }
+
             VIEW_TYPE_LIST -> {
-                val binding = PersonInfoHolderBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                val binding = PersonInfoHolderBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
                 PersonInfoHolder(binding)
             }
+
             else -> throw IllegalArgumentException("Invalid View Type")
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = getItem(position)
-        when(item){
+        when (val item = getItem(position)) {
             is Contact.ContactIndex -> {
                 val indexHolder = holder as IndexHolder
                 indexHolder.bind(item)
             }
-            is Contact.SweetieInfo ->{
+
+            is Contact.SweetiesID -> {
                 val personInfoHolder = holder as PersonInfoHolder
                 personInfoHolder.bind(item)
             }
+
+            else -> throw IllegalArgumentException("Invalid View Type")
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(getItem(position)){
+        return when (getItem(position)) {
             is Contact.ContactIndex -> VIEW_TYPE_HEADER
-            is Contact.SweetieInfo -> VIEW_TYPE_LIST
+            is Contact.SweetiesID -> VIEW_TYPE_LIST
+            else -> throw IllegalArgumentException("Invalid View Type")
         }
     }
 
@@ -82,7 +105,10 @@ class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : Di
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
                 return FilterResults().apply {
-                    values = if (charSequence.isNullOrBlank()) contactData else onFilter(contactData, charSequence.toString())
+                    values = if (charSequence.isNullOrBlank()) contactData else onFilter(
+                        contactData,
+                        charSequence.toString()
+                    )
                 }
             }
 
@@ -97,7 +123,12 @@ class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : Di
         }
     }
 
-    private fun onFilter(list: List<Contact>, constraint: String): List<Contact> {
-        return list.filter { it is Contact.SweetieInfo && it.name.lowercase().contains(constraint.lowercase()) }
+    private fun onFilter(list: List<Contact>, charString: String): List<Contact> {
+        return list.filter { item ->
+            item is Contact.SweetiesID &&
+                    if (charString.all { it in 'a'..'z' || it in 'A'..'Z' }) item.value.name.lowercase()
+                        .contains(charString.lowercase())
+                    else KoreanMatcher.matchKoreanAndConsonant(item.value.name, charString)
+        }
     }
 }

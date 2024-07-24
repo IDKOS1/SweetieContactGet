@@ -50,13 +50,13 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setViewPager()
-        setSearch()
+        initViewPager()
+        initSearch()
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 
     companion object {
@@ -79,8 +79,8 @@ class ContactFragment : Fragment() {
             }
     }
 
-    private fun setViewPager() {
-        with (binding) {
+    private fun initViewPager() {
+        with(binding) {
             vpContactViewPager.adapter = vpAdapter
             TabLayoutMediator(tlContactTab, vpContactViewPager) { tab, position ->
                 tab.text = when (position) {
@@ -91,12 +91,12 @@ class ContactFragment : Fragment() {
         }
     }
 
-    private fun setSearch() {
+    private fun initSearch() {
         binding.etContactSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
-                (vpAdapter.fragments[0] as AllContactFragment).search(binding.etContactSearch.text.toString())
+                (vpAdapter.fragments[0] as AllContactFragment).search(p0)
             }
         })
     }

@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.Adapter.ContactAdapter
+import com.example.sweetcontactget.Data.Contact
 import com.example.sweetcontactget.Data.DataObject.contactData
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
+import com.reddit.indicatorfastscroll.FastScrollItemIndicator
+import com.reddit.indicatorfastscroll.FastScrollerView
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
@@ -20,6 +23,8 @@ class AllContactFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var _binding: FragmentAllContactBinding? = null
+    private val binding get() = _binding!!
     private val contactAdapter by lazy { ContactAdapter().apply { submitList(contactData.toList()) } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +39,7 @@ class AllContactFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentAllContactBinding.inflate(inflater, container, false)
+        _binding = FragmentAllContactBinding.inflate(inflater, container, false)
         val recyclerView = binding.rvAllContactFragment
 
         recyclerView.apply {
@@ -45,7 +50,23 @@ class AllContactFragment : Fragment() {
             addItemDecoration(itemDecoration)
         }
 
+        binding.fastscroller.setupWithRecyclerView(recyclerView,
+            {position ->
+                val item = contactData[position]
+                if(item is Contact.ContactIndex){
+                    FastScrollItemIndicator.Text(item.letter)
+                }else{
+                    null
+                }
+            }
+        )
+
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {
@@ -60,7 +81,7 @@ class AllContactFragment : Fragment() {
             }
     }
 
-    fun search(searchTarget: String) {
+    fun search(searchTarget: CharSequence?) {
         contactAdapter.filter.filter(searchTarget)
     }
 }
