@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
 }
+val indicatorFastScrollVersion by extra("1.4.0")
 
 android {
     namespace = "com.example.sweetcontactget"
@@ -36,11 +37,18 @@ android {
     buildFeatures{
         viewBinding = true
     }
+
+    repositories{
+        maven ("https://jitpack.io")
+    }
+
+
+
+
 }
 
 dependencies {
-    implementation ("com.github.bumptech.glide:glide:4.11.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
+    implementation("com.reddit:indicator-fast-scroll:1.4.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
