@@ -52,15 +52,13 @@ object KoreanMatcher {
      */
     private fun filterByIndex(
         index: String,
-        contactMap: MutableMap<Int, Contact>
+        contactMap: MutableMap<Int, Contact.SweetieInfo>
     ): MutableList<Contact> {
         val filteredList = mutableListOf<Contact.SweetieInfo>()
 
         for (contact in contactMap.values) {
-            if (contact is Contact.SweetieInfo) {
-                if (getIndex(contact.name.first()) == consonantMap[index]) {
-                    filteredList.add(contact)
-                }
+            if (getIndex(contact.name.first()) == consonantMap[index]) {
+                filteredList.add(contact)
             }
         }
 
@@ -76,7 +74,8 @@ object KoreanMatcher {
      * 첫 자음을 기준으로 그룹화 된 리사이클러뷰 목록 생성
      * @param map 그룹화 할 원본 Map
      */
-    fun groupByIndex(map: MutableMap<Int, Contact>) = consonants.flatMap { filterByIndex(it, map) }
+    fun groupByIndex(map: MutableMap<Int, Contact.SweetieInfo>) =
+        consonants.flatMap { filterByIndex(it, map) }
 
     /**
      * 초성 또는 한글 검색

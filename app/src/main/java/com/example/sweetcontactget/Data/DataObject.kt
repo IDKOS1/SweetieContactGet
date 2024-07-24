@@ -5,10 +5,15 @@ import com.example.sweetcontactget.Util.KoreanMatcher.groupByIndex
 import java.time.LocalDate
 
 object DataObject {
+    fun getSweetieInfo(sweetieId: Int): Contact.SweetieInfo {
+        return contactMap[sweetieId]!!
+    }
 
-    val contactMap: MutableMap<Int, Contact> = mutableMapOf(
+    fun deleteSweetieInfo(sweetieId: Int) {
+        contactMap.remove(sweetieId)
+    }
 
-
+    private val contactMap: MutableMap<Int, Contact.SweetieInfo> = mutableMapOf(
         1 to Contact.SweetieInfo(
             imgSrc = R.drawable.img_sweetie_1,
             name = "감우",
@@ -536,3 +541,9 @@ object DataObject {
         contactData.apply { addAll(groupByIndex(contactMap)) }
     }
 }
+
+
+
+
+
+
