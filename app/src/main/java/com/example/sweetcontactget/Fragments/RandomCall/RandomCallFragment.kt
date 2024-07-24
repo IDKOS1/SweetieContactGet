@@ -24,8 +24,6 @@ class RandomCallFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var firstAnimate = true
-    private var secondAnimate = true
 
     private var _binding: FragmentRandomCallBinding? = null
     private val binding get() = _binding!!
@@ -46,11 +44,11 @@ class RandomCallFragment : Fragment() {
 
 
         binding.btnRandomCall.setOnClickListener {
-            loadGif(firstAnimate, R.raw.gacha1, binding.ivFirstGif)
+            loadGif(R.raw.gacha1, binding.ivFirstGif)
             binding.ivFirstGif.visibility = View.VISIBLE
             Handler(Looper.getMainLooper()).postDelayed({
                 binding.ivFirstGif.visibility = View.INVISIBLE
-                loadGif(secondAnimate, R.raw.gacha2, binding.ivSecondGif)
+                loadGif(R.raw.gacha2, binding.ivSecondGif)
 
                 //TODO 전화걸기 intent
             }, 2000)
@@ -70,8 +68,7 @@ class RandomCallFragment : Fragment() {
             }
     }
 
-    private fun loadGif(isAnimationActive: Boolean, loadGif: Int, imageView: ImageView) {
-        if (isAnimationActive) {
+    private fun loadGif(loadGif: Int, imageView: ImageView) {
             Glide.with(this).asGif().load(loadGif)
                 .listener(object : RequestListener<GifDrawable> {
                     override fun onLoadFailed(
@@ -95,9 +92,6 @@ class RandomCallFragment : Fragment() {
                     }
 
                 }).into(imageView)
-        } else {
-            Glide.with(this).asBitmap().load(R.raw.gacha1).into(binding.ivFirstGif)
-        }
     }
 
 }

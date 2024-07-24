@@ -31,15 +31,22 @@
 
     </FrameLayout>
 
-    <Button
+    <TextView
         android:id="@+id/btn_random_call"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginBottom="50dp"
-        android:text="랜덤으로 전화걸기"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_button"
+        android:fontFamily="@font/yeonaesidae"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/main_bottom_bar_random_call"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintWidth_percent="0.9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
