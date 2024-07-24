@@ -534,29 +534,22 @@ object DataObject {
 
     val contactData : MutableList<Contact> = mutableListOf()
 
+    fun groupByIndex(list: MutableMap<Int, Contact>) = mutableListOf<Contact>().apply { addAll(consonants.flatMap { filterByIndex(it, list, consonantMap) }) }
+
+    private val consonants = listOf("ga","na","da","la","ma","ba","sa","ah","ja","cha","ka","ta","pa","ha")
+    private val consonantMap = mapOf(
+        "ga" to "ㄱ", "na" to "ㄴ", "da" to "ㄷ", "la" to "ㄹ", "ma" to "ㅁ", "ba" to "ㅂ",
+        "sa" to "ㅅ", "ah" to "ㅇ", "ja" to "ㅈ", "cha" to "ㅊ", "ka" to "ㅋ", "ta" to "ㅌ",
+        "pa" to "ㅍ", "ha" to "ㅎ"
+    )
+
     init {
-        val consonants = listOf("ga","na","da","la","ma","ba","sa","ah","ja","cha","ka","ta","pa","ha")
-        val consonantMap = mapOf(
-            "ga" to "ㄱ", "na" to "ㄴ", "da" to "ㄷ", "la" to "ㄹ", "ma" to "ㅁ", "ba" to "ㅂ",
-            "sa" to "ㅅ", "ah" to "ㅇ", "ja" to "ㅈ", "cha" to "ㅊ", "ka" to "ㅋ", "ta" to "ㅌ",
-            "pa" to "ㅍ", "ha" to "ㅎ"
-        )
-
-        for (i in consonants){
-            filterByIndex(i, contactMap,consonantMap)
-        }
-
+        contactData.addAll(consonants.flatMap { filterByIndex(it, contactMap, consonantMap) })
     }
-
-
-
 }
 
 
-
-
 fun getIndex(char: Char): String {
-
     val indexList = listOf("ㄱ","ㄱ", "ㄴ", "ㄷ","ㄷ", "ㄹ", "ㅁ", "ㅂ","ㅂ" ,"ㅅ", "ㅅ","ㅇ", "ㅈ","ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ")
 
     val start = '가'
@@ -570,7 +563,7 @@ fun getIndex(char: Char): String {
     return char.toString()
 }
 
-fun filterByIndex(index: String, contactMap: MutableMap<Int, Contact>, consonantMap: Map<String, String>) {
+fun filterByIndex(index: String, contactMap: MutableMap<Int, Contact>, consonantMap: Map<String, String>): MutableList<Contact> {
     val filteredList = mutableListOf<Contact.SweetieInfo>()
 
     for (contact in contactMap.values) {
@@ -581,11 +574,16 @@ fun filterByIndex(index: String, contactMap: MutableMap<Int, Contact>, consonant
         }
     }
 
-    if (filteredList.isNotEmpty()) {
-        contactData.add(Contact.ContactIndex(consonantMap[index]!!))
-        contactData.addAll(filteredList)
-    }
+    return if (filteredList.isNotEmpty()) {
+        mutableListOf<Contact>().apply {
+            add(Contact.ContactIndex(consonantMap[index]!!))
+            addAll(filteredList)
+        }
+    } else mutableListOf()
 }
+
+
+
 
 
 
