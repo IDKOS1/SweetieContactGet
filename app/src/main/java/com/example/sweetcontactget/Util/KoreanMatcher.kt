@@ -54,11 +54,11 @@ object KoreanMatcher {
         index: String,
         contactMap: MutableMap<Int, Contact.SweetieInfo>
     ): MutableList<Contact> {
-        val filteredList = mutableListOf<Contact.SweetieInfo>()
+        val filteredList = mutableListOf<Contact.SweetiesID>()
 
-        for (contact in contactMap.values) {
-            if (getIndex(contact.name.first()) == consonantMap[index]) {
-                filteredList.add(contact)
+        for (contact in contactMap) {
+            if (getIndex(contact.value.name.first()) == consonantMap[index]) {
+                filteredList.add(Contact.SweetiesID(contact.key, contact.value))
             }
         }
 

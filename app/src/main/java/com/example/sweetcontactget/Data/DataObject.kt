@@ -535,7 +535,7 @@ object DataObject {
     val randomCallList = mutableListOf<Int>()
 
     val contactData: MutableList<Contact> = mutableListOf()
-    val bookmarkData get() = contactMap.filter { (it.value as Contact.SweetieInfo).isMarked }
+    val bookmarkData get() = contactMap.filter { it.value.isMarked }
 
     init {
         contactData.apply { addAll(groupByIndex(contactMap)) }
