@@ -5,55 +5,68 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import com.example.sweetcontactget.Data.DataObject
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.Util.Util
+import com.example.sweetcontactget.databinding.FragmentDetailBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_SWEETIE_ID = "userId"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentDetailBinding
+    private var sweetieId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            sweetieId = it.getInt(ARG_SWEETIE_ID)
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+    ): View {
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+
+        val currentSweetieInfo = sweetieId?.let { DataObject.getSweetieInfo(it) }
+
+        currentSweetieInfo?.let {sweetie ->
+            binding.run {
+                ivDetailProfile.setImageResource(sweetie.imgSrc)
+                tvDetailName.text = sweetie.name
+                tvDetailNumber.text = sweetie.number
+                rbHeartRating.rating = sweetie.heart / 20.toFloat()
+                tvDetailRelationship.text = sweetie.relationship
+                tvDetailMemo.text = sweetie.memo
+
+                tvDetailMessage.setOnClickListener {
+                    sweetie.number.let { number ->
+                        context?.let { ctx ->
+                            Util.sendMessage(ctx, number)
+                        }
+                    }
+                }
+
+                tvDetailCall.setOnClickListener {
+                    sweetie.number.let { number ->
+                        context?.let { ctx ->
+                            Util.callSweetie(ctx, number)
+                        }
+                    }
+                }
+            }
+        }
+        return binding.root
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: Int) =
             DetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putInt(ARG_SWEETIE_ID, param1)
                 }
             }
     }
