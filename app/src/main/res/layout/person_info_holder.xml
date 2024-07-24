@@ -43,6 +43,38 @@
             app:layout_constraintStart_toEndOf="@+id/iv_sweetie_photo"
             app:layout_constraintTop_toTopOf="@id/iv_sweetie_photo" />
 
+        <ProgressBar
+            android:id="@+id/pb_heart"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:progressDrawable="@drawable/custom_progress"
+            android:max="100"
+            android:progress="60"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60%"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/pb_heart"
+            app:layout_constraintEnd_toEndOf="@id/pb_heart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+
+
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

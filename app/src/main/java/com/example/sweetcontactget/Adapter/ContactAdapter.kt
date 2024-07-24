@@ -35,6 +35,9 @@ class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : Di
             binding.apply {
                 ivSweetiePhoto.setImageResource(item.imgSrc)
                 tvSweetieName.text = item.name
+                pbHeart.setProgress(item.heart)
+                tvHeart.text = item.heart.toString() + "%"
+
             }
         }
     }
@@ -101,3 +104,4 @@ class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : Di
         return list.filter { it is Contact.SweetieInfo && it.name.lowercase().contains(constraint.lowercase()) }
     }
 }
+
