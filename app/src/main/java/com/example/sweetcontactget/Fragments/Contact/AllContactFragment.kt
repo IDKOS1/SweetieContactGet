@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.Adapter.ContactAdapter
+import com.example.sweetcontactget.Data.Contact
 import com.example.sweetcontactget.Data.DataObject.contactData
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
+import com.reddit.indicatorfastscroll.FastScrollItemIndicator
+import com.reddit.indicatorfastscroll.FastScrollerView
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
@@ -46,6 +49,17 @@ class AllContactFragment : Fragment() {
             val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor,0f ,100f)
             addItemDecoration(itemDecoration)
         }
+
+        binding.fastscroller.setupWithRecyclerView(recyclerView,
+            {position ->
+                val item = contactData[position]
+                if(item is Contact.ContactIndex){
+                    FastScrollItemIndicator.Text(item.letter)
+                }else{
+                    null
+                }
+            }
+        )
 
         return binding.root
     }

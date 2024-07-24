@@ -12,6 +12,7 @@ import com.example.sweetcontactget.Data.DataObject.contactData
 import com.example.sweetcontactget.Util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
+import com.reddit.indicatorfastscroll.FastScrollerView
 
 class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>(){
     override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
@@ -36,6 +37,9 @@ class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : Di
             binding.apply {
                 ivSweetiePhoto.setImageResource(item.imgSrc)
                 tvSweetieName.text = item.name
+                pbHeart.setProgress(item.heart)
+                tvHeart.text = item.heart.toString() + "%"
+
             }
         }
     }
@@ -103,4 +107,8 @@ class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : Di
                 if (charString.all { it in 'a'..'z' || it in 'A'..'Z' }) item.name.lowercase().contains(charString.lowercase())
                 else KoreanMatcher.matchKoreanAndConsonant(item.name, charString) }
     }
+
+
+
 }
+
