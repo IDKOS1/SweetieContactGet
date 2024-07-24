@@ -7,35 +7,35 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
-import com.example.sweetcontactget.Data.DataObject
-import com.example.sweetcontactget.databinding.DialogRandomCallBinding
-import kotlin.random.Random
-import kotlin.random.nextInt
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.ThemeUtils
+import com.example.sweetcontactget.databinding.DialogMyPageThemeBinding
 
-class RandomCallDialog(context: Context):Dialog(context) {
-    private lateinit var binding: DialogRandomCallBinding
+class ThemeDialog(context: Context) : Dialog(context) {
+    private lateinit var binding : DialogMyPageThemeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogRandomCallBinding.inflate(layoutInflater)
-        setCancelable(false)
+        binding = DialogMyPageThemeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setCancelable(false)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialogResize(context,this@RandomCallDialog, 1.0f, 0.4f)
 
-        var random = Random.nextInt(1..56)
-        binding.ivRandomCallImage.setImageResource(DataObject.contactMap[random]?.imgSrc as Int)
-        binding.tvRandomCallName.text = DataObject.contactMap[random]?.name
-        binding.tvRandomCallQuestion.text = "[ "+DataObject.contactMap[random]?.name+" ]에게 전화를 거시겠습니까?"
+        dialogResize(context,this@ThemeDialog, 0.8f, 0.2f)
 
-        binding.tvRandomCallMakeACall.setOnClickListener {
-
+        binding.btnThemeChangeCancel.setOnClickListener {
+            changeTheme(AppCompatDelegate.MODE_NIGHT_NO)
+            dismiss()
         }
-        binding.tvRandomCallMakeACallCancel.setOnClickListener {
-            cancel()
+        binding.btnThemeChangeSave.setOnClickListener {
+            changeTheme(AppCompatDelegate.MODE_NIGHT_YES)
+            dismiss()
         }
+    }
+
+    private fun changeTheme(mode: Int) {
+        AppCompatDelegate.setDefaultNightMode(mode)
     }
 
     fun dialogResize(context: Context, dialog: Dialog, width: Float, height: Float){

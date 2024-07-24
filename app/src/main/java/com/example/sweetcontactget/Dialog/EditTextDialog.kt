@@ -7,35 +7,19 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
-import com.example.sweetcontactget.Data.DataObject
-import com.example.sweetcontactget.databinding.DialogRandomCallBinding
-import kotlin.random.Random
-import kotlin.random.nextInt
+import com.example.sweetcontactget.databinding.DialogMyPageEditTextBinding
 
-class RandomCallDialog(context: Context):Dialog(context) {
-    private lateinit var binding: DialogRandomCallBinding
+class EditTextDialog(context: Context) : Dialog(context) {
+    private lateinit var binding : DialogMyPageEditTextBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogRandomCallBinding.inflate(layoutInflater)
-        setCancelable(false)
+        binding = DialogMyPageEditTextBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialogResize(context,this@RandomCallDialog, 1.0f, 0.4f)
-
-        var random = Random.nextInt(1..56)
-        binding.ivRandomCallImage.setImageResource(DataObject.contactMap[random]?.imgSrc as Int)
-        binding.tvRandomCallName.text = DataObject.contactMap[random]?.name
-        binding.tvRandomCallQuestion.text = "[ "+DataObject.contactMap[random]?.name+" ]에게 전화를 거시겠습니까?"
-
-        binding.tvRandomCallMakeACall.setOnClickListener {
-
-        }
-        binding.tvRandomCallMakeACallCancel.setOnClickListener {
-            cancel()
-        }
+        setCancelable(false)
+        dialogResize(context,this@EditTextDialog, 1.0f, 0.4f)
     }
 
     fun dialogResize(context: Context, dialog: Dialog, width: Float, height: Float){

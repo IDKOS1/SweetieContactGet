@@ -35,5 +35,28 @@
         tools:layout_editor_absoluteY="544dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+<<<<<<< HEAD
 >>>>>>> 1ba176e (Add : 전화번호 추가 기능 구현)
+=======
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="201dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="201dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+>>>>>>> 67cae36 (add : 테마 변경 기능 구현)
 </androidx.constraintlayout.widget.ConstraintLayout>
