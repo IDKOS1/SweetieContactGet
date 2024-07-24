@@ -32,7 +32,7 @@ object DataObject {
             number = "010-2345-3495",
             relationship = "친구",
             memo = "멍청하다.",
-            heart = 0,
+            heart = 20,
             isMarked = false
         ),
         3 to Contact.SweetieInfo(
@@ -41,7 +41,7 @@ object DataObject {
             number = "010-9876-5432",
             relationship = "학교",
             memo = "착하다.",
-            heart = 0,
+            heart = 40,
             isMarked = false
         ),
         4 to Contact.SweetieInfo(
@@ -50,18 +50,16 @@ object DataObject {
             number = "010-8765-4321",
             relationship = "직장",
             memo = "성실하다.",
-            heart = 0,
+            heart = 60,
             isMarked = false
         ),
-
-
         5 to Contact.SweetieInfo(
             imgSrc = R.drawable.img_sweetie_5,
             name = "나고미 유이",
             number = "010-7654-3210",
             relationship = "친구",
             memo = "밝다.",
-            heart = 0,
+            heart = 100,
             isMarked = false
         ),
         6 to Contact.SweetieInfo(
