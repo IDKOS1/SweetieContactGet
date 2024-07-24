@@ -23,13 +23,18 @@ class RandomCallDialog(context: Context):Dialog(context) {
         binding = DialogRandomCallBinding.inflate(layoutInflater)
         setCancelable(false)
         setContentView(binding.root)
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialogResize(context,this@RandomCallDialog, 1.0f, 0.4f)
 
-        var random = Random.nextInt(1..56)
-        binding.ivRandomCallImage.setImageResource(DataObject.contactMap[random] as Contact.SweetieInfo)
-        binding.tvRandomCallName.text = DataObject.contactMap[random]?.name
-        binding.tvRandomCallQuestion.text = "[ "+DataObject.contactMap[random]?.name+" ]에게 전화를 거시겠습니까?"
+        val random = Random.nextInt(1..56)
+        val currentId = random.let { DataObject.getSweetieInfo(it) }
+        currentId.let {
+            binding.run {
+                ivRandomCallImage.setImageResource(it.imgSrc)
+                tvRandomCallName.text = it.name
+                tvRandomCallQuestion.text = "[ " + it.name + " ]에게 전화를 거시겠습니까?"
+            }
+        }
+
 
         binding.tvRandomCallMakeACall.setOnClickListener {
 

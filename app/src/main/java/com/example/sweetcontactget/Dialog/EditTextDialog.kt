@@ -2,12 +2,15 @@ package com.example.sweetcontactget.Dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import com.example.sweetcontactget.TestActivity
 import com.example.sweetcontactget.databinding.DialogMyPageEditTextBinding
 
 class EditTextDialog(context: Context) : Dialog(context) {
@@ -19,7 +22,7 @@ class EditTextDialog(context: Context) : Dialog(context) {
         setContentView(binding.root)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setCancelable(false)
-        dialogResize(context,this@EditTextDialog, 1.0f, 0.4f)
+        dialogResize(context,this@EditTextDialog, 0.8f, 0.2f)
     }
 
     fun dialogResize(context: Context, dialog: Dialog, width: Float, height: Float){
