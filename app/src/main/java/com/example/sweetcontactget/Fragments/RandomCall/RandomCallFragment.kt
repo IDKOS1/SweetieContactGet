@@ -44,7 +44,6 @@ class RandomCallFragment : Fragment() {
     ): View {
         _binding = FragmentRandomCallBinding.inflate(inflater, container, false)
 
-//        loadGif(firstAnimate, R.raw.gacha1, binding.ivFirstGif)
 
         binding.btnRandomCall.setOnClickListener {
             loadGif(firstAnimate, R.raw.gacha1, binding.ivFirstGif)
@@ -57,7 +56,6 @@ class RandomCallFragment : Fragment() {
             }, 2000)
         }
 
-//        Glide.with(this).load(R.raw.gacha2).into(binding.ivSecondGif)
         return binding.root
     }
 
@@ -97,10 +95,8 @@ class RandomCallFragment : Fragment() {
                     }
 
                 }).into(imageView)
-//            firstAnimate = false
         } else {
             Glide.with(this).asBitmap().load(R.raw.gacha1).into(binding.ivFirstGif)
-//            firstAnimate = true
         }
     }
 
