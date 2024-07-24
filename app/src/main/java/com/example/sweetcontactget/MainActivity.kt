@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.contactsItem -> {
-                        setFragment(AllContactFragment())
+                        setFragment(ContactFragment())
                         true
                     }
 

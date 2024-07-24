@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.Data.Contact
 import com.example.sweetcontactget.Data.DataObject.contactData
+import com.example.sweetcontactget.Util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
 
@@ -97,7 +98,9 @@ class ContactAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(object : Di
         }
     }
 
-    private fun onFilter(list: List<Contact>, constraint: String): List<Contact> {
-        return list.filter { it is Contact.SweetieInfo && it.name.lowercase().contains(constraint.lowercase()) }
+    private fun onFilter(list: List<Contact>, charString: String): List<Contact> {
+        return list.filter { item -> item is Contact.SweetieInfo &&
+                if (charString.all { it in 'a'..'z' || it in 'A'..'Z' }) item.name.lowercase().contains(charString.lowercase())
+                else KoreanMatcher.matchKoreanAndConsonant(item.name, charString) }
     }
 }

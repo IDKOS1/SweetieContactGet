@@ -96,7 +96,7 @@ class ContactFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
-                (vpAdapter.fragments[0] as AllContactFragment).search(binding.etContactSearch.text.toString())
+                (vpAdapter.fragments[0] as AllContactFragment).search(p0)
             }
         })
     }

@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">SweetContactGet</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="main_bottom_bar_random_call">랜덤 전화걸기</string>
-    <string name="main_bottom_bar_contacts_text">연락처</string>
-    <string name="main_bottom_bar_my_profile_text">내 프로필</string>
+
 
     <!-- Common String -->
+    <string name="common_phone_number">전화번호</string>
+    <string name="common_phone_number_content">전화번호 정보가 없습니다.</string>
     <string name="common_cancel">취소</string>
     <string name="common_save">저장</string>
-    <string name="common_phone_number">전화번호</string>
     <string name="common_name">이름</string>
     <string name="common_event_information">이벤트 정보</string>
     <string name="common_likeability">호감도</string>
@@ -17,7 +16,9 @@
     <string name="common_memo">메모</string>
 
     <!-- MainActivity -->
-
+    <string name="main_bottom_bar_random_call">랜덤으로 전화걸기</string>
+    <string name="main_bottom_bar_contacts_text">연락처</string>
+    <string name="main_bottom_bar_my_profile_text">내 프로필</string>
 
     <!-- Contact Fragment -->
     <string-array name="contact_tab">
@@ -34,10 +35,21 @@
 
 
     <!-- Detail Fragment -->
-
+    <string name="detail_message">메세지</string>
+    <string name="detail_call">전화</string>
+    <string name="detail_event">이벤트 정보</string>
+    <string name="detail_event_content">이벤트 정보가 없습니다.</string>
+    <string name="detail_heart">호감도</string>
+    <string name="detail_relationship">관계</string>
+    <string name="detail_relationship_content">관계 정보가 없습니다.</string>
+    <string name="detail_memo">메모</string>
+    <string name="detail_memo_content">저장된 메모가 없습니다.</string>
 
     <!-- Random Fragment -->
-
+    <string-array name="random_tab">
+        <item>랜덤 전화 걸기</item>
+        <item>최근 랜덤 전화</item>
+    </string-array>
 
     <!-- RandomCall Fragment -->
 
@@ -46,6 +58,12 @@
 
 
     <!-- MyPage Fragment -->
+    <string name="mypage_birthday">생일</string>
+    <string name="mypage_birthday_content">생일 정보가 없습니다.</string>
+    <string name="mypage_address">주소</string>
+    <string name="mypage_address_content">주소 정보가 없습니다.</string>
+    <string name="mypage_introduce">소개 매세지</string>
+    <string name="mypage_introduce_content">소개 정보가 없습니다.</string>
 
     <!-- Dialog -->
     <string name="dialog_change_theme">색상 테마를 변경하시겠습니까?</string>
