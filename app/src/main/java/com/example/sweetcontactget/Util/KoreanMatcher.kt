@@ -1,5 +1,7 @@
 package com.example.sweetcontactget.Util
 
+import com.example.sweetcontactget.Data.Contact
+
 object KoreanMatcher {
     private const val KOREAN_UNICODE_START = 44032 // 가
     private const val KOREAN_UNICODE_END = 55203   // 힣
@@ -9,18 +11,72 @@ object KoreanMatcher {
         'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
     ) // 자음
 
+    private val indexList = listOf(
+        "ㄱ", "ㄱ", "ㄴ", "ㄷ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅂ",
+        "ㅅ", "ㅅ", "ㅇ", "ㅈ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
+    )
+    private val consonants = listOf(
+        "ga", "na", "da", "la", "ma", "ba", "sa", "ah", "ja", "cha", "ka", "ta", "pa", "ha"
+    )
+    private val consonantMap = mapOf(
+        "ga" to "ㄱ", "na" to "ㄴ", "da" to "ㄷ", "la" to "ㄹ", "ma" to "ㅁ", "ba" to "ㅂ",
+        "sa" to "ㅅ", "ah" to "ㅇ", "ja" to "ㅈ", "cha" to "ㅊ", "ka" to "ㅋ", "ta" to "ㅌ",
+        "pa" to "ㅍ", "ha" to "ㅎ"
+    )
+
     // 초성인지 체크
-    private fun isConsonant(ch: Char) = koreanConsonant.contains(ch)
+    private fun isConsonant(char: Char) = koreanConsonant.contains(char)
 
     // 한글인지 체크
-    private fun isKorean(ch: Char) = ch.code in KOREAN_UNICODE_START..KOREAN_UNICODE_END
+    private fun isKorean(char: Char) = char.code in KOREAN_UNICODE_START..KOREAN_UNICODE_END
 
     // 자음 얻기
-    private fun getConsonant(ch: Char): Char {
-        val hasBegin = (ch.code - KOREAN_UNICODE_START)
+    private fun getConsonant(char: Char): Char {
+        val hasBegin = (char.code - KOREAN_UNICODE_START)
         val idx = hasBegin / KOREAN_UNICODE_BASED
         return koreanConsonant[idx]
     }
+
+    // 자음 얻기 (쌍자음 제외)
+    private fun getIndex(char: Char): String {
+        if (!isKorean(char)) return char.toString()
+        val hasBegin = (char.code - KOREAN_UNICODE_START)
+        val idx = hasBegin / KOREAN_UNICODE_BASED
+        return indexList[idx]
+    }
+
+    /**
+     * 첫 자음 기준 필터
+     * @param index 첫 자음 ex. ㄱ, ㄴ, ...
+     * @param contactMap 필터 할 원본 Map
+     */
+    private fun filterByIndex(
+        index: String,
+        contactMap: MutableMap<Int, Contact>
+    ): MutableList<Contact> {
+        val filteredList = mutableListOf<Contact.SweetieInfo>()
+
+        for (contact in contactMap.values) {
+            if (contact is Contact.SweetieInfo) {
+                if (getIndex(contact.name.first()) == consonantMap[index]) {
+                    filteredList.add(contact)
+                }
+            }
+        }
+
+        return if (filteredList.isNotEmpty()) {
+            mutableListOf<Contact>().apply {
+                add(Contact.ContactIndex(consonantMap[index]!!))
+                addAll(filteredList)
+            }
+        } else mutableListOf()
+    }
+
+    /**
+     * 첫 자음을 기준으로 그룹화 된 리사이클러뷰 목록 생성
+     * @param map 그룹화 할 원본 Map
+     */
+    fun groupByIndex(map: MutableMap<Int, Contact>) = consonants.flatMap { filterByIndex(it, map) }
 
     /**
      * 초성 또는 한글 검색
