@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import com.example.sweetcontactget.Data.Contact
 import com.example.sweetcontactget.Data.DataObject
 import com.example.sweetcontactget.databinding.DialogRandomCallBinding
 import kotlin.random.Random
@@ -26,7 +27,7 @@ class RandomCallDialog(context: Context):Dialog(context) {
         dialogResize(context,this@RandomCallDialog, 1.0f, 0.4f)
 
         var random = Random.nextInt(1..56)
-        binding.ivRandomCallImage.setImageResource(DataObject.contactMap[random]?.imgSrc as Int)
+        binding.ivRandomCallImage.setImageResource(DataObject.contactMap[random] as Contact.SweetieInfo)
         binding.tvRandomCallName.text = DataObject.contactMap[random]?.name
         binding.tvRandomCallQuestion.text = "[ "+DataObject.contactMap[random]?.name+" ]에게 전화를 거시겠습니까?"
 

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".TestActivity">
 
-<<<<<<< HEAD
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/test"
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
 
     </androidx.fragment.app.FragmentContainerView>
 
-=======
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -35,9 +33,6 @@
         tools:layout_editor_absoluteY="544dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-<<<<<<< HEAD
->>>>>>> 1ba176e (Add : 전화번호 추가 기능 구현)
-=======
 
     <TextView
         android:id="@+id/textView2"
@@ -58,5 +53,4 @@
         tools:layout_editor_absoluteY="201dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
->>>>>>> 67cae36 (add : 테마 변경 기능 구현)
 </androidx.constraintlayout.widget.ConstraintLayout>
