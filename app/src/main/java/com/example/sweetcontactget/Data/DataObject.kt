@@ -53,8 +53,6 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-
-
         5 to Contact.SweetieInfo(
             imgSrc = R.drawable.img_sweetie_5,
             name = "나고미 유이",
