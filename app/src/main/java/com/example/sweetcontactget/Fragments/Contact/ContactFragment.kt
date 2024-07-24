@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.sweetcontactget.Adapter.ViewPagerAdapter
+import com.example.sweetcontactget.Data.Contact
+import com.example.sweetcontactget.Data.DataObject.contactMap
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentContactBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -52,6 +54,7 @@ class ContactFragment : Fragment() {
 
         setViewPager()
         setSearch()
+        testBookmark()
     }
 
     override fun onDestroyView() {
@@ -99,5 +102,16 @@ class ContactFragment : Fragment() {
                 (vpAdapter.fragments[0] as AllContactFragment).search(p0)
             }
         })
+    }
+
+    // TODO: 즐겨찾기 테스트용 임시 동작 지정
+    private fun testBookmark() {
+        with (binding.fabContactAdd) {
+            setOnClickListener {
+                val randomIndex = contactMap.keys.random()
+                (contactMap[randomIndex] as Contact.SweetieInfo).isMarked = true
+                (vpAdapter.fragments[1] as BookmarkFragment).loadBookmarks()
+            }
+        }
     }
 }

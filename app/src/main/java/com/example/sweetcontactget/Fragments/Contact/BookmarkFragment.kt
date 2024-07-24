@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sweetcontactget.Adapter.ContactAdapter
+import com.example.sweetcontactget.Data.Contact
+import com.example.sweetcontactget.Data.DataObject
+import com.example.sweetcontactget.Data.DataObject.groupByIndex
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.databinding.FragmentBookmarkBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +25,10 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class BookmarkFragment : Fragment() {
+    private var _binding: FragmentBookmarkBinding? = null
+    private val binding get() = _binding!!
+    private val bookmarkAdapter by lazy { ContactAdapter() }
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -33,9 +44,33 @@ class BookmarkFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bookmark, container, false)
+    ): View {
+        _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initView()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun initView() = with(binding.rvBookmark) {
+        adapter = bookmarkAdapter
+        layoutManager = LinearLayoutManager(this.context)
+        val dividerColor = ContextCompat.getColor(context,R.color.secondary)
+        val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor,0f ,100f)
+        addItemDecoration(itemDecoration)
+    }
+
+    fun loadBookmarks() {
+        val newContacts = DataObject.contactMap.filter { (it.value as Contact.SweetieInfo).isMarked }
+        bookmarkAdapter.submitList(groupByIndex(newContacts.toMutableMap()))
     }
 
     companion object {
