@@ -52,14 +52,14 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setViewPager()
-        setSearch()
+        initViewPager()
+        initSearch()
         testBookmark()
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 
     companion object {
@@ -82,8 +82,8 @@ class ContactFragment : Fragment() {
             }
     }
 
-    private fun setViewPager() {
-        with (binding) {
+    private fun initViewPager() {
+        with(binding) {
             vpContactViewPager.adapter = vpAdapter
             TabLayoutMediator(tlContactTab, vpContactViewPager) { tab, position ->
                 tab.text = when (position) {
@@ -94,7 +94,7 @@ class ContactFragment : Fragment() {
         }
     }
 
-    private fun setSearch() {
+    private fun initSearch() {
         binding.etContactSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -106,7 +106,7 @@ class ContactFragment : Fragment() {
 
     // TODO: 즐겨찾기 테스트용 임시 동작 지정
     private fun testBookmark() {
-        with (binding.fabContactAdd) {
+        with(binding.fabContactAdd) {
             setOnClickListener {
                 val randomIndex = contactMap.keys.random()
                 (contactMap[randomIndex] as Contact.SweetieInfo).isMarked = true

@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.Adapter.ContactAdapter
-import com.example.sweetcontactget.Data.Contact
-import com.example.sweetcontactget.Data.DataObject
-import com.example.sweetcontactget.Data.DataObject.groupByIndex
+import com.example.sweetcontactget.Data.DataObject.bookmarkData
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.Util.KoreanMatcher.groupByIndex
 import com.example.sweetcontactget.databinding.FragmentBookmarkBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -63,14 +62,17 @@ class BookmarkFragment : Fragment() {
     private fun initView() = with(binding.rvBookmark) {
         adapter = bookmarkAdapter
         layoutManager = LinearLayoutManager(this.context)
-        val dividerColor = ContextCompat.getColor(context,R.color.secondary)
-        val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor,0f ,100f)
+        val dividerColor = ContextCompat.getColor(context, R.color.secondary)
+        val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
         addItemDecoration(itemDecoration)
     }
 
     fun loadBookmarks() {
-        val newContacts = DataObject.contactMap.filter { (it.value as Contact.SweetieInfo).isMarked }
-        bookmarkAdapter.submitList(groupByIndex(newContacts.toMutableMap()))
+        bookmarkAdapter.submitList(groupByIndex(bookmarkData.toMutableMap()))
+    }
+
+    init {
+        loadBookmarks()
     }
 
     companion object {
