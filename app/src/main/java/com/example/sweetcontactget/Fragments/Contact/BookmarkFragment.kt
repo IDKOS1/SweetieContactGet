@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.Adapter.ContactAdapter
-import com.example.sweetcontactget.Data.BookmarkViewModel
+import com.example.sweetcontactget.Data.Contact
+import com.example.sweetcontactget.Data.DataObject
 import com.example.sweetcontactget.Data.DataObject.groupByIndex
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentBookmarkBinding
@@ -27,8 +27,7 @@ private const val ARG_PARAM2 = "param2"
 class BookmarkFragment : Fragment() {
     private var _binding: FragmentBookmarkBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: BookmarkViewModel by activityViewModels()
-    private val bookmarkAdapter by lazy { ContactAdapter().apply { submitList(mutableListOf()) } }
+    private val bookmarkAdapter by lazy { ContactAdapter() }
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -54,7 +53,6 @@ class BookmarkFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        initViewModel()
     }
 
     override fun onDestroyView() {
@@ -70,10 +68,9 @@ class BookmarkFragment : Fragment() {
         addItemDecoration(itemDecoration)
     }
 
-    private fun initViewModel() = with(viewModel) {
-        bookmarkList.observe(viewLifecycleOwner) {
-            bookmarkAdapter.submitList(groupByIndex(it.toMutableMap()))
-        }
+    fun loadBookmarks() {
+        val newContacts = DataObject.contactMap.filter { (it.value as Contact.SweetieInfo).isMarked }
+        bookmarkAdapter.submitList(groupByIndex(newContacts.toMutableMap()))
     }
 
     companion object {
