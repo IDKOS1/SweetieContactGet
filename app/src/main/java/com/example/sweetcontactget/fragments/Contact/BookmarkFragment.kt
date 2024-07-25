@@ -28,7 +28,7 @@ private const val ARG_PARAM2 = "param2"
 class BookmarkFragment : Fragment() {
     private var _binding: FragmentBookmarkBinding? = null
     private val binding get() = _binding!!
-    private val bookmarkAdapter by lazy { ContactAdapter() }
+    private lateinit var bookmarkAdapter: ContactAdapter
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -47,6 +47,9 @@ class BookmarkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
+
+        bookmarkAdapter = ContactAdapter(requireContext())
+
         return binding.root
     }
 
@@ -54,6 +57,7 @@ class BookmarkFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+        loadBookmarks()
     }
 
     override fun onDestroyView() {
@@ -69,13 +73,11 @@ class BookmarkFragment : Fragment() {
         addItemDecoration(itemDecoration)
     }
 
-    fun loadBookmarks() {
+    private fun loadBookmarks() {
         bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, Contact.SweetieInfo>))
     }
 
-    init {
-        loadBookmarks()
-    }
+
 
     companion object {
         /**

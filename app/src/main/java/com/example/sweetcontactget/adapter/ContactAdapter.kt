@@ -1,5 +1,6 @@
 package com.example.sweetcontactget.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,8 +16,10 @@ import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
+import com.example.sweetcontactget.util.ItemTouchHelperCallback
+import com.example.sweetcontactget.util.Util
 
-class ContactAdapter :
+class ContactAdapter(private val context: Context) :
     ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>() {
         override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem == newItem
@@ -25,7 +28,9 @@ class ContactAdapter :
         override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem == newItem
         }
-    }), Filterable {
+    }),Filterable, ItemTouchHelperCallback.ItemTouchHelperListener{
+
+
 
     inner class IndexHolder(private val binding: IndexHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -45,7 +50,9 @@ class ContactAdapter :
                     tvSweetieName.text = name
                     pbHeart.progress = heart
                     tvHeart.text = heart.toString() + "%"
+                    ivBehindView.setImageResource(imgSrc)
                 }
+
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java).apply {
@@ -55,6 +62,10 @@ class ContactAdapter :
                 }
             }
         }
+
+        val frontView = binding.clPersonInfoHolderSize
+        val behindView = binding.clBehindView
+
     }
 
     companion object {
@@ -136,5 +147,14 @@ class ContactAdapter :
                         .contains(charString.lowercase())
                     else KoreanMatcher.matchKoreanAndConsonant(item.value.name, charString)
         }
+    }
+
+    override fun onItemSwipe(position: Int) {
+        val item= getItem(position)
+        if(item is Contact.SweetiesID){
+            Util.callSweetie(context,item.value.number)
+        }
+
+        notifyItemChanged(position)
     }
 }
