@@ -1,11 +1,13 @@
 package com.example.sweetcontactget.fragments.Contact
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.data.Contact
@@ -13,6 +15,7 @@ import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
+import com.example.sweetcontactget.util.ItemTouchHelperCallback
 import com.example.sweetcontactget.util.TopSnappedSmoothScroller
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.reddit.indicatorfastscroll.FastScrollerView
@@ -27,7 +30,7 @@ class AllContactFragment : Fragment() {
     private var param2: String? = null
     private var _binding: FragmentAllContactBinding? = null
     private val binding get() = _binding!!
-    private val contactAdapter by lazy { ContactAdapter().apply { submitList(contactData.toList()) } }
+    private lateinit var contactAdapter: ContactAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,10 @@ class AllContactFragment : Fragment() {
         _binding = FragmentAllContactBinding.inflate(inflater, container, false)
         val recyclerView = binding.rvAllContactFragment
 
+        contactAdapter = ContactAdapter(requireContext()).apply {
+            submitList(contactData.toList())
+        }
+
         recyclerView.apply {
             adapter = contactAdapter
             layoutManager = LinearLayoutManager(this.context)
@@ -51,14 +58,17 @@ class AllContactFragment : Fragment() {
             val itemDecoration =
                 CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
             addItemDecoration(itemDecoration)
+
+            val itemTouchHelperCallback = ItemTouchHelperCallback(contactAdapter)
+            val helper = ItemTouchHelper(itemTouchHelperCallback)
+            helper.attachToRecyclerView(recyclerView)
         }
 
 
         // 패스트 스크롤 정의
         binding.fastscroller.setupWithRecyclerView(recyclerView,
             { position ->
-                val item = contactData[position]
-                when(item){
+                when (val item = contactData[position]) {
                     is Contact.ContactIndex -> FastScrollItemIndicator.Text(item.letter)
                     else -> null
                 }
@@ -70,7 +80,8 @@ class AllContactFragment : Fragment() {
         //패스트 스크롤 동작 커스텀
         binding.fastscroller.apply {
             useDefaultScroller = false
-            itemIndicatorSelectedCallbacks += object : FastScrollerView.ItemIndicatorSelectedCallback{
+            itemIndicatorSelectedCallbacks += object :
+                FastScrollerView.ItemIndicatorSelectedCallback {
                 override fun onItemIndicatorSelected(
                     indicator: FastScrollItemIndicator,
                     indicatorCenterY: Int,
@@ -91,6 +102,7 @@ class AllContactFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -107,6 +119,7 @@ class AllContactFragment : Fragment() {
                 }
             }
     }
+
 
     fun search(searchTarget: CharSequence?) {
         contactAdapter.filter.filter(searchTarget)
