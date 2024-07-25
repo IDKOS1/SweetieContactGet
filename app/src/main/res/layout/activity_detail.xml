@@ -36,7 +36,7 @@
             app:tint="@color/primary" />
 
         <ToggleButton
-            android:id="@+id/iv_detail_mark"
+            android:id="@+id/tb_detail_mark"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/ic_bookmark_selector"
@@ -78,6 +78,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/yeonaesidae"
                 android:gravity="center"
+                android:letterSpacing="0.3"
                 android:text="@string/common_name"
                 android:textColor="@color/white"
                 android:textFontWeight="700"
