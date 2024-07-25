@@ -96,9 +96,6 @@ class AllContactFragment : Fragment() {
             }
         }
 
-
-
-
         return binding.root
     }
 
@@ -106,6 +103,11 @@ class AllContactFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        contactAdapter.submitList(contactData.toList())
     }
 
     companion object {
