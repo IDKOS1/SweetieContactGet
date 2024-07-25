@@ -41,7 +41,7 @@ class ContactAdapter :
         fun bind(item: Contact.SweetiesID) {
             binding.apply {
                 with(item.value) {
-                    ivSweetiePhoto.setImageResource(imgSrc)
+                    ivSweetiePhoto.setImageDrawable(imgSrc)
                     tvSweetieName.text = name
                     pbHeart.progress = heart
                     tvHeart.text = heart.toString() + "%"

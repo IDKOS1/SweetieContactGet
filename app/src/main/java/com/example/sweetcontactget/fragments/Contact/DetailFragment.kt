@@ -30,9 +30,9 @@ class DetailFragment : Fragment() {
 
         val currentSweetieInfo = sweetieId?.let { DataObject.getSweetieInfo(it) }
 
-        currentSweetieInfo?.let {sweetie ->
+        currentSweetieInfo?.let { sweetie ->
             binding.run {
-                ivDetailProfile.setImageResource(sweetie.imgSrc)
+                ivDetailProfile.setImageDrawable(sweetie.imgSrc)
                 tvDetailName.text = sweetie.name
                 tvDetailNumber.text = sweetie.number
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()
