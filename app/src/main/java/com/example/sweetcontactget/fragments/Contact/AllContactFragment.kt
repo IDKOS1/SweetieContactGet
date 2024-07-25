@@ -9,8 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.data.Contact
-import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.data.DataObject.getContactList
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
@@ -28,7 +28,7 @@ class AllContactFragment : Fragment() {
     private val contactAdapter by lazy {
         ContactAdapter().apply {
             submitList(
-                contactData.toList()
+                getContactList().toList()
             )
         }
     }
@@ -59,7 +59,7 @@ class AllContactFragment : Fragment() {
 
         binding.fastscroller.setupWithRecyclerView(recyclerView,
             { position ->
-                val item = contactData[position]
+                val item = getContactList()[position]
                 if (item is Contact.ContactIndex) {
                     FastScrollItemIndicator.Text(item.letter)
                 } else {
