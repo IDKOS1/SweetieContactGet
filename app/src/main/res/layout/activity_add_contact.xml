@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddContactActivity"
     android:background="@drawable/img_dialog_2">
 
     <ScrollView
@@ -116,15 +119,29 @@
                     app:layout_constraintStart_toStartOf="@id/tv_add_contact_phone_number"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/tv_add_contact_delete_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/dialog_delete_phone_number"
+                android:textSize="12dp"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/yeonaesidae_b"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@id/cl_add_contact_phone_number"
+                app:layout_constraintTop_toBottomOf="@id/cl_add_contact_phone_number"
+                app:layout_constraintBottom_toTopOf="@id/cl_add_contact_phone_number_2"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_add_contact_phone_number_2"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:visibility="gone"
                 android:background="@drawable/shape_corner_radius_15dp_bg_primary_transparent"
                 app:layout_constraintStart_toStartOf="@id/cl_add_contact_phone_number"
-                app:layout_constraintTop_toBottomOf="@id/cl_add_contact_phone_number">
+                app:layout_constraintTop_toBottomOf="@id/tv_add_contact_delete_phone_number">
                 <TextView
                     android:id="@+id/tv_add_contact_phone_number_2"
                     android:layout_width="wrap_content"
@@ -361,7 +378,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_add_contact_memo"
                     app:layout_constraintStart_toStartOf="@id/tv_add_contact_memo"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-            
+
             <android.widget.Button
                 android:id="@+id/btn_add_contact_cancel"
                 android:text="@string/common_cancel"
