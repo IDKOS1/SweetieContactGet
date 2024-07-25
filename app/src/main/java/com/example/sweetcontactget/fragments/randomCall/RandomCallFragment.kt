@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.fragments.RandomCall
+package com.example.sweetcontactget.fragments.randomCall
 
 import android.os.Bundle
 import android.os.Handler
@@ -43,6 +43,14 @@ class RandomCallFragment : Fragment() {
         _binding = FragmentRandomCallBinding.inflate(inflater, container, false)
 
 
+
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.btnRandomCall.setOnClickListener {
             loadGif(R.raw.gacha1, binding.ivFirstGif)
             binding.ivFirstGif.visibility = View.VISIBLE
@@ -51,10 +59,10 @@ class RandomCallFragment : Fragment() {
                 loadGif(R.raw.gacha2, binding.ivSecondGif)
 
                 //TODO 전화걸기 intent
+
             }, 2000)
         }
 
-        return binding.root
     }
 
     companion object {

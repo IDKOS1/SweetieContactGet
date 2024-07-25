@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="32dp"
     android:paddingTop="32dp"
-    tools:context=".fragments.Contact.DetailFragment">
+    tools:context=".fragments.contact.DetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_detail_top_bar"

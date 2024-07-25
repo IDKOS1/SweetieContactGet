@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="64dp"
     android:background="@drawable/img_background_light"
-    tools:context=".fragments.Contact.ContactFragment">
+    tools:context=".fragments.contact.ContactFragment">
 
     <LinearLayout
         android:id="@+id/ll_contact_search"
