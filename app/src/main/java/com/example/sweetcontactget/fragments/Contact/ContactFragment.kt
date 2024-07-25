@@ -1,5 +1,6 @@
 package com.example.sweetcontactget.fragments.Contact
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.sweetcontactget.AddContactActivity
 import com.example.sweetcontactget.adapter.ViewPagerAdapter
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentContactBinding
@@ -52,6 +54,10 @@ class ContactFragment : Fragment() {
 
         initViewPager()
         initSearch()
+        //버튼 클릭 시 AddContactActivity 이동
+        binding.fabContactAdd.setOnClickListener {
+            startActivity(Intent(requireActivity(), AddContactActivity::class.java))
+        }
     }
 
     override fun onDestroyView() {

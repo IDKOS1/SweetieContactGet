@@ -16,6 +16,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentRandomCallBinding
+import com.example.sweetcontactget.dialog.RandomCallDialog
+import kotlinx.coroutines.delay
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -52,6 +54,13 @@ class RandomCallFragment : Fragment() {
 
                 //TODO 전화걸기 intent
             }, 2000)
+
+            //Dialog 열기, delay 추가
+            Handler(Looper.getMainLooper()).postDelayed({
+            val dialog = RandomCallDialog(requireContext())
+            dialog.show()
+            }, 6000)
+
         }
 
         return binding.root

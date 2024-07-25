@@ -2,14 +2,19 @@ package com.example.sweetcontactget.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Point
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.core.content.ContextCompat.startActivity
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.DialogRandomCallBinding
+import com.example.sweetcontactget.util.Util
 import kotlin.random.Random
 import kotlin.random.nextInt
+
 
 class RandomCallDialog(context: Context):Dialog(context) {
     private lateinit var binding: DialogRandomCallBinding
@@ -28,12 +33,15 @@ class RandomCallDialog(context: Context):Dialog(context) {
                 ivRandomCallImage.setImageResource(it.imgSrc)
                 tvRandomCallName.text = it.name
                 tvRandomCallQuestion.text = "[ " + it.name + " ]에게 전화를 거시겠습니까?"
+                rbRandomCallHeart.rating = it.heart / 20.toFloat()
             }
         }
 
-
         binding.tvRandomCallMakeACall.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data =  Uri.parse("tel :"+Util.callSweetie(this.context,currentId.number))
 
+//            Util.callSweetie(context,currentId.number)
         }
         binding.tvRandomCallMakeACallCancel.setOnClickListener {
             cancel()
@@ -65,5 +73,10 @@ class RandomCallDialog(context: Context):Dialog(context) {
 
             window?.setLayout(x, y)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        cancel()
     }
 }

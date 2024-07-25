@@ -43,16 +43,16 @@
             app:layout_constraintBottom_toBottomOf="@id/cl_random_call_name"
             app:layout_constraintStart_toStartOf="@id/cl_random_call_name"/>
 
-            <TextView
-                android:id="@+id/tv_random_call_heart"
-                android:text="호감도"
-                android:textColor="@color/primary"
-                android:textSize="24dp"
-                android:fontFamily="@font/yeonaesidae_b"
-                android:padding="10dp"
-                android:paddingEnd="20dp"
+            <RatingBar
+                android:id="@+id/rb_random_call_heart"
+                style="@style/HeartRatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="0.5"
                 app:layout_constraintTop_toTopOf="@id/cl_random_call_name"
                 app:layout_constraintBottom_toBottomOf="@id/cl_random_call_name"
                 app:layout_constraintEnd_toEndOf="@id/cl_random_call_name"/>
@@ -62,7 +62,7 @@
             android:id="@+id/tv_random_call_question"
             android:text="[ 이름 ] 에게 전화를 거시겠습니까?"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:fontFamily="@font/yeonaesidae_b"
             android:paddingTop="6dp"
             android:layout_width="wrap_content"
