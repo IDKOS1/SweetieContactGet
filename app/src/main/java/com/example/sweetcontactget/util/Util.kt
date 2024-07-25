@@ -3,6 +3,7 @@ package com.example.sweetcontactget.util
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 
 object Util {
     fun sendMessage(context: Context, phoneNumber: String) {
@@ -17,5 +18,9 @@ object Util {
             data = Uri.parse("tel:$phoneNumber")
         }
         context.startActivity(intent)
+    }
+
+    fun showToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
