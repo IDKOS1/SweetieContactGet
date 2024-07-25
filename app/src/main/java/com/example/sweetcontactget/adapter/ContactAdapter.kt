@@ -1,13 +1,15 @@
 package com.example.sweetcontactget.adapter
 
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sweetcontactget.DetailActivity
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.util.KoreanMatcher
@@ -32,7 +34,6 @@ class ContactAdapter :
                 tvIndexLetter.text = item.letter
             }
         }
-
     }
 
     inner class PersonInfoHolder(private val binding: PersonInfoHolderBinding) :
@@ -46,7 +47,12 @@ class ContactAdapter :
                     tvHeart.text = heart.toString() + "%"
                 }
 
-                itemView.setOnClickListener { Log.d("CLICKED", item.key.toString()) }
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailActivity::class.java).apply {
+                        putExtra("sweetieId", item.key)
+                    }
+                    startActivity(itemView.context, intent, null)
+                }
             }
         }
     }
