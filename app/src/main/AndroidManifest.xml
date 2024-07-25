@@ -18,6 +18,9 @@
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
+            android:name=".AddContactActivity"
+            android:exported="false" />
+        <activity
             android:name=".TestActivity"
             android:exported="true" />
         <activity

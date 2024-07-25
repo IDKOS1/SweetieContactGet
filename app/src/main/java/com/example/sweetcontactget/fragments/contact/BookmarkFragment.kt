@@ -57,12 +57,16 @@ class BookmarkFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        loadBookmarks()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, Contact.SweetieInfo>))
     }
 
     private fun initView() = with(binding.rvBookmark) {
@@ -72,12 +76,6 @@ class BookmarkFragment : Fragment() {
         val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
         addItemDecoration(itemDecoration)
     }
-
-    private fun loadBookmarks() {
-        bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, Contact.SweetieInfo>))
-    }
-
-
 
     companion object {
         /**

@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.fragments.randomCall
+package com.example.sweetcontactget.fragments.RandomCall
 
 import android.os.Bundle
 import android.os.Handler
@@ -16,6 +16,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentRandomCallBinding
+import com.example.sweetcontactget.dialog.RandomCallDialog
+import kotlinx.coroutines.delay
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -70,6 +72,13 @@ class RandomCallFragment : Fragment() {
 
             }, 2000)
 
+
+            //Dialog 열기, delay 추가
+            Handler(Looper.getMainLooper()).postDelayed({
+            val dialog = RandomCallDialog(requireContext())
+            dialog.show()
+            }, 6000)
+
         }
 
     }
@@ -86,31 +95,29 @@ class RandomCallFragment : Fragment() {
     }
 
     private fun loadGif(loadGif: Int, imageView: ImageView) {
+            Glide.with(this).asGif().load(loadGif)
+                .listener(object : RequestListener<GifDrawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<GifDrawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
 
-        Glide.with(this).asGif().load(loadGif)
-            .listener(object : RequestListener<GifDrawable> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<GifDrawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    return false
-                }
+                    override fun onResourceReady(
+                        resource: GifDrawable?,
+                        model: Any?,
+                        target: Target<GifDrawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        resource?.setLoopCount(1)
+                        return false
+                    }
 
-                override fun onResourceReady(
-                    resource: GifDrawable?,
-                    model: Any?,
-                    target: Target<GifDrawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    resource?.setLoopCount(1)
-
-                    return false
-                }
-
-            }).into(imageView)
+                }).into(imageView)
     }
 
 }
