@@ -1,10 +1,16 @@
 package com.example.sweetcontactget.data
 
+import android.content.Context
+import androidx.core.content.ContextCompat
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
 import java.time.LocalDate
 
 object DataObject {
+    private val context: Context by lazy {
+        ContactApplication.applicationContext()
+    }
+
     fun getSweetieInfo(sweetieId: Int): Contact.SweetieInfo {
         return contactMap[sweetieId]!!
     }
@@ -23,9 +29,18 @@ object DataObject {
         return contactMap[sweetieId]!!.isMarked
     }
 
+    fun addSweetieInfo(sweetieInfo: Contact.SweetieInfo) {
+        val newKey = contactMap.maxOf { it.key } + 1
+        contactMap[newKey] = sweetieInfo
+    }
+
+
     private val contactMap: MutableMap<Int, Contact.SweetieInfo> = mutableMapOf(
         1 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_1,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_1
+            ),
             name = "감우",
             number = "010-2345-3444",
             relationship = "친구",
@@ -34,7 +49,10 @@ object DataObject {
             isMarked = false
         ),
         2 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_2,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_2
+            ),
             name = "고세구",
             number = "010-2345-3495",
             relationship = "친구",
@@ -43,7 +61,10 @@ object DataObject {
             isMarked = false
         ),
         3 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_3,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_3
+            ),
             name = "골드 쉽",
             number = "010-9876-5432",
             relationship = "학교",
@@ -52,7 +73,10 @@ object DataObject {
             isMarked = false
         ),
         4 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_4,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_4
+            ),
             name = "그웬",
             number = "010-8765-4321",
             relationship = "직장",
@@ -61,7 +85,10 @@ object DataObject {
             isMarked = false
         ),
         5 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_5,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_5
+            ),
             name = "나고미 유이",
             number = "010-7654-3210",
             relationship = "친구",
@@ -70,7 +97,10 @@ object DataObject {
             isMarked = false
         ),
         6 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_6,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_6
+            ),
             name = "니콜",
             number = "010-6543-2109",
             relationship = "학교",
@@ -79,7 +109,10 @@ object DataObject {
             isMarked = false
         ),
         7 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_7,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_7
+            ),
             name = "닐루",
             number = "010-5432-1098",
             relationship = "직장",
@@ -89,7 +122,10 @@ object DataObject {
         ),
 
         8 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_8,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_8
+            ),
             name = "라이덴",
             number = "010-4321-0987",
             relationship = "친구",
@@ -98,7 +134,10 @@ object DataObject {
             isMarked = false
         ),
         9 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_9,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_9
+            ),
             name = "럭스",
             number = "010-3210-9876",
             relationship = "학교",
@@ -107,7 +146,10 @@ object DataObject {
             isMarked = false
         ),
         10 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_10,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_10
+            ),
             name = "릴리아",
             number = "010-2109-8765",
             relationship = "직장",
@@ -116,7 +158,10 @@ object DataObject {
             isMarked = false
         ),
         11 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_11,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_11
+            ),
             name = "릴파",
             number = "010-1098-7654",
             relationship = "친구",
@@ -125,7 +170,10 @@ object DataObject {
             isMarked = false
         ),
         12 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_12,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_12
+            ),
             name = "마키마",
             number = "010-0987-6543",
             relationship = "직장",
@@ -134,7 +182,10 @@ object DataObject {
             isMarked = false
         ),
         13 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_13,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_13
+            ),
             name = "미스포츈",
             number = "010-8765-4321",
             relationship = "친구",
@@ -143,7 +194,10 @@ object DataObject {
             isMarked = false
         ),
         14 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_14,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_14
+            ),
             name = "미츠리",
             number = "010-7654-3210",
             relationship = "학교",
@@ -152,7 +206,10 @@ object DataObject {
             isMarked = false
         ),
         15 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_15,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_15
+            ),
             name = "미카사",
             number = "010-6543-2109",
             relationship = "직장",
@@ -161,7 +218,10 @@ object DataObject {
             isMarked = false
         ),
         16 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_16,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_16
+            ),
             name = "바바라",
             number = "010-5432-1098",
             relationship = "친구",
@@ -170,7 +230,10 @@ object DataObject {
             isMarked = false
         ),
         17 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_17,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_17
+            ),
             name = "반디",
             number = "010-4321-0987",
             relationship = "학교",
@@ -179,7 +242,10 @@ object DataObject {
             isMarked = false
         ),
         18 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_18,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_18
+            ),
             name = "방예나",
             number = "010-3210-9876",
             relationship = "직장",
@@ -188,7 +254,10 @@ object DataObject {
             isMarked = false
         ),
         19 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_19,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_19
+            ),
             name = "산고노미야 코코미",
             number = "010-2109-8765",
             relationship = "친구",
@@ -197,7 +266,10 @@ object DataObject {
             isMarked = false
         ),
         20 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_20,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_20
+            ),
             name = "설지",
             number = "010-1098-7654",
             relationship = "학교",
@@ -206,7 +278,10 @@ object DataObject {
             isMarked = false
         ),
         21 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_21,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_21
+            ),
             name = "세라핀",
             number = "010-0987-6543",
             relationship = "직장",
@@ -215,7 +290,10 @@ object DataObject {
             isMarked = false
         ),
         22 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_22,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_22
+            ),
             name = "세일러문",
             number = "010-8765-4321",
             relationship = "친구",
@@ -224,7 +302,10 @@ object DataObject {
             isMarked = false
         ),
         23 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_23,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_23
+            ),
             name = "소나",
             number = "010-7654-3210",
             relationship = "학교",
@@ -233,7 +314,10 @@ object DataObject {
             isMarked = false
         ),
         24 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_24,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_24
+            ),
             name = "수희",
             number = "010-6543-2109",
             relationship = "직장",
@@ -242,7 +326,10 @@ object DataObject {
             isMarked = false
         ),
         25 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_25,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_25
+            ),
             name = "스커크",
             number = "010-5432-1098",
             relationship = "친구",
@@ -251,7 +338,10 @@ object DataObject {
             isMarked = false
         ),
         26 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_26,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_26
+            ),
             name = "스파클",
             number = "010-4321-0987",
             relationship = "학교",
@@ -260,7 +350,10 @@ object DataObject {
             isMarked = false
         ),
         27 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_27,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_27
+            ),
             name = "시노부",
             number = "010-3210-9876",
             relationship = "직장",
@@ -269,7 +362,10 @@ object DataObject {
             isMarked = false
         ),
         28 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_28,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_28
+            ),
             name = "신학",
             number = "010-2109-8765",
             relationship = "친구",
@@ -278,7 +374,10 @@ object DataObject {
             isMarked = false
         ),
         29 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_29,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_29
+            ),
             name = "아델라",
             number = "010-1098-7654",
             relationship = "학교",
@@ -287,7 +386,10 @@ object DataObject {
             isMarked = false
         ),
         30 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_30,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_30
+            ),
             name = "아리",
             number = "010-0987-6543",
             relationship = "직장",
@@ -296,7 +398,10 @@ object DataObject {
             isMarked = false
         ),
         31 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_31,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_31
+            ),
             name = "아메",
             number = "010-8765-4321",
             relationship = "친구",
@@ -305,7 +410,10 @@ object DataObject {
             isMarked = false
         ),
         32 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_32,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_32
+            ),
             name = "야에 미코",
             number = "010-7654-3210",
             relationship = "학교",
@@ -314,7 +422,10 @@ object DataObject {
             isMarked = false
         ),
         33 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_33,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_33
+            ),
             name = "엘렌조",
             number = "010-6543-2109",
             relationship = "직장",
@@ -323,7 +434,10 @@ object DataObject {
             isMarked = false
         ),
         34 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_34,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_34
+            ),
             name = "여르미",
             number = "010-5432-1098",
             relationship = "친구",
@@ -332,7 +446,10 @@ object DataObject {
             isMarked = false
         ),
         35 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_35,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_35
+            ),
             name = "완매",
             number = "010-4321-0987",
             relationship = "학교",
@@ -341,7 +458,10 @@ object DataObject {
             isMarked = false
         ),
         36 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_36,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_36
+            ),
             name = "유라",
             number = "010-3210-9876",
             relationship = "직장",
@@ -350,7 +470,10 @@ object DataObject {
             isMarked = false
         ),
         37 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_37,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_37
+            ),
             name = "음림",
             number = "010-2109-8765",
             relationship = "친구",
@@ -359,7 +482,10 @@ object DataObject {
             isMarked = false
         ),
         38 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_38,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_38
+            ),
             name = "이렐리아",
             number = "010-1098-7654",
             relationship = "학교",
@@ -368,7 +494,10 @@ object DataObject {
             isMarked = false
         ),
         39 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_39,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_39
+            ),
             name = "이오몽",
             number = "010-0987-6543",
             relationship = "직장",
@@ -377,7 +506,10 @@ object DataObject {
             isMarked = false
         ),
         40 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_40,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_40
+            ),
             name = "자야",
             number = "010-8765-4321",
             relationship = "친구",
@@ -386,7 +518,10 @@ object DataObject {
             isMarked = false
         ),
         41 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_41,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_41
+            ),
             name = "잔나",
             number = "010-7654-3210",
             relationship = "학교",
@@ -395,7 +530,10 @@ object DataObject {
             isMarked = false
         ),
         42 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_42,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_42
+            ),
             name = "조이",
             number = "010-6543-2109",
             relationship = "직장",
@@ -404,7 +542,10 @@ object DataObject {
             isMarked = false
         ),
         43 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_43,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_43
+            ),
             name = "징버거",
             number = "010-5432-1098",
             relationship = "친구",
@@ -413,7 +554,10 @@ object DataObject {
             isMarked = false
         ),
         44 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_44,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_44
+            ),
             name = "치오리",
             number = "010-4321-0987",
             relationship = "학교",
@@ -422,7 +566,10 @@ object DataObject {
             isMarked = false
         ),
         45 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_45,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_45
+            ),
             name = "카프카",
             number = "010-3210-9876",
             relationship = "직장",
@@ -431,7 +578,10 @@ object DataObject {
             isMarked = false
         ),
         46 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_46,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_46
+            ),
             name = "케이틀린",
             number = "010-2109-8765",
             relationship = "친구",
@@ -440,7 +590,10 @@ object DataObject {
             isMarked = false
         ),
         47 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_47,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_47
+            ),
             name = "키타가미 미미",
             number = "010-1098-7654",
             relationship = "학교",
@@ -449,7 +602,10 @@ object DataObject {
             isMarked = false
         ),
         48 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_48,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_48
+            ),
             name = "키타가와 마린",
             number = "010-0987-6543",
             relationship = "직장",
@@ -458,7 +614,10 @@ object DataObject {
             isMarked = false
         ),
         49 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_49,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_49
+            ),
             name = "토파즈",
             number = "010-8765-4321",
             relationship = "친구",
@@ -467,7 +626,10 @@ object DataObject {
             isMarked = false
         ),
         50 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_50,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_50
+            ),
             name = "푸리나",
             number = "010-7654-3210",
             relationship = "학교",
@@ -476,7 +638,10 @@ object DataObject {
             isMarked = false
         ),
         51 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_51,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_51
+            ),
             name = "피슬",
             number = "010-6543-2109",
             relationship = "직장",
@@ -485,7 +650,10 @@ object DataObject {
             isMarked = false
         ),
         52 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_52,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_52
+            ),
             name = "하나코나나",
             number = "010-5432-1098",
             relationship = "친구",
@@ -494,7 +662,10 @@ object DataObject {
             isMarked = false
         ),
         53 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_53,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_53
+            ),
             name = "한결",
             number = "010-4321-0987",
             relationship = "학교",
@@ -503,7 +674,10 @@ object DataObject {
             isMarked = false
         ),
         54 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_54,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_54
+            ),
             name = "호시노 아이",
             number = "010-3210-9876",
             relationship = "직장",
@@ -512,7 +686,10 @@ object DataObject {
             isMarked = false
         ),
         55 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_55,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_55
+            ),
             name = "후부키",
             number = "010-2109-8765",
             relationship = "친구",
@@ -521,7 +698,10 @@ object DataObject {
             isMarked = false
         ),
         56 to Contact.SweetieInfo(
-            imgSrc = R.drawable.img_sweetie_56,
+            imgSrc = ContextCompat.getDrawable(
+                context,
+                R.drawable.img_sweetie_56
+            ),
             name = "u32",
             number = "010-1098-7654",
             relationship = "학교",
@@ -543,11 +723,15 @@ object DataObject {
     val randomCallList = mutableListOf<Int>()
 
     val contactData: MutableList<Contact> = mutableListOf()
+    val contactList get() = groupByIndex(contactMap.sortedByName())
     val bookmarkData get() = contactMap.filter { it.value.isMarked }
 
     init {
         contactData.apply { addAll(groupByIndex(contactMap)) }
     }
+
+    private fun MutableMap<Int, Contact.SweetieInfo>.sortedByName() =
+        this.toList().sortedBy { it.second.name }.toMap().toMutableMap()
 }
 
 

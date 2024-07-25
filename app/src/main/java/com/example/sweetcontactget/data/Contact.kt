@@ -1,5 +1,7 @@
 package com.example.sweetcontactget.data
 
+import android.graphics.drawable.Drawable
+
 sealed class Contact {
     data class SweetiesID(val key: Int, val value: SweetieInfo) : Contact()
     data class ContactIndex(
@@ -7,13 +9,13 @@ sealed class Contact {
     ) : Contact()
 
     data class SweetieInfo(
-        val imgSrc: Int,
+        var imgSrc: Drawable? = null,
         var name: String,
         var number: String,
         var relationship: String,
         var memo: String,
         var heart: Int,
-        var isMarked: Boolean
+        var isMarked: Boolean,
     ) : Contact()
 }
 
