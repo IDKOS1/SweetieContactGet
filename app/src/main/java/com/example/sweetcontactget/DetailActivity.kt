@@ -26,6 +26,7 @@ class DetailActivity : AppCompatActivity() {
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()
                 tvDetailRelationship.text = sweetie.relationship
                 tvDetailMemo.text = sweetie.memo
+                tbDetailMark.isChecked = sweetie.isMarked
                 tvDetailMessage.setOnClickListener {
                     sweetie.number.let { number ->
                         Util.sendMessage(this@DetailActivity, number)
@@ -43,12 +44,25 @@ class DetailActivity : AppCompatActivity() {
                 finish()
             }
 
-            ivDetailMark.setOnClickListener {
-                //TODO 즐겨찾기
+            tbDetailMark.setOnClickListener {
+                val isMarked = !DataObject.isMarked(sweetieId)
+                DataObject.changedBookmark(sweetieId, isMarked)
+                if(isMarked){
+                    Util.showToast(this@DetailActivity, "즐겨찾기 추가.")
+                } else {
+                    Util.showToast(this@DetailActivity, "즐겨찾기 삭제.")
+                }
             }
 
             ivDetailDelete.setOnClickListener {
-                //TODO 삭제 확인 다이얼로그 생성 및 삭제
+                //TODO 삭제 확인 다이얼로그 생성
+                if(sweetieId != -1){
+                    DataObject.deleteSweetieInfo(sweetieId)
+                    finish()
+                    Util.showToast(this@DetailActivity, "삭제되었습니다.")
+                } else {
+                    Util.showToast(this@DetailActivity, "삭제할 대상이 없습니다..")
+                }
             }
 
         }
