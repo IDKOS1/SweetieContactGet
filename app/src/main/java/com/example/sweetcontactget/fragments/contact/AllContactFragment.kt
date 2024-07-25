@@ -13,7 +13,9 @@ import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
+import com.example.sweetcontactget.util.TopSnappedSmoothScroller
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
+import com.reddit.indicatorfastscroll.FastScrollerView
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
@@ -45,21 +47,46 @@ class AllContactFragment : Fragment() {
         recyclerView.apply {
             adapter = contactAdapter
             layoutManager = LinearLayoutManager(this.context)
-            val dividerColor = ContextCompat.getColor(context,R.color.secondary)
-            val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor,0f ,100f)
+            val dividerColor = ContextCompat.getColor(context, R.color.secondary)
+            val itemDecoration =
+                CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
             addItemDecoration(itemDecoration)
         }
 
+
+        // 패스트 스크롤 정의
         binding.fastscroller.setupWithRecyclerView(recyclerView,
-            {position ->
+            { position ->
                 val item = contactData[position]
-                if(item is Contact.ContactIndex){
-                    FastScrollItemIndicator.Text(item.letter)
-                }else{
-                    null
+                when(item){
+                    is Contact.ContactIndex -> FastScrollItemIndicator.Text(item.letter)
+                    else -> null
                 }
             }
         )
+
+        binding.fastscrollerThumb.setupWithFastScroller(binding.fastscroller)
+
+        //패스트 스크롤 동작 커스텀
+        binding.fastscroller.apply {
+            useDefaultScroller = false
+            itemIndicatorSelectedCallbacks += object : FastScrollerView.ItemIndicatorSelectedCallback{
+                override fun onItemIndicatorSelected(
+                    indicator: FastScrollItemIndicator,
+                    indicatorCenterY: Int,
+                    itemPosition: Int
+                ) {
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val smoothScroller = TopSnappedSmoothScroller(recyclerView.context)
+                    smoothScroller.targetPosition = itemPosition
+                    layoutManager.startSmoothScroll(smoothScroller)
+
+                }
+            }
+        }
+
+
+
 
         return binding.root
     }

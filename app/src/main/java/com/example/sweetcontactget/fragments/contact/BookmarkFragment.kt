@@ -9,8 +9,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.data.Contact
+import com.example.sweetcontactget.data.DataObject.bookmarkData
 import com.example.sweetcontactget.databinding.FragmentBookmarkBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
+import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,7 +70,7 @@ class BookmarkFragment : Fragment() {
     }
 
     fun loadBookmarks() {
-//        bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, Contact>))
+        bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, Contact.SweetieInfo>))
     }
 
     init {

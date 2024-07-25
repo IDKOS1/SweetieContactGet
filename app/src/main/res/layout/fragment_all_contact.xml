@@ -16,13 +16,33 @@
 
     <com.reddit.indicatorfastscroll.FastScrollerView
         android:id="@+id/fastscroller"
-        android:layout_width="32dp"
+        android:layout_width="20dp"
         android:layout_height="0dp"
         app:layout_constraintHeight_percent="0.7"
+        android:background="@drawable/fast_scroll_background"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:textColor="@color/primary"
+        app:fastScrollerTextPadding="8dp"
+        android:textColor="@color/gray"
+
         />
+
+    <com.reddit.indicatorfastscroll.FastScrollerThumbView
+        android:id="@+id/fastscroller_thumb"
+        android:layout_width="22dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.7"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:fastScrollerThumbColor="@android:color/transparent"
+        android:textColor="@android:color/transparent"
+
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
