@@ -1,16 +1,21 @@
 package com.example.sweetcontactget.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.sweetcontactget.DetailActivity
+import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentMyPageBinding
 
 
+
 class MyPageFragment : Fragment() {
-    private lateinit var binding: FragmentMyPageBinding
+    private var _binding: FragmentMyPageBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -19,7 +24,7 @@ class MyPageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMyPageBinding.inflate(layoutInflater)
+        _binding = FragmentMyPageBinding.inflate(layoutInflater)
         val userData = DataObject.myProfileData
         val birthday = userData.birthday
 
@@ -35,6 +40,11 @@ class MyPageFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 
