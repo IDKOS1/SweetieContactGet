@@ -56,6 +56,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/yeonaesidae"
                 android:gravity="center"
+                android:letterSpacing="0.3"
                 android:text="@string/common_name"
                 android:textColor="@color/white"
                 android:textFontWeight="700"
