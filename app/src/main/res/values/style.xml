@@ -56,4 +56,8 @@
         <item name="android:progressDrawable">@drawable/rating_bar_heart</item>
     </style>
 
+    <style name="HeartRatingBarSmall" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:progressDrawable">@drawable/rating_bar_heart_small</item>
+    </style>
+
 </resources>
