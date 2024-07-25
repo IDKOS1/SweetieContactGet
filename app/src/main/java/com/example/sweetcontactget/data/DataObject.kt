@@ -713,7 +713,7 @@ object DataObject {
     val randomCallList = mutableListOf<Int>()
 
     val contactData: MutableList<Contact> = mutableListOf()
-    fun getContactList() = groupByIndex(contactMap.sortedByName())
+    val contactList get() = groupByIndex(contactMap.sortedByName())
     val bookmarkData get() = contactMap.filter { it.value.isMarked }
 
     init {
