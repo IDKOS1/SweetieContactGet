@@ -32,7 +32,7 @@ class ContactAdapter(private val context: Context) :
 
 
 
-    inner class IndexHolder(private val binding: IndexHolderBinding) :
+    class IndexHolder(private val binding: IndexHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Contact.ContactIndex) {
             binding.apply {
@@ -41,7 +41,7 @@ class ContactAdapter(private val context: Context) :
         }
     }
 
-    inner class PersonInfoHolder(private val binding: PersonInfoHolderBinding) :
+    class PersonInfoHolder(private val binding: PersonInfoHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Contact.SweetiesID) {
             binding.apply {

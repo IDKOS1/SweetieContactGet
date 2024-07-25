@@ -15,9 +15,16 @@ class ItemTouchHelperCallback(private val listener: ItemTouchHelperListener): It
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
     ): Int {
-        val dragFlags = ItemTouchHelper.RIGHT
+        val position = viewHolder.adapterPosition
+        val adapter = recyclerView.adapter as ContactAdapter
+        val viewType = adapter.getItemViewType(position)
+        return if (viewType == ContactAdapter.VIEW_TYPE_HEADER){
+            makeMovementFlags(0,0)
+        }else{
+            val swipeFlags = ItemTouchHelper.RIGHT
+            makeMovementFlags(0,swipeFlags)
+        }
 
-        return makeMovementFlags(0,dragFlags)
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
