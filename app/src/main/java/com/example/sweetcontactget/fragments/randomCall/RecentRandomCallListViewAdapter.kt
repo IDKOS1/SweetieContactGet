@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.data.Contact
-import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.ItemRecentRandomCallBinding
 
 class RecentRandomCallListViewAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(diffUtil) {
@@ -15,7 +14,7 @@ class RecentRandomCallListViewAdapter : ListAdapter<Contact, RecyclerView.ViewHo
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Contact.SweetieInfo) {
             binding.apply {
-                ivRecentProfile.setImageResource(item.imgSrc)
+                ivRecentProfile.setImageDrawable(item.imgSrc)
                 tvRecentName.text = item.name
                 tvRecentNumber.text = item.number
             }

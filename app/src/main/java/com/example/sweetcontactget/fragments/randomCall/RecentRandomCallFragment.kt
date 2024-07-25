@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sweetcontactget.R
-import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentRecentRancdomCallBinding
 
