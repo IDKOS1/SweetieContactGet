@@ -25,7 +25,13 @@ class AllContactFragment : Fragment() {
     private var param2: String? = null
     private var _binding: FragmentAllContactBinding? = null
     private val binding get() = _binding!!
-    private val contactAdapter by lazy { ContactAdapter().apply { submitList(contactData.toList()) } }
+    private val contactAdapter by lazy {
+        ContactAdapter().apply {
+            submitList(
+                contactData.toList()
+            )
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,17 +51,18 @@ class AllContactFragment : Fragment() {
         recyclerView.apply {
             adapter = contactAdapter
             layoutManager = LinearLayoutManager(this.context)
-            val dividerColor = ContextCompat.getColor(context,R.color.secondary)
-            val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor,0f ,100f)
+            val dividerColor = ContextCompat.getColor(context, R.color.secondary)
+            val itemDecoration =
+                CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
             addItemDecoration(itemDecoration)
         }
 
         binding.fastscroller.setupWithRecyclerView(recyclerView,
-            {position ->
+            { position ->
                 val item = contactData[position]
-                if(item is Contact.ContactIndex){
+                if (item is Contact.ContactIndex) {
                     FastScrollItemIndicator.Text(item.letter)
-                }else{
+                } else {
                     null
                 }
             }
