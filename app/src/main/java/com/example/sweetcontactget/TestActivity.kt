@@ -1,15 +1,17 @@
 package com.example.sweetcontactget
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.sweetcontactget.databinding.ActivityTestBinding
 import com.example.sweetcontactget.dialog.EditTextDialog
-import com.example.sweetcontactget.dialog.MainDialog
 import com.example.sweetcontactget.dialog.RandomCallDialog
 import com.example.sweetcontactget.dialog.ThemeDialog
-import com.example.sweetcontactget.databinding.ActivityTestBinding
 
 class TestActivity : AppCompatActivity() {
     private lateinit var binding : ActivityTestBinding
@@ -25,8 +27,9 @@ class TestActivity : AppCompatActivity() {
         }
 
         binding.textView.setOnClickListener {
-            val dialog = MainDialog(this@TestActivity)
-            dialog.show()
+            val intent = Intent(this@TestActivity,AddContactActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         binding.textView2.setOnClickListener {
@@ -36,7 +39,7 @@ class TestActivity : AppCompatActivity() {
 
         binding.textView3.setOnClickListener {
             val dialog = EditTextDialog(this@TestActivity)
-            dialog.show()
+            dialog.show("test","test")
         }
 
         binding.button.setOnClickListener {

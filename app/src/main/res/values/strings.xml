@@ -70,6 +70,7 @@
     <string name="dialog_edit_name">이름 편집</string>
     <string name="dialog_main_phone_number">대표</string>
     <string name="dialog_add_phone_number">+&#160;&#160;&#160;&#160;전화번호 추가</string>
+    <string name="dialog_delete_phone_number">-&#160;&#160;&#160;&#160;전화번호 제거</string>
     <string name="dialog_placeholder_name">이름 입력</string>
     <string name="dialog_placeholder_phone_number">전화번호 입력</string>
     <string name="dialog_placeholder_event_information">이벤트 정보 입력</string>
