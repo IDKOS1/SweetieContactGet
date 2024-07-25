@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.fragments.RandomCall
+package com.example.sweetcontactget.fragments.randomCall
 
 import android.os.Bundle
 import android.os.Handler
@@ -17,7 +17,6 @@ import com.bumptech.glide.request.target.Target
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentRandomCallBinding
 import com.example.sweetcontactget.dialog.RandomCallDialog
-import kotlinx.coroutines.delay
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -45,15 +44,33 @@ class RandomCallFragment : Fragment() {
         _binding = FragmentRandomCallBinding.inflate(inflater, container, false)
 
 
+
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.btnRandomCall.setOnClickListener {
+            binding.ivRandomCallMain.visibility = View.INVISIBLE
+
             loadGif(R.raw.gacha1, binding.ivFirstGif)
             binding.ivFirstGif.visibility = View.VISIBLE
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.ivFirstGif.visibility = View.INVISIBLE
-                loadGif(R.raw.gacha2, binding.ivSecondGif)
 
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                if(activity != null){
+
+                    binding.ivFirstGif.visibility = View.INVISIBLE
+                    loadGif(R.raw.gacha2, binding.ivSecondGif)
+
+                }
                 //TODO 전화걸기 intent
+//            binding.ivRandomCallMain.visibility = View.VISIBLE
+
             }, 2000)
+
 
             //Dialog 열기, delay 추가
             Handler(Looper.getMainLooper()).postDelayed({
@@ -63,7 +80,6 @@ class RandomCallFragment : Fragment() {
 
         }
 
-        return binding.root
     }
 
     companion object {

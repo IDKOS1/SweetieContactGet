@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.fragments.Contact
+package com.example.sweetcontactget.fragments.contact
 
 import android.content.Context
 import android.os.Bundle

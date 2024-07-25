@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.RandomCall.RandomCallFragment">
+    tools:context=".fragments.randomCall.RandomCallFragment">
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -18,9 +18,9 @@
             android:id="@+id/iv_first_gif"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:visibility="invisible"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/iv_second_gif"
@@ -29,16 +29,22 @@
             android:layout_marginTop="300dp"
             android:adjustViewBounds="true" />
 
+        <ImageView
+            android:id="@+id/iv_random_call_main"
+            android:layout_width="match_parent"
+            android:layout_height="588dp"
+            android:src="@drawable/img_random_main"
+            android:visibility="visible" />
+
     </FrameLayout>
 
     <TextView
         android:id="@+id/btn_random_call"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_button"
+        android:layout_height="100dp"
+        android:background="@drawable/btn"
         android:fontFamily="@font/yeonaesidae"
         android:gravity="center"
-        android:padding="20dp"
         android:text="@string/main_bottom_bar_random_call"
         android:textColor="@color/white"
         android:textSize="30sp"

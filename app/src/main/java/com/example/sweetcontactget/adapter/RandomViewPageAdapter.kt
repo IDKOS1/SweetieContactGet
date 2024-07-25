@@ -2,8 +2,8 @@ package com.example.sweetcontactget.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.sweetcontactget.fragments.RandomCall.RandomCallFragment
-import com.example.sweetcontactget.fragments.RandomCall.RecentRancdomCallFragment
+import com.example.sweetcontactget.fragments.randomCall.RandomCallFragment
+import com.example.sweetcontactget.fragments.randomCall.RecentRandomCallFragment
 
 class RandomViewPageAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 2
@@ -11,7 +11,7 @@ class RandomViewPageAdapter(fragment: Fragment): FragmentStateAdapter(fragment) 
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> RandomCallFragment()
-            1 -> RecentRancdomCallFragment()
+            1 -> RecentRandomCallFragment()
             else -> throw IllegalArgumentException("Invalid position $position")
         }
     }

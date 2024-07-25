@@ -16,10 +16,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.addSweetieInfo
-import com.example.sweetcontactget.fragments.Contact.AllContactFragment
-import com.example.sweetcontactget.fragments.Contact.ContactFragment
+import com.example.sweetcontactget.fragments.contact.AllContactFragment
+import com.example.sweetcontactget.fragments.contact.ContactFragment
 import com.example.sweetcontactget.fragments.MyPageFragment
-import com.example.sweetcontactget.fragments.RandomCall.RandomFragment
+import com.example.sweetcontactget.fragments.randomCall.RandomFragment
 import com.example.sweetcontactget.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
