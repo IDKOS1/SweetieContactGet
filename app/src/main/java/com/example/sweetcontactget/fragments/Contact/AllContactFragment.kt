@@ -13,7 +13,6 @@ import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
-import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.util.TopSnappedSmoothScroller
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.reddit.indicatorfastscroll.FastScrollerView
@@ -61,7 +60,6 @@ class AllContactFragment : Fragment() {
                 val item = contactData[position]
                 when(item){
                     is Contact.ContactIndex -> FastScrollItemIndicator.Text(item.letter)
-                    is Contact.SweetieInfo -> FastScrollItemIndicator.Text(KoreanMatcher.getConsonant(item.name.first()).toString())
                     else -> null
                 }
             }
