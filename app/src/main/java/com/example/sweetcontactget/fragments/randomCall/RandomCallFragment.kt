@@ -52,15 +52,24 @@ class RandomCallFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRandomCall.setOnClickListener {
+            binding.ivRandomCallMain.visibility = View.INVISIBLE
+
             loadGif(R.raw.gacha1, binding.ivFirstGif)
             binding.ivFirstGif.visibility = View.VISIBLE
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.ivFirstGif.visibility = View.INVISIBLE
-                loadGif(R.raw.gacha2, binding.ivSecondGif)
 
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                if(activity != null){
+
+                    binding.ivFirstGif.visibility = View.INVISIBLE
+                    loadGif(R.raw.gacha2, binding.ivSecondGif)
+
+                }
                 //TODO 전화걸기 intent
+//            binding.ivRandomCallMain.visibility = View.VISIBLE
 
             }, 2000)
+
         }
 
     }
@@ -77,29 +86,31 @@ class RandomCallFragment : Fragment() {
     }
 
     private fun loadGif(loadGif: Int, imageView: ImageView) {
-            Glide.with(this).asGif().load(loadGif)
-                .listener(object : RequestListener<GifDrawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<GifDrawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        return false
-                    }
 
-                    override fun onResourceReady(
-                        resource: GifDrawable?,
-                        model: Any?,
-                        target: Target<GifDrawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        resource?.setLoopCount(1)
-                        return false
-                    }
+        Glide.with(this).asGif().load(loadGif)
+            .listener(object : RequestListener<GifDrawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<GifDrawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
 
-                }).into(imageView)
+                override fun onResourceReady(
+                    resource: GifDrawable?,
+                    model: Any?,
+                    target: Target<GifDrawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    resource?.setLoopCount(1)
+
+                    return false
+                }
+
+            }).into(imageView)
     }
 
 }
