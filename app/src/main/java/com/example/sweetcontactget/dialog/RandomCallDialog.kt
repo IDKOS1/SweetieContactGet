@@ -31,7 +31,7 @@ class RandomCallDialog(context: Context):Dialog(context) {
             binding.run {
                 ivRandomCallImage.setImageDrawable(it.imgSrc)
                 tvRandomCallName.text = it.name
-                tvRandomCallQuestion.text = "[ " + it.name + " ]에게 전화를 거시겠습니까?"
+                tvRandomCallQuestion.text = "[ " + it.name + " ]짱 에게 전화를 거시겠습니까?"
                 rbRandomCallHeart.rating = it.heart / 20.toFloat()
             }
         }
