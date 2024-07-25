@@ -48,15 +48,16 @@ class AllContactFragment : Fragment() {
         recyclerView.apply {
             adapter = contactAdapter
             layoutManager = LinearLayoutManager(this.context)
-            val dividerColor = ContextCompat.getColor(context,R.color.secondary)
-            val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor,0f ,100f)
+            val dividerColor = ContextCompat.getColor(context, R.color.secondary)
+            val itemDecoration =
+                CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
             addItemDecoration(itemDecoration)
         }
 
 
         // 패스트 스크롤 정의
         binding.fastscroller.setupWithRecyclerView(recyclerView,
-            {position ->
+            { position ->
                 val item = contactData[position]
                 when(item){
                     is Contact.ContactIndex -> FastScrollItemIndicator.Text(item.letter)
