@@ -1,4 +1,4 @@
-package com.example.sweetcontactget.fragments.RandomCall
+package com.example.sweetcontactget.fragments.randomCall
 
 import android.os.Bundle
 import android.os.Handler
