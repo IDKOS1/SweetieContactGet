@@ -20,7 +20,7 @@ class DetailActivity : AppCompatActivity() {
 
         binding.run {
             currentSweetieInfo?.let { sweetie ->
-                ivDetailProfile.setImageResource(sweetie.imgSrc)
+                ivDetailProfile.setImageDrawable(sweetie.imgSrc)
                 tvDetailName.text = sweetie.name
                 tvDetailNumber.text = sweetie.number
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()

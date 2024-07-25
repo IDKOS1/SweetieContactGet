@@ -28,8 +28,7 @@ class ContactAdapter(private val context: Context) :
         override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem == newItem
         }
-    }),Filterable, ItemTouchHelperCallback.ItemTouchHelperListener{
-
+    }), Filterable, ItemTouchHelperCallback.ItemTouchHelperListener {
 
 
     inner class IndexHolder(private val binding: IndexHolderBinding) :
@@ -46,11 +45,11 @@ class ContactAdapter(private val context: Context) :
         fun bind(item: Contact.SweetiesID) {
             binding.apply {
                 with(item.value) {
-                    ivSweetiePhoto.setImageResource(imgSrc)
+                    ivSweetiePhoto.setImageDrawable(imgSrc)
                     tvSweetieName.text = name
                     pbHeart.progress = heart
                     tvHeart.text = heart.toString() + "%"
-                    ivBehindView.setImageResource(imgSrc)
+                    ivBehindView.setImageDrawable(imgSrc)
                 }
 
 
@@ -150,9 +149,9 @@ class ContactAdapter(private val context: Context) :
     }
 
     override fun onItemSwipe(position: Int) {
-        val item= getItem(position)
-        if(item is Contact.SweetiesID){
-            Util.callSweetie(context,item.value.number)
+        val item = getItem(position)
+        if (item is Contact.SweetiesID) {
+            Util.callSweetie(context, item.value.number)
         }
 
         notifyItemChanged(position)

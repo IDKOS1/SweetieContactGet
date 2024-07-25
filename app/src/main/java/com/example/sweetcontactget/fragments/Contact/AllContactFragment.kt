@@ -13,6 +13,7 @@ import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.data.DataObject.contactList
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
@@ -48,7 +49,7 @@ class AllContactFragment : Fragment() {
         val recyclerView = binding.rvAllContactFragment
 
         contactAdapter = ContactAdapter(requireContext()).apply {
-            submitList(contactData.toList())
+            submitList(contactList.toList())
         }
 
         recyclerView.apply {
@@ -68,7 +69,7 @@ class AllContactFragment : Fragment() {
         // 패스트 스크롤 정의
         binding.fastscroller.setupWithRecyclerView(recyclerView,
             { position ->
-                when (val item = contactData[position]) {
+                when (val item = contactList[position]) {
                     is Contact.ContactIndex -> FastScrollItemIndicator.Text(item.letter)
                     else -> null
                 }
@@ -102,7 +103,6 @@ class AllContactFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -119,7 +119,6 @@ class AllContactFragment : Fragment() {
                 }
             }
     }
-
 
     fun search(searchTarget: CharSequence?) {
         contactAdapter.filter.filter(searchTarget)

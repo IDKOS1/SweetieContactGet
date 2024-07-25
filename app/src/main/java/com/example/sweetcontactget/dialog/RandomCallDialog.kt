@@ -11,7 +11,7 @@ import com.example.sweetcontactget.databinding.DialogRandomCallBinding
 import kotlin.random.Random
 import kotlin.random.nextInt
 
-class RandomCallDialog(context: Context):Dialog(context) {
+class RandomCallDialog(context: Context) : Dialog(context) {
     private lateinit var binding: DialogRandomCallBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,13 +19,13 @@ class RandomCallDialog(context: Context):Dialog(context) {
         binding = DialogRandomCallBinding.inflate(layoutInflater)
         setCancelable(false)
         setContentView(binding.root)
-        dialogResize(context,this@RandomCallDialog, 1.0f, 0.4f)
+        dialogResize(context, this@RandomCallDialog, 1.0f, 0.4f)
 
         val random = Random.nextInt(1..56)
         val currentId = random.let { DataObject.getSweetieInfo(it) }
         currentId.let {
             binding.run {
-                ivRandomCallImage.setImageResource(it.imgSrc)
+                ivRandomCallImage.setImageDrawable(it.imgSrc)
                 tvRandomCallName.text = it.name
                 tvRandomCallQuestion.text = "[ " + it.name + " ]에게 전화를 거시겠습니까?"
             }
@@ -40,10 +40,10 @@ class RandomCallDialog(context: Context):Dialog(context) {
         }
     }
 
-    fun dialogResize(context: Context, dialog: Dialog, width: Float, height: Float){
+    fun dialogResize(context: Context, dialog: Dialog, width: Float, height: Float) {
         val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-        if (Build.VERSION.SDK_INT < 30){
+        if (Build.VERSION.SDK_INT < 30) {
             val display = windowManager.defaultDisplay
             val size = Point()
 
@@ -56,7 +56,7 @@ class RandomCallDialog(context: Context):Dialog(context) {
 
             window?.setLayout(x, y)
 
-        }else{
+        } else {
             val rect = windowManager.currentWindowMetrics.bounds
 
             val window = dialog.window
