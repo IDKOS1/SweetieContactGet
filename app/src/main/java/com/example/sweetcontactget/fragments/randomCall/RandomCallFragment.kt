@@ -17,7 +17,6 @@ import com.bumptech.glide.request.target.Target
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentRandomCallBinding
 import com.example.sweetcontactget.dialog.RandomCallDialog
-import kotlinx.coroutines.delay
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
