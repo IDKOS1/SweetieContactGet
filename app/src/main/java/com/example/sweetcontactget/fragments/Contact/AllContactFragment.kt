@@ -97,15 +97,17 @@ class AllContactFragment : Fragment() {
             }
         }
 
-
-
-
         return binding.root
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        contactAdapter.submitList(contactData.toList())
     }
 
     companion object {

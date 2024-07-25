@@ -17,6 +17,16 @@ object DataObject {
 
     fun deleteSweetieInfo(sweetieId: Int) {
         contactMap.remove(sweetieId)
+        contactData.clear()
+        contactData.apply { addAll(groupByIndex(contactMap)) }
+    }
+
+    fun changedBookmark(sweetieId: Int, isMarked: Boolean) {
+        contactMap[sweetieId]!!.isMarked = isMarked
+    }
+
+    fun isMarked(sweetieId: Int): Boolean {
+        return contactMap[sweetieId]!!.isMarked
     }
 
     fun addSweetieInfo(sweetieInfo: Contact.SweetieInfo) {
