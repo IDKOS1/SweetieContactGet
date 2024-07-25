@@ -8,13 +8,14 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.core.content.ContextCompat.startActivity
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.DialogRandomCallBinding
 import com.example.sweetcontactget.util.Util
 import kotlin.random.Random
 import kotlin.random.nextInt
 
-class RandomCallDialog(context: Context) : Dialog(context) {
+class RandomCallDialog(context: Context):Dialog(context) {
     private lateinit var binding: DialogRandomCallBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +23,7 @@ class RandomCallDialog(context: Context) : Dialog(context) {
         binding = DialogRandomCallBinding.inflate(layoutInflater)
         setCancelable(false)
         setContentView(binding.root)
-        dialogResize(context, this@RandomCallDialog, 1.0f, 0.4f)
+        dialogResize(context,this@RandomCallDialog, 1.0f, 0.4f)
 
         val random = Random.nextInt(1..56)
         val currentId = random.let { DataObject.getSweetieInfo(it) }
@@ -34,6 +35,7 @@ class RandomCallDialog(context: Context) : Dialog(context) {
                 rbRandomCallHeart.rating = it.heart / 20.toFloat()
             }
         }
+
 
         binding.tvRandomCallMakeACall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
