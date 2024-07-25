@@ -530,7 +530,7 @@ object DataObject {
         "미녀들 다 내꺼~"
     )
 
-    val randomCallList = mutableListOf<Int>()
+    val randomCallList = mutableListOf<Contact>()
 
     val contactData: MutableList<Contact> = mutableListOf()
     val bookmarkData get() = contactMap.filter { it.value.isMarked }

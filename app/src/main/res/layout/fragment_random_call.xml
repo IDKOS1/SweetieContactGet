@@ -32,9 +32,8 @@
         <ImageView
             android:id="@+id/iv_random_call_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_who_call"
+            android:layout_height="588dp"
+            android:src="@drawable/img_random_main"
             android:visibility="visible" />
 
     </FrameLayout>
