@@ -31,7 +31,7 @@ object KoreanMatcher {
     private fun isKorean(char: Char) = char.code in KOREAN_UNICODE_START..KOREAN_UNICODE_END
 
     // 자음 얻기
-    private fun getConsonant(char: Char): Char {
+    fun getConsonant(char: Char): Char {
         val hasBegin = (char.code - KOREAN_UNICODE_START)
         val idx = hasBegin / KOREAN_UNICODE_BASED
         return koreanConsonant[idx]
