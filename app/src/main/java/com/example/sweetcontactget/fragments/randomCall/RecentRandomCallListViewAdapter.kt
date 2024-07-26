@@ -43,7 +43,7 @@ class RecentRandomCallListViewAdapter : ListAdapter<SweetieInfo, RecyclerView.Vi
 
         val diffUtil = object : DiffUtil.ItemCallback<SweetieInfo>() {
             override fun areItemsTheSame(oldItem: SweetieInfo, newItem: SweetieInfo): Boolean {
-                return oldItem.number == newItem.number
+                return oldItem == newItem
             }
 
             override fun areContentsTheSame(oldItem: SweetieInfo, newItem: SweetieInfo): Boolean {

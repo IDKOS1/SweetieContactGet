@@ -67,6 +67,11 @@ class RandomCallFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun loadGif(loadGif: Int, imageView: ImageView) {
         Glide.with(this).asGif().load(loadGif)
             .listener(object : RequestListener<GifDrawable> {
