@@ -9,7 +9,6 @@ import android.provider.ContactsContract
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -22,6 +21,7 @@ import com.example.sweetcontactget.fragments.contact.ContactFragment
 import com.example.sweetcontactget.fragments.MyPageFragment
 import com.example.sweetcontactget.fragments.randomCall.RandomFragment
 import com.example.sweetcontactget.databinding.ActivityMainBinding
+import com.example.sweetcontactget.util.Util.showToast
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
             cursor.close()
         }
         hashMap.map { addSweetieInfo(it.value) }
-        Toast.makeText(this, "연락처 목록을 불러왔습니다.", Toast.LENGTH_SHORT).show()
+        showToast(this, "연락처 목록을 불러왔습니다.")
     }
 
     private fun requestPermission() {
