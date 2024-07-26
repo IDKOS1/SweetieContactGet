@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
@@ -25,8 +24,7 @@
             android:id="@+id/iv_behind_view_gradient"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/background_gradient_swipecall"
-            />
+            android:src="@drawable/background_gradient_swipecall" />
 
         <TextView
             android:id="@+id/tv_behind_view"
@@ -38,14 +36,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
-
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,7 +64,20 @@
             android:layout_marginStart="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cb_select"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:button="@null"
+            android:text=""
+            android:clickable="false"
+            android:background="@drawable/selector_checkbox"
+            app:layout_constraintStart_toStartOf="@id/iv_sweetie_photo"
+            app:layout_constraintEnd_toEndOf="@id/iv_sweetie_photo"
+            app:layout_constraintTop_toTopOf="@id/iv_sweetie_photo"
+            app:layout_constraintBottom_toBottomOf="@id/iv_sweetie_photo" />
 
         <TextView
             android:id="@+id/tv_sweetie_name"
@@ -95,7 +102,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/tv_heart"
@@ -108,19 +115,10 @@
             app:layout_constraintStart_toStartOf="@id/pb_heart"
             app:layout_constraintEnd_toEndOf="@id/pb_heart"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-
-
-
-
-
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

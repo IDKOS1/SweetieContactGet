@@ -4,23 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="64dp"
     android:background="@drawable/img_background_light"
     tools:context=".fragments.contact.ContactFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_contact_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/secondary"
+        android:elevation="10dp"
+        android:paddingTop="64dp"
+        android:paddingBottom="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:gravity="bottom"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/ll_contact_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_select_all_btn"
+            style="@style/body_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center|center_vertical"
+            android:text="전체 선택"
+            android:textColor="@color/white"
+            app:drawableTint="@color/white"
+            app:drawableTopCompat="@drawable/ic_delete" />
+
+        <TextView
+            android:id="@+id/tv_delete_btn"
+            style="@style/body_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center|center_vertical"
+            android:text="삭제"
+            android:textColor="@color/white"
+            app:drawableTint="@color/white"
+            app:drawableTopCompat="@drawable/ic_delete" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_contact_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
+        app:layout_goneMarginTop="64dp"
         android:background="@drawable/shape_corner_radius_12dp"
         android:backgroundTint="@color/secondary"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_contact_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:layout_width="24dp"
@@ -46,7 +91,6 @@
             android:textAppearance="@style/body" />
 
     </LinearLayout>
-
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_contact_tab"
