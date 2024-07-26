@@ -135,8 +135,9 @@ class ContactFragment : Fragment() {
         }
         binding.tvDeleteBtn.setOnClickListener {
             deleteSweetieInfo(selectedSet)
-            handleToolbarVisibility(false)
             (vpAdapter.fragments[0] as AllContactFragment).refresh()
+            (vpAdapter.fragments[1] as BookmarkFragment).onResume()
+            handleToolbarVisibility(false)
         }
     }
 }

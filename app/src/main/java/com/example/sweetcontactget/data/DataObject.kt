@@ -780,7 +780,7 @@ object DataObject {
 
     val contactData: MutableList<Contact> = mutableListOf()
     val contactList get() = groupByIndex(contactMap.sortedByName())
-    val bookmarkData get() = contactMap.filter { it.value.isMarked }
+    val bookmarkData get() = contactMap.sortedByName().filter { it.value.isMarked }
     val selectedSet = HashSet<Int>()
 
     init {
