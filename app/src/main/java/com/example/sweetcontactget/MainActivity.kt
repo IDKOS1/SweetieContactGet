@@ -16,11 +16,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.addSweetieInfo
+import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.fragments.contact.AllContactFragment
 import com.example.sweetcontactget.fragments.contact.ContactFragment
 import com.example.sweetcontactget.fragments.MyPageFragment
 import com.example.sweetcontactget.fragments.randomCall.RandomFragment
 import com.example.sweetcontactget.databinding.ActivityMainBinding
+import com.example.sweetcontactget.util.Util.showToast
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -96,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             null,
             null
         )
-        val hashMap = hashMapOf<String, Contact.SweetieInfo>()
+        val hashMap = hashMapOf<String, SweetieInfo>()
 
         if (cursor != null) {
             Log.d("Contact", cursor.count.toString())
@@ -105,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                     cursor.getString(cursor.getColumnIndex(ContactsContract.Data.MIMETYPE))
                 val id =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
-                val sweetie = hashMap[id] ?: Contact.SweetieInfo(
+                val sweetie = hashMap[id] ?: SweetieInfo(
                     null, "", "", "", "", 0, false
                 )
 
@@ -143,6 +145,7 @@ class MainActivity : AppCompatActivity() {
             cursor.close()
         }
         hashMap.map { addSweetieInfo(it.value) }
+        showToast(this, "연락처 목록을 불러왔습니다.")
     }
 
     private fun requestPermission() {
@@ -161,5 +164,15 @@ class MainActivity : AppCompatActivity() {
         } else {
             getContactList()
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0 && grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED)
+            getContactList()
     }
 }

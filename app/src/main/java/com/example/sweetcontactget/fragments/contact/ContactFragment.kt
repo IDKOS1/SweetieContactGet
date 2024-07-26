@@ -51,13 +51,7 @@ class ContactFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        initViewPager()
-        initSearch()
-        //버튼 클릭 시 AddContactActivity 이동
-        binding.fabContactAdd.setOnClickListener {
-            startActivity(Intent(requireActivity(), AddContactActivity::class.java))
-        }
+        initView()
     }
 
     override fun onDestroyView() {
@@ -85,25 +79,25 @@ class ContactFragment : Fragment() {
             }
     }
 
-    private fun initViewPager() {
-        with(binding) {
-            vpContactViewPager.adapter = vpAdapter
-            TabLayoutMediator(tlContactTab, vpContactViewPager) { tab, position ->
-                tab.text = when (position) {
-                    in 0..1 -> resources.getStringArray(R.array.contact_tab)[position]
-                    else -> throw IllegalStateException("Unexpected position: $position")
-                }
-            }.attach()
-        }
-    }
+    private fun initView() = with(binding) {
+        vpContactViewPager.adapter = vpAdapter
+        TabLayoutMediator(tlContactTab, vpContactViewPager) { tab, position ->
+            tab.text = when (position) {
+                in 0..1 -> resources.getStringArray(R.array.contact_tab)[position]
+                else -> throw IllegalStateException("Unexpected position: $position")
+            }
+        }.attach()
 
-    private fun initSearch() {
-        binding.etContactSearch.addTextChangedListener(object : TextWatcher {
+        etContactSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
                 (vpAdapter.fragments[0] as AllContactFragment).search(p0)
             }
         })
+
+        fabContactAdd.setOnClickListener {
+            startActivity(Intent(requireActivity(), AddContactActivity::class.java))
+        }
     }
 }

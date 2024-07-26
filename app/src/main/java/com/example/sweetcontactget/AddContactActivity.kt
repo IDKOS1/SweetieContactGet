@@ -8,12 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sweetcontactget.data.DataObject
+import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
 import kotlin.random.Random
 import kotlin.random.nextInt
 
 class AddContactActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityAddContactBinding
+    private lateinit var binding: ActivityAddContactBinding
     private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +30,12 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.tvAddContactAddPhoneNumber.setOnClickListener {
             count++
-            if(count==1) {
+            if (count == 1) {
                 binding.clAddContactPhoneNumber2.visibility = View.VISIBLE
                 binding.tvAddContactDeletePhoneNumber.visibility = View.VISIBLE
             }
 
-            if(count==2) {
+            if (count == 2) {
                 binding.clAddContactPhoneNumber3.visibility = View.VISIBLE
                 binding.tvAddContactAddPhoneNumber.visibility = View.GONE
             }
@@ -42,19 +43,18 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.tvAddContactDeletePhoneNumber.setOnClickListener {
             count--
-            if(count==1) {
+            if (count == 1) {
                 binding.clAddContactPhoneNumber3.visibility = View.GONE
                 binding.tvAddContactAddPhoneNumber.visibility = View.VISIBLE
             }
 
-            if(count==0) {
+            if (count == 0) {
                 binding.clAddContactPhoneNumber2.visibility = View.GONE
                 binding.tvAddContactDeletePhoneNumber.visibility = View.GONE
             }
         }
 
         binding.btnAddContactSave.setOnClickListener {
-
             //저장 시 ContactFragment로 넘겨줄 데이터
 //            var contact_fragment = ContactFragment()
 //            var bundle = Bundle()
@@ -76,7 +76,7 @@ class AddContactActivity : AppCompatActivity() {
         }
 
         binding.btnAddContactCancel.setOnClickListener {
-            val intent = Intent(this@AddContactActivity,MainActivity::class.java)
+            val intent = Intent(this@AddContactActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

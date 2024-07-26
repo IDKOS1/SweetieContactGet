@@ -29,6 +29,9 @@
     <string name="contact_search">검색창</string>
 
     <!-- AllContact Fragment -->
+    <string name="swipe_call">전화 걸기 > > </string>
+    <string name="person_info_holder_name">스위티 이름</string>
+    <string name="person_info_holder_heart_percent">호감도</string>
 
 
     <!-- Bookmark Fragment -->

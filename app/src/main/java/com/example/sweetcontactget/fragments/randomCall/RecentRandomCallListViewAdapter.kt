@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.data.Contact
+import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ItemRecentRandomCallBinding
 
 class RecentRandomCallListViewAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(diffUtil) {
 
     inner class RecentRandomViewHolder(private val binding: ItemRecentRandomCallBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Contact.SweetieInfo) {
+        fun bind(item: SweetieInfo) {
             binding.apply {
                 ivRecentProfile.setImageDrawable(item.imgSrc)
                 tvRecentName.text = item.name
