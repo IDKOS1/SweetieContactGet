@@ -1,7 +1,5 @@
 package com.example.sweetcontactget.fragments.randomCall
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
