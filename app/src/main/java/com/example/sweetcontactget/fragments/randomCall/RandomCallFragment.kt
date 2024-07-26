@@ -49,22 +49,25 @@ class RandomCallFragment : Fragment() {
                 if (activity != null) {
 
                     binding.ivFirstGif.visibility = View.INVISIBLE
+                    binding.ivSecondGif.visibility = View.VISIBLE
+
+                    Glide.with(this).asBitmap().load(R.raw.gacha1).into(binding.ivFirstGif)
+
                     loadGif(R.raw.gacha2, binding.ivSecondGif)
 
-                }
-                //TODO 전화걸기 intent
 
-            }, 2000)
+                }
+
+            }, 1500)
 
             //Dialog 열기, delay 추가
             Handler(Looper.getMainLooper()).postDelayed({
                 val sweetieId = DataObject.getValidKeys().random()
-                val dialog = CallingDialog(requireContext(), sweetieId)
+                val dialog = CallingDialog(requireContext(), sweetieId, binding.ivRandomCallMain, binding.ivSecondGif)
                 dialog.show()
-            }, 5000)
+                Glide.with(this).asBitmap().load(R.raw.gacha2).into(binding.ivSecondGif)
+                binding.ivSecondGif.visibility = View.INVISIBLE
 
-                val dialog = RandomCallDialog(requireContext(), binding.ivRandomCallMain)
-                dialog.show()
 
             }, 4000)
 

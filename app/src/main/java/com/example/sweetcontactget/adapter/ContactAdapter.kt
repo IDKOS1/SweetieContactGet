@@ -3,7 +3,6 @@ package com.example.sweetcontactget.adapter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -20,7 +19,6 @@ import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderGridBinding
 import com.example.sweetcontactget.dialog.CallingDialog
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
-import com.example.sweetcontactget.util.Util
 
 class ContactAdapter(private val context: Context) :
     ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>() {
@@ -195,8 +193,7 @@ class ContactAdapter(private val context: Context) :
     override fun onItemSwipe(position: Int) {
         val item = getItem(position)
         if (item is Contact.SweetiesID) {
-            //dialog 띄우기
-            val dialog = CallingDialog(context, item.key)
+            val dialog = CallingDialog(context, item.key, null, null)
             dialog.show()
         }
 

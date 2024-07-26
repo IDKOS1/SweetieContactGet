@@ -16,8 +16,12 @@ import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.DialogRandomCallBinding
 import com.example.sweetcontactget.util.Util
 
-class CallingDialog(context: Context, private val sweetieID: Int):Dialog(context) {
-class RandomCallDialog(context: Context, private val imageView: ImageView) : Dialog(context) {
+class CallingDialog(
+    context: Context,
+    private val sweetieID: Int,
+    private val imageView: ImageView?,
+    private val ivSecondGif: ImageView?
+) : Dialog(context) {
     private lateinit var binding: DialogRandomCallBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +29,7 @@ class RandomCallDialog(context: Context, private val imageView: ImageView) : Dia
         binding = DialogRandomCallBinding.inflate(layoutInflater)
         setCancelable(false)
         setContentView(binding.root)
-        dialogResize(context,this@CallingDialog, 0.9f, 0.4f)
+        dialogResize(context, this@CallingDialog, 0.9f, 0.4f)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val currentId = sweetieID.let { DataObject.getSweetieInfo(it) }
@@ -41,21 +45,21 @@ class RandomCallDialog(context: Context, private val imageView: ImageView) : Dia
         binding.tvRandomCallMakeACall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel :" + Util.callSweetie(this.context, currentId.number))
-            DataObject.randomCallList.add(currentId)
-            setImageVisibility(imageView)
+            if (imageView != null) {
+                imageView.visibility = View.VISIBLE
+                DataObject.randomCallList.add(currentId)
+            }
             dismiss()
         }
 
         binding.tvRandomCallMakeACallCancel.setOnClickListener {
-            setImageVisibility(imageView)
+            if (imageView != null) {
+                imageView.visibility = View.VISIBLE
+            }
             cancel()
         }
     }
 
-
-    private fun setImageVisibility(imageView: ImageView) {
-        imageView.visibility = View.VISIBLE
-    }
 
     fun dialogResize(context: Context, dialog: Dialog, width: Float, height: Float) {
         val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
