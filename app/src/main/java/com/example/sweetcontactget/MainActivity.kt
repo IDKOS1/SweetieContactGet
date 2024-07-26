@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.addSweetieInfo
+import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.fragments.contact.AllContactFragment
 import com.example.sweetcontactget.fragments.contact.ContactFragment
 import com.example.sweetcontactget.fragments.MyPageFragment
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             null,
             null
         )
-        val hashMap = hashMapOf<String, Contact.SweetieInfo>()
+        val hashMap = hashMapOf<String, SweetieInfo>()
 
         if (cursor != null) {
             Log.d("Contact", cursor.count.toString())
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                     cursor.getString(cursor.getColumnIndex(ContactsContract.Data.MIMETYPE))
                 val id =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
-                val sweetie = hashMap[id] ?: Contact.SweetieInfo(
+                val sweetie = hashMap[id] ?: SweetieInfo(
                     null, "", "", "", "", 0, false
                 )
 

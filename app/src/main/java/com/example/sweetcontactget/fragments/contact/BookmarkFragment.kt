@@ -11,6 +11,7 @@ import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.bookmarkData
+import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.FragmentBookmarkBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
@@ -62,7 +63,7 @@ class BookmarkFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, Contact.SweetieInfo>))
+        bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, SweetieInfo>))
     }
 
     private fun initView() = with(binding) {

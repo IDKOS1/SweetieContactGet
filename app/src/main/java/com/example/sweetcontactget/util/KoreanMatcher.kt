@@ -1,6 +1,7 @@
 package com.example.sweetcontactget.util
 
 import com.example.sweetcontactget.data.Contact
+import com.example.sweetcontactget.data.SweetieInfo
 
 object KoreanMatcher {
     private const val KOREAN_UNICODE_START = 44032 // 가
@@ -52,7 +53,7 @@ object KoreanMatcher {
      */
     private fun filterByIndex(
         index: String,
-        contactMap: MutableMap<Int, Contact.SweetieInfo>
+        contactMap: MutableMap<Int, SweetieInfo>
     ): MutableList<Contact> {
         val filteredList = mutableListOf<Contact.SweetiesID>()
 
@@ -74,7 +75,7 @@ object KoreanMatcher {
      * 첫 자음을 기준으로 그룹화 된 리사이클러뷰 목록 생성
      * @param map 그룹화 할 원본 Map
      */
-    fun groupByIndex(map: MutableMap<Int, Contact.SweetieInfo>) =
+    fun groupByIndex(map: MutableMap<Int, SweetieInfo>) =
         consonants.flatMap { filterByIndex(it, map) }
 
     /**

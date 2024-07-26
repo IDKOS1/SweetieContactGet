@@ -11,7 +11,7 @@ object DataObject {
         ContactApplication.applicationContext()
     }
 
-    fun getSweetieInfo(sweetieId: Int): Contact.SweetieInfo {
+    fun getSweetieInfo(sweetieId: Int): SweetieInfo {
         return contactMap[sweetieId]!!
     }
 
@@ -29,14 +29,14 @@ object DataObject {
         return contactMap[sweetieId]!!.isMarked
     }
 
-    fun addSweetieInfo(sweetieInfo: Contact.SweetieInfo) {
+    fun addSweetieInfo(sweetieInfo: SweetieInfo) {
         val newKey = contactMap.maxOf { it.key } + 1
         contactMap[newKey] = sweetieInfo
     }
 
 
-    private val contactMap: MutableMap<Int, Contact.SweetieInfo> = mutableMapOf(
-        1 to Contact.SweetieInfo(
+    private val contactMap: MutableMap<Int, SweetieInfo> = mutableMapOf(
+        1 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_1
@@ -48,7 +48,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        2 to Contact.SweetieInfo(
+        2 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_2
@@ -60,7 +60,7 @@ object DataObject {
             heart = 20,
             isMarked = false
         ),
-        3 to Contact.SweetieInfo(
+        3 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_3
@@ -72,7 +72,7 @@ object DataObject {
             heart = 40,
             isMarked = false
         ),
-        4 to Contact.SweetieInfo(
+        4 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_4
@@ -84,7 +84,7 @@ object DataObject {
             heart = 60,
             isMarked = false
         ),
-        5 to Contact.SweetieInfo(
+        5 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_5
@@ -96,7 +96,7 @@ object DataObject {
             heart = 100,
             isMarked = false
         ),
-        6 to Contact.SweetieInfo(
+        6 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_6
@@ -108,7 +108,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        7 to Contact.SweetieInfo(
+        7 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_7
@@ -121,7 +121,7 @@ object DataObject {
             isMarked = false
         ),
 
-        8 to Contact.SweetieInfo(
+        8 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_8
@@ -133,7 +133,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        9 to Contact.SweetieInfo(
+        9 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_9
@@ -145,7 +145,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        10 to Contact.SweetieInfo(
+        10 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_10
@@ -157,7 +157,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        11 to Contact.SweetieInfo(
+        11 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_11
@@ -169,7 +169,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        12 to Contact.SweetieInfo(
+        12 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_12
@@ -181,7 +181,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        13 to Contact.SweetieInfo(
+        13 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_13
@@ -193,7 +193,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        14 to Contact.SweetieInfo(
+        14 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_14
@@ -205,7 +205,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        15 to Contact.SweetieInfo(
+        15 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_15
@@ -217,7 +217,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        16 to Contact.SweetieInfo(
+        16 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_16
@@ -229,7 +229,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        17 to Contact.SweetieInfo(
+        17 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_17
@@ -241,7 +241,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        18 to Contact.SweetieInfo(
+        18 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_18
@@ -253,7 +253,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        19 to Contact.SweetieInfo(
+        19 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_19
@@ -265,7 +265,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        20 to Contact.SweetieInfo(
+        20 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_20
@@ -277,7 +277,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        21 to Contact.SweetieInfo(
+        21 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_21
@@ -289,7 +289,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        22 to Contact.SweetieInfo(
+        22 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_22
@@ -301,7 +301,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        23 to Contact.SweetieInfo(
+        23 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_23
@@ -313,7 +313,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        24 to Contact.SweetieInfo(
+        24 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_24
@@ -325,7 +325,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        25 to Contact.SweetieInfo(
+        25 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_25
@@ -337,7 +337,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        26 to Contact.SweetieInfo(
+        26 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_26
@@ -349,7 +349,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        27 to Contact.SweetieInfo(
+        27 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_27
@@ -361,7 +361,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        28 to Contact.SweetieInfo(
+        28 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_28
@@ -373,7 +373,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        29 to Contact.SweetieInfo(
+        29 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_29
@@ -385,7 +385,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        30 to Contact.SweetieInfo(
+        30 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_30
@@ -397,7 +397,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        31 to Contact.SweetieInfo(
+        31 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_31
@@ -409,7 +409,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        32 to Contact.SweetieInfo(
+        32 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_32
@@ -421,7 +421,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        33 to Contact.SweetieInfo(
+        33 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_33
@@ -433,7 +433,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        34 to Contact.SweetieInfo(
+        34 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_34
@@ -445,7 +445,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        35 to Contact.SweetieInfo(
+        35 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_35
@@ -457,7 +457,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        36 to Contact.SweetieInfo(
+        36 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_36
@@ -469,7 +469,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        37 to Contact.SweetieInfo(
+        37 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_37
@@ -481,7 +481,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        38 to Contact.SweetieInfo(
+        38 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_38
@@ -493,7 +493,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        39 to Contact.SweetieInfo(
+        39 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_39
@@ -505,7 +505,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        40 to Contact.SweetieInfo(
+        40 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_40
@@ -517,7 +517,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        41 to Contact.SweetieInfo(
+        41 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_41
@@ -529,7 +529,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        42 to Contact.SweetieInfo(
+        42 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_42
@@ -541,7 +541,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        43 to Contact.SweetieInfo(
+        43 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_43
@@ -553,7 +553,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        44 to Contact.SweetieInfo(
+        44 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_44
@@ -565,7 +565,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        45 to Contact.SweetieInfo(
+        45 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_45
@@ -577,7 +577,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        46 to Contact.SweetieInfo(
+        46 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_46
@@ -589,7 +589,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        47 to Contact.SweetieInfo(
+        47 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_47
@@ -601,7 +601,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        48 to Contact.SweetieInfo(
+        48 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_48
@@ -613,7 +613,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        49 to Contact.SweetieInfo(
+        49 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_49
@@ -625,7 +625,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        50 to Contact.SweetieInfo(
+        50 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_50
@@ -637,7 +637,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        51 to Contact.SweetieInfo(
+        51 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_51
@@ -649,7 +649,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        52 to Contact.SweetieInfo(
+        52 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_52
@@ -661,7 +661,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        53 to Contact.SweetieInfo(
+        53 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_53
@@ -673,7 +673,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        54 to Contact.SweetieInfo(
+        54 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_54
@@ -685,7 +685,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        55 to Contact.SweetieInfo(
+        55 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_55
@@ -697,7 +697,7 @@ object DataObject {
             heart = 0,
             isMarked = false
         ),
-        56 to Contact.SweetieInfo(
+        56 to SweetieInfo(
             imgSrc = ContextCompat.getDrawable(
                 context,
                 R.drawable.img_sweetie_56
@@ -730,7 +730,7 @@ object DataObject {
         contactData.apply { addAll(groupByIndex(contactMap)) }
     }
 
-    private fun MutableMap<Int, Contact.SweetieInfo>.sortedByName() =
+    private fun MutableMap<Int, SweetieInfo>.sortedByName() =
         this.toList().sortedBy { it.second.name }.toMap().toMutableMap()
 }
 
