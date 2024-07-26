@@ -7,4 +7,5 @@
     <color name="primary_transparent">#55F379D8</color>
     <color name="secondary">#FFB0C5</color>
     <color name="tertiary">#FFEEF5</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

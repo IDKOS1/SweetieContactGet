@@ -12,6 +12,7 @@ import com.example.sweetcontactget.AddContactActivity
 import com.example.sweetcontactget.adapter.ViewPagerAdapter
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.databinding.FragmentContactBinding
+import com.github.angads25.toggle.interfaces.OnToggledListener
 import com.google.android.material.tabs.TabLayoutMediator
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,6 +29,7 @@ class ContactFragment : Fragment() {
     private var _binding: FragmentContactBinding? = null
     private val binding get() = _binding!!
     private val vpAdapter: ViewPagerAdapter by lazy { ViewPagerAdapter(this) }
+    private lateinit var allContactFragment: AllContactFragment
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -46,12 +48,18 @@ class ContactFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentContactBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+
+        binding.toggleSetLayout.setOnToggledListener{_,isOn ->
+            (vpAdapter.fragments[0] as AllContactFragment).switchLayoutManager(isOn)
+        }
+
     }
 
     override fun onDestroyView() {
