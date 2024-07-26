@@ -3,12 +3,14 @@ package com.example.sweetcontactget.dialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Point
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.Window
 import android.view.WindowManager
-import androidx.core.content.ContextCompat.startActivity
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.DialogRandomCallBinding
 import com.example.sweetcontactget.util.Util
@@ -23,7 +25,8 @@ class RandomCallDialog(context: Context):Dialog(context) {
         binding = DialogRandomCallBinding.inflate(layoutInflater)
         setCancelable(false)
         setContentView(binding.root)
-        dialogResize(context,this@RandomCallDialog, 1.0f, 0.4f)
+        dialogResize(context,this@RandomCallDialog, 0.9f, 0.4f)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val random = Random.nextInt(1..56)
         val currentId = random.let { DataObject.getSweetieInfo(it) }

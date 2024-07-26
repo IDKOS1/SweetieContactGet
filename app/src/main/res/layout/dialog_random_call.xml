@@ -7,21 +7,33 @@
     <ImageView
         android:id="@+id/iv_random_call_image"
         android:layout_width="match_parent"
-        android:layout_height="350sp"
+        android:layout_height="match_parent"
         android:src="@drawable/img_sweetie_2"
         android:scaleType="fitXY"
+        android:background="@drawable/shape_corner_radius_24dp"
+        android:clipToOutline="true"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_dialog_3"
+        android:alpha="0.9"
+        android:layout_marginStart="8sp"
+        android:layout_marginBottom="6sp"
+        android:paddingHorizontal="16sp"
+        android:paddingVertical="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_random_call_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="6sp"
-        android:layout_marginBottom="6sp"
-        android:background="@drawable/img_dialog_1"
-        android:paddingHorizontal="16sp"
-        android:paddingVertical="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -111,6 +123,7 @@
             android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="@id/tv_random_call_make_a_call"
             app:layout_constraintTop_toBottomOf="@id/tv_random_call_make_a_call" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
