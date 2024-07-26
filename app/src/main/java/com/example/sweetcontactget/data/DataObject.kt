@@ -43,6 +43,32 @@ object DataObject {
 
     }
 
+    fun increaseHeart(sweetieId: Int, heart: Int) {
+        contactMap[sweetieId]!!.heart += heart
+    }
+
+    fun editProfile(editTarget: String, content: String) {
+        when (editTarget) {
+            "이름" -> myProfileData.name = content
+            "전화번호" -> myProfileData.phone_number = content
+            "주소" -> myProfileData.address = content
+            "소개" -> myProfileData.infoMessage = content
+            "birthday" -> myProfileData.birthday = LocalDate.parse(content)
+        }
+    }
+
+    fun editContact(sweetieId: Int, editTarget: String, content: String) {
+        val contact = contactMap[sweetieId]
+        if (contact != null) {
+            when (editTarget) {
+                "이름" -> contact.name = content
+                "전화번호" -> contact.number = content
+                "관계" -> contact.relationship = content
+                "메모" -> contact.memo = content
+            }
+        }
+    }
+
 
     private val contactMap: MutableMap<Int, SweetieInfo> = mutableMapOf(
         1 to SweetieInfo(

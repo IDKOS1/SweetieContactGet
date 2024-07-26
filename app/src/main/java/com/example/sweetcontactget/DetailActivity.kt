@@ -1,42 +1,65 @@
 package com.example.sweetcontactget
 
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import com.example.sweetcontactget.data.DataObject
+import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityDetailBinding
+import com.example.sweetcontactget.dialog.EditTextDialog
 import com.example.sweetcontactget.util.Util
 
 class DetailActivity : AppCompatActivity() {
-    private val sweetieId by lazy { intent.getIntExtra("sweetieId", -1) }
-    private val binding by lazy { ActivityDetailBinding.inflate(layoutInflater) }
+    private lateinit var binding: ActivityDetailBinding
+    private var sweetieId: Int = -1
+    private var sweetie: SweetieInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val currentSweetieInfo = if (sweetieId != -1) DataObject.getSweetieInfo(sweetieId) else null
+        sweetieId = intent.getIntExtra("sweetieId", -1)
+        if (sweetieId != -1) {
+            sweetie = DataObject.getSweetieInfo(sweetieId)
+        }
+
+        requestCallPermission()
+
+        updateDetail()
 
         binding.run {
-            currentSweetieInfo?.let { sweetie ->
-                ivDetailProfile.setImageDrawable(sweetie.imgSrc)
-                tvDetailName.text = sweetie.name
-                tvDetailNumber.text = sweetie.number
-                rbHeartRating.rating = sweetie.heart / 20.toFloat()
-                tvDetailRelationship.text = sweetie.relationship
-                tvDetailMemo.text = sweetie.memo
-                tbDetailMark.isChecked = sweetie.isMarked
+            tvDetailName.setOnClickListener {
+                editContent("이름")
+            }
+
+            llDetailNumber.setOnClickListener {
+                editContent("전화번호")
+            }
+
+            llDetailRelationship.setOnClickListener {
+                editContent("관계")
+            }
+
+            llDetailMemo.setOnClickListener {
+                editContent("메모")
+            }
+
+
+            sweetie?.let { sweetie ->
                 tvDetailMessage.setOnClickListener {
-                    sweetie.number.let { number ->
-                        Util.sendMessage(this@DetailActivity, number)
-                    }
+                    Util.sendMessage(this@DetailActivity, sweetie.number)
                 }
 
                 tvDetailCall.setOnClickListener {
-                    sweetie.number.let { number ->
-                        Util.callSweetie(this@DetailActivity, number)
-                    }
+                    Util.callSweetie(this@DetailActivity, sweetie.number)
                 }
             }
 
@@ -47,24 +70,64 @@ class DetailActivity : AppCompatActivity() {
             tbDetailMark.setOnClickListener {
                 val isMarked = !DataObject.isMarked(sweetieId)
                 DataObject.changedBookmark(sweetieId, isMarked)
-                if(isMarked){
-                    Util.showToast(this@DetailActivity, "즐겨찾기 추가.")
-                } else {
-                    Util.showToast(this@DetailActivity, "즐겨찾기 삭제.")
-                }
+                val toastMessage = if (isMarked) "즐겨찾기 추가." else "즐겨찾기 삭제."
+                Util.showToast(this@DetailActivity, toastMessage)
             }
 
             ivDetailDelete.setOnClickListener {
-                //TODO 삭제 확인 다이얼로그 생성
-                if(sweetieId != -1){
+                // TODO: 삭제 확인 다이얼로그 생성
+                if (sweetieId != -1) {
                     DataObject.deleteSweetieInfo(sweetieId)
                     finish()
                     Util.showToast(this@DetailActivity, "삭제되었습니다.")
                 } else {
-                    Util.showToast(this@DetailActivity, "삭제할 대상이 없습니다..")
+                    Util.showToast(this@DetailActivity, "삭제할 대상이 없습니다.")
                 }
             }
+        }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        updateDetail()
+    }
+
+    private fun editContent(editTarget: String) {
+        val dialog = EditTextDialog(this)
+        dialog.show("$editTarget 편집", editTarget)
+
+        //다이얼로그 저장 버튼을 눌렀을 때 text 변경
+        dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
+            override fun onClicked(content: String) {
+                DataObject.editContact(sweetieId,editTarget, content)
+                updateDetail()
+                Util.showToast(this@DetailActivity, "수정 되었습니다.")
+            }
+        })
+    }
+
+    private fun updateDetail() {
+        sweetie?.let { sweetie ->
+            binding.run {
+                ivDetailProfile.setImageDrawable(sweetie.imgSrc)
+                tvDetailName.text = sweetie.name
+                tvDetailNumber.text = sweetie.number
+                rbHeartRating.rating = sweetie.heart / 20.toFloat()
+                tvDetailRelationship.text = sweetie.relationship
+                tvDetailMemo.text = sweetie.memo
+                tbDetailMark.isChecked = sweetie.isMarked
+            }
+        }
+    }
+
+    private fun requestCallPermission() {
+        val status = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
+        if (status != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.CALL_PHONE),
+                10
+            )
         }
     }
 }
