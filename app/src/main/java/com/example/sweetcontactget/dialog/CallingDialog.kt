@@ -13,10 +13,8 @@ import android.view.WindowManager
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.DialogRandomCallBinding
 import com.example.sweetcontactget.util.Util
-import kotlin.random.Random
-import kotlin.random.nextInt
 
-class RandomCallDialog(context: Context):Dialog(context) {
+class CallingDialog(context: Context, private val sweetieID: Int):Dialog(context) {
     private lateinit var binding: DialogRandomCallBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,11 +22,10 @@ class RandomCallDialog(context: Context):Dialog(context) {
         binding = DialogRandomCallBinding.inflate(layoutInflater)
         setCancelable(false)
         setContentView(binding.root)
-        dialogResize(context,this@RandomCallDialog, 0.9f, 0.4f)
+        dialogResize(context,this@CallingDialog, 0.9f, 0.4f)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val random = Random.nextInt(1..56)
-        val currentId = random.let { DataObject.getSweetieInfo(it) }
+        val currentId = sweetieID.let { DataObject.getSweetieInfo(it) }
         currentId.let {
             binding.run {
                 ivRandomCallImage.setImageDrawable(it.imgSrc)
@@ -37,8 +34,6 @@ class RandomCallDialog(context: Context):Dialog(context) {
                 rbRandomCallHeart.rating = it.heart / 20.toFloat()
             }
         }
-
-
         binding.tvRandomCallMakeACall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data =  Uri.parse("tel :"+Util.callSweetie(this.context,currentId.number))

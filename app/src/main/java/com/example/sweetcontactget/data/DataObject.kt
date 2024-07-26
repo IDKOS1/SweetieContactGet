@@ -2,7 +2,6 @@ package com.example.sweetcontactget.data
 
 import android.content.Context
 import android.widget.Toast
-import android.util.Log
 import androidx.core.content.ContextCompat
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
@@ -13,6 +12,10 @@ import java.time.LocalDate
 object DataObject {
     private val context: Context by lazy {
         ContactApplication.applicationContext()
+    }
+
+    fun getValidKeys(): List<Int> {
+        return contactMap.keys.toList()
     }
 
     fun getSweetieInfo(sweetieId: Int): SweetieInfo {
@@ -28,7 +31,6 @@ object DataObject {
     fun deleteSweetieInfo(sweetieIdList: Set<Int>) {
         contactMap.removeAll(sweetieIdList)
         selectedSet.clear()
-        Log.d("TEST", contactList.size.toString())
     }
 
     fun changedBookmark(sweetieId: Int, isMarked: Boolean) {
@@ -57,6 +59,32 @@ object DataObject {
 
     fun addSelection(id: Int) = selectedSet.add(id)
     fun removeSelection(id: Int) = selectedSet.remove(id)
+
+    fun increaseHeart(sweetieId: Int, heart: Int) {
+        contactMap[sweetieId]!!.heart += heart
+    }
+
+    fun editProfile(editTarget: String, content: String) {
+        when (editTarget) {
+            "이름" -> myProfileData.name = content
+            "전화번호" -> myProfileData.phone_number = content
+            "주소" -> myProfileData.address = content
+            "소개" -> myProfileData.infoMessage = content
+            "birthday" -> myProfileData.birthday = LocalDate.parse(content)
+        }
+    }
+
+    fun editContact(sweetieId: Int, editTarget: String, content: String) {
+        val contact = contactMap[sweetieId]
+        if (contact != null) {
+            when (editTarget) {
+                "이름" -> contact.name = content
+                "전화번호" -> contact.number = content
+                "관계" -> contact.relationship = content
+                "메모" -> contact.memo = content
+            }
+        }
+    }
 
     private val contactMap: MutableMap<Int, SweetieInfo> = mutableMapOf(
         1 to SweetieInfo(
