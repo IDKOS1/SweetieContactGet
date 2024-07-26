@@ -7,7 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject
+import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -55,11 +57,17 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.btnAddContactSave.setOnClickListener {
 
-//            var map : Contact.SweetieInfo? = null
-//            map?.imgSrc = binding.ivAddContactImage.drawable
-//
-//            DataObject.addSweetieInfo(map)
-
+            var sweetieInfo = SweetieInfo(
+                imgSrc = binding.ivAddContactImage.drawable,
+                name = binding.etAddContactName.text.toString(),
+                number = binding.etAddContactPhoneNumber.text.toString(),
+                relationship = binding.etAddContactRelationship.text.toString(),
+                memo = binding.etAddContactMemo.text.toString(),
+                heart = 0,
+                isMarked = false
+            )
+            DataObject.addSweetieInfo(sweetieInfo)
+            finish()
         }
 
         binding.btnAddContactCancel.setOnClickListener {
