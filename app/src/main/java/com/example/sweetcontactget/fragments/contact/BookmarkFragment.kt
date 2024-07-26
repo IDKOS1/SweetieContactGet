@@ -47,15 +47,11 @@ class BookmarkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
-
-        bookmarkAdapter = ContactAdapter(requireContext())
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
     }
 
@@ -69,12 +65,16 @@ class BookmarkFragment : Fragment() {
         bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, Contact.SweetieInfo>))
     }
 
-    private fun initView() = with(binding.rvBookmark) {
-        adapter = bookmarkAdapter
-        layoutManager = LinearLayoutManager(this.context)
-        val dividerColor = ContextCompat.getColor(context, R.color.secondary)
-        val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
-        addItemDecoration(itemDecoration)
+    private fun initView() = with(binding) {
+        bookmarkAdapter = ContactAdapter(requireContext())
+        rvBookmark.apply {
+            adapter = bookmarkAdapter
+            layoutManager = LinearLayoutManager(this.context)
+            val dividerColor = ContextCompat.getColor(context, R.color.secondary)
+            val itemDecoration =
+                CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
+            addItemDecoration(itemDecoration)
+        }
     }
 
     companion object {
