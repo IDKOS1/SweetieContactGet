@@ -1,15 +1,15 @@
 package com.example.sweetcontactget.fragments
 
+import CustomDatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentMyPageBinding
 import com.example.sweetcontactget.dialog.EditTextDialog
-
+import com.example.sweetcontactget.util.Util
 
 
 class MyPageFragment : Fragment() {
@@ -24,9 +24,66 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMyPageBinding.inflate(layoutInflater)
+
+        binding.run {
+            updateMyInfo()
+
+            tvMypageName.setOnClickListener {
+                editContent("이름")
+            }
+
+            llMypageNumber.setOnClickListener {
+                editContent("전화번호")
+            }
+
+            llMypageBirthday.setOnClickListener {
+                val datePickerFragment = CustomDatePickerDialog {selectedYear, selectedMonth, selectedDay ->
+                    // 선택된 날짜를 처리
+                    val selectedDate = String.format(
+                        "%04d-%02d-%02d",
+                        selectedYear,
+                        selectedMonth + 1,
+                        selectedDay
+                    )
+                    // 데이터 저장 (예: ViewModel 또는 데이터 객체에 저장)
+                    DataObject.editProfile("birthday", selectedDate)
+
+                    // 사용자에게 알림
+                    updateMyInfo()
+                    Util.showToast(requireContext(), "생년월일이 수정되었습니다.")
+                }
+
+                datePickerFragment.show(parentFragmentManager, "datePicker")
+            }
+
+            llMypageAddress.setOnClickListener {
+                editContent("주소")
+            }
+
+            llMypageInfoMessage.setOnClickListener {
+                editContent("소개")
+            }
+        }
+        return binding.root
+    }
+
+    private fun editContent(editTarget: String) {
+        val dialog = EditTextDialog(requireContext())
+        dialog.show("$editTarget 편집", editTarget)
+
+        //다이얼로그 저장 버튼을 눌렀을 때 text 변경
+        dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
+            override fun onClicked(content: String) {
+                DataObject.editProfile(editTarget, content)
+                updateMyInfo()
+                Util.showToast(requireContext(), "수정 되었습니다.")
+            }
+        })
+    }
+
+    private fun updateMyInfo() {
         val userData = DataObject.myProfileData
         val birthday = userData.birthday
-
         binding.run {
             ivMypageProfile.setImageResource(userData.imgSrc)
             tvMypageName.text = userData.name
@@ -36,73 +93,7 @@ class MyPageFragment : Fragment() {
                 "${birthday.year}년 ${birthday.monthValue}월 ${birthday.dayOfMonth}일"
             tvMypageAddres.text = userData.address
             tvMypageInfoMessage.text = userData.infoMessage
-
-
-            //Dialog
-            //이름 클릭 시 다이얼로그 열림
-            tvMypageName.setOnClickListener {
-                val dialog = EditTextDialog(requireContext())
-                dialog.show("${resources.getString(R.string.common_name)} 편집",resources.getString(R.string.common_name))
-
-                //다이얼로그 저장 버튼을 눌렀을 때 text 변경
-                dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
-                    override fun onClicked(myName: String) {
-                        tvMypageName.text = myName
-                    }
-                })
-            }
-
-            tvMypageNumber.setOnClickListener {
-                val dialog = EditTextDialog(requireContext())
-                dialog.show("${resources.getString(R.string.common_phone_number)} 편집",resources.getString(R.string.common_phone_number))
-
-                //다이얼로그 저장 버튼을 눌렀을 때 text 변경
-                dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
-                    override fun onClicked(myName: String) {
-                        tvMypageNumber.text = myName
-                    }
-                })
-            }
-
-            tvMypageBirthday.setOnClickListener {
-                val dialog = EditTextDialog(requireContext())
-                dialog.show("${resources.getString(R.string.mypage_birthday)} 편집",resources.getString(R.string.mypage_birthday))
-
-                //다이얼로그 저장 버튼을 눌렀을 때 text 변경
-                dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
-                    override fun onClicked(myName: String) {
-                        tvMypageBirthday.text = myName
-                    }
-                })
-            }
-
-            tvMypageAddres.setOnClickListener {
-                val dialog = EditTextDialog(requireContext())
-                dialog.show("${resources.getString(R.string.mypage_address)} 편집",resources.getString(R.string.mypage_address))
-
-                //다이얼로그 저장 버튼을 눌렀을 때 text 변경
-                dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
-                    override fun onClicked(myName: String) {
-                        tvMypageAddres.text = myName
-                    }
-                })
-            }
-
-            tvMypageInfoMessage.setOnClickListener {
-                val dialog = EditTextDialog(requireContext())
-                dialog.show("${resources.getString(R.string.mypage_introduce)} 편집",resources.getString(R.string.mypage_introduce))
-
-                //다이얼로그 저장 버튼을 눌렀을 때 text 변경
-                dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
-                    override fun onClicked(myName: String) {
-                        tvMypageInfoMessage.text = myName
-                    }
-                })
-            }
-            //
         }
-
-        return binding.root
     }
 
     override fun onDestroyView() {
