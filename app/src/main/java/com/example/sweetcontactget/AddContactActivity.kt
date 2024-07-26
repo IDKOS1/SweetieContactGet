@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
