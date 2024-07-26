@@ -8,13 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sweetcontactget.data.DataObject
-import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
 import kotlin.random.Random
 import kotlin.random.nextInt
 
 class AddContactActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityAddContactBinding
+    private lateinit var binding:ActivityAddContactBinding
     private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +29,12 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.tvAddContactAddPhoneNumber.setOnClickListener {
             count++
-            if (count == 1) {
+            if(count==1) {
                 binding.clAddContactPhoneNumber2.visibility = View.VISIBLE
                 binding.tvAddContactDeletePhoneNumber.visibility = View.VISIBLE
             }
 
-            if (count == 2) {
+            if(count==2) {
                 binding.clAddContactPhoneNumber3.visibility = View.VISIBLE
                 binding.tvAddContactAddPhoneNumber.visibility = View.GONE
             }
@@ -43,40 +42,28 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.tvAddContactDeletePhoneNumber.setOnClickListener {
             count--
-            if (count == 1) {
+            if(count==1) {
                 binding.clAddContactPhoneNumber3.visibility = View.GONE
                 binding.tvAddContactAddPhoneNumber.visibility = View.VISIBLE
             }
 
-            if (count == 0) {
+            if(count==0) {
                 binding.clAddContactPhoneNumber2.visibility = View.GONE
                 binding.tvAddContactDeletePhoneNumber.visibility = View.GONE
             }
         }
 
         binding.btnAddContactSave.setOnClickListener {
-            //저장 시 ContactFragment로 넘겨줄 데이터
-//            var contact_fragment = ContactFragment()
-//            var bundle = Bundle()
-//            binding.apply {
-//                bundle.apply {
-//                    putString("name", etAddContactName.text.toString())
-//                    putString("phone_number",etAddContactPhoneNumber.text.toString())
-//                    putString("phone_number2",etAddContactPhoneNumber2.text.toString())
-//                    putString("phone_number3",etAddContactPhoneNumber3.text.toString())
-//                    putString("event_information",etAddContactEventInformation.text.toString())
-//                    putString("relationship",etAddContactRelationship.text.toString())
-//                    putString("group",etAddContactGroup.text.toString())
-//                    putString("memo",etAddContactMemo.text.toString())
-//                }
-//            }
-//            contact_fragment.arguments = bundle
+
+//            var map : Contact.SweetieInfo? = null
+//            map?.imgSrc = binding.ivAddContactImage.drawable
 //
-//            supportFragmentManager!!.beginTransaction().replace(R.id.rv_all_contact_fragment, contact_fragment).commit()
+//            DataObject.addSweetieInfo(map)
+
         }
 
         binding.btnAddContactCancel.setOnClickListener {
-            val intent = Intent(this@AddContactActivity, MainActivity::class.java)
+            val intent = Intent(this@AddContactActivity,MainActivity::class.java)
             startActivity(intent)
             finish()
         }

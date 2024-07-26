@@ -9,6 +9,7 @@
         android:id="@+id/tv_theme_change_text"
         android:text="@string/dialog_change_theme"
         android:textColor="@color/white"
+        android:textSize="18sp"
         android:fontFamily="@font/yeonaesidae_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
