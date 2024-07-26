@@ -9,6 +9,7 @@ import android.provider.ContactsContract
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -143,6 +144,7 @@ class MainActivity : AppCompatActivity() {
             cursor.close()
         }
         hashMap.map { addSweetieInfo(it.value) }
+        Toast.makeText(this, "연락처 목록을 불러왔습니다.", Toast.LENGTH_SHORT).show()
     }
 
     private fun requestPermission() {
@@ -161,5 +163,15 @@ class MainActivity : AppCompatActivity() {
         } else {
             getContactList()
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0 && grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED)
+            getContactList()
     }
 }
