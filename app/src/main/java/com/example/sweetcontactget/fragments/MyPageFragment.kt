@@ -9,7 +9,7 @@ import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentMyPageBinding
 import com.example.sweetcontactget.dialog.EditTextDialog
-
+import com.example.sweetcontactget.dialog.ThemeDialog
 
 
 class MyPageFragment : Fragment() {
@@ -98,6 +98,11 @@ class MyPageFragment : Fragment() {
                         tvMypageInfoMessage.text = myName
                     }
                 })
+            }
+
+            ivMypageSetting.setOnClickListener {
+                val dialog = ThemeDialog(requireContext())
+                dialog.show()
             }
             //
         }

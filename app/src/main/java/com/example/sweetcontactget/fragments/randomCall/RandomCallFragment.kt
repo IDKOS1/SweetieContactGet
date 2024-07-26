@@ -76,7 +76,7 @@ class RandomCallFragment : Fragment() {
             Handler(Looper.getMainLooper()).postDelayed({
             val dialog = RandomCallDialog(requireContext())
             dialog.show()
-            }, 6000)
+            }, 5000)
 
         }
 

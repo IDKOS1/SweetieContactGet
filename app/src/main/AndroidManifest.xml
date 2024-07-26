@@ -3,17 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".data.ContactApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_heart_full"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_heart_full"
         android:supportsRtl="true"
         android:theme="@style/Theme.SweetContactGet"
         tools:targetApi="31">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
@@ -21,16 +31,9 @@
             android:name=".AddContactActivity"
             android:exported="false" />
         <activity
-            android:name=".TestActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".StartActivity"
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

@@ -5,52 +5,41 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_background_light"
+    android:background="@color/secondary"
     tools:context=".SplashActivity">
 
+
     <ImageView
-        android:id="@+id/ic_logo"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.8"
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/img_logo_main"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <ImageView
-        android:id="@+id/ic_sub_logo"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.85"
+    <TextView
+        android:id="@+id/tv_team_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/img_logo_sub"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/ic_logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:text="@string/splash_team_name"
+        style="@style/body_b"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo"
+        app:layout_constraintEnd_toEndOf="@id/iv_logo"/>
 
-    <ImageView
-        android:id="@+id/iv_character"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1.4"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_main_character"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <ImageView
-        android:id="@+id/btn_start"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.3"
+    <TextView
+        android:id="@+id/tv_member_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-
+        android:text="@string/splash_member_name"
+        style="@style/body"
+        android:textColor="@color/tertiary"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_team_name"
+        app:layout_constraintEnd_toEndOf="@id/tv_team_name"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import android.view.ViewGroup
 import com.example.sweetcontactget.AddContactActivity
 import com.example.sweetcontactget.adapter.ViewPagerAdapter
 import com.example.sweetcontactget.R
-import com.example.sweetcontactget.data.DataObject.contactList
 import com.example.sweetcontactget.data.DataObject.deleteSweetieInfo
 import com.example.sweetcontactget.data.DataObject.selectAllOrClear
 import com.example.sweetcontactget.data.DataObject.selectedSet
@@ -33,6 +31,7 @@ class ContactFragment : Fragment() {
     private var _binding: FragmentContactBinding? = null
     private val binding get() = _binding!!
     private val vpAdapter: ViewPagerAdapter by lazy { ViewPagerAdapter(this) }
+    private lateinit var allContactFragment: AllContactFragment
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -58,7 +57,10 @@ class ContactFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initToolbar()
-        Log.d("TEST", contactList.size.toString())
+
+        binding.toggleSetLayout.setOnToggledListener{_,isOn ->
+            (vpAdapter.fragments[0] as AllContactFragment).switchLayoutManager(isOn)
+        }
     }
 
     override fun onDestroyView() {
