@@ -83,6 +83,13 @@ class ContactAdapter(private val context: Context) :
                     ivSweetiePhotoGrid.setImageDrawable(imgSrc)
                     tvSweetieNameGrid.text = name
                 }
+
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailActivity::class.java).apply {
+                        putExtra("sweetieId", item.key)
+                    }
+                    startActivity(itemView.context, intent, null)
+                }
             }
         }
     }
