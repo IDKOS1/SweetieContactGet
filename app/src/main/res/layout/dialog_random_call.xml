@@ -2,34 +2,46 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="350dp">
+    android:layout_height="350sp">
 
     <ImageView
         android:id="@+id/iv_random_call_image"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:scaleType="fitXY"
+        android:layout_height="match_parent"
         android:src="@drawable/img_sweetie_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:scaleType="centerCrop"
+        android:background="@drawable/shape_corner_radius_24dp"
+        android:clipToOutline="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_dialog_3"
+        android:alpha="0.85"
+        android:layout_marginStart="8sp"
+        android:layout_marginBottom="6sp"
+        android:paddingHorizontal="16sp"
+        android:paddingVertical="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_random_call_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="6dp"
-        android:layout_marginBottom="6dp"
-        android:background="@drawable/img_dialog_1"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_random_call_name"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="50sp"
+            android:layout_marginEnd="16sp"
             android:background="@drawable/shape_corner_radius_15dp_bg_white"
             app:layout_constraintStart_toStartOf="@id/cl_random_call_layout"
             app:layout_constraintTop_toTopOf="@id/cl_random_call_layout">
@@ -39,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/yeonaesidae_b"
-                android:padding="10dp"
+                android:padding="10sp"
                 android:text="@string/common_name"
                 android:textColor="@color/primary"
                 android:textSize="18sp"
@@ -53,11 +65,11 @@
             android:id="@+id/tv_random_call_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="6sp"
             android:fontFamily="@font/yeonaesidae_b"
             android:text="호감도"
             android:textColor="@color/primary"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/cl_random_call_name"
             app:layout_constraintEnd_toStartOf="@id/rb_random_call_heart"
             app:layout_constraintTop_toTopOf="@id/cl_random_call_name" />
@@ -83,10 +95,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/yeonaesidae_b"
-            android:paddingTop="6dp"
+            android:paddingTop="6sp"
             android:text="[ 이름 ] 에게 전화를 거시겠습니까?"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@id/cl_random_call_name"
             app:layout_constraintTop_toBottomOf="@id/cl_random_call_name" />
 
@@ -97,7 +109,7 @@
             android:fontFamily="@font/yeonaesidae_b"
             android:text="@string/dialog_make_a_call"
             android:textColor="@color/primary"
-            android:textSize="18dp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@id/tv_random_call_question"
             app:layout_constraintTop_toBottomOf="@id/tv_random_call_question" />
 
@@ -107,10 +119,11 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/yeonaesidae_b"
             android:text="@string/dialog_make_a_call_cancel"
+            android:textSize="18sp"
             android:textColor="@color/gray"
-            android:textSize="18dp"
             app:layout_constraintStart_toStartOf="@id/tv_random_call_make_a_call"
             app:layout_constraintTop_toBottomOf="@id/tv_random_call_make_a_call" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
