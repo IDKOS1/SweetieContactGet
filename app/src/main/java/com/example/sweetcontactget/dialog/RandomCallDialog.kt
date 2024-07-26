@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.DialogRandomCallBinding
