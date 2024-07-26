@@ -410,7 +410,7 @@
                 android:layout_marginTop="20sp"
                 android:paddingTop="5sp"
                 android:layout_marginBottom="30sp"
-                android:background="@drawable/img_btn"
+                android:background="@drawable/btn"
                 app:layout_constraintTop_toBottomOf="@id/cl_add_contact_memo"
                 app:layout_constraintStart_toStartOf="@id/cl_add_contact_memo"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -424,7 +424,7 @@
                 android:layout_width="125sp"
                 android:layout_height="50sp"
                 android:paddingTop="5sp"
-                android:background="@drawable/img_btn"
+                android:background="@drawable/btn"
                 app:layout_constraintTop_toTopOf="@id/btn_add_contact_cancel"
                 app:layout_constraintEnd_toEndOf="@id/cl_add_contact_memo"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,7 +27,7 @@
         android:layout_marginStart="30sp"
         android:layout_marginBottom="15sp"
         android:paddingTop="5sp"
-        android:background="@drawable/img_btn"
+        android:background="@drawable/btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -42,7 +42,7 @@
         android:layout_marginBottom="15sp"
         android:layout_marginEnd="30sp"
         android:paddingTop="5sp"
-        android:background="@drawable/img_btn"
+        android:background="@drawable/btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
