@@ -18,6 +18,7 @@ import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderGridBinding
+import com.example.sweetcontactget.dialog.CallingDialog
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
 import com.example.sweetcontactget.util.Util
 
@@ -194,7 +195,9 @@ class ContactAdapter(private val context: Context) :
     override fun onItemSwipe(position: Int) {
         val item = getItem(position)
         if (item is Contact.SweetiesID) {
-            Util.callSweetie(context, item.value.number)
+            //dialog 띄우기
+            val dialog = CallingDialog(context, item.key)
+            dialog.show()
         }
 
         notifyItemChanged(position)
