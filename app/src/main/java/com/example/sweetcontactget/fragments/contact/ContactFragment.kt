@@ -51,6 +51,7 @@ class ContactFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentContactBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -59,9 +60,15 @@ class ContactFragment : Fragment() {
         initView()
         initToolbar()
 
-        binding.toggleSetLayout.setOnToggledListener { _, isOn ->
-            (vpAdapter.fragments[0] as AllContactFragment).switchLayoutManager(isOn)
+        binding.toggleSetLayout.setOnToggledListener{_,isOn ->
+            if(binding.vpContactViewPager.currentItem == 0 ){
+                (vpAdapter.fragments[0] as AllContactFragment).switchLayoutManager(isOn)
+            }else{
+                (vpAdapter.fragments[1] as BookmarkFragment).switchLayoutManager(isOn)
+            }
+
         }
+
     }
 
     override fun onDestroyView() {
