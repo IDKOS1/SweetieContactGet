@@ -37,6 +37,11 @@ object DataObject {
         contactMap[sweetieId]!!.isMarked = isMarked
     }
 
+    fun changedBookmark(sweetieIdList: Set<Int>) {
+        sweetieIdList.map { contactMap[it]?.isMarked = true }
+        selectedSet.clear()
+    }
+
     fun isMarked(sweetieId: Int): Boolean {
         return contactMap[sweetieId]!!.isMarked
     }

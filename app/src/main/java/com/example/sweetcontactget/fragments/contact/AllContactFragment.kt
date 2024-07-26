@@ -52,6 +52,11 @@ class AllContactFragment : Fragment() {
         recyclerView.apply {
             adapter = contactAdapter
             layoutManager = LinearLayoutManager(this.context)
+            ContactAdapter.itemClickListener = object : ContactAdapter.ItemClickListener {
+                override fun onItemLongClick(isShow: Boolean) {
+                    (parentFragment as ContactFragment).handleToolbarVisibility(isShow)
+                }
+            }
             val dividerColor = ContextCompat.getColor(context, R.color.secondary)
             val itemDecoration =
                 CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
@@ -76,8 +81,6 @@ class AllContactFragment : Fragment() {
         })
 
         binding.fastscrollerThumb.setupWithFastScroller(binding.fastscroller)
-
-
 
 
         //패스트 스크롤 동작 커스텀
@@ -113,31 +116,30 @@ class AllContactFragment : Fragment() {
     }
 
 
-
     fun search(searchTarget: CharSequence?) {
         if (::contactAdapter.isInitialized) contactAdapter.filter.filter(searchTarget)
     }
 
-    fun refreshList() {
+    fun refresh() {
         contactAdapter.submitList(contactList.toList())
         contactAdapter.notifyItemRangeChanged(0, contactList.size)
     }
 
-    fun switchLayoutManager(isGridLayout : Boolean){
-        if (isGridLayout){
-            recyclerView.layoutManager = GridLayoutManager(requireContext(),3).apply {
-                spanSizeLookup = object  : GridLayoutManager.SpanSizeLookup(){
+    fun switchLayoutManager(isGridLayout: Boolean) {
+        if (isGridLayout) {
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 3).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
-                        return if(contactAdapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER){
+                        return if (contactAdapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER) {
                             3
-                        }else{
+                        } else {
                             1
                         }
                     }
                 }
             }
             contactAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_GRID)
-        }else{
+        } else {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             contactAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_LINEAR)
         }

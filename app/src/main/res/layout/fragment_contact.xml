@@ -18,7 +18,7 @@
         android:paddingTop="64dp"
         android:paddingBottom="16dp"
         android:visibility="gone"
-        android:weightSum="2"
+        android:weightSum="3"
         app:layout_constraintBottom_toTopOf="@id/ll_contact_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/tv_select_all_btn"
             style="@style/body_b"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="8dp"
@@ -35,12 +35,25 @@
             android:text="전체 선택"
             android:textColor="@color/white"
             app:drawableTint="@color/white"
-            app:drawableTopCompat="@drawable/ic_delete" />
+            app:drawableTopCompat="@drawable/ic_select_all" />
+
+        <TextView
+            android:id="@+id/tv_bookmark_btn"
+            style="@style/body_b"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center|center_vertical"
+            android:text="북마크"
+            android:textColor="@color/white"
+            app:drawableTint="@color/white"
+            app:drawableTopCompat="@drawable/ic_star_full" />
 
         <TextView
             android:id="@+id/tv_delete_btn"
             style="@style/body_b"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="8dp"
