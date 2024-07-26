@@ -30,6 +30,7 @@ class ContactFragment : Fragment() {
     private val binding get() = _binding!!
     private val vpAdapter: ViewPagerAdapter by lazy { ViewPagerAdapter(this) }
     private lateinit var allContactFragment: AllContactFragment
+    var isGridLayout = false
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -57,7 +58,13 @@ class ContactFragment : Fragment() {
         initView()
 
         binding.toggleSetLayout.setOnToggledListener{_,isOn ->
-            (vpAdapter.fragments[0] as AllContactFragment).switchLayoutManager(isOn)
+            isGridLayout = isOn
+            if(binding.vpContactViewPager.currentItem == 0 ){
+                (vpAdapter.fragments[0] as AllContactFragment).switchLayoutManager(isOn)
+            }else{
+                (vpAdapter.fragments[1] as BookmarkFragment).switchLayoutManager(isOn)
+            }
+
         }
 
     }

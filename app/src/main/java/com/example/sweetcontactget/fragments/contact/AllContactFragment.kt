@@ -51,7 +51,6 @@ class AllContactFragment : Fragment() {
             submitList(contactList.toList())
         }
 
-
         recyclerView.apply {
             adapter = contactAdapter
             layoutManager = LinearLayoutManager(this.context)
