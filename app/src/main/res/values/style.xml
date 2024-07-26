@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="headline_b">
         <item name="fontFamily">@font/yeonaesidae</item>
         <item name="android:textSize">36sp</item>
@@ -58,6 +59,17 @@
 
     <style name="HeartRatingBarSmall" parent="Widget.AppCompat.RatingBar.Small">
         <item name="android:progressDrawable">@drawable/rating_bar_heart_small</item>
+    </style>
+
+    <style name="CustomDatePicker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:datePickerStyle">@style/CustomDateMode</item>
+    </style>
+
+    <style name="CustomDateMode" parent="android:Widget.Material.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
     </style>
 
 </resources>
