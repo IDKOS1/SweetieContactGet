@@ -21,7 +21,7 @@ class ThemeDialog(context: Context) : Dialog(context) {
         setCancelable(false)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        dialogResize(context,this@ThemeDialog, 0.8f, 0.2f)
+        dialogResize(context,this@ThemeDialog, 0.7f, 0.15f)
 
         binding.btnThemeChangeCancel.setOnClickListener {
             changeTheme(AppCompatDelegate.MODE_NIGHT_NO)

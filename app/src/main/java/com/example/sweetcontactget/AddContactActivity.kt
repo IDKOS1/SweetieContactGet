@@ -55,24 +55,11 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.btnAddContactSave.setOnClickListener {
 
-            //저장 시 ContactFragment로 넘겨줄 데이터
-//            var contact_fragment = ContactFragment()
-//            var bundle = Bundle()
-//            binding.apply {
-//                bundle.apply {
-//                    putString("name", etAddContactName.text.toString())
-//                    putString("phone_number",etAddContactPhoneNumber.text.toString())
-//                    putString("phone_number2",etAddContactPhoneNumber2.text.toString())
-//                    putString("phone_number3",etAddContactPhoneNumber3.text.toString())
-//                    putString("event_information",etAddContactEventInformation.text.toString())
-//                    putString("relationship",etAddContactRelationship.text.toString())
-//                    putString("group",etAddContactGroup.text.toString())
-//                    putString("memo",etAddContactMemo.text.toString())
-//                }
-//            }
-//            contact_fragment.arguments = bundle
+//            var map : Contact.SweetieInfo? = null
+//            map?.imgSrc = binding.ivAddContactImage.drawable
 //
-//            supportFragmentManager!!.beginTransaction().replace(R.id.rv_all_contact_fragment, contact_fragment).commit()
+//            DataObject.addSweetieInfo(map)
+
         }
 
         binding.btnAddContactCancel.setOnClickListener {
