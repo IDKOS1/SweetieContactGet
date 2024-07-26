@@ -39,8 +39,8 @@ object DataObject {
     }
 
     fun addSweetieInfo(sweetieInfo: SweetieInfo) {
-        val newKey = contactMap.maxOf { it.key } + 1
-        contactMap[newKey] = sweetieInfo
+        var newKey = contactMap.maxOfOrNull { it.key } ?: 0
+        contactMap[++newKey] = sweetieInfo
     }
 
     fun selectAllOrClear() {

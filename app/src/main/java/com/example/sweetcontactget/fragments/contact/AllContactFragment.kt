@@ -1,7 +1,6 @@
 package com.example.sweetcontactget.fragments.contact
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sweetcontactget.MainActivity
 import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.R
@@ -17,7 +15,6 @@ import com.example.sweetcontactget.data.DataObject.contactList
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
-import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.util.TopSnappedSmoothScroller
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.reddit.indicatorfastscroll.FastScrollerView
@@ -75,8 +72,8 @@ class AllContactFragment : Fragment() {
 
         // 패스트 스크롤 정의
         binding.fastscroller.setupWithRecyclerView(recyclerView, { position ->
-            val item = contactList[position]
-            if (item is Contact.ContactIndex) {
+            val item = contactList.getOrNull(position)
+            if (item != null && item is Contact.ContactIndex) {
 //                Log.d("FastScroller","Indicator: ${item.letter} at position $position")
                 FastScrollItemIndicator.Text(item.letter)
             } else {

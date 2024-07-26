@@ -3,9 +3,7 @@ package com.example.sweetcontactget.adapter
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -15,12 +13,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.DetailActivity
-import com.example.sweetcontactget.MainActivity
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.addSelection
 import com.example.sweetcontactget.data.DataObject.contactData
-import com.example.sweetcontactget.data.DataObject.deleteSweetieInfo
 import com.example.sweetcontactget.data.DataObject.removeSelection
 import com.example.sweetcontactget.data.DataObject.selectedSet
 import com.example.sweetcontactget.util.KoreanMatcher
