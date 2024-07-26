@@ -40,8 +40,6 @@ class RandomCallDialog(context: Context):Dialog(context) {
         binding.tvRandomCallMakeACall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data =  Uri.parse("tel :"+Util.callSweetie(this.context,currentId.number))
-
-//            Util.callSweetie(context,currentId.number)
         }
         binding.tvRandomCallMakeACallCancel.setOnClickListener {
             cancel()
