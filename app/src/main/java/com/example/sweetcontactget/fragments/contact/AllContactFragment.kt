@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sweetcontactget.MainActivity
 import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.R
@@ -54,6 +55,12 @@ class AllContactFragment : Fragment() {
 
         recyclerView.apply {
             adapter = contactAdapter
+            ContactAdapter.itemClickListener = object : ContactAdapter.ItemClickListener {
+                override fun onItemLongClick(isShow: Boolean) {
+                    (parentFragment as ContactFragment).handleToolbarVisibility(isShow)
+                }
+            }
+
             layoutManager = LinearLayoutManager(this.context)
             val dividerColor = ContextCompat.getColor(context, R.color.secondary)
             val itemDecoration =
@@ -79,8 +86,6 @@ class AllContactFragment : Fragment() {
         })
 
         binding.fastscrollerThumb.setupWithFastScroller(binding.fastscroller)
-
-
 
 
         //패스트 스크롤 동작 커스텀
@@ -129,5 +134,10 @@ class AllContactFragment : Fragment() {
 
     fun search(searchTarget: CharSequence?) {
         if (::contactAdapter.isInitialized) contactAdapter.filter.filter(searchTarget)
+    }
+
+    fun refreshList() {
+        contactAdapter.submitList(contactList.toList())
+        contactAdapter.notifyItemRangeChanged(0, contactList.size)
     }
 }

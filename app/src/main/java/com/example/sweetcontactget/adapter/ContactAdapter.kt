@@ -2,17 +2,27 @@ package com.example.sweetcontactget.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.DetailActivity
+import com.example.sweetcontactget.MainActivity
+import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.Contact
+import com.example.sweetcontactget.data.DataObject.addSelection
 import com.example.sweetcontactget.data.DataObject.contactData
+import com.example.sweetcontactget.data.DataObject.deleteSweetieInfo
+import com.example.sweetcontactget.data.DataObject.removeSelection
+import com.example.sweetcontactget.data.DataObject.selectedSet
 import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
@@ -30,6 +40,9 @@ class ContactAdapter(private val context: Context) :
         }
     }), Filterable, ItemTouchHelperCallback.ItemTouchHelperListener {
 
+    interface ItemClickListener {
+        fun onItemLongClick(isShow: Boolean)
+    }
 
     class IndexHolder(private val binding: IndexHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -50,26 +63,57 @@ class ContactAdapter(private val context: Context) :
                     pbHeart.progress = heart
                     tvHeart.text = heart.toString() + "%"
                     ivBehindView.setImageDrawable(imgSrc)
+                    cbSelect.isChecked = selectedSet.contains(item.key)
+                    frontView.backgroundTintList =
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                if (selectedSet.contains(item.key)) R.color.gray else R.color.white
+                            )
+                        )
                 }
 
-
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailActivity::class.java).apply {
-                        putExtra("sweetieId", item.key)
+                    if (isSelectionMode) {
+                        handleSelection(item.key)
+                    } else {
+                        val intent = Intent(itemView.context, DetailActivity::class.java).apply {
+                            putExtra("sweetieId", item.key)
+                        }
+                        startActivity(itemView.context, intent, null)
                     }
-                    startActivity(itemView.context, intent, null)
+                }
+
+                itemView.setOnLongClickListener {
+                    handleSelection(item.key)
+                    true
                 }
             }
         }
 
+        private fun handleSelection(id: Int) = with(binding) {
+            if (cbSelect.isChecked) removeSelection(id) else addSelection(id)
+            isSelectionMode = selectedSet.size > 0
+            cbSelect.isChecked = !cbSelect.isChecked
+            itemClickListener?.onItemLongClick(isSelectionMode)
+            frontView.backgroundTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        if (cbSelect.isChecked) R.color.gray else R.color.white
+                    )
+                )
+        }
+
         val frontView = binding.clPersonInfoHolderSize
         val behindView = binding.clBehindView
-
     }
 
     companion object {
         const val VIEW_TYPE_HEADER = 1
         const val VIEW_TYPE_LIST = 2
+        var itemClickListener: ItemClickListener? = null
+        var isSelectionMode = false
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

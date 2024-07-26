@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,10 @@ import android.view.ViewGroup
 import com.example.sweetcontactget.AddContactActivity
 import com.example.sweetcontactget.adapter.ViewPagerAdapter
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.data.DataObject.contactList
+import com.example.sweetcontactget.data.DataObject.deleteSweetieInfo
+import com.example.sweetcontactget.data.DataObject.selectAllOrClear
+import com.example.sweetcontactget.data.DataObject.selectedSet
 import com.example.sweetcontactget.databinding.FragmentContactBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -52,6 +57,8 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initToolbar()
+        Log.d("TEST", contactList.size.toString())
     }
 
     override fun onDestroyView() {
@@ -98,6 +105,22 @@ class ContactFragment : Fragment() {
 
         fabContactAdd.setOnClickListener {
             startActivity(Intent(requireActivity(), AddContactActivity::class.java))
+        }
+    }
+
+    fun handleToolbarVisibility(isShow: Boolean) {
+        binding.llContactToolbar.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    private fun initToolbar() {
+        binding.tvSelectAllBtn.setOnClickListener {
+            selectAllOrClear()
+            (vpAdapter.fragments[0] as AllContactFragment).refreshList()
+        }
+        binding.tvDeleteBtn.setOnClickListener {
+            deleteSweetieInfo(selectedSet)
+            handleToolbarVisibility(false)
+            (vpAdapter.fragments[0] as AllContactFragment).refreshList()
         }
     }
 }

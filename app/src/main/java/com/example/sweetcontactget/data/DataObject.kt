@@ -1,9 +1,12 @@
 package com.example.sweetcontactget.data
 
 import android.content.Context
+import android.util.Log
 import androidx.core.content.ContextCompat
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
+import com.example.sweetcontactget.util.Util.removeAll
+import com.example.sweetcontactget.util.Util.sortedByName
 import java.time.LocalDate
 
 object DataObject {
@@ -21,6 +24,12 @@ object DataObject {
         contactData.apply { addAll(groupByIndex(contactMap)) }
     }
 
+    fun deleteSweetieInfo(sweetieIdList: Set<Int>) {
+        contactMap.removeAll(sweetieIdList)
+        selectedSet.clear()
+        Log.d("TEST", contactList.size.toString())
+    }
+
     fun changedBookmark(sweetieId: Int, isMarked: Boolean) {
         contactMap[sweetieId]!!.isMarked = isMarked
     }
@@ -34,6 +43,15 @@ object DataObject {
         contactMap[newKey] = sweetieInfo
     }
 
+    fun selectAllOrClear() {
+        selectedSet.apply {
+            if (contactMap.size == size) clear()
+            else addAll(contactMap.keys)
+        }
+    }
+
+    fun addSelection(id: Int) = selectedSet.add(id)
+    fun removeSelection(id: Int) = selectedSet.remove(id)
 
     private val contactMap: MutableMap<Int, SweetieInfo> = mutableMapOf(
         1 to SweetieInfo(
@@ -725,13 +743,11 @@ object DataObject {
     val contactData: MutableList<Contact> = mutableListOf()
     val contactList get() = groupByIndex(contactMap.sortedByName())
     val bookmarkData get() = contactMap.filter { it.value.isMarked }
+    val selectedSet = HashSet<Int>()
 
     init {
         contactData.apply { addAll(groupByIndex(contactMap)) }
     }
-
-    private fun MutableMap<Int, SweetieInfo>.sortedByName() =
-        this.toList().sortedBy { it.second.name }.toMap().toMutableMap()
 }
 
 
