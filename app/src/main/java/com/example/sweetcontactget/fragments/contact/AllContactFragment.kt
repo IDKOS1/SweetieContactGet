@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.R
@@ -32,6 +34,8 @@ class AllContactFragment : Fragment() {
     private var _binding: FragmentAllContactBinding? = null
     private val binding get() = _binding!!
     private lateinit var contactAdapter: ContactAdapter
+    private var isLinearlayout = true
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +50,7 @@ class AllContactFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAllContactBinding.inflate(inflater, container, false)
-        val recyclerView = binding.rvAllContactFragment
+        recyclerView = binding.rvAllContactFragment
 
         contactAdapter = ContactAdapter(requireContext()).apply {
             submitList(contactList.toList())
@@ -64,6 +68,15 @@ class AllContactFragment : Fragment() {
             val helper = ItemTouchHelper(itemTouchHelperCallback)
             helper.attachToRecyclerView(recyclerView)
         }
+
+        //레이아웃 매니저 변경
+
+        binding.testLayoutManagerSetting.setOnClickListener {
+            switchLayoutManager()
+        }
+
+
+
 
 
         // 패스트 스크롤 정의
@@ -130,4 +143,28 @@ class AllContactFragment : Fragment() {
     fun search(searchTarget: CharSequence?) {
         if (::contactAdapter.isInitialized) contactAdapter.filter.filter(searchTarget)
     }
+
+    private fun switchLayoutManager(){
+        if (isLinearlayout){
+            recyclerView.layoutManager = GridLayoutManager(requireContext(),3).apply {
+                spanSizeLookup = object  : GridLayoutManager.SpanSizeLookup(){
+                    override fun getSpanSize(position: Int): Int {
+                        return if(contactAdapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER){
+                            3
+                        }else{
+                            1
+                        }
+                    }
+                }
+            }
+            contactAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_GRID)
+        }else{
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            contactAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_LINEAR)
+        }
+        isLinearlayout = !isLinearlayout
+        contactAdapter.notifyDataSetChanged()
+    }
+
+
 }
