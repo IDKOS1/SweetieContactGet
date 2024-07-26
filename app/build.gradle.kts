@@ -46,6 +46,7 @@ android {
 }
 
 dependencies {
+    implementation("com.github.angads25:toggle:1.1.0")
     implementation("com.reddit:indicator-fast-scroll:1.4.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

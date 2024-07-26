@@ -84,6 +84,7 @@ class MyPageFragment : Fragment() {
     private fun updateMyInfo() {
         val userData = DataObject.myProfileData
         val birthday = userData.birthday
+
         binding.run {
             ivMypageProfile.setImageResource(userData.imgSrc)
             tvMypageName.text = userData.name

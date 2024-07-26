@@ -3,6 +3,7 @@ package com.example.sweetcontactget.adapter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -16,6 +17,8 @@ import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
+import com.example.sweetcontactget.databinding.PersonInfoHolderGridBinding
+import com.example.sweetcontactget.dialog.CallingDialog
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
 import com.example.sweetcontactget.util.Util
 
@@ -30,6 +33,12 @@ class ContactAdapter(private val context: Context) :
         }
     }), Filterable, ItemTouchHelperCallback.ItemTouchHelperListener {
 
+        private var viewType = VIEW_TYPE_LIST_LINEAR
+
+    fun setViewType(viewType: Int){
+        this.viewType = viewType
+        notifyDataSetChanged()
+    }
 
     class IndexHolder(private val binding: IndexHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -67,9 +76,29 @@ class ContactAdapter(private val context: Context) :
 
     }
 
+    class PersonInfoGridHolder(private val binding: PersonInfoHolderGridBinding):
+    RecyclerView.ViewHolder(binding.root){
+        fun bind(item: Contact.SweetiesID){
+            binding.apply {
+                with(item.value){
+                    ivSweetiePhotoGrid.setImageDrawable(imgSrc)
+                    tvSweetieNameGrid.text = name
+                }
+
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailActivity::class.java).apply {
+                        putExtra("sweetieId", item.key)
+                    }
+                    startActivity(itemView.context, intent, null)
+                }
+            }
+        }
+    }
+
     companion object {
         const val VIEW_TYPE_HEADER = 1
-        const val VIEW_TYPE_LIST = 2
+        const val VIEW_TYPE_LIST_LINEAR = 2
+        const val VIEW_TYPE_LIST_GRID = 3
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -80,13 +109,22 @@ class ContactAdapter(private val context: Context) :
                 IndexHolder(binding)
             }
 
-            VIEW_TYPE_LIST -> {
+            VIEW_TYPE_LIST_LINEAR -> {
                 val binding = PersonInfoHolderBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
                 PersonInfoHolder(binding)
+            }
+
+            VIEW_TYPE_LIST_GRID -> {
+                val binding = PersonInfoHolderGridBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+                PersonInfoGridHolder(binding)
             }
 
             else -> throw IllegalArgumentException("Invalid View Type")
@@ -101,8 +139,14 @@ class ContactAdapter(private val context: Context) :
             }
 
             is Contact.SweetiesID -> {
-                val personInfoHolder = holder as PersonInfoHolder
-                personInfoHolder.bind(item)
+                if (viewType == VIEW_TYPE_LIST_LINEAR){
+                    val personInfoHolder = holder as PersonInfoHolder
+                    personInfoHolder.bind(item)
+                }else{
+                    val personInfoGridHolder = holder as PersonInfoGridHolder
+                    personInfoGridHolder.bind(item)
+                }
+
             }
 
             else -> throw IllegalArgumentException("Invalid View Type")
@@ -112,7 +156,7 @@ class ContactAdapter(private val context: Context) :
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is Contact.ContactIndex -> VIEW_TYPE_HEADER
-            is Contact.SweetiesID -> VIEW_TYPE_LIST
+            is Contact.SweetiesID -> if(viewType == VIEW_TYPE_LIST_LINEAR) VIEW_TYPE_LIST_LINEAR else VIEW_TYPE_LIST_GRID
             else -> throw IllegalArgumentException("Invalid View Type")
         }
     }
@@ -151,7 +195,9 @@ class ContactAdapter(private val context: Context) :
     override fun onItemSwipe(position: Int) {
         val item = getItem(position)
         if (item is Contact.SweetiesID) {
-            Util.callSweetie(context, item.value.number)
+            //dialog 띄우기
+            val dialog = CallingDialog(context, item.key)
+            dialog.show()
         }
 
         notifyItemChanged(position)
