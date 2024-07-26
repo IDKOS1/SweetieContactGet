@@ -37,8 +37,6 @@ class RandomCallDialog(context: Context):Dialog(context) {
                 rbRandomCallHeart.rating = it.heart / 20.toFloat()
             }
         }
-
-
         binding.tvRandomCallMakeACall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data =  Uri.parse("tel :"+Util.callSweetie(this.context,currentId.number))
