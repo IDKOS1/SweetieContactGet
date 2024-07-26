@@ -11,6 +11,7 @@ import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.bookmarkData
+import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.FragmentBookmarkBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
@@ -47,15 +48,11 @@ class BookmarkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
-
-        bookmarkAdapter = ContactAdapter(requireContext())
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
     }
 
@@ -66,15 +63,19 @@ class BookmarkFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, Contact.SweetieInfo>))
+        bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, SweetieInfo>))
     }
 
-    private fun initView() = with(binding.rvBookmark) {
-        adapter = bookmarkAdapter
-        layoutManager = LinearLayoutManager(this.context)
-        val dividerColor = ContextCompat.getColor(context, R.color.secondary)
-        val itemDecoration = CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
-        addItemDecoration(itemDecoration)
+    private fun initView() = with(binding) {
+        bookmarkAdapter = ContactAdapter(requireContext())
+        rvBookmark.apply {
+            adapter = bookmarkAdapter
+            layoutManager = LinearLayoutManager(this.context)
+            val dividerColor = ContextCompat.getColor(context, R.color.secondary)
+            val itemDecoration =
+                CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
+            addItemDecoration(itemDecoration)
+        }
     }
 
     companion object {

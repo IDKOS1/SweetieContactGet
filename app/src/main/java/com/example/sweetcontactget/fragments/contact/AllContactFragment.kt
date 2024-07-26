@@ -1,6 +1,5 @@
 package com.example.sweetcontactget.fragments.contact
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.data.Contact
-import com.example.sweetcontactget.data.DataObject.contactData
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.DataObject.contactList
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
@@ -114,7 +112,7 @@ class AllContactFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        contactAdapter.submitList(contactData.toList())
+        contactAdapter.submitList(contactList.toList())
     }
 
     companion object {
@@ -130,6 +128,6 @@ class AllContactFragment : Fragment() {
     }
 
     fun search(searchTarget: CharSequence?) {
-        contactAdapter.filter.filter(searchTarget)
+        if (::contactAdapter.isInitialized) contactAdapter.filter.filter(searchTarget)
     }
 }
