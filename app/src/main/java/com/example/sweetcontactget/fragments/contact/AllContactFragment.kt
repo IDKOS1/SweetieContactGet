@@ -25,23 +25,18 @@ import com.reddit.indicatorfastscroll.FastScrollerView
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class AllContactFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var param1: Int? = null
     private var _binding: FragmentAllContactBinding? = null
     private val binding get() = _binding!!
     private lateinit var contactAdapter: ContactAdapter
-    private var isLinearlayout = true
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            param1 = it.getInt(ARG_PARAM1)
         }
     }
 
@@ -56,6 +51,7 @@ class AllContactFragment : Fragment() {
             submitList(contactList.toList())
         }
 
+
         recyclerView.apply {
             adapter = contactAdapter
             layoutManager = LinearLayoutManager(this.context)
@@ -68,15 +64,6 @@ class AllContactFragment : Fragment() {
             val helper = ItemTouchHelper(itemTouchHelperCallback)
             helper.attachToRecyclerView(recyclerView)
         }
-
-        //레이아웃 매니저 변경
-
-        binding.testLayoutManagerSetting.setOnClickListener {
-            switchLayoutManager()
-        }
-
-
-
 
 
         // 패스트 스크롤 정의
@@ -92,8 +79,6 @@ class AllContactFragment : Fragment() {
         })
 
         binding.fastscrollerThumb.setupWithFastScroller(binding.fastscroller)
-
-
 
 
         //패스트 스크롤 동작 커스텀
@@ -128,24 +113,14 @@ class AllContactFragment : Fragment() {
         contactAdapter.submitList(contactList.toList())
     }
 
-    companion object {
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AllContactFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 
     fun search(searchTarget: CharSequence?) {
         if (::contactAdapter.isInitialized) contactAdapter.filter.filter(searchTarget)
     }
 
-    private fun switchLayoutManager(){
-        if (isLinearlayout){
+    fun switchLayoutManager(isGridLayout : Boolean){
+        if (isGridLayout){
             recyclerView.layoutManager = GridLayoutManager(requireContext(),3).apply {
                 spanSizeLookup = object  : GridLayoutManager.SpanSizeLookup(){
                     override fun getSpanSize(position: Int): Int {
@@ -162,9 +137,19 @@ class AllContactFragment : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             contactAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_LINEAR)
         }
-        isLinearlayout = !isLinearlayout
         contactAdapter.notifyDataSetChanged()
+    }
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: Int) =
+            AllContactFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_PARAM1, param1)
+                }
+            }
     }
 
 
+
 }
+

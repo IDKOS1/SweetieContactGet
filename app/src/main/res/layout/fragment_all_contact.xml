@@ -45,13 +45,6 @@
         android:textColor="@color/white"
         />
 
-    <TextView
-        android:id="@+id/test_layout_manager_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="레이아웃\n변경하기"
-        app:layout_constraintTop_toBottomOf="@id/fastscroller"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 

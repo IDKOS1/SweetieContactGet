@@ -48,6 +48,23 @@
     </LinearLayout>
 
 
+        
+        <com.github.angads25.toggle.widget.LabeledSwitch
+            android:id="@+id/toggle_set_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:on="false"
+            app:textOn="Grid"
+            app:textOff="List"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/v_contact_line"/>
+        
+
+
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_contact_tab"
         android:layout_width="0dp"

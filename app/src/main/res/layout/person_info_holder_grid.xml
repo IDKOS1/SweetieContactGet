@@ -3,14 +3,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="150dp"
+    android:layout_width="110dp"
     android:layout_height="150dp"
     android:id="@+id/cl_person_info_holder_grid">
 
     <ImageView
         android:id="@+id/iv_sweetie_photo_grid"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintWidth_percent="0.8"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1"
         android:src="@drawable/img_sweetie_1"
@@ -24,12 +24,17 @@
 
     <TextView
         android:id="@+id/tv_sweetie_name_grid"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.8"
         android:layout_height="wrap_content"
         android:text="@string/person_info_holder_name"
         style="@style/subtitle_b"
         android:textColor="@color/primary"
-        android:layout_marginTop="8dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@id/iv_sweetie_photo_grid"
         app:layout_constraintEnd_toEndOf="@id/iv_sweetie_photo_grid"
         app:layout_constraintTop_toBottomOf="@id/iv_sweetie_photo_grid"/>
