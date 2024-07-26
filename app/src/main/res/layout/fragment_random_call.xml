@@ -17,8 +17,7 @@
         <ImageView
             android:id="@+id/iv_first_gif"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:adjustViewBounds="true"
+            android:layout_height="400dp"
             android:scaleType="centerCrop"
             android:visibility="invisible" />
 
@@ -26,7 +25,7 @@
             android:id="@+id/iv_second_gif"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="100dp"
             android:adjustViewBounds="true" />
 
         <ImageView
@@ -41,17 +40,18 @@
     <TextView
         android:id="@+id/btn_random_call"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.12"
         android:background="@drawable/btn"
         android:fontFamily="@font/yeonaesidae"
         android:gravity="center"
         android:text="@string/main_bottom_bar_random_call"
         android:textColor="@color/white"
         android:textSize="30sp"
+        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         app:layout_constraintWidth_percent="0.9" />
 
 

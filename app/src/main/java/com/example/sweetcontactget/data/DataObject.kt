@@ -776,7 +776,7 @@ object DataObject {
         "미녀들 다 내꺼~"
     )
 
-    val randomCallList = mutableListOf<Contact>()
+    val randomCallList = mutableListOf<SweetieInfo>()
 
     val contactData: MutableList<Contact> = mutableListOf()
     val contactList get() = groupByIndex(contactMap.sortedByName())

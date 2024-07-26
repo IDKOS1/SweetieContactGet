@@ -3,28 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:padding="10dp">
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="15dp"
+    android:background="@drawable/shape_corner_radius_12dp_bg"
+    android:backgroundTint="@color/primary_transparent"
+    >
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:cardBackgroundColor="@color/primary_transparent"
-        app:cardCornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/iv_recent_profile"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="25dp"
                 android:background="@drawable/shape_circle_background"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
@@ -33,7 +23,7 @@
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.15"
+                app:layout_constraintWidth_percent="0.2"
                 app:layout_goneMarginStart="16dp" />
 
             <TextView
@@ -63,10 +53,8 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_recent_name"
                 app:layout_constraintTop_toBottomOf="@id/tv_recent_name" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

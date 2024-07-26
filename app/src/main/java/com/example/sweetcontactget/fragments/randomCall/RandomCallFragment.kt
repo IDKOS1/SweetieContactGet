@@ -19,33 +19,17 @@ import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentRandomCallBinding
 import com.example.sweetcontactget.dialog.CallingDialog
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class RandomCallFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
-
 
     private var _binding: FragmentRandomCallBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRandomCallBinding.inflate(inflater, container, false)
-
-
-
 
         return binding.root
     }
@@ -56,42 +40,44 @@ class RandomCallFragment : Fragment() {
         binding.btnRandomCall.setOnClickListener {
             binding.ivRandomCallMain.visibility = View.INVISIBLE
 
-            loadGif(R.raw.gacha1, binding.ivFirstGif)
+
             binding.ivFirstGif.visibility = View.VISIBLE
+            loadGif(R.raw.gacha1, binding.ivFirstGif)
 
             Handler(Looper.getMainLooper()).postDelayed({
 
                 if (activity != null) {
 
                     binding.ivFirstGif.visibility = View.INVISIBLE
+                    binding.ivSecondGif.visibility = View.VISIBLE
+
+                    Glide.with(this).asBitmap().load(R.raw.gacha1).into(binding.ivFirstGif)
+
                     loadGif(R.raw.gacha2, binding.ivSecondGif)
 
-                }
-                //TODO 전화걸기 intent
-//            binding.ivRandomCallMain.visibility = View.VISIBLE
 
-            }, 2000)
+                }
+
+            }, 1500)
 
             //Dialog 열기, delay 추가
             Handler(Looper.getMainLooper()).postDelayed({
                 val sweetieId = DataObject.getValidKeys().random()
-                val dialog = CallingDialog(requireContext(), sweetieId)
+                val dialog = CallingDialog(requireContext(), sweetieId, binding.ivRandomCallMain, binding.ivSecondGif)
                 dialog.show()
-            }, 5000)
+                Glide.with(this).asBitmap().load(R.raw.gacha2).into(binding.ivSecondGif)
+                binding.ivSecondGif.visibility = View.INVISIBLE
+
+
+            }, 4000)
 
         }
 
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RandomCallFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun loadGif(loadGif: Int, imageView: ImageView) {

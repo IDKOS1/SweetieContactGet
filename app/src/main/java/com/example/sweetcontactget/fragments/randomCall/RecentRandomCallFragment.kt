@@ -9,23 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentRecentRancdomCallBinding
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class RecentRandomCallFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
 
-    private var _binding : FragmentRecentRancdomCallBinding? = null
+    private var _binding: FragmentRecentRancdomCallBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val recentListViewAdapter by lazy { RecentRandomCallListViewAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,22 +27,19 @@ class RecentRandomCallFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        DataObject.randomCallList.add()
-
-        val recentListViewAdapter = RecentRandomCallListViewAdapter()
         binding.rvRecentList.adapter = recentListViewAdapter
         binding.rvRecentList.layoutManager = LinearLayoutManager(this.context)
-        recentListViewAdapter.submitList(DataObject.randomCallList)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecentRandomCallFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onResume() {
+        super.onResume()
+        recentListViewAdapter.submitList(DataObject.randomCallList.toList())
+
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
