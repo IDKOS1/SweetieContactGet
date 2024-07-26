@@ -21,9 +21,6 @@
             android:name=".AddContactActivity"
             android:exported="false" />
         <activity
-            android:name=".TestActivity"
-            android:exported="true" />
-        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
