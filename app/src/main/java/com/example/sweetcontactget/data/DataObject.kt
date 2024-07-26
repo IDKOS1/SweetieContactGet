@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
+import com.example.sweetcontactget.util.Util.removeAll
+import com.example.sweetcontactget.util.Util.sortedByName
 import java.time.LocalDate
 
 object DataObject {
@@ -12,9 +14,10 @@ object DataObject {
         ContactApplication.applicationContext()
     }
 
-    fun getValidKeys():List<Int>{
+    fun getValidKeys(): List<Int> {
         return contactMap.keys.toList()
     }
+
     fun getSweetieInfo(sweetieId: Int): SweetieInfo {
         return contactMap[sweetieId]!!
     }
@@ -25,8 +28,18 @@ object DataObject {
         contactData.apply { addAll(groupByIndex(contactMap)) }
     }
 
+    fun deleteSweetieInfo(sweetieIdList: Set<Int>) {
+        contactMap.removeAll(sweetieIdList)
+        selectedSet.clear()
+    }
+
     fun changedBookmark(sweetieId: Int, isMarked: Boolean) {
         contactMap[sweetieId]!!.isMarked = isMarked
+    }
+
+    fun changedBookmark(sweetieIdList: Set<Int>) {
+        sweetieIdList.map { contactMap[it]?.isMarked = true }
+        selectedSet.clear()
     }
 
     fun isMarked(sweetieId: Int): Boolean {
@@ -34,14 +47,23 @@ object DataObject {
     }
 
     fun addSweetieInfo(sweetieInfo: SweetieInfo) {
-        val newKey = contactMap.maxOf { it.key } + 1
-        if (sweetieInfo.number in contactMap.values.map{ it.number }){
+        var newKey = contactMap.maxOfOrNull { it.key } ?: 0
+        if (sweetieInfo.number in contactMap.values.map { it.number }) {
             Toast.makeText(context, "동일한 번호로 저장된 연락처가 있습니다.", Toast.LENGTH_SHORT).show()
-        }else{
-            contactMap[newKey] = sweetieInfo
+        } else {
+            contactMap[++newKey] = sweetieInfo
         }
-
     }
+
+    fun selectAllOrClear() {
+        selectedSet.apply {
+            if (contactMap.size == size) clear()
+            else addAll(contactMap.keys)
+        }
+    }
+
+    fun addSelection(id: Int) = selectedSet.add(id)
+    fun removeSelection(id: Int) = selectedSet.remove(id)
 
     fun increaseHeart(sweetieId: Int, heart: Int) {
         contactMap[sweetieId]!!.heart += heart
@@ -68,7 +90,6 @@ object DataObject {
             }
         }
     }
-
 
     private val contactMap: MutableMap<Int, SweetieInfo> = mutableMapOf(
         1 to SweetieInfo(
@@ -760,13 +781,11 @@ object DataObject {
     val contactData: MutableList<Contact> = mutableListOf()
     val contactList get() = groupByIndex(contactMap.sortedByName())
     val bookmarkData get() = contactMap.filter { it.value.isMarked }
+    val selectedSet = HashSet<Int>()
 
     init {
         contactData.apply { addAll(groupByIndex(contactMap)) }
     }
-
-    private fun MutableMap<Int, SweetieInfo>.sortedByName() =
-        this.toList().sortedBy { it.second.name }.toMap().toMutableMap()
 }
 
 
