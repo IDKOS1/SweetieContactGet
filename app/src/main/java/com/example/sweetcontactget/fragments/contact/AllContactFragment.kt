@@ -2,6 +2,7 @@ package com.example.sweetcontactget.fragments.contact
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.example.sweetcontactget.data.DataObject.contactList
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
+import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.util.TopSnappedSmoothScroller
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.reddit.indicatorfastscroll.FastScrollerView
@@ -67,16 +69,21 @@ class AllContactFragment : Fragment() {
 
 
         // 패스트 스크롤 정의
-        binding.fastscroller.setupWithRecyclerView(recyclerView,
-            { position ->
-                when (val item = contactList[position]) {
-                    is Contact.ContactIndex -> FastScrollItemIndicator.Text(item.letter)
-                    else -> null
-                }
+        binding.fastscroller.setupWithRecyclerView(recyclerView, { position ->
+            val item = contactList[position]
+            if (item is Contact.ContactIndex) {
+//                Log.d("FastScroller","Indicator: ${item.letter} at position $position")
+                FastScrollItemIndicator.Text(item.letter)
+            } else {
+//                Log.d("FastScroller", "No Indicator at position $position")
+                null
             }
-        )
+        })
 
         binding.fastscrollerThumb.setupWithFastScroller(binding.fastscroller)
+
+
+
 
         //패스트 스크롤 동작 커스텀
         binding.fastscroller.apply {
