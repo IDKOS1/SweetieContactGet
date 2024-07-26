@@ -29,13 +29,11 @@ class RecentRandomCallFragment : Fragment() {
 
         binding.rvRecentList.adapter = recentListViewAdapter
         binding.rvRecentList.layoutManager = LinearLayoutManager(this.context)
-        recentListViewAdapter.submitList(DataObject.randomCallList)
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        recentListViewAdapter.notifyDataSetChanged()
+    override fun onResume() {
+        super.onResume()
+        recentListViewAdapter.submitList(DataObject.randomCallList.toList())
 
     }
 
