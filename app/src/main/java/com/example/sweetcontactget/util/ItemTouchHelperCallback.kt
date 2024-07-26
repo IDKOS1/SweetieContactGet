@@ -18,7 +18,7 @@ class ItemTouchHelperCallback(private val listener: ItemTouchHelperListener): It
         val position = viewHolder.adapterPosition
         val adapter = recyclerView.adapter as ContactAdapter
         val viewType = adapter.getItemViewType(position)
-        return if (viewType == ContactAdapter.VIEW_TYPE_HEADER){
+        return if (viewType == ContactAdapter.VIEW_TYPE_HEADER || viewType == ContactAdapter.VIEW_TYPE_LIST_GRID){
             makeMovementFlags(0,0)
         }else{
             val swipeFlags = ItemTouchHelper.RIGHT

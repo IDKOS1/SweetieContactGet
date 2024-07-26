@@ -3,6 +3,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+    <!-- Splash String -->
+    <string name="splash_team_name">by 대한민국 개발에 일조하다 </string>
+    <string name="splash_member_name">이강진 | 김윤재 | 김태영 | 김현지 | 이지민</string>
+
+
     <!-- Common String -->
     <string name="common_phone_number">전화번호</string>
     <string name="common_phone_number_content">전화번호 정보가 없습니다.</string>

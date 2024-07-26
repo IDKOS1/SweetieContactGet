@@ -15,8 +15,9 @@ import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentRandomCallBinding
-import com.example.sweetcontactget.dialog.RandomCallDialog
+import com.example.sweetcontactget.dialog.CallingDialog
 
 
 class RandomCallFragment : Fragment() {
@@ -57,6 +58,10 @@ class RandomCallFragment : Fragment() {
 
             //Dialog 열기, delay 추가
             Handler(Looper.getMainLooper()).postDelayed({
+                val sweetieId = DataObject.getValidKeys().random()
+                val dialog = CallingDialog(requireContext(), sweetieId)
+                dialog.show()
+            }, 5000)
 
                 val dialog = RandomCallDialog(requireContext(), binding.ivRandomCallMain)
                 dialog.show()

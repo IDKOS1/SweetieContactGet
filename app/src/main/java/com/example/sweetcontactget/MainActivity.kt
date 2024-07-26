@@ -14,14 +14,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.addSweetieInfo
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.fragments.contact.AllContactFragment
 import com.example.sweetcontactget.fragments.contact.ContactFragment
 import com.example.sweetcontactget.fragments.MyPageFragment
-import com.example.sweetcontactget.fragments.randomCall.RandomFragment
 import com.example.sweetcontactget.databinding.ActivityMainBinding
+import com.example.sweetcontactget.fragments.randomCall.RandomFragment
 import com.example.sweetcontactget.util.Util.showToast
 
 class MainActivity : AppCompatActivity() {
@@ -113,7 +112,7 @@ class MainActivity : AppCompatActivity() {
 
                 when (mimeType) {
                     ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> sweetie.number =
-                        cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
 
                     ContactsContract.CommonDataKinds.Relation.CONTENT_ITEM_TYPE -> sweetie.relationship =
                         cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Relation.NAME))
