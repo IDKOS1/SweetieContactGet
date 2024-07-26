@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.DataObject.bookmarkData
@@ -29,6 +31,7 @@ class BookmarkFragment : Fragment() {
     private var _binding: FragmentBookmarkBinding? = null
     private val binding get() = _binding!!
     private lateinit var bookmarkAdapter: ContactAdapter
+    private lateinit var rvBookmark : RecyclerView
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -47,6 +50,8 @@ class BookmarkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
+        rvBookmark = binding.rvBookmark
+
         return binding.root
     }
 
@@ -76,6 +81,27 @@ class BookmarkFragment : Fragment() {
             addItemDecoration(itemDecoration)
         }
     }
+    fun switchLayoutManager(isGridLayout : Boolean){
+        if (isGridLayout){
+            rvBookmark.layoutManager = GridLayoutManager(requireContext(),3).apply {
+                spanSizeLookup = object  : GridLayoutManager.SpanSizeLookup(){
+                    override fun getSpanSize(position: Int): Int {
+                        return if(bookmarkAdapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER){
+                            3
+                        }else{
+                            1
+                        }
+                    }
+                }
+            }
+            bookmarkAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_GRID)
+        }else{
+           rvBookmark.layoutManager = LinearLayoutManager(requireContext())
+            bookmarkAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_LINEAR)
+        }
+        bookmarkAdapter.notifyDataSetChanged()
+    }
+
 
     companion object {
         /**

@@ -11,8 +11,11 @@ import android.view.ViewGroup
 import com.example.sweetcontactget.AddContactActivity
 import com.example.sweetcontactget.adapter.ViewPagerAdapter
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.data.DataObject.changedBookmark
+import com.example.sweetcontactget.data.DataObject.deleteSweetieInfo
+import com.example.sweetcontactget.data.DataObject.selectAllOrClear
+import com.example.sweetcontactget.data.DataObject.selectedSet
 import com.example.sweetcontactget.databinding.FragmentContactBinding
-import com.github.angads25.toggle.interfaces.OnToggledListener
 import com.google.android.material.tabs.TabLayoutMediator
 
 // TODO: Rename parameter arguments, choose names that match
@@ -55,9 +58,15 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initToolbar()
 
         binding.toggleSetLayout.setOnToggledListener{_,isOn ->
-            (vpAdapter.fragments[0] as AllContactFragment).switchLayoutManager(isOn)
+            if(binding.vpContactViewPager.currentItem == 0 ){
+                (vpAdapter.fragments[0] as AllContactFragment).switchLayoutManager(isOn)
+            }else{
+                (vpAdapter.fragments[1] as BookmarkFragment).switchLayoutManager(isOn)
+            }
+
         }
 
     }
@@ -106,6 +115,29 @@ class ContactFragment : Fragment() {
 
         fabContactAdd.setOnClickListener {
             startActivity(Intent(requireActivity(), AddContactActivity::class.java))
+        }
+    }
+
+    fun handleToolbarVisibility(isShow: Boolean) {
+        binding.llContactToolbar.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    private fun initToolbar() {
+        binding.tvSelectAllBtn.setOnClickListener {
+            selectAllOrClear()
+            (vpAdapter.fragments[0] as AllContactFragment).refresh()
+        }
+        binding.tvBookmarkBtn.setOnClickListener {
+            changedBookmark(selectedSet)
+            (vpAdapter.fragments[0] as AllContactFragment).refresh()
+            handleToolbarVisibility(false)
+            binding.vpContactViewPager.currentItem = 1
+        }
+        binding.tvDeleteBtn.setOnClickListener {
+            deleteSweetieInfo(selectedSet)
+            (vpAdapter.fragments[0] as AllContactFragment).refresh()
+            (vpAdapter.fragments[1] as BookmarkFragment).onResume()
+            handleToolbarVisibility(false)
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import com.example.sweetcontactget.data.SweetieInfo
 
 object Util {
     fun sendMessage(context: Context, phoneNumber: String) {
@@ -23,4 +24,11 @@ object Util {
     fun showToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
+
+    fun MutableMap<Int, SweetieInfo>.removeAll(keys: Set<Int>) {
+        keys.forEach { this.remove(it) }
+    }
+
+    fun MutableMap<Int, SweetieInfo>.sortedByName() =
+        this.toList().sortedBy { it.second.name }.toMap().toMutableMap()
 }
