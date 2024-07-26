@@ -11,6 +11,9 @@ object DataObject {
         ContactApplication.applicationContext()
     }
 
+    fun getValidKeys():List<Int>{
+        return contactMap.keys.toList()
+    }
     fun getSweetieInfo(sweetieId: Int): SweetieInfo {
         return contactMap[sweetieId]!!
     }
