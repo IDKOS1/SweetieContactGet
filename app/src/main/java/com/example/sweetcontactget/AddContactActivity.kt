@@ -55,18 +55,6 @@ class AddContactActivity : AppCompatActivity() {
         }
 
         binding.btnAddContactSave.setOnClickListener {
-            val sweetie = SweetieInfo(
-                binding.ivAddContactImage.drawable,
-                binding.etAddContactName.text.toString(),
-                binding.etAddContactPhoneNumber.text.toString(),
-                binding.etAddContactPhoneNumber2.text.toString(),
-                binding.etAddContactPhoneNumber3.text.toString(),
-                0,
-                false
-            )
-            DataObject.addSweetieInfo(sweetie)
-            finish()
-
             //저장 시 ContactFragment로 넘겨줄 데이터
 //            var contact_fragment = ContactFragment()
 //            var bundle = Bundle()
