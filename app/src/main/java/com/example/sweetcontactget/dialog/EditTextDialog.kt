@@ -35,7 +35,7 @@ class EditTextDialog(context: Context) {
     }
 
     interface ButtonClickListener {
-        fun onClicked(myName: String)
+        fun onClicked(content: String)
     }
 
     private lateinit var onClickedListener: ButtonClickListener
