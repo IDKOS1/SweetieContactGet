@@ -4,15 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="64dp"
     android:background="@drawable/img_background_light"
     tools:context=".fragments.contact.ContactFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_contact_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/secondary"
+        android:elevation="10dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingTop="64dp"
+        android:paddingBottom="16dp"
+        android:visibility="gone"
+        android:weightSum="3"
+        app:layout_constraintBottom_toTopOf="@id/ll_contact_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_select_all_btn"
+            style="@style/body_b"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center|center_vertical"
+            android:text="전체 선택"
+            android:textColor="@color/white"
+            app:drawableTint="@color/white"
+            app:drawableTopCompat="@drawable/ic_select_all" />
+
+        <TextView
+            android:id="@+id/tv_bookmark_btn"
+            style="@style/body_b"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center|center_vertical"
+            android:text="북마크"
+            android:textColor="@color/white"
+            app:drawableTint="@color/white"
+            app:drawableTopCompat="@drawable/ic_star_full" />
+
+        <TextView
+            android:id="@+id/tv_delete_btn"
+            style="@style/body_b"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center|center_vertical"
+            android:text="삭제"
+            android:textColor="@color/white"
+            app:drawableTint="@color/white"
+            app:drawableTopCompat="@drawable/ic_delete" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_contact_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/shape_corner_radius_12dp"
         android:backgroundTint="@color/secondary"
         android:gravity="center_vertical"
@@ -20,7 +77,8 @@
         android:paddingHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/ll_contact_toolbar"
+        app:layout_goneMarginTop="64dp">
 
         <ImageView
             android:layout_width="24dp"
@@ -47,23 +105,17 @@
 
     </LinearLayout>
 
-
-        
-        <com.github.angads25.toggle.widget.LabeledSwitch
-            android:id="@+id/toggle_set_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:on="false"
-            app:textOn="Grid"
-            app:textOff="List"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/v_contact_line"/>
-        
-
-
-
+    <com.github.angads25.toggle.widget.LabeledSwitch
+        android:id="@+id/toggle_set_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/v_contact_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:on="false"
+        app:textOff="List"
+        app:textOn="Grid" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_contact_tab"

@@ -1,7 +1,6 @@
 package com.example.sweetcontactget.fragments.contact
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import com.example.sweetcontactget.data.DataObject.contactList
 import com.example.sweetcontactget.databinding.FragmentAllContactBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
-import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.util.TopSnappedSmoothScroller
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.reddit.indicatorfastscroll.FastScrollerView
@@ -54,6 +52,11 @@ class AllContactFragment : Fragment() {
         recyclerView.apply {
             adapter = contactAdapter
             layoutManager = LinearLayoutManager(this.context)
+            ContactAdapter.itemClickListener = object : ContactAdapter.ItemClickListener {
+                override fun onItemLongClick(isShow: Boolean) {
+                    (parentFragment as ContactFragment).handleToolbarVisibility(isShow)
+                }
+            }
             val dividerColor = ContextCompat.getColor(context, R.color.secondary)
             val itemDecoration =
                 CustomDividerDecoration(context, height = 3f, dividerColor, 0f, 100f)
@@ -67,8 +70,8 @@ class AllContactFragment : Fragment() {
 
         // 패스트 스크롤 정의
         binding.fastscroller.setupWithRecyclerView(recyclerView, { position ->
-            val item = contactList[position]
-            if (item is Contact.ContactIndex) {
+            val item = contactList.getOrNull(position)
+            if (item != null && item is Contact.ContactIndex) {
 //                Log.d("FastScroller","Indicator: ${item.letter} at position $position")
                 FastScrollItemIndicator.Text(item.letter)
             } else {
@@ -113,32 +116,38 @@ class AllContactFragment : Fragment() {
     }
 
 
-
     fun search(searchTarget: CharSequence?) {
         if (::contactAdapter.isInitialized) contactAdapter.filter.filter(searchTarget)
     }
 
-    fun switchLayoutManager(isGridLayout : Boolean){
-        if (isGridLayout){
-            recyclerView.layoutManager = GridLayoutManager(requireContext(),3).apply {
-                spanSizeLookup = object  : GridLayoutManager.SpanSizeLookup(){
+    fun refresh() {
+        contactAdapter.submitList(contactList.toList())
+        contactAdapter.notifyItemRangeChanged(0, contactList.size)
+    }
+
+    fun switchLayoutManager(isGridLayout: Boolean) {
+        if (isGridLayout) {
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 3).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
-                        return if(contactAdapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER){
+                        return if (contactAdapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER) {
                             3
-                        }else{
+                        } else {
                             1
                         }
                     }
                 }
             }
             contactAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_GRID)
-        }else{
+        } else {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             contactAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_LINEAR)
         }
         contactAdapter.notifyDataSetChanged()
     }
+
     companion object {
+        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: Int) =
             AllContactFragment().apply {
@@ -147,8 +156,4 @@ class AllContactFragment : Fragment() {
                 }
             }
     }
-
-
-
 }
-

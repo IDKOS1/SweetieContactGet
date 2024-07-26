@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.adapter.ContactAdapter
 import com.example.sweetcontactget.R
-import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject.bookmarkData
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.FragmentBookmarkBinding

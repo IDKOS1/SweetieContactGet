@@ -2,24 +2,29 @@ package com.example.sweetcontactget.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.DetailActivity
+import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.Contact
+import com.example.sweetcontactget.data.DataObject.addSelection
 import com.example.sweetcontactget.data.DataObject.contactData
+import com.example.sweetcontactget.data.DataObject.removeSelection
+import com.example.sweetcontactget.data.DataObject.selectedSet
 import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderBinding
 import com.example.sweetcontactget.databinding.PersonInfoHolderGridBinding
+import com.example.sweetcontactget.dialog.CallingDialog
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
-import com.example.sweetcontactget.util.Util
 
 class ContactAdapter(private val context: Context) :
     ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>() {
@@ -32,9 +37,13 @@ class ContactAdapter(private val context: Context) :
         }
     }), Filterable, ItemTouchHelperCallback.ItemTouchHelperListener {
 
-        private var viewType = VIEW_TYPE_LIST_LINEAR
+    interface ItemClickListener {
+        fun onItemLongClick(isShow: Boolean)
+    }
 
-    fun setViewType(viewType: Int){
+    private var viewType = VIEW_TYPE_LIST_LINEAR
+
+    fun setViewType(viewType: Int) {
         this.viewType = viewType
         notifyDataSetChanged()
     }
@@ -58,28 +67,57 @@ class ContactAdapter(private val context: Context) :
                     pbHeart.progress = heart
                     tvHeart.text = heart.toString() + "%"
                     ivBehindView.setImageDrawable(imgSrc)
+                    cbSelect.isChecked = selectedSet.contains(item.key)
+                    frontView.backgroundTintList =
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                if (selectedSet.contains(item.key)) R.color.gray else R.color.white
+                            )
+                        )
                 }
 
-
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailActivity::class.java).apply {
-                        putExtra("sweetieId", item.key)
+                    if (isSelectionMode) {
+                        handleSelection(item.key)
+                    } else {
+                        val intent = Intent(itemView.context, DetailActivity::class.java).apply {
+                            putExtra("sweetieId", item.key)
+                        }
+                        startActivity(itemView.context, intent, null)
                     }
-                    startActivity(itemView.context, intent, null)
+                }
+
+                itemView.setOnLongClickListener {
+                    handleSelection(item.key)
+                    true
                 }
             }
         }
 
+        private fun handleSelection(id: Int) = with(binding) {
+            if (cbSelect.isChecked) removeSelection(id) else addSelection(id)
+            isSelectionMode = selectedSet.size > 0
+            cbSelect.isChecked = !cbSelect.isChecked
+            itemClickListener?.onItemLongClick(isSelectionMode)
+            frontView.backgroundTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        if (cbSelect.isChecked) R.color.gray else R.color.white
+                    )
+                )
+        }
+
         val frontView = binding.clPersonInfoHolderSize
         val behindView = binding.clBehindView
-
     }
 
-    class PersonInfoGridHolder(private val binding: PersonInfoHolderGridBinding):
-    RecyclerView.ViewHolder(binding.root){
-        fun bind(item: Contact.SweetiesID){
+    class PersonInfoGridHolder(private val binding: PersonInfoHolderGridBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Contact.SweetiesID) {
             binding.apply {
-                with(item.value){
+                with(item.value) {
                     ivSweetiePhotoGrid.setImageDrawable(imgSrc)
                     tvSweetieNameGrid.text = name
                 }
@@ -96,8 +134,12 @@ class ContactAdapter(private val context: Context) :
 
     companion object {
         const val VIEW_TYPE_HEADER = 1
+        const val VIEW_TYPE_LIST = 2
         const val VIEW_TYPE_LIST_LINEAR = 2
         const val VIEW_TYPE_LIST_GRID = 3
+
+        var itemClickListener: ItemClickListener? = null
+        var isSelectionMode = false
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -138,10 +180,10 @@ class ContactAdapter(private val context: Context) :
             }
 
             is Contact.SweetiesID -> {
-                if (viewType == VIEW_TYPE_LIST_LINEAR){
+                if (viewType == VIEW_TYPE_LIST_LINEAR) {
                     val personInfoHolder = holder as PersonInfoHolder
                     personInfoHolder.bind(item)
-                }else{
+                } else {
                     val personInfoGridHolder = holder as PersonInfoGridHolder
                     personInfoGridHolder.bind(item)
                 }
@@ -155,7 +197,7 @@ class ContactAdapter(private val context: Context) :
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is Contact.ContactIndex -> VIEW_TYPE_HEADER
-            is Contact.SweetiesID -> if(viewType == VIEW_TYPE_LIST_LINEAR) VIEW_TYPE_LIST_LINEAR else VIEW_TYPE_LIST_GRID
+            is Contact.SweetiesID -> if (viewType == VIEW_TYPE_LIST_LINEAR) VIEW_TYPE_LIST_LINEAR else VIEW_TYPE_LIST_GRID
             else -> throw IllegalArgumentException("Invalid View Type")
         }
     }
@@ -194,7 +236,9 @@ class ContactAdapter(private val context: Context) :
     override fun onItemSwipe(position: Int) {
         val item = getItem(position)
         if (item is Contact.SweetiesID) {
-            Util.callSweetie(context, item.value.number)
+            //dialog 띄우기
+            val dialog = CallingDialog(context, item.key)
+            dialog.show()
         }
 
         notifyItemChanged(position)
