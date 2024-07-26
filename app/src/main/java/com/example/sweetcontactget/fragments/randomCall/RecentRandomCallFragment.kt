@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.Contact
+import com.example.sweetcontactget.data.ContactApplication
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentRecentRancdomCallBinding
 
@@ -47,7 +48,7 @@ class RecentRandomCallFragment : Fragment() {
                 Contact.SweetiesID(
                     1,
                     Contact.SweetieInfo(
-                        ContextCompat.getDrawable(DataObject.context, R.drawable.img_sweetie_1),
+                        ContextCompat.getDrawable(requireContext(), R.drawable.img_sweetie_1),
                         name = "감우",
                         number = "010-2345-3444",
                         relationship = "친구",
