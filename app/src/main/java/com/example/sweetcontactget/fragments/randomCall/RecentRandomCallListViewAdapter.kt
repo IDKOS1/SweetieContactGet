@@ -34,8 +34,8 @@ class RecentRandomCallListViewAdapter : ListAdapter<Contact, RecyclerView.ViewHo
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = currentList[position]
-        if(holder is RecentRandomViewHolder){
-            holder.bind(item as Contact.SweetieInfo)
+        if (holder is RecentRandomViewHolder && item is Contact.SweetiesID) {
+            holder.bind(item.value)
         }
     }
 

@@ -53,14 +53,15 @@ class RandomCallFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRandomCall.setOnClickListener {
-            binding.ivRandomCallMain.visibility = View.INVISIBLE
+//            binding.ivRandomCallMain.visibility = View.INVISIBLE
 
-            loadGif(R.raw.gacha1, binding.ivFirstGif)
+
             binding.ivFirstGif.visibility = View.VISIBLE
+            loadGif(R.raw.gacha1, binding.ivFirstGif)
 
             Handler(Looper.getMainLooper()).postDelayed({
 
-                if(activity != null){
+                if (activity != null) {
 
                     binding.ivFirstGif.visibility = View.INVISIBLE
                     loadGif(R.raw.gacha2, binding.ivSecondGif)
@@ -74,8 +75,8 @@ class RandomCallFragment : Fragment() {
 
             //Dialog 열기, delay 추가
             Handler(Looper.getMainLooper()).postDelayed({
-            val dialog = RandomCallDialog(requireContext())
-            dialog.show()
+                val dialog = RandomCallDialog(requireContext())
+                dialog.show()
             }, 6000)
 
         }
@@ -94,29 +95,29 @@ class RandomCallFragment : Fragment() {
     }
 
     private fun loadGif(loadGif: Int, imageView: ImageView) {
-            Glide.with(this).asGif().load(loadGif)
-                .listener(object : RequestListener<GifDrawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<GifDrawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        return false
-                    }
+        Glide.with(this).asGif().load(loadGif)
+            .listener(object : RequestListener<GifDrawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<GifDrawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
 
-                    override fun onResourceReady(
-                        resource: GifDrawable?,
-                        model: Any?,
-                        target: Target<GifDrawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        resource?.setLoopCount(1)
-                        return false
-                    }
+                override fun onResourceReady(
+                    resource: GifDrawable?,
+                    model: Any?,
+                    target: Target<GifDrawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    resource?.setLoopCount(1)
+                    return false
+                }
 
-                }).into(imageView)
+            }).into(imageView)
     }
 
 }

@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sweetcontactget.R
+import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentRecentRancdomCallBinding
 
@@ -16,7 +19,7 @@ class RecentRandomCallFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var _binding : FragmentRecentRancdomCallBinding? = null
+    private var _binding: FragmentRecentRancdomCallBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +41,25 @@ class RecentRandomCallFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        DataObject.randomCallList.add()
+        repeat(10) {
+
+            DataObject.randomCallList.add(
+                Contact.SweetiesID(
+                    1,
+                    Contact.SweetieInfo(
+                        ContextCompat.getDrawable(DataObject.context, R.drawable.img_sweetie_1),
+                        name = "감우",
+                        number = "010-2345-3444",
+                        relationship = "친구",
+                        memo = "멍청하다.",
+                        heart = 0,
+                        isMarked = false
+                    )
+                )
+
+            )
+        }
+
 
         val recentListViewAdapter = RecentRandomCallListViewAdapter()
         binding.rvRecentList.adapter = recentListViewAdapter
