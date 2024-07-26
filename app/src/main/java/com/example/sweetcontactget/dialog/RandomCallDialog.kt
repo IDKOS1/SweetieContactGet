@@ -9,22 +9,23 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.DialogRandomCallBinding
 import com.example.sweetcontactget.util.Util
 import kotlin.random.Random
 import kotlin.random.nextInt
 
-class RandomCallDialog(context: Context):Dialog(context) {
+class RandomCallDialog(context: Context, private val imageView: ImageView) : Dialog(context) {
     private lateinit var binding: DialogRandomCallBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DialogRandomCallBinding.inflate(layoutInflater)
         setCancelable(false)
         setContentView(binding.root)
-        dialogResize(context,this@RandomCallDialog, 0.9f, 0.4f)
+        dialogResize(context, this@RandomCallDialog, 0.9f, 0.4f)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val random = Random.nextInt(1..56)
@@ -38,14 +39,24 @@ class RandomCallDialog(context: Context):Dialog(context) {
             }
         }
 
-
         binding.tvRandomCallMakeACall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
-            intent.data =  Uri.parse("tel :"+Util.callSweetie(this.context,currentId.number))
+            intent.data = Uri.parse("tel :" + Util.callSweetie(this.context, currentId.number))
+            DataObject.randomCallList.add(currentId)
+            setImageVisibility(imageView)
+            dismiss()
+//            Util.callSweetie(context,currentId.number)
         }
+
         binding.tvRandomCallMakeACallCancel.setOnClickListener {
+            setImageVisibility(imageView)
             cancel()
         }
+    }
+
+
+    private fun setImageVisibility(imageView: ImageView) {
+        imageView.visibility = View.VISIBLE
     }
 
     fun dialogResize(context: Context, dialog: Dialog, width: Float, height: Float) {

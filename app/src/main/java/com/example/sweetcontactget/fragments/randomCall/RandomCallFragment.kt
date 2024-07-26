@@ -43,9 +43,6 @@ class RandomCallFragment : Fragment() {
     ): View {
         _binding = FragmentRandomCallBinding.inflate(inflater, container, false)
 
-
-
-
         return binding.root
     }
 
@@ -53,7 +50,7 @@ class RandomCallFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRandomCall.setOnClickListener {
-//            binding.ivRandomCallMain.visibility = View.INVISIBLE
+            binding.ivRandomCallMain.visibility = View.INVISIBLE
 
 
             binding.ivFirstGif.visibility = View.VISIBLE
@@ -68,16 +65,16 @@ class RandomCallFragment : Fragment() {
 
                 }
                 //TODO 전화걸기 intent
-//            binding.ivRandomCallMain.visibility = View.VISIBLE
 
             }, 2000)
 
-
             //Dialog 열기, delay 추가
             Handler(Looper.getMainLooper()).postDelayed({
-                val dialog = RandomCallDialog(requireContext())
+
+                val dialog = RandomCallDialog(requireContext(), binding.ivRandomCallMain)
                 dialog.show()
-            }, 6000)
+
+            }, 4000)
 
         }
 

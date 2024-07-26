@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sweetcontactget.data.Contact
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ItemRecentRandomCallBinding
 
-class RecentRandomCallListViewAdapter : ListAdapter<Contact, RecyclerView.ViewHolder>(diffUtil) {
+class RecentRandomCallListViewAdapter : ListAdapter<SweetieInfo, RecyclerView.ViewHolder>(diffUtil) {
 
     inner class RecentRandomViewHolder(private val binding: ItemRecentRandomCallBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -35,20 +34,20 @@ class RecentRandomCallListViewAdapter : ListAdapter<Contact, RecyclerView.ViewHo
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = currentList[position]
-        if (holder is RecentRandomViewHolder && item is Contact.SweetiesID) {
-            holder.bind(item.value)
+        if (holder is RecentRandomViewHolder) {
+            holder.bind(item)
         }
     }
 
     companion object {
 
-        val diffUtil = object : DiffUtil.ItemCallback<Contact>() {
-            override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-                TODO("Not yet implemented")
+        val diffUtil = object : DiffUtil.ItemCallback<SweetieInfo>() {
+            override fun areItemsTheSame(oldItem: SweetieInfo, newItem: SweetieInfo): Boolean {
+                return oldItem.number == newItem.number
             }
 
-            override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-                TODO("Not yet implemented")
+            override fun areContentsTheSame(oldItem: SweetieInfo, newItem: SweetieInfo): Boolean {
+                return oldItem == newItem
             }
 
         }

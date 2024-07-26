@@ -5,11 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sweetcontactget.R
-import com.example.sweetcontactget.data.Contact
-import com.example.sweetcontactget.data.ContactApplication
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentRecentRancdomCallBinding
 
@@ -22,6 +18,8 @@ class RecentRandomCallFragment : Fragment() {
 
     private var _binding: FragmentRecentRancdomCallBinding? = null
     private val binding get() = _binding!!
+
+    private val recentListViewAdapter by lazy { RecentRandomCallListViewAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,30 +40,16 @@ class RecentRandomCallFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        repeat(10) {
-
-            DataObject.randomCallList.add(
-                Contact.SweetiesID(
-                    1,
-                    Contact.SweetieInfo(
-                        ContextCompat.getDrawable(requireContext(), R.drawable.img_sweetie_1),
-                        name = "감우",
-                        number = "010-2345-3444",
-                        relationship = "친구",
-                        memo = "멍청하다.",
-                        heart = 0,
-                        isMarked = false
-                    )
-                )
-
-            )
-        }
-
-
-        val recentListViewAdapter = RecentRandomCallListViewAdapter()
         binding.rvRecentList.adapter = recentListViewAdapter
         binding.rvRecentList.layoutManager = LinearLayoutManager(this.context)
         recentListViewAdapter.submitList(DataObject.randomCallList)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        recentListViewAdapter.notifyDataSetChanged()
+
     }
 
     companion object {
