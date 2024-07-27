@@ -2,24 +2,41 @@ package com.example.sweetcontactget
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
+import com.example.sweetcontactget.data.isRegularEvent
+import com.example.sweetcontactget.data.isRegularMemo
+import com.example.sweetcontactget.data.isRegularName
+import com.example.sweetcontactget.data.isRegularPhoneNumber
+import com.example.sweetcontactget.data.isRegularRelationShip
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
 import kotlin.random.Random
 import kotlin.random.nextInt
 
 class AddContactActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityAddContactBinding
+    private lateinit var binding: ActivityAddContactBinding
     private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        var isName = false
+        var isPhoneNumber = false
+        var isPhoneNumber2 = false
+        var isPhoneNumber3 = false
+        var isEvent = false
+        var isRelationShip = false
+        var isMemo = false
+
         binding = ActivityAddContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -30,12 +47,12 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.tvAddContactAddPhoneNumber.setOnClickListener {
             count++
-            if(count==1) {
+            if (count == 1) {
                 binding.clAddContactPhoneNumber2.visibility = View.VISIBLE
                 binding.tvAddContactDeletePhoneNumber.visibility = View.VISIBLE
             }
 
-            if(count==2) {
+            if (count == 2) {
                 binding.clAddContactPhoneNumber3.visibility = View.VISIBLE
                 binding.tvAddContactAddPhoneNumber.visibility = View.GONE
             }
@@ -43,18 +60,166 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.tvAddContactDeletePhoneNumber.setOnClickListener {
             count--
-            if(count==1) {
+            if (count == 1) {
                 binding.clAddContactPhoneNumber3.visibility = View.GONE
                 binding.tvAddContactAddPhoneNumber.visibility = View.VISIBLE
             }
 
-            if(count==0) {
+            if (count == 0) {
                 binding.clAddContactPhoneNumber2.visibility = View.GONE
                 binding.tvAddContactDeletePhoneNumber.visibility = View.GONE
             }
         }
 
+        binding.ivAddContactImage.setOnClickListener {
+            val random = Random.nextInt(1..56)
+            val currentId = random.let { DataObject.getSweetieInfo(it) }
+
+            currentId.let {
+                binding.ivAddContactImage.setImageDrawable(it.imgSrc)
+            }
+        }
+
+        //이름 유효성 검사
+        binding.etAddContactName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (isRegularName(binding.etAddContactName.text.toString().trim())) {
+                    binding.tvAddContactWrongName.visibility = View.INVISIBLE
+                    isName = true
+                } else {
+                    binding.tvAddContactWrongName.visibility = View.VISIBLE
+                    isName = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        //전화번호 유효성 검사1
+        binding.etAddContactPhoneNumber.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (isRegularPhoneNumber(binding.etAddContactPhoneNumber.text.toString().trim())) {
+                    binding.tvAddContactWrongNumber.visibility = View.INVISIBLE
+                    isPhoneNumber = true
+                } else {
+                    binding.tvAddContactWrongNumber.visibility = View.VISIBLE
+                    isPhoneNumber = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        //전화번호 유효성 검사2
+        binding.etAddContactPhoneNumber2.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (isRegularPhoneNumber(binding.etAddContactPhoneNumber2.text.toString().trim())) {
+                    binding.tvAddContactWrongNumber2.visibility = View.INVISIBLE
+                    isPhoneNumber2 = true
+                } else {
+                    binding.tvAddContactWrongNumber2.visibility = View.VISIBLE
+                    isPhoneNumber2 = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        //전화번호 유효성 검사3
+        binding.etAddContactPhoneNumber3.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (isRegularPhoneNumber(binding.etAddContactPhoneNumber3.text.toString().trim())) {
+                    binding.tvAddContactWrongNumber3.visibility = View.INVISIBLE
+                    isPhoneNumber3 = true
+                } else {
+                    binding.tvAddContactWrongNumber3.visibility = View.VISIBLE
+                    isPhoneNumber3 = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        //이벤트 유효성 검사
+        binding.etAddContactEventInformation.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (isRegularEvent(binding.etAddContactEventInformation.text.toString().trim())) {
+                    binding.tvAddContactWrongEventInformation.visibility = View.INVISIBLE
+                    isEvent = true
+                } else {
+                    binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
+                    isEvent = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        //관계 유효성 검사
+        binding.etAddContactRelationship.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (isRegularRelationShip(binding.etAddContactRelationship.text.toString().trim())) {
+                    binding.tvAddContactWrongRelationship.visibility = View.INVISIBLE
+                    isRelationShip = true
+                } else {
+                    binding.tvAddContactWrongRelationship.visibility = View.VISIBLE
+                    isRelationShip = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        //메모 유효성 검사
+        binding.etAddContactMemo.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (isRegularMemo(binding.etAddContactMemo.text.toString().trim())) {
+                    binding.tvAddContactWrongMemo.visibility = View.INVISIBLE
+                    isMemo = true
+                } else {
+                    binding.tvAddContactWrongMemo.visibility = View.VISIBLE
+                    isMemo = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         binding.btnAddContactSave.setOnClickListener {
+            val name = binding.etAddContactName.text.toString().trim()
+            val phoneNumber = binding.etAddContactPhoneNumber.text.toString().trim()
+            val eventInformation = binding.etAddContactEventInformation.text.toString().trim()
+            val relationShip = binding.etAddContactRelationship.text.toString().trim()
+            val memo = binding.etAddContactMemo.text.toString().trim()
+            val image = binding.ivAddContactImage.drawable
+
+            // 비었을 때
+            if (name.isEmpty() || phoneNumber.isEmpty() || eventInformation.isEmpty()
+                || relationShip.isEmpty() || memo.isEmpty() || image == null
+            ) {
+                Toast.makeText(this,"입력하지 않은 정보가 있습니다.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            //유효한 입력 체크
+            if (!isName || !isPhoneNumber || !isEvent || !isRelationShip || !isMemo) {
+                Toast.makeText(this,"유효하지 않은 정보가 있습니다.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             var sweetieInfo = SweetieInfo(
                 imgSrc = binding.ivAddContactImage.drawable,
@@ -70,19 +235,11 @@ class AddContactActivity : AppCompatActivity() {
         }
 
         binding.btnAddContactCancel.setOnClickListener {
-            val intent = Intent(this@AddContactActivity,MainActivity::class.java)
+            val intent = Intent(this@AddContactActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        binding.ivAddContactImage.setOnClickListener {
-            val random = Random.nextInt(1..56)
-            val currentId = random.let { DataObject.getSweetieInfo(it) }
-
-            currentId.let {
-                binding.ivAddContactImage.setImageDrawable(it.imgSrc)
-            }
-        }
     }
 
     override fun onBackPressed() {

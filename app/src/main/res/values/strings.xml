@@ -25,6 +25,21 @@
     <string name="main_bottom_bar_contacts_text">연락처</string>
     <string name="main_bottom_bar_my_profile_text">내 프로필</string>
 
+    <!-- AddContactActivity -->
+    <string name="add_contact_main_phone_number">대표</string>
+    <string name="add_contact_add_phone_number">+&#160;&#160;&#160;&#160;전화번호 추가</string>
+    <string name="add_contact_delete_phone_number">-&#160;&#160;&#160;&#160;전화번호 제거</string>
+    <string name="add_contact_placeholder_name">이름 입력</string>
+    <string name="add_contact_placeholder_phone_number">전화번호 입력</string>
+    <string name="add_contact_placeholder_event_information">이벤트 정보 입력</string>
+    <string name="add_contact_placeholder_relationship">관계 입력</string>
+    <string name="add_contact_placeholder_memo">메모 입력</string>
+    <string name="add_contact_placeholder_wrong_name">이름은 한글, 영어만 입력 가능</string>
+    <string name="add_contact_placeholder_wrong_phone_number">전화번호 입력이 잘못되었습니다</string>
+    <string name="add_contact_placeholder_wrong_event_information">이벤트 정보는 2글자 이상 10글자 이하</string>
+    <string name="add_contact_placeholder_wrong_relationship">관계는 친구, 가족, 학교, 직장 넷 중 하나</string>
+    <string name="add_contact_placeholder_wrong_memo">메모는 2글자 이상 8글자 이하</string>
+
     <!-- Contact Fragment -->
     <string-array name="contact_tab">
         <item>전체 연락처</item>
@@ -76,15 +91,6 @@
     <!-- Dialog -->
     <string name="dialog_change_theme">색상 테마를 변경하시겠습니까?</string>
     <string name="dialog_edit_name">이름 편집</string>
-    <string name="dialog_main_phone_number">대표</string>
-    <string name="dialog_add_phone_number">+&#160;&#160;&#160;&#160;전화번호 추가</string>
-    <string name="dialog_delete_phone_number">-&#160;&#160;&#160;&#160;전화번호 제거</string>
-    <string name="dialog_placeholder_name">이름 입력</string>
-    <string name="dialog_placeholder_phone_number">전화번호 입력</string>
-    <string name="dialog_placeholder_event_information">이벤트 정보 입력</string>
-    <string name="dialog_placeholder_relationship">관계 입력</string>
-    <string name="dialog_placeholder_group">그룹 지정</string>
-    <string name="dialog_placeholder_memo">메모 입력</string>
     <string name="dialog_make_a_call">>&#160;&#160;&#160;전화 걸기</string>
     <string name="dialog_make_a_call_cancel">>&#160;&#160;&#160;전화 걸지 않기</string>
 </resources>
