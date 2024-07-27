@@ -80,7 +80,8 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 tvDetailCall.setOnClickListener {
-                    Util.callSweetie(this@DetailActivity, sweetie.number)
+                    Util.callSweetie(this@DetailActivity, sweetieId, sweetie.number)
+                    updateDetail()
                 }
             }
 
