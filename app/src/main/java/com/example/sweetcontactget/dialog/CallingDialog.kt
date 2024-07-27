@@ -20,7 +20,6 @@ class CallingDialog(
     context: Context,
     private val sweetieID: Int,
     private val imageView: ImageView?,
-    private val ivSecondGif: ImageView?
 ) : Dialog(context) {
     private lateinit var binding: DialogRandomCallBinding
 

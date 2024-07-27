@@ -63,7 +63,7 @@ class RandomCallFragment : Fragment() {
             //Dialog 열기, delay 추가
             Handler(Looper.getMainLooper()).postDelayed({
                 val sweetieId = DataObject.getValidKeys().random()
-                val dialog = CallingDialog(requireContext(), sweetieId, binding.ivRandomCallMain, binding.ivSecondGif)
+                val dialog = CallingDialog(requireContext(), sweetieId, binding.ivRandomCallMain)
                 dialog.show()
                 Glide.with(this).asBitmap().load(R.raw.gacha2).into(binding.ivSecondGif)
                 binding.ivSecondGif.visibility = View.INVISIBLE
