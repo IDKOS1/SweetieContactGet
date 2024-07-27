@@ -44,7 +44,7 @@ class CallingDialog(
 
         binding.tvRandomCallMakeACall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel :" + Util.callSweetie(this.context, currentId.number))
+            intent.data = Uri.parse("tel :" + Util.callSweetie(this.context, sweetieID, currentId.number))
             if (imageView != null) {
                 imageView.visibility = View.VISIBLE
                 DataObject.randomCallList.add(currentId)
