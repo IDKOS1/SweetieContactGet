@@ -130,7 +130,6 @@ class AddContactActivity : AppCompatActivity() {
 
         //갤러리 이미지 가져와서 추가
         binding.ivAddContactImage.setOnClickListener {
-
             pickImageLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
@@ -405,15 +404,6 @@ class AddContactActivity : AppCompatActivity() {
         }
         binding.btnAddContactCancel.setOnClickListener {
             finish()
-        }
-
-        binding.ivAddContactImage.setOnClickListener {
-            val random = Random.nextInt(1..56)
-            val currentId = random.let { DataObject.getSweetieInfo(it) }
-
-            currentId.let {
-                binding.ivAddContactImage.setImageDrawable(it.imgSrc)
-            }
         }
     }
 
