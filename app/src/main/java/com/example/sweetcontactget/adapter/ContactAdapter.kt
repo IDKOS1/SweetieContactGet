@@ -236,7 +236,7 @@ class ContactAdapter(private val context: Context) :
     override fun onItemSwipe(position: Int) {
         val item = getItem(position)
         if (item is Contact.SweetiesID) {
-            val dialog = CallingDialog(context, item.key, null, null)
+            val dialog = CallingDialog(context, item.key, null)
             dialog.show()
         }
 

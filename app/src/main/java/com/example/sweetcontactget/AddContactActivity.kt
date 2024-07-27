@@ -37,6 +37,9 @@ import com.example.sweetcontactget.data.isRegularName
 import com.example.sweetcontactget.data.isRegularPhoneNumber
 import com.example.sweetcontactget.data.isRegularRelationShip
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
+import com.example.sweetcontactget.util.Util.initSpinner
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 class AddContactActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddContactBinding
@@ -122,6 +125,8 @@ class AddContactActivity : AppCompatActivity() {
                 binding.tvAddContactDeletePhoneNumber.visibility = View.GONE
             }
         }
+
+        initSpinner(this@AddContactActivity, binding.groupSpinner, null)
 
         //갤러리 이미지 가져와서 추가
         binding.ivAddContactImage.setOnClickListener {
@@ -351,36 +356,16 @@ class AddContactActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        //관계 유효성 검사
-        binding.etAddContactRelationship.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularRelationShip(
-                        binding.etAddContactRelationship.text.toString().trim()
-                    )
-                ) {
-                    binding.tvAddContactWrongRelationship.visibility = View.INVISIBLE
-                    isRelationShip = true
-                } else {
-                    binding.tvAddContactWrongRelationship.visibility = View.VISIBLE
-                    isRelationShip = false
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
 
         binding.btnAddContactSave.setOnClickListener {
             val name = binding.etAddContactName.text.toString().trim()
             val phoneNumber = binding.etAddContactPhoneNumber.text.toString().trim()
             val eventInformation = binding.etAddContactEventInformation.text.toString().trim()
-            val relationShip = binding.etAddContactRelationship.text.toString().trim()
             val image = binding.ivAddContactImage.drawable
 
             // 비었을 때
             if (name.isEmpty() || phoneNumber.isEmpty() || eventInformation.isEmpty()
-                || relationShip.isEmpty() || image == null
+                ||  image == null
             ) {
                 Toast.makeText(
                     this,
@@ -400,9 +385,9 @@ class AddContactActivity : AppCompatActivity() {
                 imgSrc = binding.ivAddContactImage.drawable,
                 name = binding.etAddContactName.text.toString(),
                 number = binding.etAddContactPhoneNumber.text.toString(),
+                relationship = binding.groupSpinner.selectedItemPosition,
                 secondNumber = binding.etAddContactPhoneNumber2.text.toString(),
                 thirdNumber = binding.etAddContactPhoneNumber3.text.toString(),
-                relationship = binding.etAddContactRelationship.text.toString(),
                 memo = binding.etAddContactMemo.text.toString(),
                 heart = 0,
                 isMarked = false
@@ -422,6 +407,14 @@ class AddContactActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.ivAddContactImage.setOnClickListener {
+            val random = Random.nextInt(1..56)
+            val currentId = random.let { DataObject.getSweetieInfo(it) }
+
+            currentId.let {
+                binding.ivAddContactImage.setImageDrawable(it.imgSrc)
+            }
+        }
     }
 
     override fun onBackPressed() {

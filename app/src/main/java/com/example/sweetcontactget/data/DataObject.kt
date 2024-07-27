@@ -97,9 +97,15 @@ object DataObject {
                 "전화번호" -> contact.number = content
                 "전화번호2" -> contact.secondNumber = content
                 "전화번호3" -> contact.thirdNumber = content
-                "관계" -> contact.relationship = content
                 "메모" -> contact.memo = content
             }
+        }
+    }
+
+    fun editGroup(sweetieId: Int, index: Int) {
+        val contact = contactMap[sweetieId]
+        if (contact != null) {
+            contact.relationship = index
         }
     }
 
@@ -113,7 +119,7 @@ object DataObject {
             number = "01023453444",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "멍청하다.",
             heart = 0,
             isMarked = false
@@ -127,7 +133,7 @@ object DataObject {
             number = "01023453495",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "멍청하다.",
             heart = 20,
             isMarked = false
@@ -141,7 +147,7 @@ object DataObject {
             number = "01098765432",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "착하다.",
             heart = 40,
             isMarked = false
@@ -155,7 +161,7 @@ object DataObject {
             number = "01087654321",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "성실하다.",
             heart = 60,
             isMarked = false
@@ -169,7 +175,7 @@ object DataObject {
             number = "01076543210",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "밝다.",
             heart = 100,
             isMarked = false
@@ -183,7 +189,7 @@ object DataObject {
             number = "01065432109",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "조용하다.",
             heart = 0,
             isMarked = false
@@ -197,7 +203,7 @@ object DataObject {
             number = "01054321098",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "똑똑하다.",
             heart = 0,
             isMarked = false
@@ -212,7 +218,7 @@ object DataObject {
             number = "01043210987",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "강하다.",
             heart = 0,
             isMarked = false
@@ -226,7 +232,7 @@ object DataObject {
             number = "01032109876",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "아름답다.",
             heart = 0,
             isMarked = false
@@ -240,7 +246,7 @@ object DataObject {
             number = "01021098765",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "침착하다.",
             heart = 0,
             isMarked = false
@@ -254,7 +260,7 @@ object DataObject {
             number = "01010987654",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "재밌다.",
             heart = 0,
             isMarked = false
@@ -268,7 +274,7 @@ object DataObject {
             number = "01009876543",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "카리스마 있다.",
             heart = 0,
             isMarked = false
@@ -282,7 +288,7 @@ object DataObject {
             number = "01087654321",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "모험적이다.",
             heart = 0,
             isMarked = false
@@ -296,7 +302,7 @@ object DataObject {
             number = "01076543210",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "애정이 많다.",
             heart = 0,
             isMarked = false
@@ -310,7 +316,7 @@ object DataObject {
             number = "01065432109",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "충성스럽다.",
             heart = 0,
             isMarked = false
@@ -324,7 +330,7 @@ object DataObject {
             number = "01054321098",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "활발하다.",
             heart = 0,
             isMarked = false
@@ -338,7 +344,7 @@ object DataObject {
             number = "01043210987",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "상냥하다.",
             heart = 0,
             isMarked = false
@@ -352,7 +358,7 @@ object DataObject {
             number = "01032109876",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "효율적이다.",
             heart = 0,
             isMarked = false
@@ -366,7 +372,7 @@ object DataObject {
             number = "01021098765",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "친절하다.",
             heart = 0,
             isMarked = false
@@ -380,7 +386,7 @@ object DataObject {
             number = "01010987654",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "명랑하다.",
             heart = 0,
             isMarked = false
@@ -394,7 +400,7 @@ object DataObject {
             number = "01009876543",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "창의적이다.",
             heart = 0,
             isMarked = false
@@ -408,7 +414,7 @@ object DataObject {
             number = "01087654321",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "용감하다.",
             heart = 0,
             isMarked = false
@@ -422,7 +428,7 @@ object DataObject {
             number = "01076543210",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "조용하다.",
             heart = 0,
             isMarked = false
@@ -436,7 +442,7 @@ object DataObject {
             number = "01065432109",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "열정적이다.",
             heart = 0,
             isMarked = false
@@ -450,7 +456,7 @@ object DataObject {
             number = "01054321098",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "똑똑하다.",
             heart = 0,
             isMarked = false
@@ -464,7 +470,7 @@ object DataObject {
             number = "01043210987",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "반짝이다.",
             heart = 0,
             isMarked = false
@@ -478,7 +484,7 @@ object DataObject {
             number = "01032109876",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "냉철하다.",
             heart = 0,
             isMarked = false
@@ -492,7 +498,7 @@ object DataObject {
             number = "01021098765",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "진지하다.",
             heart = 0,
             isMarked = false
@@ -506,7 +512,7 @@ object DataObject {
             number = "01010987654",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "총명하다.",
             heart = 0,
             isMarked = false
@@ -520,7 +526,7 @@ object DataObject {
             number = "01009876543",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "매력적이다.",
             heart = 0,
             isMarked = false
@@ -534,7 +540,7 @@ object DataObject {
             number = "01087654321",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "쾌활하다.",
             heart = 0,
             isMarked = false
@@ -548,7 +554,7 @@ object DataObject {
             number = "01076543210",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "신비롭다.",
             heart = 0,
             isMarked = false
@@ -562,7 +568,7 @@ object DataObject {
             number = "01065432109",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "실용적이다.",
             heart = 0,
             isMarked = false
@@ -576,7 +582,7 @@ object DataObject {
             number = "01054321098",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "유머러스하다.",
             heart = 0,
             isMarked = false
@@ -590,7 +596,7 @@ object DataObject {
             number = "01043210987",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "온화하다.",
             heart = 0,
             isMarked = false
@@ -604,7 +610,7 @@ object DataObject {
             number = "01032109876",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "기품있다.",
             heart = 0,
             isMarked = false
@@ -618,7 +624,7 @@ object DataObject {
             number = "01021098765",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "지혜롭다.",
             heart = 0,
             isMarked = false
@@ -632,7 +638,7 @@ object DataObject {
             number = "01010987654",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "강인하다.",
             heart = 0,
             isMarked = false
@@ -646,7 +652,7 @@ object DataObject {
             number = "01009876543",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "기발하다.",
             heart = 0,
             isMarked = false
@@ -660,7 +666,7 @@ object DataObject {
             number = "01087654321",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "자유롭다.",
             heart = 0,
             isMarked = false
@@ -674,7 +680,7 @@ object DataObject {
             number = "01076543210",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "산뜻하다.",
             heart = 0,
             isMarked = false
@@ -688,7 +694,7 @@ object DataObject {
             number = "01065432109",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "명랑하다.",
             heart = 0,
             isMarked = false
@@ -702,7 +708,7 @@ object DataObject {
             number = "01054321098",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "다정하다.",
             heart = 0,
             isMarked = false
@@ -716,7 +722,7 @@ object DataObject {
             number = "01043210987",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "활기차다.",
             heart = 0,
             isMarked = false
@@ -730,7 +736,7 @@ object DataObject {
             number = "01032109876",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "분석적이다.",
             heart = 0,
             isMarked = false
@@ -744,7 +750,7 @@ object DataObject {
             number = "01021098765",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "정확하다.",
             heart = 0,
             isMarked = false
@@ -758,7 +764,7 @@ object DataObject {
             number = "01010987654",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "냉철하다.",
             heart = 0,
             isMarked = false
@@ -772,7 +778,7 @@ object DataObject {
             number = "01009876543",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "열정적이다.",
             heart = 0,
             isMarked = false
@@ -786,7 +792,7 @@ object DataObject {
             number = "01087654321",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "반짝이다.",
             heart = 0,
             isMarked = false
@@ -800,7 +806,7 @@ object DataObject {
             number = "01076543210",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "창의적이다.",
             heart = 0,
             isMarked = false
@@ -814,7 +820,7 @@ object DataObject {
             number = "01065432109",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "매력적이다.",
             heart = 0,
             isMarked = false
@@ -828,7 +834,7 @@ object DataObject {
             number = "01054321098",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "유쾌하다.",
             heart = 0,
             isMarked = false
@@ -842,7 +848,7 @@ object DataObject {
             number = "01043210987",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "의젓하다.",
             heart = 0,
             isMarked = false
@@ -856,7 +862,7 @@ object DataObject {
             number = "01032109876",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "직장",
+            relationship = 0,
             memo = "빛나다.",
             heart = 0,
             isMarked = false
@@ -870,7 +876,7 @@ object DataObject {
             number = "01021098765",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "친구",
+            relationship = 0,
             memo = "쿨하다.",
             heart = 0,
             isMarked = false
@@ -884,7 +890,7 @@ object DataObject {
             number = "01010987654",
             secondNumber = null,
             thirdNumber = null,
-            relationship = "학교",
+            relationship = 0,
             memo = "미지수이다.",
             heart = 0,
             isMarked = false

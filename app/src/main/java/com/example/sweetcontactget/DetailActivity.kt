@@ -13,7 +13,6 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
@@ -23,6 +22,7 @@ import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityDetailBinding
 import com.example.sweetcontactget.dialog.EditTextDialog
 import com.example.sweetcontactget.util.Util
+import com.example.sweetcontactget.util.Util.initSpinner
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -79,6 +79,8 @@ class DetailActivity : AppCompatActivity() {
             sweetie = DataObject.getSweetieInfo(sweetieId)
         }
 
+        initSpinner(this@DetailActivity, binding.detailGroupSpinner, sweetieId)
+
         requestCallPermission()
 
         updateDetail()
@@ -116,9 +118,10 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
 
-            llDetailRelationship.setOnClickListener {
-                editContent("allText","관계")
-            }
+//            llDetailRelationship.setOnClickListener {
+//                editContent("관계")
+//            }
+
 
             llDetailMemo.setOnClickListener {
                 editContent("allText","메모")
@@ -188,12 +191,12 @@ class DetailActivity : AppCompatActivity() {
                 tvDetailNumber2.text = sweetie.secondNumber
                 tvDetailNumber3.text =sweetie.thirdNumber
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()
-                tvDetailRelationship.text = sweetie.relationship
                 tvDetailMemo.text = sweetie.memo
                 tbDetailMark.isChecked = sweetie.isMarked
 
                 llDetailNumber2.visibility = if (sweetie.secondNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
                 llDetailNumber3.visibility = if (sweetie.thirdNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
+                detailGroupSpinner.setSelection(sweetie.relationship)
             }
         }
     }
