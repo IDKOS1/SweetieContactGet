@@ -19,6 +19,12 @@
     <string name="common_relationship">관계</string>
     <string name="common_group">그룹</string>
     <string name="common_memo">메모</string>
+    <string-array name="group_array">
+        <item>가족</item>
+        <item>회사</item>
+        <item>직장</item>
+        <item>친구</item>
+    </string-array>
 
     <!-- MainActivity -->
     <string name="main_bottom_bar_random_call">랜덤으로 전화걸기</string>
@@ -88,3 +94,4 @@
     <string name="dialog_make_a_call">>&#160;&#160;&#160;전화 걸기</string>
     <string name="dialog_make_a_call_cancel">>&#160;&#160;&#160;전화 걸지 않기</string>
 </resources>
+

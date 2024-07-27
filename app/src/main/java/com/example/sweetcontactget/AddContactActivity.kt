@@ -3,6 +3,9 @@ package com.example.sweetcontactget
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,7 +17,7 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 class AddContactActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityAddContactBinding
+    private lateinit var binding: ActivityAddContactBinding
     private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +33,12 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.tvAddContactAddPhoneNumber.setOnClickListener {
             count++
-            if(count==1) {
+            if (count == 1) {
                 binding.clAddContactPhoneNumber2.visibility = View.VISIBLE
                 binding.tvAddContactDeletePhoneNumber.visibility = View.VISIBLE
             }
 
-            if(count==2) {
+            if (count == 2) {
                 binding.clAddContactPhoneNumber3.visibility = View.VISIBLE
                 binding.tvAddContactAddPhoneNumber.visibility = View.GONE
             }
@@ -43,24 +46,26 @@ class AddContactActivity : AppCompatActivity() {
 
         binding.tvAddContactDeletePhoneNumber.setOnClickListener {
             count--
-            if(count==1) {
+            if (count == 1) {
                 binding.clAddContactPhoneNumber3.visibility = View.GONE
                 binding.tvAddContactAddPhoneNumber.visibility = View.VISIBLE
             }
 
-            if(count==0) {
+            if (count == 0) {
                 binding.clAddContactPhoneNumber2.visibility = View.GONE
                 binding.tvAddContactDeletePhoneNumber.visibility = View.GONE
             }
         }
 
-        binding.btnAddContactSave.setOnClickListener {
+        initSpinner()
 
+
+        binding.btnAddContactSave.setOnClickListener {
             var sweetieInfo = SweetieInfo(
                 imgSrc = binding.ivAddContactImage.drawable,
                 name = binding.etAddContactName.text.toString(),
                 number = binding.etAddContactPhoneNumber.text.toString(),
-                relationship = binding.etAddContactRelationship.text.toString(),
+                relationship = binding.groupSpinner.selectedItem.toString(),
                 memo = binding.etAddContactMemo.text.toString(),
                 heart = 0,
                 isMarked = false
@@ -70,7 +75,7 @@ class AddContactActivity : AppCompatActivity() {
         }
 
         binding.btnAddContactCancel.setOnClickListener {
-            val intent = Intent(this@AddContactActivity,MainActivity::class.java)
+            val intent = Intent(this@AddContactActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -83,10 +88,38 @@ class AddContactActivity : AppCompatActivity() {
                 binding.ivAddContactImage.setImageDrawable(it.imgSrc)
             }
         }
+
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
     }
+
+    private fun initSpinner() {
+        ArrayAdapter.createFromResource(
+            this@AddContactActivity, R.array.group_array, android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.groupSpinner.adapter = adapter
+        }
+        binding.groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (parent != null) {
+                    Toast.makeText(this@AddContactActivity, parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                return
+            }
+
+        }
+    }
+
 }
