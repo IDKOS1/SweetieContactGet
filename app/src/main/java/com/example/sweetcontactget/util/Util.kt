@@ -53,7 +53,6 @@ object Util {
                 id: Long
             ) {
                 if (parent != null) {
-                    Toast.makeText(context, parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show()
                     if(sweetiesId != null){
                         DataObject.editGroup(sweetiesId, position)
                     }

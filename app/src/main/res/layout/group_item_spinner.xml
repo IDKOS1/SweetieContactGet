@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tvItemSpinner"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
+    android:layout_height="wrap_content"
     android:textColor="@color/white"
+    android:fontFamily="@font/yeonaesidae_b"
     android:textSize="24sp" />
