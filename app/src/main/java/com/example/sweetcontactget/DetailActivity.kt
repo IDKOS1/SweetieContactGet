@@ -3,6 +3,8 @@ package com.example.sweetcontactget
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -35,21 +37,40 @@ class DetailActivity : AppCompatActivity() {
 
         updateDetail()
 
+
         binding.run {
             tvDetailName.setOnClickListener {
-                editContent("이름")
+                editContent("name","이름")
             }
 
             llDetailNumber.setOnClickListener {
-                editContent("전화번호")
+                editContent("number","전화번호")
+            }
+
+            llDetailNumber2.setOnClickListener {
+                editContent("number","전화번호2")
+            }
+
+            llDetailNumber3.setOnClickListener {
+                editContent("number","전화번호3")
+            }
+
+            tvDetailAddNumber.setOnClickListener {
+                if (llDetailNumber2.visibility == View.GONE && llDetailNumber3.visibility == View.GONE){
+                    editContent("number","전화번호2")
+                }else if(llDetailNumber2.visibility == View.VISIBLE && llDetailNumber3.visibility ==View.GONE){
+                    editContent("number","전화번호3")
+                }else{
+                    Toast.makeText(this@DetailActivity, "전화번호는 3개 까지만 저장할 수 있습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
 
             llDetailRelationship.setOnClickListener {
-                editContent("관계")
+                editContent("allText","관계")
             }
 
             llDetailMemo.setOnClickListener {
-                editContent("메모")
+                editContent("allText","메모")
             }
 
 
@@ -92,9 +113,9 @@ class DetailActivity : AppCompatActivity() {
         updateDetail()
     }
 
-    private fun editContent(editTarget: String) {
+    private fun editContent(type: String, editTarget: String) {
         val dialog = EditTextDialog(this)
-        dialog.show("$editTarget 편집", editTarget)
+        dialog.show(type,"$editTarget 편집", editTarget)
 
         //다이얼로그 저장 버튼을 눌렀을 때 text 변경
         dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
@@ -112,10 +133,15 @@ class DetailActivity : AppCompatActivity() {
                 ivDetailProfile.setImageDrawable(sweetie.imgSrc)
                 tvDetailName.text = sweetie.name
                 tvDetailNumber.text = sweetie.number
+                tvDetailNumber2.text = sweetie.secondNumber
+                tvDetailNumber3.text =sweetie.thirdNumber
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()
                 tvDetailRelationship.text = sweetie.relationship
                 tvDetailMemo.text = sweetie.memo
                 tbDetailMark.isChecked = sweetie.isMarked
+
+                llDetailNumber2.visibility = if (sweetie.secondNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
+                llDetailNumber3.visibility = if (sweetie.thirdNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
             }
         }
     }

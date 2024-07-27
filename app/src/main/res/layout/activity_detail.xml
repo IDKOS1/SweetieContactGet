@@ -167,6 +167,78 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_detail_number_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_info"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:paddingVertical="16dp"
+                app:layout_constraintTop_toBottomOf="@id/ll_detail_number">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/yeonaesidae"
+                    android:text="@string/common_phone_number"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_detail_number_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/yeonaesidae"
+                    android:text="@string/common_phone_number_content"
+                    android:textColor="@color/white"
+                    android:textFontWeight="700"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_detail_number_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_info"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:paddingVertical="16dp"
+                app:layout_constraintTop_toBottomOf="@id/ll_detail_number_2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/yeonaesidae"
+                    android:text="@string/common_phone_number"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_detail_number_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/yeonaesidae"
+                    android:text="@string/common_phone_number_content"
+                    android:textColor="@color/white"
+                    android:textFontWeight="700"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_detail_add_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_add_phone_number"
+                android:textSize="12sp"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/yeonaesidae_b"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@id/ll_detail_number_3"
+                app:layout_constraintTop_toBottomOf="@id/ll_detail_number_3"/>
+
+            <LinearLayout
                 android:id="@+id/ll_detail_event"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,7 +246,7 @@
                 android:background="@drawable/background_info"
                 android:orientation="vertical"
                 android:padding="16dp"
-                app:layout_constraintTop_toBottomOf="@id/ll_detail_number">
+                app:layout_constraintTop_toBottomOf="@id/tv_detail_add_number">
 
                 <TextView
                     android:layout_width="wrap_content"
