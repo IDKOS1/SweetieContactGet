@@ -36,6 +36,7 @@
             android:exported="false" />
         <activity
             android:name=".AddContactActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".StartActivity"

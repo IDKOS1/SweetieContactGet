@@ -48,6 +48,16 @@
                     android:paddingStart="20sp"
                     app:layout_constraintTop_toTopOf="@id/cl_add_contact_name"
                     app:layout_constraintStart_toStartOf="@id/cl_add_contact_name"/>
+                <ImageView
+                    android:id="@+id/iv_check_okay_name"
+                    android:layout_width="27sp"
+                    android:layout_height="18sp"
+                    android:src="@drawable/ic_chenk_okay"
+                    android:visibility="invisible"
+                    android:layout_marginTop="4sp"
+                    app:layout_constraintStart_toEndOf="@id/tv_add_contact_name"
+                    app:layout_constraintTop_toTopOf="@id/tv_add_contact_name"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_add_contact_name"/>
                 <EditText
                     android:id="@+id/et_add_contact_name"
                     android:layout_width="match_parent"
@@ -82,7 +92,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_add_contact_main_phone_number"
-                android:layout_width="60sp"
+                android:layout_width="80sp"
                 android:layout_height="30sp"
                 android:background="@drawable/shape_corner_radius_12dp_bg"
                 android:layout_marginTop="6dp"
@@ -98,7 +108,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/yeonaesidae_b"
-                android:paddingEnd="6sp"
+                android:paddingEnd="16sp"
                 android:paddingTop="4sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -109,6 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_check"
+                    android:paddingStart="8sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -135,6 +146,16 @@
                     android:paddingStart="20sp"
                     app:layout_constraintTop_toTopOf="@id/cl_add_contact_phone_number"
                     app:layout_constraintStart_toStartOf="@id/cl_add_contact_phone_number"/>
+                <ImageView
+                    android:id="@+id/iv_check_okay_phone_number"
+                    android:layout_width="27sp"
+                    android:layout_height="18sp"
+                    android:src="@drawable/ic_chenk_okay"
+                    android:visibility="invisible"
+                    android:layout_marginTop="4sp"
+                    app:layout_constraintStart_toEndOf="@id/tv_add_contact_phone_number"
+                    app:layout_constraintTop_toTopOf="@id/tv_add_contact_phone_number"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_add_contact_phone_number"/>
                 <EditText
                     android:id="@+id/et_add_contact_phone_number"
                     android:layout_width="match_parent"
@@ -194,7 +215,7 @@
                     android:id="@+id/tv_add_contact_phone_number_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/common_phone_number"
+                    android:text="@string/common_phone_number2"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/yeonaesidae_r"
@@ -202,6 +223,16 @@
                     android:paddingStart="20sp"
                     app:layout_constraintTop_toTopOf="@id/cl_add_contact_phone_number_2"
                     app:layout_constraintStart_toStartOf="@id/cl_add_contact_phone_number_2"/>
+                <ImageView
+                    android:id="@+id/iv_check_okay_phone_number_2"
+                    android:layout_width="27sp"
+                    android:layout_height="18sp"
+                    android:src="@drawable/ic_chenk_okay"
+                    android:visibility="invisible"
+                    android:layout_marginTop="4sp"
+                    app:layout_constraintStart_toEndOf="@id/tv_add_contact_phone_number_2"
+                    app:layout_constraintTop_toTopOf="@id/tv_add_contact_phone_number_2"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_add_contact_phone_number_2"/>
                 <EditText
                     android:id="@+id/et_add_contact_phone_number_2"
                     android:layout_width="match_parent"
@@ -247,7 +278,7 @@
                     android:id="@+id/tv_add_contact_phone_number_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/common_phone_number"
+                    android:text="@string/common_phone_number3"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/yeonaesidae_r"
@@ -255,6 +286,16 @@
                     android:paddingStart="20sp"
                     app:layout_constraintTop_toTopOf="@id/cl_add_contact_phone_number_3"
                     app:layout_constraintStart_toStartOf="@id/cl_add_contact_phone_number_3"/>
+                <ImageView
+                    android:id="@+id/iv_check_okay_phone_number_3"
+                    android:layout_width="27sp"
+                    android:layout_height="18sp"
+                    android:src="@drawable/ic_chenk_okay"
+                    android:visibility="invisible"
+                    android:layout_marginTop="4sp"
+                    app:layout_constraintStart_toEndOf="@id/tv_add_contact_phone_number_3"
+                    app:layout_constraintTop_toTopOf="@id/tv_add_contact_phone_number_3"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_add_contact_phone_number_3"/>
                 <EditText
                     android:id="@+id/et_add_contact_phone_number_3"
                     android:layout_width="match_parent"
@@ -300,6 +341,9 @@
                 app:layout_constraintTop_toBottomOf="@id/cl_add_contact_phone_number_3"
                 app:layout_constraintBottom_toTopOf="@id/cl_add_contact_event_information"/>
 
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_add_contact_event_information"
                 android:layout_width="300sp"
@@ -320,6 +364,16 @@
                     android:paddingStart="20sp"
                     app:layout_constraintTop_toTopOf="@id/cl_add_contact_event_information"
                     app:layout_constraintStart_toStartOf="@id/cl_add_contact_event_information"/>
+                <ImageView
+                    android:id="@+id/iv_check_okay_event_information"
+                    android:layout_width="27sp"
+                    android:layout_height="18sp"
+                    android:src="@drawable/ic_chenk_okay"
+                    android:visibility="invisible"
+                    android:layout_marginTop="4sp"
+                    app:layout_constraintStart_toEndOf="@id/tv_add_contact_event_information"
+                    app:layout_constraintTop_toTopOf="@id/tv_add_contact_event_information"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_add_contact_event_information"/>
 
                 <EditText
                     android:id="@+id/et_add_contact_event_information"
@@ -429,6 +483,17 @@
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/cl_add_contact_memo"
                     app:layout_constraintTop_toTopOf="@id/cl_add_contact_memo" />
+
+                <ImageView
+                    android:id="@+id/iv_check_okay_memo"
+                    android:layout_width="27sp"
+                    android:layout_height="18sp"
+                    android:src="@drawable/ic_chenk_okay"
+                    android:visibility="invisible"
+                    android:layout_marginTop="4sp"
+                    app:layout_constraintStart_toEndOf="@id/tv_add_contact_memo"
+                    app:layout_constraintTop_toTopOf="@id/tv_add_contact_memo"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_add_contact_memo"/>
 
                 <EditText
                     android:id="@+id/et_add_contact_memo"
