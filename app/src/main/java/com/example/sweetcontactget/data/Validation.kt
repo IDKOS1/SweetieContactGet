@@ -3,14 +3,14 @@ import java.util.regex.Pattern
 
 //이름 유효성
 fun isRegularName(name: String): Boolean {
-    val namePattern = "[^~!@#$%^&*()_+=]*\$"
+    val namePattern = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]*$"
     val pattern = Pattern.matches(namePattern,name)
     return pattern
 }
 
 //전화번호 유효성
 fun isRegularPhoneNumber(number: String): Boolean {
-    val phoneNumberPattern = "^[0-9_]+$"
+    val phoneNumberPattern = "^[0-9-]+$"
     val pattern = Pattern.matches(phoneNumberPattern,number)
     return pattern
 }
