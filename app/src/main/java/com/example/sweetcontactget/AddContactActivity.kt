@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
+import com.example.sweetcontactget.util.Util.initSpinner
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -57,8 +58,7 @@ class AddContactActivity : AppCompatActivity() {
             }
         }
 
-        initSpinner()
-
+        initSpinner(this@AddContactActivity, binding.groupSpinner)
 
         binding.btnAddContactSave.setOnClickListener {
             var sweetieInfo = SweetieInfo(
@@ -96,30 +96,6 @@ class AddContactActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun initSpinner() {
-        ArrayAdapter.createFromResource(
-            this@AddContactActivity, R.array.group_array, android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.groupSpinner.adapter = adapter
-        }
-        binding.groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (parent != null) {
-                    Toast.makeText(this@AddContactActivity, parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show()
-                }
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                return
-            }
-
-        }
-    }
 
 }
