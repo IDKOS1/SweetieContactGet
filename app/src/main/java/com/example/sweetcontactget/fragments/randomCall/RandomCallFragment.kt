@@ -54,8 +54,6 @@ class RandomCallFragment : Fragment() {
                     Glide.with(this).asBitmap().load(R.raw.gacha1).into(binding.ivFirstGif)
 
                     loadGif(R.raw.gacha2, binding.ivSecondGif)
-
-
                 }
 
             }, 1500)
@@ -67,8 +65,6 @@ class RandomCallFragment : Fragment() {
                 dialog.show()
                 Glide.with(this).asBitmap().load(R.raw.gacha2).into(binding.ivSecondGif)
                 binding.ivSecondGif.visibility = View.INVISIBLE
-
-
             }, 4000)
 
         }
