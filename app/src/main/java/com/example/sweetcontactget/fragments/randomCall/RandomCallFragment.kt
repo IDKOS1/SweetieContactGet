@@ -54,8 +54,6 @@ class RandomCallFragment : Fragment() {
                     Glide.with(this).asBitmap().load(R.raw.gacha1).into(binding.ivFirstGif)
 
                     loadGif(R.raw.gacha2, binding.ivSecondGif)
-
-
                 }
 
             }, 1500)
@@ -63,12 +61,15 @@ class RandomCallFragment : Fragment() {
             //Dialog 열기, delay 추가
             Handler(Looper.getMainLooper()).postDelayed({
                 val sweetieId = DataObject.getValidKeys().random()
-                val dialog = CallingDialog(requireContext(), sweetieId, binding.ivRandomCallMain, binding.ivSecondGif)
+                val dialog = CallingDialog(
+                    requireContext(),
+                    sweetieId,
+                    binding.ivRandomCallMain,
+                    binding.ivSecondGif
+                )
                 dialog.show()
                 Glide.with(this).asBitmap().load(R.raw.gacha2).into(binding.ivSecondGif)
                 binding.ivSecondGif.visibility = View.INVISIBLE
-
-
             }, 4000)
 
         }
