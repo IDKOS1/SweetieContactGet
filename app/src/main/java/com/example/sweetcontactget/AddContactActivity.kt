@@ -1,13 +1,23 @@
 package com.example.sweetcontactget
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sweetcontactget.data.DataObject
@@ -18,12 +28,35 @@ import com.example.sweetcontactget.data.isRegularName
 import com.example.sweetcontactget.data.isRegularPhoneNumber
 import com.example.sweetcontactget.data.isRegularRelationShip
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
-import kotlin.random.Random
-import kotlin.random.nextInt
 
 class AddContactActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddContactBinding
     private var count = 0
+
+    private  lateinit var profileImage : ImageView
+    private var pickImageUri : Uri? = null
+
+
+    private val requestPermissonLauncher : ActivityResultLauncher<String> =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()){isGranted ->
+            if(isGranted){
+                openGallery()
+            }else{
+                Toast.makeText(this,"갤러리 접근 권한이 필요합니다",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    private val pickImageLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
+            if(result.resultCode == Activity.RESULT_OK){
+                val data: Intent? = result.data
+                data?.data?.let {
+                    pickImageUri = it
+                    profileImage.setImageURI(pickImageUri)
+                }
+            }
+
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,14 +104,41 @@ class AddContactActivity : AppCompatActivity() {
             }
         }
 
+        //갤러리 이미지 가져와서 추가
         binding.ivAddContactImage.setOnClickListener {
-            val random = Random.nextInt(1..56)
-            val currentId = random.let { DataObject.getSweetieInfo(it) }
+            //랜덤이미지 추가하는 로직
+//            val random = Random.nextInt(1..56)
+//            val currentId = random.let { DataObject.getSweetieInfo(it) }
+//
+//            currentId.let {
+//                binding.ivAddContactImage.setImageDrawable(it.imgSrc)
+//            }
+            profileImage = binding.ivAddContactImage
 
-            currentId.let {
-                binding.ivAddContactImage.setImageDrawable(it.imgSrc)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.READ_MEDIA_IMAGES
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    openGallery()
+                } else {
+                    requestPermissonLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+                }
+            } else {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    openGallery()
+                } else {
+                    requestPermissonLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                }
             }
         }
+
+
 
         //이름 유효성 검사
         binding.etAddContactName.addTextChangedListener(object : TextWatcher {
@@ -245,5 +305,10 @@ class AddContactActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    private fun openGallery(){
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        pickImageLauncher.launch(galleryIntent)
     }
 }
