@@ -112,7 +112,7 @@ class AllContactFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        contactAdapter.submitList(contactList.toList())
+        refresh()
     }
 
 
@@ -123,6 +123,7 @@ class AllContactFragment : Fragment() {
     fun refresh() {
         contactAdapter.submitList(contactList.toList())
         contactAdapter.notifyItemRangeChanged(0, contactList.size)
+        contactAdapter.notifyDataSetChanged()
     }
 
     fun switchLayoutManager(isGridLayout: Boolean) {
