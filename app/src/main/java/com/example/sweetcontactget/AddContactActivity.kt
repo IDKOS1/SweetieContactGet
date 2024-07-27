@@ -22,6 +22,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
+import com.example.sweetcontactget.data.formatPhoneNumber
 import com.example.sweetcontactget.data.isRegularEvent
 import com.example.sweetcontactget.data.isRegularMemo
 import com.example.sweetcontactget.data.isRegularName
@@ -106,13 +107,6 @@ class AddContactActivity : AppCompatActivity() {
 
         //갤러리 이미지 가져와서 추가
         binding.ivAddContactImage.setOnClickListener {
-            //랜덤이미지 추가하는 로직
-//            val random = Random.nextInt(1..56)
-//            val currentId = random.let { DataObject.getSweetieInfo(it) }
-//
-//            currentId.let {
-//                binding.ivAddContactImage.setImageDrawable(it.imgSrc)
-//            }
             profileImage = binding.ivAddContactImage
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -159,7 +153,14 @@ class AddContactActivity : AppCompatActivity() {
 
         //전화번호 유효성 검사1
         binding.etAddContactPhoneNumber.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            private var isFormat : Boolean = false
+            private var isDeleteHyphen : Boolean = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                if(count > 0 && s?.get(start) == '-'){
+                    isDeleteHyphen = true
+                }
+            }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (isRegularPhoneNumber(binding.etAddContactPhoneNumber.text.toString().trim())) {
@@ -171,12 +172,30 @@ class AddContactActivity : AppCompatActivity() {
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if(isFormat||isDeleteHyphen) return
+                isFormat = true
+
+                val text = s.toString().replace("-","")
+                val formattedNumber = formatPhoneNumber(text)
+
+                s?.replace(0,s.length,formattedNumber)
+                isFormat = false
+            }
+
         })
 
         //전화번호 유효성 검사2
         binding.etAddContactPhoneNumber2.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            private var isFormat : Boolean = false
+            private var isDeleteHyphen : Boolean = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                if(count > 0 && s?.get(start) == '-'){
+                    isDeleteHyphen = true
+                }
+            }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (isRegularPhoneNumber(binding.etAddContactPhoneNumber2.text.toString().trim())) {
@@ -188,12 +207,28 @@ class AddContactActivity : AppCompatActivity() {
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if(isFormat||isDeleteHyphen) return
+                isFormat = true
+
+                val text = s.toString().replace("-","")
+                val formattedNumber = formatPhoneNumber(text)
+
+                s?.replace(0,s.length,formattedNumber)
+                isFormat = false
+            }
         })
 
         //전화번호 유효성 검사3
         binding.etAddContactPhoneNumber3.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            private var isFormat : Boolean = false
+            private var isDeleteHyphen : Boolean = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                if(count > 0 && s?.get(start) == '-'){
+                    isDeleteHyphen = true
+                }
+            }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (isRegularPhoneNumber(binding.etAddContactPhoneNumber3.text.toString().trim())) {
@@ -205,7 +240,16 @@ class AddContactActivity : AppCompatActivity() {
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if(isFormat||isDeleteHyphen) return
+                isFormat = true
+
+                val text = s.toString().replace("-","")
+                val formattedNumber = formatPhoneNumber(text)
+
+                s?.replace(0,s.length,formattedNumber)
+                isFormat = false
+            }
         })
 
         //이벤트 유효성 검사
@@ -285,6 +329,8 @@ class AddContactActivity : AppCompatActivity() {
                 imgSrc = binding.ivAddContactImage.drawable,
                 name = binding.etAddContactName.text.toString(),
                 number = binding.etAddContactPhoneNumber.text.toString(),
+                secondNumber = binding.etAddContactPhoneNumber2.text.toString(),
+                thirdNumber = binding.etAddContactPhoneNumber3.text.toString(),
                 relationship = binding.etAddContactRelationship.text.toString(),
                 memo = binding.etAddContactMemo.text.toString(),
                 heart = 0,
@@ -311,4 +357,6 @@ class AddContactActivity : AppCompatActivity() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         pickImageLauncher.launch(galleryIntent)
     }
+
+
 }

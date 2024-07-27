@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                 val id =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
                 val sweetie = hashMap[id] ?: SweetieInfo(
-                    null, "", "", "", "", 0, false
+                    null, "", "","","", "", "", 0, false
                 )
 
                 when (mimeType) {

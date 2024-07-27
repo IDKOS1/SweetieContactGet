@@ -38,3 +38,25 @@ fun isRegularMemo(memo: String): Boolean {
     val pattern = Pattern.matches(eventPattern, memo)
     return pattern
 }
+
+//전화번호 입력시 하이픈 로직을 위한..지역번호 처리
+
+fun formatPhoneNumber(text: String): String {
+    if (text.startsWith("02")) {
+        return when (text.length) {
+            in 1..2 -> text
+            in 3..5 -> "${text.substring(0, 2)}-${text.substring(2)}"
+            in 6..9 -> "${text.substring(0, 2)}-${text.substring(2, 5)}-${text.substring(5)}"
+            in 10 ..10 -> "${text.substring(0, 2)}-${text.substring(2, 6)}-${text.substring(6)}"
+            else -> text
+        }
+    } else {
+        return when (text.length){
+            in 1..3 -> text
+            in 4..6 -> "${text.substring(0, 3)}-${text.substring(3)}"
+            in 7..10 -> "${text.substring(0, 3)}-${text.substring(3, 6)}-${text.substring(6)}"
+            in 11 ..11 -> "${text.substring(0, 3)}-${text.substring(3, 7)}-${text.substring(7)}"
+            else -> text
+        }
+    }
+}

@@ -29,11 +29,11 @@ class MyPageFragment : Fragment() {
             updateMyInfo()
 
             tvMypageName.setOnClickListener {
-                editContent("이름")
+                editContent("name","이름")
             }
 
             llMypageNumber.setOnClickListener {
-                editContent("전화번호")
+                editContent("number","전화번호")
             }
 
             llMypageBirthday.setOnClickListener {
@@ -57,19 +57,19 @@ class MyPageFragment : Fragment() {
             }
 
             llMypageAddress.setOnClickListener {
-                editContent("주소")
+                editContent("allText","주소")
             }
 
             llMypageInfoMessage.setOnClickListener {
-                editContent("소개")
+                editContent("allText","소개")
             }
         }
         return binding.root
     }
 
-    private fun editContent(editTarget: String) {
+    private fun editContent(type : String,editTarget: String) {
         val dialog = EditTextDialog(requireContext())
-        dialog.show("$editTarget 편집", editTarget)
+        dialog.show(type,"$editTarget 편집", editTarget)
 
         //다이얼로그 저장 버튼을 눌렀을 때 text 변경
         dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
