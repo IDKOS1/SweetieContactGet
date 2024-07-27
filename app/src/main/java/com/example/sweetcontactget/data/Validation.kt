@@ -1,9 +1,10 @@
 package com.example.sweetcontactget.data
+import android.widget.Toast
 import java.util.regex.Pattern
 
 //이름 유효성
 fun isRegularName(name: String): Boolean {
-    val namePattern = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]*$"
+    val namePattern = "^[0-9a-zA-zㄱ-ㅎ가-힣ㅏ-ㅣ]*\$"
     val pattern = Pattern.matches(namePattern,name)
     return pattern
 }
@@ -26,13 +27,6 @@ fun isRegularEvent(event: String): Boolean {
 fun isRegularRelationShip(relation : String): Boolean {
     val reationPattern = "(친구|직장|학교|가족)"
     val pattern = Pattern.matches(reationPattern,relation)
-    return pattern
-}
-
-//메모 유효성
-fun isRegularMemo(memo: String): Boolean {
-    val eventPattern = "^[A-Za-z0-9가-힣ㄱ-ㅎㅏ-ㅣ\$@!%*#?&.]{2,8}$"
-    val pattern = Pattern.matches(eventPattern, memo)
     return pattern
 }
 

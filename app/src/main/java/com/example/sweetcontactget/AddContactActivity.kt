@@ -24,7 +24,6 @@ import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.data.formatPhoneNumber
 import com.example.sweetcontactget.data.isRegularEvent
-import com.example.sweetcontactget.data.isRegularMemo
 import com.example.sweetcontactget.data.isRegularName
 import com.example.sweetcontactget.data.isRegularPhoneNumber
 import com.example.sweetcontactget.data.isRegularRelationShip
@@ -56,7 +55,6 @@ class AddContactActivity : AppCompatActivity() {
                     profileImage.setImageURI(pickImageUri)
                 }
             }
-
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,11 +63,10 @@ class AddContactActivity : AppCompatActivity() {
 
         var isName = false
         var isPhoneNumber = false
-        var isPhoneNumber2 = false
-        var isPhoneNumber3 = false
+        var isPhoneNumber2 = true
+        var isPhoneNumber3 = true
         var isEvent = false
         var isRelationShip = false
-        var isMemo = false
 
         binding = ActivityAddContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -247,7 +244,7 @@ class AddContactActivity : AppCompatActivity() {
                             resources.getString(R.string.add_contact_empty_phone_number2)
                         binding.ivCheckOkayPhoneNumber2.visibility = View.INVISIBLE
                         binding.tvAddContactWrongNumber2.visibility = View.VISIBLE
-                        isPhoneNumber2 = false
+                        isPhoneNumber2 = true
                     }
 
                     else -> {
@@ -298,7 +295,7 @@ class AddContactActivity : AppCompatActivity() {
                             resources.getString(R.string.add_contact_empty_phone_number3)
                         binding.ivCheckOkayPhoneNumber3.visibility = View.INVISIBLE
                         binding.tvAddContactWrongNumber3.visibility = View.VISIBLE
-                        isPhoneNumber3 = false
+                        isPhoneNumber3 = true
                     }
 
                     else -> {
@@ -375,57 +372,23 @@ class AddContactActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        //메모 유효성 검사
-        binding.etAddContactMemo.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                when {
-                    isRegularMemo(binding.etAddContactMemo.text.toString().trim()) -> {
-                        binding.ivCheckOkayMemo.visibility = View.VISIBLE
-                        binding.tvAddContactWrongMemo.visibility = View.INVISIBLE
-                        isMemo = true
-                    }
-
-                    binding.etAddContactMemo.text.toString().trim().isEmpty() -> {
-                        binding.tvAddContactWrongMemo.text =
-                            resources.getString(R.string.add_contact_empty_memo)
-                        binding.ivCheckOkayMemo.visibility = View.INVISIBLE
-                        binding.tvAddContactWrongMemo.visibility = View.VISIBLE
-                        isMemo = false
-                    }
-
-                    else -> {
-                        binding.tvAddContactWrongMemo.text =
-                            resources.getString(R.string.add_contact_placeholder_wrong_memo)
-                        binding.ivCheckOkayMemo.visibility = View.INVISIBLE
-                        binding.tvAddContactWrongMemo.visibility = View.VISIBLE
-                        isMemo = false
-                    }
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-
         binding.btnAddContactSave.setOnClickListener {
             val name = binding.etAddContactName.text.toString().trim()
             val phoneNumber = binding.etAddContactPhoneNumber.text.toString().trim()
             val eventInformation = binding.etAddContactEventInformation.text.toString().trim()
             val relationShip = binding.etAddContactRelationship.text.toString().trim()
-            val memo = binding.etAddContactMemo.text.toString().trim()
             val image = binding.ivAddContactImage.drawable
 
             // 비었을 때
             if (name.isEmpty() || phoneNumber.isEmpty() || eventInformation.isEmpty()
-                || relationShip.isEmpty() || memo.isEmpty() || image == null
+                || relationShip.isEmpty() || image == null
             ) {
                 Toast.makeText(this, resources.getString(R.string.add_contact_empty_data), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             //유효한 입력 체크
-            if (!isName || !isPhoneNumber || !isEvent || !isRelationShip || !isMemo) {
+            if (!isName || !isPhoneNumber || !isPhoneNumber2 || !isPhoneNumber3 || !isEvent || !isRelationShip) {
                 Toast.makeText(this, resources.getString(R.string.add_contact_wrong_data), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -441,10 +404,17 @@ class AddContactActivity : AppCompatActivity() {
                 heart = 0,
                 isMarked = false
             )
-            DataObject.addSweetieInfo(sweetieInfo)
-            finish()
-        }
 
+            if(DataObject.booleanSweetieInfo(sweetieInfo)){
+                Toast.makeText(this, "동일한 번호로 저장된 연락처가 있습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            else {
+                DataObject.addSweetieInfo(sweetieInfo)
+                finish()
+            }
+
+        }
         binding.btnAddContactCancel.setOnClickListener {
             finish()
         }
