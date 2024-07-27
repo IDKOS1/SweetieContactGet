@@ -3,6 +3,7 @@ package com.example.sweetcontactget.data
 import android.content.Context
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.sweetcontactget.AddContactActivity
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
 import com.example.sweetcontactget.util.Util.removeAll
@@ -52,6 +53,15 @@ object DataObject {
             Toast.makeText(context, "동일한 번호로 저장된 연락처가 있습니다.", Toast.LENGTH_SHORT).show()
         } else {
             contactMap[++newKey] = sweetieInfo
+        }
+    }
+
+    //추가한 코드
+    fun booleanSweetieInfo(sweetieInfo: SweetieInfo) : Boolean {
+        if (sweetieInfo.number in contactMap.values.map { it.number }) {
+            return true
+        } else {
+            return false
         }
     }
 
