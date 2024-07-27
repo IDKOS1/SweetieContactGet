@@ -139,12 +139,29 @@ class AddContactActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularName(binding.etAddContactName.text.toString().trim())) {
-                    binding.tvAddContactWrongName.visibility = View.INVISIBLE
-                    isName = true
-                } else {
-                    binding.tvAddContactWrongName.visibility = View.VISIBLE
-                    isName = false
+
+                when {
+                    isRegularName(binding.etAddContactName.text.toString().trim()) -> {
+                        binding.ivCheckOkayName.visibility = View.VISIBLE
+                        binding.tvAddContactWrongName.visibility = View.INVISIBLE
+                        isName = true
+                    }
+
+                    binding.etAddContactName.text.toString().trim().isEmpty() -> {
+                        binding.tvAddContactWrongName.text =
+                            resources.getString(R.string.add_contact_empty_name)
+                        binding.ivCheckOkayName.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongName.visibility = View.VISIBLE
+                        isName = false
+                    }
+
+                    else -> {
+                        binding.tvAddContactWrongName.text =
+                            resources.getString(R.string.add_contact_placeholder_wrong_name)
+                        binding.ivCheckOkayName.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongName.visibility = View.VISIBLE
+                        isName = false
+                    }
                 }
             }
 
@@ -163,12 +180,30 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularPhoneNumber(binding.etAddContactPhoneNumber.text.toString().trim())) {
-                    binding.tvAddContactWrongNumber.visibility = View.INVISIBLE
-                    isPhoneNumber = true
-                } else {
-                    binding.tvAddContactWrongNumber.visibility = View.VISIBLE
-                    isPhoneNumber = false
+                when {
+                    isRegularPhoneNumber(
+                        binding.etAddContactPhoneNumber.text.toString().trim()
+                    ) -> {
+                        binding.ivCheckOkayPhoneNumber.visibility = View.VISIBLE
+                        binding.tvAddContactWrongNumber.visibility = View.INVISIBLE
+                        isPhoneNumber = true
+                    }
+
+                    binding.etAddContactPhoneNumber.text.toString().trim().isEmpty() -> {
+                        binding.tvAddContactWrongNumber.text =
+                            resources.getString(R.string.add_contact_empty_phone_number)
+                        binding.ivCheckOkayPhoneNumber.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongNumber.visibility = View.VISIBLE
+                        isPhoneNumber = false
+                    }
+
+                    else -> {
+                        binding.tvAddContactWrongNumber.text =
+                            resources.getString(R.string.add_contact_placeholder_wrong_phone_number)
+                        binding.ivCheckOkayPhoneNumber.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongNumber.visibility = View.VISIBLE
+                        isPhoneNumber = false
+                    }
                 }
             }
 
@@ -198,12 +233,30 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularPhoneNumber(binding.etAddContactPhoneNumber2.text.toString().trim())) {
-                    binding.tvAddContactWrongNumber2.visibility = View.INVISIBLE
-                    isPhoneNumber2 = true
-                } else {
-                    binding.tvAddContactWrongNumber2.visibility = View.VISIBLE
-                    isPhoneNumber2 = false
+                when {
+                    isRegularPhoneNumber(
+                        binding.etAddContactPhoneNumber2.text.toString().trim()
+                    ) -> {
+                        binding.ivCheckOkayPhoneNumber2.visibility = View.VISIBLE
+                        binding.tvAddContactWrongNumber2.visibility = View.INVISIBLE
+                        isPhoneNumber2 = true
+                    }
+
+                    binding.etAddContactPhoneNumber2.text.toString().trim().isEmpty() -> {
+                        binding.tvAddContactWrongNumber2.text =
+                            resources.getString(R.string.add_contact_empty_phone_number2)
+                        binding.ivCheckOkayPhoneNumber2.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongNumber2.visibility = View.VISIBLE
+                        isPhoneNumber2 = false
+                    }
+
+                    else -> {
+                        binding.tvAddContactWrongNumber2.text =
+                            resources.getString(R.string.add_contact_placeholder_wrong_phone_number)
+                        binding.ivCheckOkayPhoneNumber2.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongNumber2.visibility = View.VISIBLE
+                        isPhoneNumber2 = false
+                    }
                 }
             }
 
@@ -231,12 +284,30 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularPhoneNumber(binding.etAddContactPhoneNumber3.text.toString().trim())) {
-                    binding.tvAddContactWrongNumber3.visibility = View.INVISIBLE
-                    isPhoneNumber3 = true
-                } else {
-                    binding.tvAddContactWrongNumber3.visibility = View.VISIBLE
-                    isPhoneNumber3 = false
+                when {
+                    isRegularPhoneNumber(
+                        binding.etAddContactPhoneNumber3.text.toString().trim()
+                    ) -> {
+                        binding.ivCheckOkayPhoneNumber3.visibility = View.VISIBLE
+                        binding.tvAddContactWrongNumber3.visibility = View.INVISIBLE
+                        isPhoneNumber3 = true
+                    }
+
+                    binding.etAddContactPhoneNumber3.text.toString().trim().isEmpty() -> {
+                        binding.tvAddContactWrongNumber3.text =
+                            resources.getString(R.string.add_contact_empty_phone_number3)
+                        binding.ivCheckOkayPhoneNumber3.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongNumber3.visibility = View.VISIBLE
+                        isPhoneNumber3 = false
+                    }
+
+                    else -> {
+                        binding.tvAddContactWrongNumber3.text =
+                            resources.getString(R.string.add_contact_placeholder_wrong_phone_number)
+                        binding.ivCheckOkayPhoneNumber3.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongNumber3.visibility = View.VISIBLE
+                        isPhoneNumber3 = false
+                    }
                 }
             }
 
@@ -257,12 +328,27 @@ class AddContactActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularEvent(binding.etAddContactEventInformation.text.toString().trim())) {
-                    binding.tvAddContactWrongEventInformation.visibility = View.INVISIBLE
-                    isEvent = true
-                } else {
-                    binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
-                    isEvent = false
+                when {
+                    isRegularEvent(binding.etAddContactEventInformation.text.toString().trim()) -> {
+                        binding.ivCheckOkayEventInformation.visibility = View.VISIBLE
+                        binding.tvAddContactWrongEventInformation.visibility = View.INVISIBLE
+                        isEvent = true
+                    }
+
+                    binding.etAddContactEventInformation.text.toString().trim().isEmpty() -> {
+                        binding.tvAddContactWrongEventInformation.text =
+                            resources.getString(R.string.add_contact_empty_event_information)
+                        binding.ivCheckOkayEventInformation.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
+                        isEvent = false
+                    }
+
+                    else -> {
+                        binding.tvAddContactWrongEventInformation.text =
+                            resources.getString(R.string.add_contact_placeholder_wrong_event_information)
+                        binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
+                        isEvent = false
+                    }
                 }
             }
 
@@ -274,7 +360,10 @@ class AddContactActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularRelationShip(binding.etAddContactRelationship.text.toString().trim())) {
+                if (isRegularRelationShip(
+                        binding.etAddContactRelationship.text.toString().trim()
+                    )
+                ) {
                     binding.tvAddContactWrongRelationship.visibility = View.INVISIBLE
                     isRelationShip = true
                 } else {
@@ -291,12 +380,28 @@ class AddContactActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularMemo(binding.etAddContactMemo.text.toString().trim())) {
-                    binding.tvAddContactWrongMemo.visibility = View.INVISIBLE
-                    isMemo = true
-                } else {
-                    binding.tvAddContactWrongMemo.visibility = View.VISIBLE
-                    isMemo = false
+                when {
+                    isRegularMemo(binding.etAddContactMemo.text.toString().trim()) -> {
+                        binding.ivCheckOkayMemo.visibility = View.VISIBLE
+                        binding.tvAddContactWrongMemo.visibility = View.INVISIBLE
+                        isMemo = true
+                    }
+
+                    binding.etAddContactMemo.text.toString().trim().isEmpty() -> {
+                        binding.tvAddContactWrongMemo.text =
+                            resources.getString(R.string.add_contact_empty_memo)
+                        binding.ivCheckOkayMemo.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongMemo.visibility = View.VISIBLE
+                        isMemo = false
+                    }
+
+                    else -> {
+                        binding.tvAddContactWrongMemo.text =
+                            resources.getString(R.string.add_contact_placeholder_wrong_memo)
+                        binding.ivCheckOkayMemo.visibility = View.INVISIBLE
+                        binding.tvAddContactWrongMemo.visibility = View.VISIBLE
+                        isMemo = false
+                    }
                 }
             }
 
@@ -315,17 +420,17 @@ class AddContactActivity : AppCompatActivity() {
             if (name.isEmpty() || phoneNumber.isEmpty() || eventInformation.isEmpty()
                 || relationShip.isEmpty() || memo.isEmpty() || image == null
             ) {
-                Toast.makeText(this,"입력하지 않은 정보가 있습니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, resources.getString(R.string.add_contact_empty_data), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             //유효한 입력 체크
             if (!isName || !isPhoneNumber || !isEvent || !isRelationShip || !isMemo) {
-                Toast.makeText(this,"유효하지 않은 정보가 있습니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, resources.getString(R.string.add_contact_wrong_data), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            var sweetieInfo = SweetieInfo(
+            val sweetieInfo = SweetieInfo(
                 imgSrc = binding.ivAddContactImage.drawable,
                 name = binding.etAddContactName.text.toString(),
                 number = binding.etAddContactPhoneNumber.text.toString(),
@@ -341,8 +446,6 @@ class AddContactActivity : AppCompatActivity() {
         }
 
         binding.btnAddContactCancel.setOnClickListener {
-            val intent = Intent(this@AddContactActivity, MainActivity::class.java)
-            startActivity(intent)
             finish()
         }
 

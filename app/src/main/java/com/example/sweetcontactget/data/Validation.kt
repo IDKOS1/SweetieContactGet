@@ -1,19 +1,16 @@
 package com.example.sweetcontactget.data
-
-import android.content.Context
-import android.widget.Toast
 import java.util.regex.Pattern
 
 //이름 유효성
 fun isRegularName(name: String): Boolean {
-    val namePattern = "^[a-zA-Z가-힣]*\$"
+    val namePattern = "[^~!@#$%^&*()_+=]*\$"
     val pattern = Pattern.matches(namePattern,name)
     return pattern
 }
 
 //전화번호 유효성
 fun isRegularPhoneNumber(number: String): Boolean {
-    val phoneNumberPattern = "^\\d{3}-\\d{3,4}-\\d{4}$"
+    val phoneNumberPattern = "^[0-9_]+$"
     val pattern = Pattern.matches(phoneNumberPattern,number)
     return pattern
 }

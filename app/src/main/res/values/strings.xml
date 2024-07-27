@@ -10,6 +10,8 @@
 
     <!-- Common String -->
     <string name="common_phone_number">전화번호</string>
+    <string name="common_phone_number2">전화번호2</string>
+    <string name="common_phone_number3">전화번호3</string>
     <string name="common_phone_number_content">전화번호 정보가 없습니다.</string>
     <string name="common_cancel">취소</string>
     <string name="common_save">저장</string>
@@ -26,16 +28,24 @@
     <string name="main_bottom_bar_my_profile_text">내 프로필</string>
 
     <!-- AddContactActivity -->
-    <string name="add_contact_main_phone_number">대표</string>
     <string name="add_contact_add_phone_number">+&#160;&#160;&#160;&#160;전화번호 추가</string>
     <string name="add_contact_delete_phone_number">-&#160;&#160;&#160;&#160;전화번호 제거</string>
+    <string name="add_contact_empty_name">이름을 입력해주세요</string>
+    <string name="add_contact_empty_phone_number">전화번호를 입력해주세요</string>
+    <string name="add_contact_empty_phone_number2">전화번호2(을)를 입력해주세요</string>
+    <string name="add_contact_empty_phone_number3">전화번호3(을)를 입력해주세요</string>
+    <string name="add_contact_empty_event_information">이벤트 정보를 입력해주세요</string>
+    <string name="add_contact_empty_memo">메모를 입력해주세요</string>
+    <string name="add_contact_empty_data">입력하지 않은 정보가 있습니다</string>
+    <string name="add_contact_wrong_data">유효하지 않은 정보가 있습니다</string>
+    <string name="add_contact_main_phone_number">대표</string>
     <string name="add_contact_placeholder_name">이름 입력</string>
     <string name="add_contact_placeholder_phone_number">전화번호 입력</string>
     <string name="add_contact_placeholder_event_information">이벤트 정보 입력</string>
     <string name="add_contact_placeholder_relationship">관계 입력</string>
     <string name="add_contact_placeholder_memo">메모 입력</string>
-    <string name="add_contact_placeholder_wrong_name">이름은 한글, 영어만 입력 가능</string>
-    <string name="add_contact_placeholder_wrong_phone_number">전화번호 입력이 잘못되었습니다</string>
+    <string name="add_contact_placeholder_wrong_name">특수문자는 이름에 넣을 수 없습니다</string>
+    <string name="add_contact_placeholder_wrong_phone_number">올바른 전화번호 형식이 아닙니다. 예 : 010-1234-5678</string>
     <string name="add_contact_placeholder_wrong_event_information">이벤트 정보는 2글자 이상 10글자 이하</string>
     <string name="add_contact_placeholder_wrong_relationship">관계는 친구, 가족, 학교, 직장 넷 중 하나</string>
     <string name="add_contact_placeholder_wrong_memo">메모는 2글자 이상 8글자 이하</string>
