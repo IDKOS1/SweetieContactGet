@@ -106,4 +106,5 @@
     <string name="dialog_make_a_call_cancel">>&#160;&#160;&#160;전화 걸지 않기</string>
     <string name="dialog_wrong_message_name">이름에는 특수문자를 입력할 수 없습니다</string>
     <string name="dialog_wrong_message_number">숫자만 입력 가능 합니다</string>
+    <string name="title_activity_crop_image">CropImageActivity</string>
 </resources>
