@@ -75,6 +75,20 @@
                     android:background="@android:color/transparent"
                     app:layout_constraintTop_toBottomOf="@id/tv_add_contact_name"
                     app:layout_constraintStart_toStartOf="@id/tv_add_contact_name"/>
+
+                <TextView
+                    android:id="@+id/tv_add_contact_wrong_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/yeonaesidae_r"
+                    android:text="@string/add_contact_placeholder_wrong_name"
+                    android:visibility="invisible"
+                    android:layout_marginStart="3sp"
+                    app:layout_constraintStart_toStartOf="@id/cl_add_contact_name"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_add_contact_name" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -412,22 +426,6 @@
                     app:layout_constraintTop_toTopOf="@id/cl_add_contact_relationship"
                     app:layout_constraintStart_toStartOf="@id/cl_add_contact_relationship"/>
 
-                <EditText
-                    android:id="@+id/et_add_contact_relationship"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/add_contact_placeholder_relationship"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/gray"
-                    android:textSize="24sp"
-                    android:inputType="text"
-                    android:fontFamily="@font/yeonaesidae_b"
-                    android:paddingTop="8sp"
-                    android:paddingStart="20sp"
-                    android:paddingEnd="20sp"
-                    android:background="@android:color/transparent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_add_contact_relationship"
-                    app:layout_constraintStart_toStartOf="@id/tv_add_contact_relationship"/>
                 <Spinner
                     android:id="@+id/group_spinner"
                     android:layout_width="match_parent"

@@ -13,7 +13,6 @@ import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import androidx.core.content.ContextCompat
-import com.example.sweetcontactget.data.DataObject
 
 
 object Util {

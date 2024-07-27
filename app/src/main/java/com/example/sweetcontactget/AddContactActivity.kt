@@ -15,9 +15,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
@@ -359,37 +356,16 @@ class AddContactActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        //관계 유효성 검사
-        binding.etAddContactRelationship.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularRelationShip(
-                        binding.etAddContactRelationship.text.toString().trim()
-                    )
-                ) {
-                    binding.tvAddContactWrongRelationship.visibility = View.INVISIBLE
-                    isRelationShip = true
-                } else {
-                    binding.tvAddContactWrongRelationship.visibility = View.VISIBLE
-                    isRelationShip = false
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
 
         binding.btnAddContactSave.setOnClickListener {
-            var sweetieInfo = SweetieInfo(
             val name = binding.etAddContactName.text.toString().trim()
             val phoneNumber = binding.etAddContactPhoneNumber.text.toString().trim()
             val eventInformation = binding.etAddContactEventInformation.text.toString().trim()
-            val relationShip = binding.etAddContactRelationship.text.toString().trim()
             val image = binding.ivAddContactImage.drawable
 
             // 비었을 때
             if (name.isEmpty() || phoneNumber.isEmpty() || eventInformation.isEmpty()
-                || relationShip.isEmpty() || image == null
+                ||  image == null
             ) {
                 Toast.makeText(
                     this,
@@ -412,7 +388,6 @@ class AddContactActivity : AppCompatActivity() {
                 relationship = binding.groupSpinner.selectedItemPosition,
                 secondNumber = binding.etAddContactPhoneNumber2.text.toString(),
                 thirdNumber = binding.etAddContactPhoneNumber3.text.toString(),
-                relationship = binding.etAddContactRelationship.text.toString(),
                 memo = binding.etAddContactMemo.text.toString(),
                 heart = 0,
                 isMarked = false
