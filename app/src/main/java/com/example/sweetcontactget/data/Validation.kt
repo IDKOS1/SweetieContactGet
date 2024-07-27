@@ -10,7 +10,7 @@ fun isRegularName(name: String): Boolean {
 
 //전화번호 유효성
 fun isRegularPhoneNumber(number: String): Boolean {
-    val phoneNumberPattern = "^[0-9]{9,11}$"
+    val phoneNumberPattern = "^[0-9_]+$"
     val pattern = Pattern.matches(phoneNumberPattern,number)
     return pattern
 }

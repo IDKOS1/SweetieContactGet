@@ -341,9 +341,6 @@
                 app:layout_constraintTop_toBottomOf="@id/cl_add_contact_phone_number_3"
                 app:layout_constraintBottom_toTopOf="@id/cl_add_contact_event_information"/>
 
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_add_contact_event_information"
                 android:layout_width="300sp"
