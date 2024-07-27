@@ -242,16 +242,17 @@
                     android:text="@string/detail_relationship"
                     android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tv_detail_relationship"
+                <Spinner
+                    android:id="@+id/detail_group_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/yeonaesidae"
-                    android:text="@string/detail_relationship_content"
-                    android:textColor="@color/white"
-                    android:textFontWeight="700"
-                    android:textSize="24sp" />
+                    android:layout_height="45dp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="8dp"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintStart_toStartOf="@+id/tv_add_contact_relationship"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_add_contact_relationship" />
+
+
             </LinearLayout>
 
             <LinearLayout

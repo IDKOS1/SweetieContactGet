@@ -333,12 +333,11 @@
                     android:id="@+id/group_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:spinnerMode="dropdown"
                     android:paddingHorizontal="20dp"
                     android:paddingTop="8dp"
+                    android:spinnerMode="dropdown"
                     app:layout_constraintStart_toStartOf="@+id/tv_add_contact_relationship"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_add_contact_relationship"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_add_contact_relationship" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

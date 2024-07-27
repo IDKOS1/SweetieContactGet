@@ -58,14 +58,14 @@ class AddContactActivity : AppCompatActivity() {
             }
         }
 
-        initSpinner(this@AddContactActivity, binding.groupSpinner)
+        initSpinner(this@AddContactActivity, binding.groupSpinner, null)
 
         binding.btnAddContactSave.setOnClickListener {
             var sweetieInfo = SweetieInfo(
                 imgSrc = binding.ivAddContactImage.drawable,
                 name = binding.etAddContactName.text.toString(),
                 number = binding.etAddContactPhoneNumber.text.toString(),
-                relationship = binding.groupSpinner.selectedItem.toString(),
+                relationship = binding.groupSpinner.selectedItemPosition,
                 memo = binding.etAddContactMemo.text.toString(),
                 heart = 0,
                 isMarked = false

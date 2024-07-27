@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 
 object Util {
@@ -37,7 +38,7 @@ object Util {
     fun MutableMap<Int, SweetieInfo>.sortedByName() =
         this.toList().sortedBy { it.second.name }.toMap().toMutableMap()
 
-    fun initSpinner(context: Context, spinner: Spinner) {
+    fun initSpinner(context: Context, spinner: Spinner, sweetiesId: Int?) {
         ArrayAdapter.createFromResource(
             context, R.array.group_array, R.layout.group_item_spinner
         ).also { adapter ->
@@ -53,6 +54,9 @@ object Util {
             ) {
                 if (parent != null) {
                     Toast.makeText(context, parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show()
+                    if(sweetiesId != null){
+                        DataObject.editGroup(sweetiesId, position)
+                    }
                 }
             }
 

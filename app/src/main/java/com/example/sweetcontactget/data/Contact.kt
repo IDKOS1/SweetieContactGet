@@ -13,7 +13,7 @@ data class SweetieInfo(
     var imgSrc: Drawable? = null,
     var name: String,
     var number: String,
-    var relationship: String,
+    var relationship: Int,
     var memo: String,
     var heart: Int,
     var isMarked: Boolean,

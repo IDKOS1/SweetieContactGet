@@ -85,9 +85,15 @@ object DataObject {
             when (editTarget) {
                 "이름" -> contact.name = content
                 "전화번호" -> contact.number = content
-                "관계" -> contact.relationship = content
                 "메모" -> contact.memo = content
             }
+        }
+    }
+
+    fun editGroup(sweetieId: Int, index: Int) {
+        val contact = contactMap[sweetieId]
+        if (contact != null) {
+            contact.relationship = index
         }
     }
 
@@ -99,7 +105,7 @@ object DataObject {
             ),
             name = "감우",
             number = "01023453444",
-            relationship = "친구",
+            relationship = 0,
             memo = "멍청하다.",
             heart = 0,
             isMarked = false
@@ -111,7 +117,7 @@ object DataObject {
             ),
             name = "고세구",
             number = "01023453495",
-            relationship = "친구",
+            relationship = 0,
             memo = "멍청하다.",
             heart = 20,
             isMarked = false
@@ -123,7 +129,7 @@ object DataObject {
             ),
             name = "골드 쉽",
             number = "01098765432",
-            relationship = "학교",
+            relationship = 0,
             memo = "착하다.",
             heart = 40,
             isMarked = false
@@ -135,7 +141,7 @@ object DataObject {
             ),
             name = "그웬",
             number = "01087654321",
-            relationship = "직장",
+            relationship = 0,
             memo = "성실하다.",
             heart = 60,
             isMarked = false
@@ -147,7 +153,7 @@ object DataObject {
             ),
             name = "나고미 유이",
             number = "01076543210",
-            relationship = "친구",
+            relationship = 0,
             memo = "밝다.",
             heart = 100,
             isMarked = false
@@ -159,7 +165,7 @@ object DataObject {
             ),
             name = "니콜",
             number = "01065432109",
-            relationship = "학교",
+            relationship = 0,
             memo = "조용하다.",
             heart = 0,
             isMarked = false
@@ -171,7 +177,7 @@ object DataObject {
             ),
             name = "닐루",
             number = "01054321098",
-            relationship = "직장",
+            relationship = 0,
             memo = "똑똑하다.",
             heart = 0,
             isMarked = false
@@ -184,7 +190,7 @@ object DataObject {
             ),
             name = "라이덴",
             number = "01043210987",
-            relationship = "친구",
+            relationship = 0,
             memo = "강하다.",
             heart = 0,
             isMarked = false
@@ -196,7 +202,7 @@ object DataObject {
             ),
             name = "럭스",
             number = "01032109876",
-            relationship = "학교",
+            relationship = 0,
             memo = "아름답다.",
             heart = 0,
             isMarked = false
@@ -208,7 +214,7 @@ object DataObject {
             ),
             name = "릴리아",
             number = "01021098765",
-            relationship = "직장",
+            relationship = 0,
             memo = "침착하다.",
             heart = 0,
             isMarked = false
@@ -220,7 +226,7 @@ object DataObject {
             ),
             name = "릴파",
             number = "01010987654",
-            relationship = "친구",
+            relationship = 0,
             memo = "재밌다.",
             heart = 0,
             isMarked = false
@@ -232,7 +238,7 @@ object DataObject {
             ),
             name = "마키마",
             number = "01009876543",
-            relationship = "직장",
+            relationship = 0,
             memo = "카리스마 있다.",
             heart = 0,
             isMarked = false
@@ -244,7 +250,7 @@ object DataObject {
             ),
             name = "미스포츈",
             number = "01087654321",
-            relationship = "친구",
+            relationship = 0,
             memo = "모험적이다.",
             heart = 0,
             isMarked = false
@@ -256,7 +262,7 @@ object DataObject {
             ),
             name = "미츠리",
             number = "01076543210",
-            relationship = "학교",
+            relationship = 0,
             memo = "애정이 많다.",
             heart = 0,
             isMarked = false
@@ -268,7 +274,7 @@ object DataObject {
             ),
             name = "미카사",
             number = "01065432109",
-            relationship = "직장",
+            relationship = 0,
             memo = "충성스럽다.",
             heart = 0,
             isMarked = false
@@ -280,7 +286,7 @@ object DataObject {
             ),
             name = "바바라",
             number = "01054321098",
-            relationship = "친구",
+            relationship = 0,
             memo = "활발하다.",
             heart = 0,
             isMarked = false
@@ -292,7 +298,7 @@ object DataObject {
             ),
             name = "반디",
             number = "01043210987",
-            relationship = "학교",
+            relationship = 0,
             memo = "상냥하다.",
             heart = 0,
             isMarked = false
@@ -304,7 +310,7 @@ object DataObject {
             ),
             name = "방예나",
             number = "01032109876",
-            relationship = "직장",
+            relationship = 0,
             memo = "효율적이다.",
             heart = 0,
             isMarked = false
@@ -316,7 +322,7 @@ object DataObject {
             ),
             name = "산고노미야 코코미",
             number = "01021098765",
-            relationship = "친구",
+            relationship = 0,
             memo = "친절하다.",
             heart = 0,
             isMarked = false
@@ -328,7 +334,7 @@ object DataObject {
             ),
             name = "설지",
             number = "01010987654",
-            relationship = "학교",
+            relationship = 0,
             memo = "명랑하다.",
             heart = 0,
             isMarked = false
@@ -340,7 +346,7 @@ object DataObject {
             ),
             name = "세라핀",
             number = "01009876543",
-            relationship = "직장",
+            relationship = 0,
             memo = "창의적이다.",
             heart = 0,
             isMarked = false
@@ -352,7 +358,7 @@ object DataObject {
             ),
             name = "세일러문",
             number = "01087654321",
-            relationship = "친구",
+            relationship = 0,
             memo = "용감하다.",
             heart = 0,
             isMarked = false
@@ -364,7 +370,7 @@ object DataObject {
             ),
             name = "소나",
             number = "01076543210",
-            relationship = "학교",
+            relationship = 0,
             memo = "조용하다.",
             heart = 0,
             isMarked = false
@@ -376,7 +382,7 @@ object DataObject {
             ),
             name = "수희",
             number = "01065432109",
-            relationship = "직장",
+            relationship = 0,
             memo = "열정적이다.",
             heart = 0,
             isMarked = false
@@ -388,7 +394,7 @@ object DataObject {
             ),
             name = "스커크",
             number = "01054321098",
-            relationship = "친구",
+            relationship = 0,
             memo = "똑똑하다.",
             heart = 0,
             isMarked = false
@@ -400,7 +406,7 @@ object DataObject {
             ),
             name = "스파클",
             number = "01043210987",
-            relationship = "학교",
+            relationship = 0,
             memo = "반짝이다.",
             heart = 0,
             isMarked = false
@@ -412,7 +418,7 @@ object DataObject {
             ),
             name = "시노부",
             number = "01032109876",
-            relationship = "직장",
+            relationship = 0,
             memo = "냉철하다.",
             heart = 0,
             isMarked = false
@@ -424,7 +430,7 @@ object DataObject {
             ),
             name = "신학",
             number = "01021098765",
-            relationship = "친구",
+            relationship = 0,
             memo = "진지하다.",
             heart = 0,
             isMarked = false
@@ -436,7 +442,7 @@ object DataObject {
             ),
             name = "아델라",
             number = "01010987654",
-            relationship = "학교",
+            relationship = 0,
             memo = "총명하다.",
             heart = 0,
             isMarked = false
@@ -448,7 +454,7 @@ object DataObject {
             ),
             name = "아리",
             number = "01009876543",
-            relationship = "직장",
+            relationship = 0,
             memo = "매력적이다.",
             heart = 0,
             isMarked = false
@@ -460,7 +466,7 @@ object DataObject {
             ),
             name = "아메",
             number = "01087654321",
-            relationship = "친구",
+            relationship = 0,
             memo = "쾌활하다.",
             heart = 0,
             isMarked = false
@@ -472,7 +478,7 @@ object DataObject {
             ),
             name = "야에 미코",
             number = "01076543210",
-            relationship = "학교",
+            relationship = 0,
             memo = "신비롭다.",
             heart = 0,
             isMarked = false
@@ -484,7 +490,7 @@ object DataObject {
             ),
             name = "엘렌조",
             number = "01065432109",
-            relationship = "직장",
+            relationship = 0,
             memo = "실용적이다.",
             heart = 0,
             isMarked = false
@@ -496,7 +502,7 @@ object DataObject {
             ),
             name = "여르미",
             number = "01054321098",
-            relationship = "친구",
+            relationship = 0,
             memo = "유머러스하다.",
             heart = 0,
             isMarked = false
@@ -508,7 +514,7 @@ object DataObject {
             ),
             name = "완매",
             number = "01043210987",
-            relationship = "학교",
+            relationship = 0,
             memo = "온화하다.",
             heart = 0,
             isMarked = false
@@ -520,7 +526,7 @@ object DataObject {
             ),
             name = "유라",
             number = "01032109876",
-            relationship = "직장",
+            relationship = 0,
             memo = "기품있다.",
             heart = 0,
             isMarked = false
@@ -532,7 +538,7 @@ object DataObject {
             ),
             name = "음림",
             number = "01021098765",
-            relationship = "친구",
+            relationship = 0,
             memo = "지혜롭다.",
             heart = 0,
             isMarked = false
@@ -544,7 +550,7 @@ object DataObject {
             ),
             name = "이렐리아",
             number = "01010987654",
-            relationship = "학교",
+            relationship = 0,
             memo = "강인하다.",
             heart = 0,
             isMarked = false
@@ -556,7 +562,7 @@ object DataObject {
             ),
             name = "이오몽",
             number = "01009876543",
-            relationship = "직장",
+            relationship = 0,
             memo = "기발하다.",
             heart = 0,
             isMarked = false
@@ -568,7 +574,7 @@ object DataObject {
             ),
             name = "자야",
             number = "01087654321",
-            relationship = "친구",
+            relationship = 0,
             memo = "자유롭다.",
             heart = 0,
             isMarked = false
@@ -580,7 +586,7 @@ object DataObject {
             ),
             name = "잔나",
             number = "01076543210",
-            relationship = "학교",
+            relationship = 0,
             memo = "산뜻하다.",
             heart = 0,
             isMarked = false
@@ -592,7 +598,7 @@ object DataObject {
             ),
             name = "조이",
             number = "01065432109",
-            relationship = "직장",
+            relationship = 0,
             memo = "명랑하다.",
             heart = 0,
             isMarked = false
@@ -604,7 +610,7 @@ object DataObject {
             ),
             name = "징버거",
             number = "01054321098",
-            relationship = "친구",
+            relationship = 0,
             memo = "다정하다.",
             heart = 0,
             isMarked = false
@@ -616,7 +622,7 @@ object DataObject {
             ),
             name = "치오리",
             number = "01043210987",
-            relationship = "학교",
+            relationship = 0,
             memo = "활기차다.",
             heart = 0,
             isMarked = false
@@ -628,7 +634,7 @@ object DataObject {
             ),
             name = "카프카",
             number = "01032109876",
-            relationship = "직장",
+            relationship = 0,
             memo = "분석적이다.",
             heart = 0,
             isMarked = false
@@ -640,7 +646,7 @@ object DataObject {
             ),
             name = "케이틀린",
             number = "01021098765",
-            relationship = "친구",
+            relationship = 0,
             memo = "정확하다.",
             heart = 0,
             isMarked = false
@@ -652,7 +658,7 @@ object DataObject {
             ),
             name = "키타가미 미미",
             number = "01010987654",
-            relationship = "학교",
+            relationship = 0,
             memo = "냉철하다.",
             heart = 0,
             isMarked = false
@@ -664,7 +670,7 @@ object DataObject {
             ),
             name = "키타가와 마린",
             number = "01009876543",
-            relationship = "직장",
+            relationship = 0,
             memo = "열정적이다.",
             heart = 0,
             isMarked = false
@@ -676,7 +682,7 @@ object DataObject {
             ),
             name = "토파즈",
             number = "01087654321",
-            relationship = "친구",
+            relationship = 0,
             memo = "반짝이다.",
             heart = 0,
             isMarked = false
@@ -688,7 +694,7 @@ object DataObject {
             ),
             name = "푸리나",
             number = "01076543210",
-            relationship = "학교",
+            relationship = 0,
             memo = "창의적이다.",
             heart = 0,
             isMarked = false
@@ -700,7 +706,7 @@ object DataObject {
             ),
             name = "피슬",
             number = "01065432109",
-            relationship = "직장",
+            relationship = 0,
             memo = "매력적이다.",
             heart = 0,
             isMarked = false
@@ -712,7 +718,7 @@ object DataObject {
             ),
             name = "하나코나나",
             number = "01054321098",
-            relationship = "친구",
+            relationship = 0,
             memo = "유쾌하다.",
             heart = 0,
             isMarked = false
@@ -724,7 +730,7 @@ object DataObject {
             ),
             name = "한결",
             number = "01043210987",
-            relationship = "학교",
+            relationship = 0,
             memo = "의젓하다.",
             heart = 0,
             isMarked = false
@@ -736,7 +742,7 @@ object DataObject {
             ),
             name = "호시노 아이",
             number = "01032109876",
-            relationship = "직장",
+            relationship = 0,
             memo = "빛나다.",
             heart = 0,
             isMarked = false
@@ -748,7 +754,7 @@ object DataObject {
             ),
             name = "후부키",
             number = "01021098765",
-            relationship = "친구",
+            relationship = 0,
             memo = "쿨하다.",
             heart = 0,
             isMarked = false
@@ -760,7 +766,7 @@ object DataObject {
             ),
             name = "u32",
             number = "01010987654",
-            relationship = "학교",
+            relationship = 0,
             memo = "미지수이다.",
             heart = 0,
             isMarked = false

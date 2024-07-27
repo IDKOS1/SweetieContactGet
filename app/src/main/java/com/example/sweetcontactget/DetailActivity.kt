@@ -2,17 +2,16 @@ package com.example.sweetcontactget
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityDetailBinding
 import com.example.sweetcontactget.dialog.EditTextDialog
 import com.example.sweetcontactget.util.Util
+import com.example.sweetcontactget.util.Util.initSpinner
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -31,10 +30,11 @@ class DetailActivity : AppCompatActivity() {
             sweetie = DataObject.getSweetieInfo(sweetieId)
         }
 
+        initSpinner(this@DetailActivity, binding.detailGroupSpinner, sweetieId)
+
         requestCallPermission()
 
         updateDetail()
-
         binding.run {
             tvDetailName.setOnClickListener {
                 editContent("이름")
@@ -44,9 +44,10 @@ class DetailActivity : AppCompatActivity() {
                 editContent("전화번호")
             }
 
-            llDetailRelationship.setOnClickListener {
-                editContent("관계")
-            }
+//            llDetailRelationship.setOnClickListener {
+//                editContent("관계")
+//            }
+
 
             llDetailMemo.setOnClickListener {
                 editContent("메모")
@@ -113,9 +114,9 @@ class DetailActivity : AppCompatActivity() {
                 tvDetailName.text = sweetie.name
                 tvDetailNumber.text = sweetie.number
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()
-                tvDetailRelationship.text = sweetie.relationship
                 tvDetailMemo.text = sweetie.memo
                 tbDetailMark.isChecked = sweetie.isMarked
+                detailGroupSpinner.setSelection(sweetie.relationship)
             }
         }
     }

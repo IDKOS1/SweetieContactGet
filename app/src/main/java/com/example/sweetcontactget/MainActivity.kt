@@ -107,15 +107,15 @@ class MainActivity : AppCompatActivity() {
                 val id =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
                 val sweetie = hashMap[id] ?: SweetieInfo(
-                    null, "", "", "", "", 0, false
+                    null, "", "", 0, "", 0, false
                 )
 
                 when (mimeType) {
                     ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> sweetie.number =
                         cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
 
-                    ContactsContract.CommonDataKinds.Relation.CONTENT_ITEM_TYPE -> sweetie.relationship =
-                        cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Relation.NAME))
+//                    ContactsContract.CommonDataKinds.Relation.CONTENT_ITEM_TYPE -> sweetie.relationship =
+//                        cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Relation.NAME))
 
                     ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE -> sweetie.memo =
                         cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Note.NOTE))
