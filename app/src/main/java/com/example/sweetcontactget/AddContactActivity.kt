@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,11 +17,18 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.data.formatPhoneNumber
@@ -34,29 +43,40 @@ class AddContactActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddContactBinding
     private var count = 0
 
-    private  lateinit var profileImage : ImageView
-    private var pickImageUri : Uri? = null
+    private var pickImageUri: Uri? = null
 
 
-    private val requestPermissonLauncher : ActivityResultLauncher<String> =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()){isGranted ->
-            if(isGranted){
-                openGallery()
-            }else{
-                Toast.makeText(this,"갤러리 접근 권한이 필요합니다",Toast.LENGTH_SHORT).show()
-            }
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+
+            pickImageUri = result.uriContent
+            binding.ivAddContactImage.setImageURI(pickImageUri)
+
+        } else {
+            val exception = result.error
         }
+    }
 
-    private val pickImageLauncher: ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
-            if(result.resultCode == Activity.RESULT_OK){
-                val data: Intent? = result.data
-                data?.data?.let {
-                    pickImageUri = it
-                    profileImage.setImageURI(pickImageUri)
-                }
+
+    private val pickImageLauncher =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                cropImage.launch(
+                    CropImageContractOptions(
+                        uri = uri, // 크롭할 이미지 uri
+                        cropImageOptions = CropImageOptions(
+                            outputCompressFormat = Bitmap.CompressFormat.PNG,//사진 확장자 변경
+                            minCropResultHeight = 50,//사진 최소 세로크기
+                            minCropResultWidth = 50,//사진 최소 가로크기
+                            aspectRatioY = 5,//세로 비율
+                            aspectRatioX = 8,//가로 비율
+                            fixAspectRatio = false,//커터? 크기 고정 여부
+                            borderLineColor = Color.MAGENTA//커터? 태두리 색
+                            // 원하는 옵션 추가
+                        )
+                    )
+                )
             }
-
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,31 +127,9 @@ class AddContactActivity : AppCompatActivity() {
 
         //갤러리 이미지 가져와서 추가
         binding.ivAddContactImage.setOnClickListener {
-            profileImage = binding.ivAddContactImage
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.READ_MEDIA_IMAGES
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    openGallery()
-                } else {
-                    requestPermissonLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
-                }
-            } else {
-                if (ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    openGallery()
-                } else {
-                    requestPermissonLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-                }
-            }
+            pickImageLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
-
 
 
         //이름 유효성 검사
@@ -170,11 +168,11 @@ class AddContactActivity : AppCompatActivity() {
 
         //전화번호 유효성 검사1
         binding.etAddContactPhoneNumber.addTextChangedListener(object : TextWatcher {
-            private var isFormat : Boolean = false
-            private var isDeleteHyphen : Boolean = false
+            private var isFormat: Boolean = false
+            private var isDeleteHyphen: Boolean = false
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if(count > 0 && s?.get(start) == '-'){
+                if (count > 0 && s?.get(start) == '-') {
                     isDeleteHyphen = true
                 }
             }
@@ -208,13 +206,13 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if(isFormat||isDeleteHyphen) return
+                if (isFormat || isDeleteHyphen) return
                 isFormat = true
 
-                val text = s.toString().replace("-","")
+                val text = s.toString().replace("-", "")
                 val formattedNumber = formatPhoneNumber(text)
 
-                s?.replace(0,s.length,formattedNumber)
+                s?.replace(0, s.length, formattedNumber)
                 isFormat = false
             }
 
@@ -223,11 +221,11 @@ class AddContactActivity : AppCompatActivity() {
         //전화번호 유효성 검사2
         binding.etAddContactPhoneNumber2.addTextChangedListener(object : TextWatcher {
 
-            private var isFormat : Boolean = false
-            private var isDeleteHyphen : Boolean = false
+            private var isFormat: Boolean = false
+            private var isDeleteHyphen: Boolean = false
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if(count > 0 && s?.get(start) == '-'){
+                if (count > 0 && s?.get(start) == '-') {
                     isDeleteHyphen = true
                 }
             }
@@ -261,24 +259,24 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if(isFormat||isDeleteHyphen) return
+                if (isFormat || isDeleteHyphen) return
                 isFormat = true
 
-                val text = s.toString().replace("-","")
+                val text = s.toString().replace("-", "")
                 val formattedNumber = formatPhoneNumber(text)
 
-                s?.replace(0,s.length,formattedNumber)
+                s?.replace(0, s.length, formattedNumber)
                 isFormat = false
             }
         })
 
         //전화번호 유효성 검사3
         binding.etAddContactPhoneNumber3.addTextChangedListener(object : TextWatcher {
-            private var isFormat : Boolean = false
-            private var isDeleteHyphen : Boolean = false
+            private var isFormat: Boolean = false
+            private var isDeleteHyphen: Boolean = false
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if(count > 0 && s?.get(start) == '-'){
+                if (count > 0 && s?.get(start) == '-') {
                     isDeleteHyphen = true
                 }
             }
@@ -312,13 +310,13 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if(isFormat||isDeleteHyphen) return
+                if (isFormat || isDeleteHyphen) return
                 isFormat = true
 
-                val text = s.toString().replace("-","")
+                val text = s.toString().replace("-", "")
                 val formattedNumber = formatPhoneNumber(text)
 
-                s?.replace(0,s.length,formattedNumber)
+                s?.replace(0, s.length, formattedNumber)
                 isFormat = false
             }
         })
@@ -420,13 +418,21 @@ class AddContactActivity : AppCompatActivity() {
             if (name.isEmpty() || phoneNumber.isEmpty() || eventInformation.isEmpty()
                 || relationShip.isEmpty() || memo.isEmpty() || image == null
             ) {
-                Toast.makeText(this, resources.getString(R.string.add_contact_empty_data), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.add_contact_empty_data),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
             //유효한 입력 체크
             if (!isName || !isPhoneNumber || !isEvent || !isRelationShip || !isMemo) {
-                Toast.makeText(this, resources.getString(R.string.add_contact_wrong_data), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.add_contact_wrong_data),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
@@ -454,11 +460,6 @@ class AddContactActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
-    }
-
-    private fun openGallery(){
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-        pickImageLauncher.launch(galleryIntent)
     }
 
 
