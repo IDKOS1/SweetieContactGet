@@ -13,6 +13,10 @@ import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sweetcontactget.adapter.ContactAdapter
 
 
 object Util {
@@ -79,5 +83,26 @@ object Util {
             }
 
         }
+    }
+
+    fun switchLayoutManager(context: Context, recyclerView: RecyclerView, adapter: ContactAdapter, isGridLayout: Boolean) {
+        if (isGridLayout) {
+            recyclerView.layoutManager = GridLayoutManager(context, 3).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        return if (adapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER) {
+                            3
+                        } else {
+                            1
+                        }
+                    }
+                }
+            }
+            adapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_GRID)
+        } else {
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            adapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_LINEAR)
+        }
+        adapter.notifyDataSetChanged()
     }
 }
