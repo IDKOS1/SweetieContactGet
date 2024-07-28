@@ -4,13 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.postDelayed
 import com.example.sweetcontactget.AddContactActivity
-import com.example.sweetcontactget.adapter.ViewPagerAdapter
 import com.example.sweetcontactget.R
+import com.example.sweetcontactget.adapter.ViewPagerAdapter
 import com.example.sweetcontactget.data.DataObject.changedBookmark
 import com.example.sweetcontactget.data.DataObject.deleteSweetieInfo
 import com.example.sweetcontactget.data.DataObject.selectAllOrClear
@@ -18,23 +20,14 @@ import com.example.sweetcontactget.data.DataObject.selectedSet
 import com.example.sweetcontactget.databinding.FragmentContactBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ContactFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ContactFragment : Fragment() {
     private var _binding: FragmentContactBinding? = null
     private val binding get() = _binding!!
     private val vpAdapter: ViewPagerAdapter by lazy { ViewPagerAdapter(this) }
-    private lateinit var allContactFragment: AllContactFragment
 
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -51,7 +44,6 @@ class ContactFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentContactBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -60,15 +52,10 @@ class ContactFragment : Fragment() {
         initView()
         initToolbar()
 
-        binding.toggleSetLayout.setOnToggledListener{_,isOn ->
-            if(binding.vpContactViewPager.currentItem == 0 ){
-                (vpAdapter.fragments[0] as AllContactFragment).switchLayoutManager(isOn)
-            }else{
-                (vpAdapter.fragments[1] as BookmarkFragment).switchLayoutManager(isOn)
-            }
-
+        binding.toggleSetLayout.setOnToggledListener { _, isOn ->
+            Log.d("ContactFragment", "Toggle button clicked: isOn=$isOn")
+            updateLayoutForAllFragments(isOn)
         }
-
     }
 
     override fun onDestroyView() {
@@ -76,17 +63,21 @@ class ContactFragment : Fragment() {
         _binding = null
     }
 
+    private fun updateLayoutForAllFragments(isOn: Boolean) {
+        vpAdapter.fragments.forEach { fragment ->
+            if (fragment is LayoutManagerSwitchable) {
+                if (fragment.isAdded) {
+                    fragment.updateLayoutManager(isOn)
+                } else {
+                    fragment.view?.postDelayed(100) {
+                        fragment.updateLayoutManager(isOn)
+                    }
+                }
+            }
+        }
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ContactFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
         fun newInstance(param1: String, param2: String) =
             ContactFragment().apply {
                 arguments = Bundle().apply {
@@ -139,5 +130,9 @@ class ContactFragment : Fragment() {
             (vpAdapter.fragments[1] as BookmarkFragment).onResume()
             handleToolbarVisibility(false)
         }
+    }
+
+    interface LayoutManagerSwitchable {
+        fun updateLayoutManager(isGridLayout: Boolean)
     }
 }
