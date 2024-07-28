@@ -180,13 +180,14 @@
         android:scaleType="center"
         android:src="@drawable/ic_plus"
         android:tint="@color/primary"
-        app:borderWidth="0dp"
+        app:backgroundTint="@color/primary"
+        app:borderWidth="2dp"
         app:elevation="0dp"
         app:fabCustomSize="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="48dp"
-        app:shapeAppearance="@drawable/shape_circle_background"
+        app:shapeAppearance="@drawable/shape_fab_background"
         app:tint="@color/primary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
