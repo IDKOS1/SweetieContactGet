@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,24 +19,10 @@ import com.example.sweetcontactget.data.DataObject.selectedSet
 import com.example.sweetcontactget.databinding.FragmentContactBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class ContactFragment : Fragment() {
     private var _binding: FragmentContactBinding? = null
     private val binding get() = _binding!!
     private val vpAdapter: ViewPagerAdapter by lazy { ViewPagerAdapter(this) }
-
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +38,6 @@ class ContactFragment : Fragment() {
         initToolbar()
 
         binding.toggleSetLayout.setOnToggledListener { _, isOn ->
-            Log.d("ContactFragment", "Toggle button clicked: isOn=$isOn")
             updateLayoutForAllFragments(isOn)
         }
     }
@@ -75,16 +59,6 @@ class ContactFragment : Fragment() {
                 }
             }
         }
-    }
-
-    companion object {
-        fun newInstance(param1: String, param2: String) =
-            ContactFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 
     private fun initView() = with(binding) {
