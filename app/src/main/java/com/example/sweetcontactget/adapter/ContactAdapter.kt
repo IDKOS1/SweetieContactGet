@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.DetailActivity
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.Contact
+import com.example.sweetcontactget.data.ContactApplication
 import com.example.sweetcontactget.data.DataObject.contactList
 import com.example.sweetcontactget.data.DataObject.selectedSet
 import com.example.sweetcontactget.util.KoreanMatcher
@@ -24,7 +25,7 @@ import com.example.sweetcontactget.databinding.PersonInfoHolderGridBinding
 import com.example.sweetcontactget.dialog.CallingDialog
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
 
-class ContactAdapter(private val context: Context) :
+class ContactAdapter :
     ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>() {
         override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem == newItem
@@ -40,10 +41,11 @@ class ContactAdapter(private val context: Context) :
     }
 
     private var viewType = VIEW_TYPE_LIST_LINEAR
+    private val context: Context by lazy { ContactApplication.applicationContext() }
 
     fun setViewType(viewType: Int) {
         this.viewType = viewType
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, currentList.size)
     }
 
     class IndexHolder(private val binding: IndexHolderBinding) :
@@ -132,7 +134,6 @@ class ContactAdapter(private val context: Context) :
 
     companion object {
         const val VIEW_TYPE_HEADER = 1
-        const val VIEW_TYPE_LIST = 2
         const val VIEW_TYPE_LIST_LINEAR = 2
         const val VIEW_TYPE_LIST_GRID = 3
 
