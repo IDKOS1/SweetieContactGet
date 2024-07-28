@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.DataObject
@@ -68,11 +69,23 @@ object Util {
                 position: Int,
                 id: Long
             ) {
+
                 if (parent != null) {
                     if (sweetiesId != null) {
                         DataObject.editGroup(sweetiesId, position)
+
                     }
                 }
+
+                if (position == 0) {
+                    val tv = view?.findViewById<TextView>(R.id.tvItemSpinner)
+                    tv?.setTextColor(ContextCompat.getColor(context, R.color.gray))
+                } else {
+                    val tv = view?.findViewById<TextView>(R.id.tvItemSpinner)
+                    tv?.setTextColor(ContextCompat.getColor(context, R.color.white))
+
+                }
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
