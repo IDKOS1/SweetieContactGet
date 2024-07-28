@@ -40,7 +40,7 @@ class CustomDatePickerDialog(
 
         binding.dpPickerDatePicker.setCalendarViewShown(false)
 
-        binding.btnPickerConfirm.setOnClickListener {
+        binding.btnPickerDateConfirm.setOnClickListener {
             listener(
                 binding.dpPickerDatePicker.year,
                 binding.dpPickerDatePicker.month,
@@ -49,7 +49,7 @@ class CustomDatePickerDialog(
             dismiss()
         }
 
-        binding.btnPickerCancle.setOnClickListener {
+        binding.btnPickerDateCancle.setOnClickListener {
             dismiss()
         }
 
