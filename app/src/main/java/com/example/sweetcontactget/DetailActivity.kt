@@ -149,10 +149,6 @@ class DetailActivity : AppCompatActivity() {
                 datePickerFragment.show()
             }
 
-            llDetailRelationship.setOnClickListener {
-                editContent("allText", "관계")
-            }
-
             llDetailMemo.setOnClickListener {
                 editContent("allText", "메모")
             }
