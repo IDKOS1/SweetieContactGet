@@ -78,7 +78,6 @@ object Util {
                 position: Int,
                 id: Long
             ) {
-
                 if (parent != null) {
                     if (sweetiesId != null) {
                         DataObject.editGroup(sweetiesId, position)
@@ -122,7 +121,12 @@ object Util {
         else -> 0
     }
 
-    fun switchLayoutManager(context: Context, recyclerView: RecyclerView, adapter: ContactAdapter, isGridLayout: Boolean) {
+    fun switchLayoutManager(
+        context: Context,
+        recyclerView: RecyclerView,
+        adapter: ContactAdapter,
+        isGridLayout: Boolean
+    ) {
         if (isGridLayout) {
             recyclerView.layoutManager = GridLayoutManager(context, 3).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
