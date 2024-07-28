@@ -72,7 +72,7 @@ object DataObject {
     fun editProfile(editTarget: String, content: String) {
         when (editTarget) {
             "이름" -> myProfileData.name = content
-            "전화번호" -> myProfileData.phone_number = content
+            "전화번호" -> myProfileData.phoneNumber = content
             "주소" -> myProfileData.address = content
             "소개" -> myProfileData.infoMessage = content
             "birthday" -> myProfileData.birthday = LocalDate.parse(content)
