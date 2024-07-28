@@ -1,10 +1,18 @@
 package com.example.sweetcontactget
 
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sweetcontactget.data.Alarm
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityDetailBinding
@@ -12,11 +20,48 @@ import com.example.sweetcontactget.dialog.EditTextDialog
 import com.example.sweetcontactget.dialog.NotificationDialog
 import com.example.sweetcontactget.util.Util
 import java.time.LocalDateTime
+import com.example.sweetcontactget.util.Util.initSpinner
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private var sweetieId: Int = -1
     private var sweetie: SweetieInfo? = null
+
+    private var pickImageUri: Uri? = null
+
+
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+
+            pickImageUri = result.uriContent
+            binding.ivDetailProfile.setImageURI(pickImageUri)
+
+        } else {
+            val exception = result.error
+        }
+    }
+
+
+    private val pickImageLauncher =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                cropImage.launch(
+                    CropImageContractOptions(
+                        uri = uri, // 크롭할 이미지 uri
+                        cropImageOptions = CropImageOptions(
+                            outputCompressFormat = Bitmap.CompressFormat.PNG,//사진 확장자 변경
+                            minCropResultHeight = 50,//사진 최소 세로크기
+                            minCropResultWidth = 50,//사진 최소 가로크기
+                            aspectRatioY = 5,//세로 비율
+                            aspectRatioX = 8,//가로 비율
+                            fixAspectRatio = false,//커터? 크기 고정 여부
+                            borderLineColor = Color.MAGENTA//커터? 태두리 색
+                            // 원하는 옵션 추가
+                        )
+                    )
+                )
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +75,17 @@ class DetailActivity : AppCompatActivity() {
             sweetie = DataObject.getSweetieInfo(sweetieId)
         }
 
+        initSpinner(this@DetailActivity, binding.detailGroupSpinner, sweetieId)
+
         updateDetail()
 
 
         binding.run {
+
+            ivDetailProfile.setOnClickListener {
+                pickImageLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
+
             tvDetailName.setOnClickListener {
                 editContent("name", "이름")
             }
@@ -62,9 +114,9 @@ class DetailActivity : AppCompatActivity() {
 
             llDetailEvent.setOnClickListener {
                 val datePickerFragment =
-                    NotificationDialog(this@DetailActivity) {notificationDate ->
+                    NotificationDialog(this@DetailActivity) { notificationDate ->
                         // 선택된 날짜를 처리
-                        if(notificationDate >= LocalDateTime.now()) {
+                        if (notificationDate >= LocalDateTime.now()) {
                             sweetie?.let { sweetie ->
                                 Alarm().addAlarm(
                                     this@DetailActivity,
@@ -78,7 +130,9 @@ class DetailActivity : AppCompatActivity() {
                                 )
                             }
 
-                            "${notificationDate.year}년 ${notificationDate.monthValue}월 ${notificationDate.dayOfMonth}일 ${notificationDate.hour}시 ${notificationDate.minute}분".also { tvDetailEvent.text = it }
+                            "${notificationDate.year}년 ${notificationDate.monthValue}월 ${notificationDate.dayOfMonth}일 ${notificationDate.hour}시 ${notificationDate.minute}분".also {
+                                tvDetailEvent.text = it
+                            }
 
                             updateDetail()
                             Util.showToast(this@DetailActivity, "이벤트 알림 설정 완료")
@@ -163,7 +217,6 @@ class DetailActivity : AppCompatActivity() {
                 tvDetailNumber2.text = sweetie.secondNumber
                 tvDetailNumber3.text = sweetie.thirdNumber
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()
-                tvDetailRelationship.text = sweetie.relationship
                 tvDetailMemo.text = sweetie.memo
                 tbDetailMark.isChecked = sweetie.isMarked
 
@@ -171,6 +224,7 @@ class DetailActivity : AppCompatActivity() {
                     if (sweetie.secondNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
                 llDetailNumber3.visibility =
                     if (sweetie.thirdNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
+                detailGroupSpinner.setSelection(sweetie.relationship)
             }
         }
     }

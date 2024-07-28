@@ -1,62 +1,69 @@
 package com.example.sweetcontactget
 
-import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.data.formatPhoneNumber
 import com.example.sweetcontactget.data.isRegularEvent
-import com.example.sweetcontactget.data.isRegularMemo
 import com.example.sweetcontactget.data.isRegularName
 import com.example.sweetcontactget.data.isRegularPhoneNumber
-import com.example.sweetcontactget.data.isRegularRelationShip
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
+import com.example.sweetcontactget.util.Util.initSpinner
 
 class AddContactActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddContactBinding
     private var count = 0
 
-    private  lateinit var profileImage : ImageView
-    private var pickImageUri : Uri? = null
+    private var pickImageUri: Uri? = null
 
 
-    private val requestPermissonLauncher : ActivityResultLauncher<String> =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()){isGranted ->
-            if(isGranted){
-                openGallery()
-            }else{
-                Toast.makeText(this,"갤러리 접근 권한이 필요합니다",Toast.LENGTH_SHORT).show()
-            }
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+
+            pickImageUri = result.uriContent
+            binding.ivAddContactImage.setImageURI(pickImageUri)
+
+        } else {
+            val exception = result.error
         }
+    }
 
-    private val pickImageLauncher: ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
-            if(result.resultCode == Activity.RESULT_OK){
-                val data: Intent? = result.data
-                data?.data?.let {
-                    pickImageUri = it
-                    profileImage.setImageURI(pickImageUri)
-                }
+
+    private val pickImageLauncher =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                cropImage.launch(
+                    CropImageContractOptions(
+                        uri = uri, // 크롭할 이미지 uri
+                        cropImageOptions = CropImageOptions(
+                            outputCompressFormat = Bitmap.CompressFormat.PNG,//사진 확장자 변경
+                            minCropResultHeight = 50,//사진 최소 세로크기
+                            minCropResultWidth = 50,//사진 최소 가로크기
+                            aspectRatioY = 5,//세로 비율
+                            aspectRatioX = 8,//가로 비율
+                            fixAspectRatio = false,//커터? 크기 고정 여부
+                            borderLineColor = Color.MAGENTA//커터? 태두리 색
+                            // 원하는 옵션 추가
+                        )
+                    )
+                )
             }
-
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,11 +72,8 @@ class AddContactActivity : AppCompatActivity() {
 
         var isName = false
         var isPhoneNumber = false
-        var isPhoneNumber2 = false
-        var isPhoneNumber3 = false
-        var isEvent = false
-        var isRelationShip = false
-        var isMemo = false
+        var isPhoneNumber2 = true
+        var isPhoneNumber3 = true
 
         binding = ActivityAddContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -105,33 +109,12 @@ class AddContactActivity : AppCompatActivity() {
             }
         }
 
+        initSpinner(this@AddContactActivity, binding.groupSpinner, null)
+
         //갤러리 이미지 가져와서 추가
         binding.ivAddContactImage.setOnClickListener {
-            profileImage = binding.ivAddContactImage
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.READ_MEDIA_IMAGES
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    openGallery()
-                } else {
-                    requestPermissonLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
-                }
-            } else {
-                if (ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    openGallery()
-                } else {
-                    requestPermissonLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-                }
-            }
+            pickImageLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
-
 
 
         //이름 유효성 검사
@@ -170,11 +153,11 @@ class AddContactActivity : AppCompatActivity() {
 
         //전화번호 유효성 검사1
         binding.etAddContactPhoneNumber.addTextChangedListener(object : TextWatcher {
-            private var isFormat : Boolean = false
-            private var isDeleteHyphen : Boolean = false
+            private var isFormat: Boolean = false
+            private var isDeleteHyphen: Boolean = false
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if(count > 0 && s?.get(start) == '-'){
+                if (count > 0 && s?.get(start) == '-') {
                     isDeleteHyphen = true
                 }
             }
@@ -208,13 +191,13 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if(isFormat||isDeleteHyphen) return
+                if (isFormat || isDeleteHyphen) return
                 isFormat = true
 
-                val text = s.toString().replace("-","")
+                val text = s.toString().replace("-", "")
                 val formattedNumber = formatPhoneNumber(text)
 
-                s?.replace(0,s.length,formattedNumber)
+                s?.replace(0, s.length, formattedNumber)
                 isFormat = false
             }
 
@@ -223,11 +206,11 @@ class AddContactActivity : AppCompatActivity() {
         //전화번호 유효성 검사2
         binding.etAddContactPhoneNumber2.addTextChangedListener(object : TextWatcher {
 
-            private var isFormat : Boolean = false
-            private var isDeleteHyphen : Boolean = false
+            private var isFormat: Boolean = false
+            private var isDeleteHyphen: Boolean = false
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if(count > 0 && s?.get(start) == '-'){
+                if (count > 0 && s?.get(start) == '-') {
                     isDeleteHyphen = true
                 }
             }
@@ -247,7 +230,7 @@ class AddContactActivity : AppCompatActivity() {
                             resources.getString(R.string.add_contact_empty_phone_number2)
                         binding.ivCheckOkayPhoneNumber2.visibility = View.INVISIBLE
                         binding.tvAddContactWrongNumber2.visibility = View.VISIBLE
-                        isPhoneNumber2 = false
+                        isPhoneNumber2 = true
                     }
 
                     else -> {
@@ -261,24 +244,24 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if(isFormat||isDeleteHyphen) return
+                if (isFormat || isDeleteHyphen) return
                 isFormat = true
 
-                val text = s.toString().replace("-","")
+                val text = s.toString().replace("-", "")
                 val formattedNumber = formatPhoneNumber(text)
 
-                s?.replace(0,s.length,formattedNumber)
+                s?.replace(0, s.length, formattedNumber)
                 isFormat = false
             }
         })
 
         //전화번호 유효성 검사3
         binding.etAddContactPhoneNumber3.addTextChangedListener(object : TextWatcher {
-            private var isFormat : Boolean = false
-            private var isDeleteHyphen : Boolean = false
+            private var isFormat: Boolean = false
+            private var isDeleteHyphen: Boolean = false
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if(count > 0 && s?.get(start) == '-'){
+                if (count > 0 && s?.get(start) == '-') {
                     isDeleteHyphen = true
                 }
             }
@@ -298,7 +281,7 @@ class AddContactActivity : AppCompatActivity() {
                             resources.getString(R.string.add_contact_empty_phone_number3)
                         binding.ivCheckOkayPhoneNumber3.visibility = View.INVISIBLE
                         binding.tvAddContactWrongNumber3.visibility = View.VISIBLE
-                        isPhoneNumber3 = false
+                        isPhoneNumber3 = true
                     }
 
                     else -> {
@@ -312,13 +295,13 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if(isFormat||isDeleteHyphen) return
+                if (isFormat || isDeleteHyphen) return
                 isFormat = true
 
-                val text = s.toString().replace("-","")
+                val text = s.toString().replace("-", "")
                 val formattedNumber = formatPhoneNumber(text)
 
-                s?.replace(0,s.length,formattedNumber)
+                s?.replace(0, s.length, formattedNumber)
                 isFormat = false
             }
         })
@@ -332,7 +315,6 @@ class AddContactActivity : AppCompatActivity() {
                     isRegularEvent(binding.etAddContactEventInformation.text.toString().trim()) -> {
                         binding.ivCheckOkayEventInformation.visibility = View.VISIBLE
                         binding.tvAddContactWrongEventInformation.visibility = View.INVISIBLE
-                        isEvent = true
                     }
 
                     binding.etAddContactEventInformation.text.toString().trim().isEmpty() -> {
@@ -340,14 +322,12 @@ class AddContactActivity : AppCompatActivity() {
                             resources.getString(R.string.add_contact_empty_event_information)
                         binding.ivCheckOkayEventInformation.visibility = View.INVISIBLE
                         binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
-                        isEvent = false
                     }
 
                     else -> {
                         binding.tvAddContactWrongEventInformation.text =
                             resources.getString(R.string.add_contact_placeholder_wrong_event_information)
                         binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
-                        isEvent = false
                     }
                 }
             }
@@ -355,77 +335,27 @@ class AddContactActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        //관계 유효성 검사
-        binding.etAddContactRelationship.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isRegularRelationShip(
-                        binding.etAddContactRelationship.text.toString().trim()
-                    )
-                ) {
-                    binding.tvAddContactWrongRelationship.visibility = View.INVISIBLE
-                    isRelationShip = true
-                } else {
-                    binding.tvAddContactWrongRelationship.visibility = View.VISIBLE
-                    isRelationShip = false
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-
-        //메모 유효성 검사
-        binding.etAddContactMemo.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                when {
-                    isRegularMemo(binding.etAddContactMemo.text.toString().trim()) -> {
-                        binding.ivCheckOkayMemo.visibility = View.VISIBLE
-                        binding.tvAddContactWrongMemo.visibility = View.INVISIBLE
-                        isMemo = true
-                    }
-
-                    binding.etAddContactMemo.text.toString().trim().isEmpty() -> {
-                        binding.tvAddContactWrongMemo.text =
-                            resources.getString(R.string.add_contact_empty_memo)
-                        binding.ivCheckOkayMemo.visibility = View.INVISIBLE
-                        binding.tvAddContactWrongMemo.visibility = View.VISIBLE
-                        isMemo = false
-                    }
-
-                    else -> {
-                        binding.tvAddContactWrongMemo.text =
-                            resources.getString(R.string.add_contact_placeholder_wrong_memo)
-                        binding.ivCheckOkayMemo.visibility = View.INVISIBLE
-                        binding.tvAddContactWrongMemo.visibility = View.VISIBLE
-                        isMemo = false
-                    }
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
 
         binding.btnAddContactSave.setOnClickListener {
             val name = binding.etAddContactName.text.toString().trim()
             val phoneNumber = binding.etAddContactPhoneNumber.text.toString().trim()
             val eventInformation = binding.etAddContactEventInformation.text.toString().trim()
-            val relationShip = binding.etAddContactRelationship.text.toString().trim()
-            val memo = binding.etAddContactMemo.text.toString().trim()
             val image = binding.ivAddContactImage.drawable
 
             // 비었을 때
             if (name.isEmpty() || phoneNumber.isEmpty() || eventInformation.isEmpty()
-                || relationShip.isEmpty() || memo.isEmpty() || image == null
+                ||  image == null
             ) {
-                Toast.makeText(this, resources.getString(R.string.add_contact_empty_data), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.add_contact_empty_data),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
             //유효한 입력 체크
-            if (!isName || !isPhoneNumber || !isEvent || !isRelationShip || !isMemo) {
+            if (!isName || !isPhoneNumber || !isPhoneNumber2 || !isPhoneNumber3) {
                 Toast.makeText(this, resources.getString(R.string.add_contact_wrong_data), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -434,31 +364,32 @@ class AddContactActivity : AppCompatActivity() {
                 imgSrc = binding.ivAddContactImage.drawable,
                 name = binding.etAddContactName.text.toString(),
                 number = binding.etAddContactPhoneNumber.text.toString(),
+                relationship = binding.groupSpinner.selectedItemPosition,
                 secondNumber = binding.etAddContactPhoneNumber2.text.toString(),
                 thirdNumber = binding.etAddContactPhoneNumber3.text.toString(),
-                relationship = binding.etAddContactRelationship.text.toString(),
                 memo = binding.etAddContactMemo.text.toString(),
                 heart = 0,
                 isMarked = false
             )
-            DataObject.addSweetieInfo(sweetieInfo)
-            finish()
-        }
 
+            if(DataObject.booleanSweetieInfo(sweetieInfo)){
+                Toast.makeText(this, "동일한 번호로 저장된 연락처가 있습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            else {
+                DataObject.addSweetieInfo(sweetieInfo)
+                finish()
+            }
+
+        }
         binding.btnAddContactCancel.setOnClickListener {
             finish()
         }
-
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
-    }
-
-    private fun openGallery(){
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-        pickImageLauncher.launch(galleryIntent)
     }
 
 

@@ -82,4 +82,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="SpinnerDivideStyle">
+        <item name="android:divider">@color/tertiary</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="SpinnerTheme" parent="Theme.AppCompat">
+        <item name="android:dropDownListViewStyle">@style/SpinnerDivideStyle</item>
+    </style>
+
 </resources>

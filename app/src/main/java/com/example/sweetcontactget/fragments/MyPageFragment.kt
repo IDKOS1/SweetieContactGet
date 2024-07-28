@@ -1,11 +1,19 @@
 package com.example.sweetcontactget.fragments
 
 import CustomDatePickerDialog
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.databinding.FragmentMyPageBinding
 import com.example.sweetcontactget.dialog.EditTextDialog
@@ -15,6 +23,40 @@ import com.example.sweetcontactget.util.Util
 class MyPageFragment : Fragment() {
     private var _binding: FragmentMyPageBinding? = null
     private val binding get() = _binding!!
+
+    private var pickImageUri: Uri? = null
+
+
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            pickImageUri = result.uriContent
+            binding.ivMypageProfile.setImageURI(pickImageUri)
+        } else {
+            val exception = result.error
+        }
+    }
+
+
+    private val pickImageLauncher =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                cropImage.launch(
+                    CropImageContractOptions(
+                        uri = uri, // 크롭할 이미지 uri
+                        cropImageOptions = CropImageOptions(
+                            outputCompressFormat = Bitmap.CompressFormat.PNG,//사진 확장자 변경
+                            minCropResultHeight = 50,//사진 최소 세로크기
+                            minCropResultWidth = 50,//사진 최소 가로크기
+                            aspectRatioY = 5,//세로 비율
+                            aspectRatioX = 8,//가로 비율
+                            fixAspectRatio = false,//커터? 크기 고정 여부
+                            borderLineColor = Color.MAGENTA//커터? 태두리 색
+                            // 원하는 옵션 추가
+                        )
+                    )
+                )
+            }
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -27,6 +69,10 @@ class MyPageFragment : Fragment() {
 
         binding.run {
             updateMyInfo()
+
+            ivMypageProfile.setOnClickListener {
+                pickImageLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
 
             tvMypageName.setOnClickListener {
                 editContent("name","이름")

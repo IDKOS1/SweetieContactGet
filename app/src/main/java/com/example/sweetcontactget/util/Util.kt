@@ -4,10 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.provider.ContactsContract
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
+import com.example.sweetcontactget.R
+import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import androidx.core.content.ContextCompat
-import com.example.sweetcontactget.data.DataObject
 
 
 object Util {
@@ -46,4 +53,63 @@ object Util {
         return callPermission == PackageManager.PERMISSION_GRANTED
     }
 
+
+    fun initSpinner(context: Context, spinner: Spinner, sweetiesId: Int?) {
+        ArrayAdapter.createFromResource(
+            context, R.array.group_array, R.layout.group_item_spinner
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
+
+            spinner.adapter = adapter
+        }
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+                if (parent != null) {
+                    if (sweetiesId != null) {
+                        DataObject.editGroup(sweetiesId, position)
+
+                    }
+                }
+
+                if (position == 0) {
+                    val tv = view?.findViewById<TextView>(R.id.tvItemSpinner)
+                    tv?.setTextColor(ContextCompat.getColor(context, R.color.gray))
+                } else {
+                    val tv = view?.findViewById<TextView>(R.id.tvItemSpinner)
+                    tv?.setTextColor(ContextCompat.getColor(context, R.color.white))
+
+                }
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                return
+            }
+
+        }
+    }
+
+    fun getRelationshipString(type: Int) = when (type) {
+        ContactsContract.CommonDataKinds.Relation.TYPE_RELATIVE,
+        ContactsContract.CommonDataKinds.Relation.TYPE_BROTHER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_SISTER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_CHILD,
+        ContactsContract.CommonDataKinds.Relation.TYPE_FATHER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_MOTHER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_PARENT,
+        ContactsContract.CommonDataKinds.Relation.TYPE_SPOUSE -> 1
+
+        ContactsContract.CommonDataKinds.Relation.TYPE_FRIEND -> 4
+
+        ContactsContract.CommonDataKinds.Relation.TYPE_MANAGER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_ASSISTANT -> 2
+
+        else -> 0
+    }
 }

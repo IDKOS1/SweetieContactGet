@@ -14,14 +14,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.database.getIntOrNull
 import androidx.fragment.app.Fragment
 import com.example.sweetcontactget.data.DataObject.addSweetieInfo
 import com.example.sweetcontactget.data.SweetieInfo
+import com.example.sweetcontactget.data.formatPhoneNumber
 import com.example.sweetcontactget.fragments.contact.AllContactFragment
 import com.example.sweetcontactget.fragments.contact.ContactFragment
 import com.example.sweetcontactget.fragments.MyPageFragment
 import com.example.sweetcontactget.databinding.ActivityMainBinding
 import com.example.sweetcontactget.fragments.randomCall.RandomFragment
+import com.example.sweetcontactget.util.Util.getRelationshipString
 import com.example.sweetcontactget.util.Util.showToast
 
 class MainActivity : AppCompatActivity() {
@@ -86,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             ContactsContract.Data.CONTACT_ID,
             ContactsContract.Contacts.DISPLAY_NAME,
             ContactsContract.CommonDataKinds.Phone.NUMBER,
-            ContactsContract.CommonDataKinds.Relation.NAME,
+            ContactsContract.CommonDataKinds.Relation.TYPE,
             ContactsContract.CommonDataKinds.Note.NOTE,
             ContactsContract.Contacts.STARRED,
             ContactsContract.CommonDataKinds.Photo.PHOTO_URI
@@ -108,15 +111,21 @@ class MainActivity : AppCompatActivity() {
                 val id =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
                 val sweetie = hashMap[id] ?: SweetieInfo(
-                    null, "", "", "", "", "", "", 0, false
+                    null, "", "", "", "", 0, "", 0, false
                 )
 
                 when (mimeType) {
                     ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> sweetie.number =
-                        cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                        formatPhoneNumber(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)))
 
                     ContactsContract.CommonDataKinds.Relation.CONTENT_ITEM_TYPE -> sweetie.relationship =
-                        cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Relation.NAME))
+                        getRelationshipString(
+                            cursor.getIntOrNull(
+                                cursor.getColumnIndex(
+                                    ContactsContract.CommonDataKinds.Relation.TYPE
+                                )
+                            ) ?: 0
+                        )
 
                     ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE -> sweetie.memo =
                         cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Note.NOTE))
@@ -198,7 +207,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

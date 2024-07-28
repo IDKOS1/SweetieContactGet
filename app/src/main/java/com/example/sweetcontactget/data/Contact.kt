@@ -15,7 +15,7 @@ data class SweetieInfo(
     var number: String,
     var secondNumber: String?,
     var thirdNumber : String?,
-    var relationship: String,
+    var relationship: Int,
     var memo: String,
     var heart: Int,
     var isMarked: Boolean,
