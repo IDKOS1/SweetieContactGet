@@ -18,13 +18,14 @@ import com.example.sweetcontactget.databinding.FragmentAllContactBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
 import com.example.sweetcontactget.util.TopSnappedSmoothScroller
+import com.example.sweetcontactget.util.Util
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.reddit.indicatorfastscroll.FastScrollerView
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
 
-class AllContactFragment : Fragment() {
+class AllContactFragment : Fragment(),ContactFragment.LayoutManagerSwitchable {
     private var param1: Int? = null
     private var _binding: FragmentAllContactBinding? = null
     private val binding get() = _binding!!
@@ -126,25 +127,8 @@ class AllContactFragment : Fragment() {
         contactAdapter.notifyDataSetChanged()
     }
 
-    fun switchLayoutManager(isGridLayout: Boolean) {
-        if (isGridLayout) {
-            recyclerView.layoutManager = GridLayoutManager(requireContext(), 3).apply {
-                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                    override fun getSpanSize(position: Int): Int {
-                        return if (contactAdapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER) {
-                            3
-                        } else {
-                            1
-                        }
-                    }
-                }
-            }
-            contactAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_GRID)
-        } else {
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            contactAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_LINEAR)
-        }
-        contactAdapter.notifyDataSetChanged()
+    override fun updateLayoutManager(isGridLayout : Boolean){
+        Util.switchLayoutManager(requireContext(),recyclerView,contactAdapter,isGridLayout)
     }
 
     companion object {

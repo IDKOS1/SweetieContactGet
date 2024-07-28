@@ -16,6 +16,7 @@ import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.FragmentBookmarkBinding
 import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
+import com.example.sweetcontactget.util.Util
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +28,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [BookmarkFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BookmarkFragment : Fragment() {
+class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
     private var _binding: FragmentBookmarkBinding? = null
     private val binding get() = _binding!!
     private lateinit var bookmarkAdapter: ContactAdapter
@@ -81,27 +82,10 @@ class BookmarkFragment : Fragment() {
             addItemDecoration(itemDecoration)
         }
     }
-    fun switchLayoutManager(isGridLayout : Boolean){
-        if (isGridLayout){
-            rvBookmark.layoutManager = GridLayoutManager(requireContext(),3).apply {
-                spanSizeLookup = object  : GridLayoutManager.SpanSizeLookup(){
-                    override fun getSpanSize(position: Int): Int {
-                        return if(bookmarkAdapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER){
-                            3
-                        }else{
-                            1
-                        }
-                    }
-                }
-            }
-            bookmarkAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_GRID)
-        }else{
-           rvBookmark.layoutManager = LinearLayoutManager(requireContext())
-            bookmarkAdapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_LINEAR)
-        }
-        bookmarkAdapter.notifyDataSetChanged()
-    }
 
+    override fun updateLayoutManager(isGridLayout : Boolean){
+        Util.switchLayoutManager(requireContext(),rvBookmark,bookmarkAdapter,isGridLayout)
+    }
 
     companion object {
         /**
