@@ -2,6 +2,7 @@ package com.example.sweetcontactget
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         initNavigationBar()
         setFragment(AllContactFragment())
-        requestPermission()
+        requestPermissions()
 
         binding.bottomNavigationView.selectedItemId = R.id.contactsItem
 
@@ -107,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                 val id =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
                 val sweetie = hashMap[id] ?: SweetieInfo(
-                    null, "", "","","", "", "", 0, false
+                    null, "", "", "", "", "", "", 0, false
                 )
 
                 when (mimeType) {
@@ -147,23 +148,57 @@ class MainActivity : AppCompatActivity() {
         showToast(this, "연락처 목록을 불러왔습니다.")
     }
 
-    private fun requestPermission() {
-        val status =
-            ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.READ_CONTACTS
-            )
+    private fun requestPermissions() {
+        val permissionsNeeded = mutableListOf<String>()
 
-        if (status != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+        // READ_CONTACTS 권한 확인 및 추가
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsNeeded.add(android.Manifest.permission.READ_CONTACTS)
+        }
+
+        // CALL_PHONE 권한 확인 및 추가
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsNeeded.add(android.Manifest.permission.CALL_PHONE)
+        }
+
+        // USE_EXACT_ALARM 권한 확인 및 추가
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.USE_EXACT_ALARM)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsNeeded.add(android.Manifest.permission.USE_EXACT_ALARM)
+        }
+
+        // SCHEDULE_EXACT_ALARM 권한 확인 및 추가
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.SCHEDULE_EXACT_ALARM
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsNeeded.add(android.Manifest.permission.SCHEDULE_EXACT_ALARM)
+        }
+
+        // POST_NOTIFICATIONS 권한 확인 및 추가
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsNeeded.add(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+        // 필요한 권한이 있으면 요청
+        if (permissionsNeeded.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(android.Manifest.permission.READ_CONTACTS),
+                permissionsNeeded.toTypedArray(),
                 0
             )
-        } else {
-            getContactList()
         }
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
