@@ -76,7 +76,10 @@ object DataObject {
     fun removeSelection(id: Int) = selectedSet.remove(id)
 
     fun increaseHeart(sweetieId: Int, heart: Int) {
-        contactMap[sweetieId]!!.heart += heart
+        contactMap[sweetieId]?.let {
+            it.heart += heart
+            if(it.heart >= 100) it.heart = 100
+        }
     }
 
     fun editProfile(editTarget: String, content: String) {
@@ -95,7 +98,7 @@ object DataObject {
             when (editTarget) {
                 "이름" -> contact.name = content
                 "전화번호" -> contact.number = content
-              "전화번호2" -> contact.secondNumber = content
+                "전화번호2" -> contact.secondNumber = content
                 "전화번호3" -> contact.thirdNumber = content
                 "메모" -> contact.memo = content
             }

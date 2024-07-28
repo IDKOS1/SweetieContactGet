@@ -1,31 +1,19 @@
 package com.example.sweetcontactget
 
-import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
@@ -35,11 +23,8 @@ import com.example.sweetcontactget.data.formatPhoneNumber
 import com.example.sweetcontactget.data.isRegularEvent
 import com.example.sweetcontactget.data.isRegularName
 import com.example.sweetcontactget.data.isRegularPhoneNumber
-import com.example.sweetcontactget.data.isRegularRelationShip
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
 import com.example.sweetcontactget.util.Util.initSpinner
-import kotlin.random.Random
-import kotlin.random.nextInt
 
 class AddContactActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddContactBinding
@@ -89,8 +74,6 @@ class AddContactActivity : AppCompatActivity() {
         var isPhoneNumber = false
         var isPhoneNumber2 = true
         var isPhoneNumber3 = true
-        var isEvent = false
-        var isRelationShip = false
 
         binding = ActivityAddContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -332,7 +315,6 @@ class AddContactActivity : AppCompatActivity() {
                     isRegularEvent(binding.etAddContactEventInformation.text.toString().trim()) -> {
                         binding.ivCheckOkayEventInformation.visibility = View.VISIBLE
                         binding.tvAddContactWrongEventInformation.visibility = View.INVISIBLE
-                        isEvent = true
                     }
 
                     binding.etAddContactEventInformation.text.toString().trim().isEmpty() -> {
@@ -340,14 +322,12 @@ class AddContactActivity : AppCompatActivity() {
                             resources.getString(R.string.add_contact_empty_event_information)
                         binding.ivCheckOkayEventInformation.visibility = View.INVISIBLE
                         binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
-                        isEvent = false
                     }
 
                     else -> {
                         binding.tvAddContactWrongEventInformation.text =
                             resources.getString(R.string.add_contact_placeholder_wrong_event_information)
                         binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
-                        isEvent = false
                     }
                 }
             }
@@ -375,7 +355,7 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             //유효한 입력 체크
-            if (!isName || !isPhoneNumber || !isPhoneNumber2 || !isPhoneNumber3 || !isEvent || !isRelationShip) {
+            if (!isName || !isPhoneNumber || !isPhoneNumber2 || !isPhoneNumber3) {
                 Toast.makeText(this, resources.getString(R.string.add_contact_wrong_data), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

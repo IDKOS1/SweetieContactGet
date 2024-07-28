@@ -1,5 +1,4 @@
 package com.example.sweetcontactget.data
-import android.widget.Toast
 import java.util.regex.Pattern
 
 //이름 유효성
