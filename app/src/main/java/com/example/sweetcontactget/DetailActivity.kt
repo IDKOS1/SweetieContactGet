@@ -131,7 +131,7 @@ class DetailActivity : AppCompatActivity() {
                             }
 
                             "${notificationDate.year}년 ${notificationDate.monthValue}월 ${notificationDate.dayOfMonth}일 ${notificationDate.hour}시 ${notificationDate.minute}분".also {
-                                tvDetailEvent.text = it
+                                sweetie?.event = it
                             }
 
                             updateDetail()
@@ -216,6 +216,7 @@ class DetailActivity : AppCompatActivity() {
                 tvDetailNumber.text = sweetie.number
                 tvDetailNumber2.text = sweetie.secondNumber
                 tvDetailNumber3.text = sweetie.thirdNumber
+                tvDetailEvent.text = sweetie.event
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()
                 tvDetailMemo.text = sweetie.memo
                 tbDetailMark.isChecked = sweetie.isMarked

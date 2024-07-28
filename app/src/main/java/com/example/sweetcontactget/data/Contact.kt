@@ -15,6 +15,7 @@ data class SweetieInfo(
     var number: String,
     var secondNumber: String?,
     var thirdNumber : String?,
+    var event : String = "최근 설정한 이벤트가 없습니다.",
     var relationship: Int,
     var memo: String,
     var heart: Int,
