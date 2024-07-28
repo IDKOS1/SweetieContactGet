@@ -66,7 +66,10 @@ object DataObject {
     fun removeSelection(id: Int) = selectedSet.remove(id)
 
     fun increaseHeart(sweetieId: Int, heart: Int) {
-        contactMap[sweetieId]!!.heart += heart
+        contactMap[sweetieId]?.let {
+            it.heart += heart
+            if(it.heart >= 100) it.heart = 100
+        }
     }
 
     fun editProfile(editTarget: String, content: String) {
