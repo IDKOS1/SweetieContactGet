@@ -3,7 +3,6 @@ package com.example.sweetcontactget.data
 import android.content.Context
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.example.sweetcontactget.AddContactActivity
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
 import com.example.sweetcontactget.util.Util.removeAll

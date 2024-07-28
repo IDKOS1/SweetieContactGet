@@ -1,31 +1,19 @@
 package com.example.sweetcontactget
 
-import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
@@ -35,11 +23,8 @@ import com.example.sweetcontactget.data.formatPhoneNumber
 import com.example.sweetcontactget.data.isRegularEvent
 import com.example.sweetcontactget.data.isRegularName
 import com.example.sweetcontactget.data.isRegularPhoneNumber
-import com.example.sweetcontactget.data.isRegularRelationShip
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
 import com.example.sweetcontactget.util.Util.initSpinner
-import kotlin.random.Random
-import kotlin.random.nextInt
 
 class AddContactActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddContactBinding
