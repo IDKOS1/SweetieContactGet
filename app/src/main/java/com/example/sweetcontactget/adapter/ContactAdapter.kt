@@ -25,7 +25,7 @@ import com.example.sweetcontactget.databinding.PersonInfoHolderGridBinding
 import com.example.sweetcontactget.dialog.CallingDialog
 import com.example.sweetcontactget.util.ItemTouchHelperCallback
 
-class ContactAdapter :
+class ContactAdapter(private val context: Context) :
     ListAdapter<Contact, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Contact>() {
         override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem == newItem
@@ -41,7 +41,6 @@ class ContactAdapter :
     }
 
     private var viewType = VIEW_TYPE_LIST_LINEAR
-    private val context: Context by lazy { ContactApplication.applicationContext() }
 
     fun setViewType(viewType: Int) {
         this.viewType = viewType

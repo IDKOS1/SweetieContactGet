@@ -20,7 +20,7 @@ import com.example.sweetcontactget.util.Util
 class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
     private var _binding: FragmentBookmarkBinding? = null
     private val binding get() = _binding!!
-    private val bookmarkAdapter by lazy { ContactAdapter() }
+    private lateinit var bookmarkAdapter: ContactAdapter
     private lateinit var rvBookmark: RecyclerView
 
     override fun onCreateView(
@@ -34,6 +34,7 @@ class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        bookmarkAdapter = ContactAdapter(requireContext())
         rvBookmark = binding.rvBookmark
     }
 
