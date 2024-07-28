@@ -13,13 +13,14 @@ import com.example.sweetcontactget.data.formatPhoneNumber
 import com.example.sweetcontactget.data.isRegularName
 import com.example.sweetcontactget.data.isRegularPhoneNumber
 import com.example.sweetcontactget.databinding.DialogMyPageEditTextBinding
+
 class EditTextDialog(private val context: Context) {
-    private lateinit var binding : DialogMyPageEditTextBinding
+    private lateinit var binding: DialogMyPageEditTextBinding
     private val dialog = Dialog(context)
 
-    fun show(type: String, text:String, editText : String){
-        when(type){
-            "name" -> {
+    fun show(type: String, text: String, editText: String) {
+        when (type) {
+            context.getString(R.string.name) -> {
                 var isNameCorrect = true
 
                 dialog.show()
@@ -35,9 +36,20 @@ class EditTextDialog(private val context: Context) {
                 binding.tvEditWrongName.text = context.getString(R.string.dialog_wrong_message_name)
 
                 binding.etEditName.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
 
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
                         if (isRegularName(binding.etEditName.text.toString().trim())) {
                             binding.tvEditWrongName.visibility = View.INVISIBLE
                             isNameCorrect = true
@@ -52,11 +64,14 @@ class EditTextDialog(private val context: Context) {
 
                 binding.run {
                     btnEditSave.setOnClickListener {
-                        if(isNameCorrect) {
+                        if (isNameCorrect) {
                             onClickedListener.onClicked(etEditName.text.toString())
                             dialog.dismiss()
-                        }else{
-                            Toast.makeText(context, "유효하지 않은 입력 입니다. 다시 확인해 주세요", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.invalid_input), Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
@@ -65,7 +80,8 @@ class EditTextDialog(private val context: Context) {
                     }
                 }
             }
-            "number" ->{
+
+            context.getString(R.string.number) -> {
                 var isNumberCorrect = true
 
                 dialog.show()
@@ -78,19 +94,30 @@ class EditTextDialog(private val context: Context) {
 
                 binding.tvEditName.text = text
                 binding.etEditName.hint = editText
-                binding.tvEditWrongName.text = context.getString(R.string.dialog_wrong_message_number)
+                binding.tvEditWrongName.text =
+                    context.getString(R.string.dialog_wrong_message_number)
 
                 binding.etEditName.addTextChangedListener(object : TextWatcher {
-                    private var isFormat : Boolean = false
-                    private var isDeleteHyphen : Boolean = false
+                    private var isFormat: Boolean = false
+                    private var isDeleteHyphen: Boolean = false
 
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                        if(count > 0 && s?.get(start) == '-'){
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                        if (count > 0 && s?.get(start) == '-') {
                             isDeleteHyphen = true
                         }
                     }
 
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
                         if (isRegularPhoneNumber(binding.etEditName.text.toString().trim())) {
                             binding.tvEditWrongName.visibility = View.INVISIBLE
                             isNumberCorrect = true
@@ -101,24 +128,28 @@ class EditTextDialog(private val context: Context) {
                     }
 
                     override fun afterTextChanged(s: Editable?) {
-                        if(isFormat||isDeleteHyphen) return
+                        if (isFormat || isDeleteHyphen) return
                         isFormat = true
 
-                        val text = s.toString().replace("-","")
-                        val formattedNumber = formatPhoneNumber(text)
+                        val replacedText = s.toString().replace("-", "")
+                        val formattedNumber = formatPhoneNumber(replacedText)
 
-                        s?.replace(0,s.length,formattedNumber)
+                        s?.replace(0, s.length, formattedNumber)
                         isFormat = false
                     }
                 })
 
                 binding.run {
                     btnEditSave.setOnClickListener {
-                        if(isNumberCorrect) {
+                        if (isNumberCorrect) {
                             onClickedListener.onClicked(etEditName.text.toString())
                             dialog.dismiss()
-                        }else{
-                            Toast.makeText(context, "유효하지 않은 입력 입니다. 다시 확인해 주세요", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.invalid_input),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
@@ -127,7 +158,8 @@ class EditTextDialog(private val context: Context) {
                     }
                 }
             }
-            "allText" -> {
+
+            context.getString(R.string.alltext) -> {
                 dialog.show()
 
                 binding = DialogMyPageEditTextBinding.inflate(dialog.layoutInflater)

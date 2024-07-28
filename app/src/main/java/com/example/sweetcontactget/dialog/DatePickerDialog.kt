@@ -1,17 +1,11 @@
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.view.Window
-import android.view.WindowManager
-import android.widget.DatePicker
-import androidx.fragment.app.DialogFragment
 import com.example.sweetcontactget.databinding.DialogDatePickerBinding
 import java.util.*
 

@@ -122,4 +122,10 @@
     <string name="notification_4">야! 지금 나한테 빨리 전화해</string>
     <string name="notification_5">혹시..뭐 잊은거 없어..?</string>
     <string name="notification_6">%s.. 보고 싶어</string>
+    <string name="notification">알림입니다.</string>
+    <string name="notificate">알림</string>
+    <string name="invalid_input">유효하지 않은 입력 입니다. 다시 확인해 주세요</string>
+    <string name="name">name</string>
+    <string name="number">number</string>
+    <string name="alltext">allText</string>
 </resources>
