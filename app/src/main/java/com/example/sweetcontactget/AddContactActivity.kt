@@ -89,8 +89,6 @@ class AddContactActivity : AppCompatActivity() {
         var isPhoneNumber = false
         var isPhoneNumber2 = true
         var isPhoneNumber3 = true
-        var isEvent = false
-        var isRelationShip = false
 
         binding = ActivityAddContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -332,7 +330,6 @@ class AddContactActivity : AppCompatActivity() {
                     isRegularEvent(binding.etAddContactEventInformation.text.toString().trim()) -> {
                         binding.ivCheckOkayEventInformation.visibility = View.VISIBLE
                         binding.tvAddContactWrongEventInformation.visibility = View.INVISIBLE
-                        isEvent = true
                     }
 
                     binding.etAddContactEventInformation.text.toString().trim().isEmpty() -> {
@@ -340,14 +337,12 @@ class AddContactActivity : AppCompatActivity() {
                             resources.getString(R.string.add_contact_empty_event_information)
                         binding.ivCheckOkayEventInformation.visibility = View.INVISIBLE
                         binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
-                        isEvent = false
                     }
 
                     else -> {
                         binding.tvAddContactWrongEventInformation.text =
                             resources.getString(R.string.add_contact_placeholder_wrong_event_information)
                         binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
-                        isEvent = false
                     }
                 }
             }
@@ -375,7 +370,7 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             //유효한 입력 체크
-            if (!isName || !isPhoneNumber || !isPhoneNumber2 || !isPhoneNumber3 || !isEvent || !isRelationShip) {
+            if (!isName || !isPhoneNumber || !isPhoneNumber2 || !isPhoneNumber3) {
                 Toast.makeText(this, resources.getString(R.string.add_contact_wrong_data), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
