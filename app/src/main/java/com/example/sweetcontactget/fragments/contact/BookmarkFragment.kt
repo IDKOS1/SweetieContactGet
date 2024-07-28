@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.adapter.ContactAdapter
@@ -18,47 +17,25 @@ import com.example.sweetcontactget.util.CustomDividerDecoration
 import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
 import com.example.sweetcontactget.util.Util
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [BookmarkFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
     private var _binding: FragmentBookmarkBinding? = null
     private val binding get() = _binding!!
     private lateinit var bookmarkAdapter: ContactAdapter
-    private lateinit var rvBookmark : RecyclerView
-
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var rvBookmark: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
-        rvBookmark = binding.rvBookmark
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        bookmarkAdapter = ContactAdapter(requireContext())
+        rvBookmark = binding.rvBookmark
     }
 
     override fun onDestroyView() {
@@ -72,7 +49,6 @@ class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
     }
 
     private fun initView() = with(binding) {
-        bookmarkAdapter = ContactAdapter(requireContext())
         rvBookmark.apply {
             adapter = bookmarkAdapter
             layoutManager = LinearLayoutManager(this.context)
@@ -83,27 +59,7 @@ class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
         }
     }
 
-    override fun updateLayoutManager(isGridLayout : Boolean){
-        Util.switchLayoutManager(requireContext(),rvBookmark,bookmarkAdapter,isGridLayout)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BookmarkFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BookmarkFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun updateLayoutManager(isGridLayout: Boolean) {
+        Util.switchLayoutManager(requireContext(), rvBookmark, bookmarkAdapter, isGridLayout)
     }
 }
