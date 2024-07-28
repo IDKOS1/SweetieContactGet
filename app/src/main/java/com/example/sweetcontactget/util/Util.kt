@@ -18,11 +18,16 @@ import androidx.core.content.ContextCompat
 
 
 object Util {
-    fun sendMessage(context: Context, phoneNumber: String) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse("sms:$phoneNumber")
+    fun sendMessage(context: Context, sweetieId: Int, phoneNumber: String) {
+        if (checkCallPermission(context)) {
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("sms:$phoneNumber")
+            }
+            context.startActivity(intent)
+            DataObject.increaseHeart(sweetieId, 10)
+        } else {
+            showToast(context, "권한 설정이 필요합니다.")
         }
-        context.startActivity(intent)
     }
 
     fun callSweetie(context: Context, sweetieId: Int, phoneNumber: String) {
