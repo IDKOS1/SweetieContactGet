@@ -24,7 +24,7 @@ import com.reddit.indicatorfastscroll.FastScrollerView
 class AllContactFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
     private var _binding: FragmentAllContactBinding? = null
     private val binding get() = _binding!!
-    private val contactAdapter by lazy { ContactAdapter().apply { submitList(contactList.toList()) } }
+    private lateinit var contactAdapter: ContactAdapter
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -37,6 +37,7 @@ class AllContactFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        contactAdapter = ContactAdapter(requireContext()).apply { submitList(contactList.toList()) }
         recyclerView = binding.rvAllContactFragment
 
         recyclerView.apply {
