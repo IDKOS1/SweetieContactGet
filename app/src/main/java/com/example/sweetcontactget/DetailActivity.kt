@@ -1,20 +1,17 @@
 package com.example.sweetcontactget
 
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
+import com.example.sweetcontactget.data.Alarm
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.databinding.ActivityDetailBinding
 import com.example.sweetcontactget.dialog.EditTextDialog
+import com.example.sweetcontactget.dialog.NotificationDialog
 import com.example.sweetcontactget.util.Util
+import java.time.LocalDateTime
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -33,44 +30,73 @@ class DetailActivity : AppCompatActivity() {
             sweetie = DataObject.getSweetieInfo(sweetieId)
         }
 
-        requestCallPermission()
-
         updateDetail()
 
 
         binding.run {
             tvDetailName.setOnClickListener {
-                editContent("name","이름")
+                editContent("name", "이름")
             }
 
             llDetailNumber.setOnClickListener {
-                editContent("number","전화번호")
+                editContent("number", "전화번호")
             }
 
             llDetailNumber2.setOnClickListener {
-                editContent("number","전화번호2")
+                editContent("number", "전화번호2")
             }
 
             llDetailNumber3.setOnClickListener {
-                editContent("number","전화번호3")
+                editContent("number", "전화번호3")
             }
 
             tvDetailAddNumber.setOnClickListener {
-                if (llDetailNumber2.visibility == View.GONE && llDetailNumber3.visibility == View.GONE){
-                    editContent("number","전화번호2")
-                }else if(llDetailNumber2.visibility == View.VISIBLE && llDetailNumber3.visibility ==View.GONE){
-                    editContent("number","전화번호3")
-                }else{
-                    Toast.makeText(this@DetailActivity, "전화번호는 3개 까지만 저장할 수 있습니다.", Toast.LENGTH_SHORT).show()
+                if (llDetailNumber2.visibility == View.GONE && llDetailNumber3.visibility == View.GONE) {
+                    editContent("number", "전화번호2")
+                } else if (llDetailNumber2.visibility == View.VISIBLE && llDetailNumber3.visibility == View.GONE) {
+                    editContent("number", "전화번호3")
+                } else {
+                    Util.showToast(this@DetailActivity, "전화번호는 3개 까지만 저장할 수 있습니다.")
                 }
             }
 
+            llDetailEvent.setOnClickListener {
+                val datePickerFragment =
+                    NotificationDialog(this@DetailActivity) {notificationDate ->
+                        // 선택된 날짜를 처리
+                        if(notificationDate >= LocalDateTime.now()) {
+                            sweetie?.let { sweetie ->
+                                Alarm().addAlarm(
+                                    this@DetailActivity,
+                                    notificationDate.year,
+                                    notificationDate.monthValue,
+                                    notificationDate.dayOfMonth,
+                                    notificationDate.hour,
+                                    notificationDate.minute,
+                                    sweetie.name,
+                                    "${sweetie.name}님 의 알림"
+                                )
+                            }
+
+                            "${notificationDate.year}년 ${notificationDate.monthValue}월 ${notificationDate.dayOfMonth}일 ${notificationDate.hour}시 ${notificationDate.minute}분".also { tvDetailEvent.text = it }
+
+                            updateDetail()
+                            Util.showToast(this@DetailActivity, "이벤트 알림 설정 완료")
+                        } else {
+                            Util.showToast(this@DetailActivity, "현재 시간 이후로 설정해 주세요")
+                        }
+
+                    }
+
+                datePickerFragment.show()
+            }
+
             llDetailRelationship.setOnClickListener {
-                editContent("allText","관계")
+                editContent("allText", "관계")
             }
 
             llDetailMemo.setOnClickListener {
-                editContent("allText","메모")
+                editContent("allText", "메모")
             }
 
 
@@ -116,12 +142,12 @@ class DetailActivity : AppCompatActivity() {
 
     private fun editContent(type: String, editTarget: String) {
         val dialog = EditTextDialog(this)
-        dialog.show(type,"$editTarget 편집", editTarget)
+        dialog.show(type, "$editTarget 편집", editTarget)
 
         //다이얼로그 저장 버튼을 눌렀을 때 text 변경
         dialog.setOnClickedListener(object : EditTextDialog.ButtonClickListener {
             override fun onClicked(content: String) {
-                DataObject.editContact(sweetieId,editTarget, content)
+                DataObject.editContact(sweetieId, editTarget, content)
                 updateDetail()
                 Util.showToast(this@DetailActivity, "수정 되었습니다.")
             }
@@ -135,26 +161,17 @@ class DetailActivity : AppCompatActivity() {
                 tvDetailName.text = sweetie.name
                 tvDetailNumber.text = sweetie.number
                 tvDetailNumber2.text = sweetie.secondNumber
-                tvDetailNumber3.text =sweetie.thirdNumber
+                tvDetailNumber3.text = sweetie.thirdNumber
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()
                 tvDetailRelationship.text = sweetie.relationship
                 tvDetailMemo.text = sweetie.memo
                 tbDetailMark.isChecked = sweetie.isMarked
 
-                llDetailNumber2.visibility = if (sweetie.secondNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
-                llDetailNumber3.visibility = if (sweetie.thirdNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
+                llDetailNumber2.visibility =
+                    if (sweetie.secondNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
+                llDetailNumber3.visibility =
+                    if (sweetie.thirdNumber.isNullOrEmpty()) View.GONE else View.VISIBLE
             }
-        }
-    }
-
-    private fun requestCallPermission() {
-        val status = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
-        if (status != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.CALL_PHONE),
-                10
-            )
         }
     }
 }
