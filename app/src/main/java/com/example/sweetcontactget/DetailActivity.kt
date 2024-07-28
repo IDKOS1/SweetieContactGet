@@ -129,7 +129,8 @@ class DetailActivity : AppCompatActivity() {
                                     notificationDate.hour,
                                     notificationDate.minute,
                                     sweetie.name,
-                                    getString(mentList.random(),DataObject.myProfileData.name.takeLast(2))
+                                    getString(mentList.random(),DataObject.myProfileData.name.takeLast(2)),
+                                    sweetieId
                                 )
                             }
 
@@ -159,7 +160,7 @@ class DetailActivity : AppCompatActivity() {
 
             sweetie?.let { sweetie ->
                 tvDetailMessage.setOnClickListener {
-                    Util.sendMessage(this@DetailActivity, sweetie.number)
+                    Util.sendMessage(this@DetailActivity, sweetieId, sweetie.number)
                 }
 
                 tvDetailCall.setOnClickListener {
