@@ -187,7 +187,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="48dp"
-        app:shapeAppearance="@drawable/shape_fab_background"
+        app:shapeAppearance="@drawable/shape_circle_background"
         app:tint="@color/primary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
