@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.provider.ContactsContract
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,6 +15,10 @@ import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sweetcontactget.adapter.ContactAdapter
 
 
 object Util {
@@ -92,5 +97,44 @@ object Util {
             }
 
         }
+    }
+
+    fun getRelationshipString(type: Int) = when (type) {
+        ContactsContract.CommonDataKinds.Relation.TYPE_RELATIVE,
+        ContactsContract.CommonDataKinds.Relation.TYPE_BROTHER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_SISTER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_CHILD,
+        ContactsContract.CommonDataKinds.Relation.TYPE_FATHER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_MOTHER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_PARENT,
+        ContactsContract.CommonDataKinds.Relation.TYPE_SPOUSE -> 1
+
+        ContactsContract.CommonDataKinds.Relation.TYPE_FRIEND -> 4
+
+        ContactsContract.CommonDataKinds.Relation.TYPE_MANAGER,
+        ContactsContract.CommonDataKinds.Relation.TYPE_ASSISTANT -> 2
+
+        else -> 0
+    }
+
+    fun switchLayoutManager(context: Context, recyclerView: RecyclerView, adapter: ContactAdapter, isGridLayout: Boolean) {
+        if (isGridLayout) {
+            recyclerView.layoutManager = GridLayoutManager(context, 3).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        return if (adapter.getItemViewType(position) == ContactAdapter.VIEW_TYPE_HEADER) {
+                            3
+                        } else {
+                            1
+                        }
+                    }
+                }
+            }
+            adapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_GRID)
+        } else {
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            adapter.setViewType(ContactAdapter.VIEW_TYPE_LIST_LINEAR)
+        }
+        adapter.notifyDataSetChanged()
     }
 }

@@ -1,44 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_dialog"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/img_dialog_3"
     android:padding="16dp">
 
     <DatePicker
-        android:id="@+id/dp_picker_datePicker"
+        android:id="@+id/dp_picker_date_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:datePickerMode="spinner"
-
-        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/BirthdayDatePicker"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/btn_picker_cancle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_button"
-        android:gravity="center"
-        android:text="취소"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/background_button"
         android:fontFamily="@font/yeonaesidae"
-        app:layout_constraintTop_toBottomOf="@id/dp_picker_datePicker"
-        app:layout_constraintEnd_toStartOf="@id/btn_picker_confirm"/>
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        android:text="취소"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/btn_picker_confirm"
+        app:layout_constraintTop_toBottomOf="@id/dp_picker_date_picker" />
 
     <TextView
         android:id="@+id/btn_picker_confirm"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_button"
-        android:gravity="center"
-        android:text="확인"
         android:layout_marginTop="16dp"
+        android:background="@drawable/background_button"
         android:fontFamily="@font/yeonaesidae"
-        app:layout_constraintTop_toBottomOf="@id/dp_picker_datePicker"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        android:text="확인"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dp_picker_date_picker" />
 </androidx.constraintlayout.widget.ConstraintLayout>
