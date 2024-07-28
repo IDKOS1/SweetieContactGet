@@ -20,7 +20,6 @@ import com.canhub.cropper.CropImageOptions
 import com.example.sweetcontactget.data.DataObject
 import com.example.sweetcontactget.data.SweetieInfo
 import com.example.sweetcontactget.data.formatPhoneNumber
-import com.example.sweetcontactget.data.isRegularEvent
 import com.example.sweetcontactget.data.isRegularName
 import com.example.sweetcontactget.data.isRegularPhoneNumber
 import com.example.sweetcontactget.databinding.ActivityAddContactBinding
@@ -306,45 +305,13 @@ class AddContactActivity : AppCompatActivity() {
             }
         })
 
-        //이벤트 유효성 검사
-        binding.etAddContactEventInformation.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                when {
-                    isRegularEvent(binding.etAddContactEventInformation.text.toString().trim()) -> {
-                        binding.ivCheckOkayEventInformation.visibility = View.VISIBLE
-                        binding.tvAddContactWrongEventInformation.visibility = View.INVISIBLE
-                    }
-
-                    binding.etAddContactEventInformation.text.toString().trim().isEmpty() -> {
-                        binding.tvAddContactWrongEventInformation.text =
-                            resources.getString(R.string.add_contact_empty_event_information)
-                        binding.ivCheckOkayEventInformation.visibility = View.INVISIBLE
-                        binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
-                    }
-
-                    else -> {
-                        binding.tvAddContactWrongEventInformation.text =
-                            resources.getString(R.string.add_contact_placeholder_wrong_event_information)
-                        binding.tvAddContactWrongEventInformation.visibility = View.VISIBLE
-                    }
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-
-
         binding.btnAddContactSave.setOnClickListener {
             val name = binding.etAddContactName.text.toString().trim()
             val phoneNumber = binding.etAddContactPhoneNumber.text.toString().trim()
-            val eventInformation = binding.etAddContactEventInformation.text.toString().trim()
             val image = binding.ivAddContactImage.drawable
 
             // 비었을 때
-            if (name.isEmpty() || phoneNumber.isEmpty() || eventInformation.isEmpty()
-                ||  image == null
+            if (name.isEmpty() || phoneNumber.isEmpty() || image == null
             ) {
                 Toast.makeText(
                     this,
@@ -356,7 +323,11 @@ class AddContactActivity : AppCompatActivity() {
 
             //유효한 입력 체크
             if (!isName || !isPhoneNumber || !isPhoneNumber2 || !isPhoneNumber3) {
-                Toast.makeText(this, resources.getString(R.string.add_contact_wrong_data), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.add_contact_wrong_data),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
@@ -372,11 +343,10 @@ class AddContactActivity : AppCompatActivity() {
                 isMarked = false
             )
 
-            if(DataObject.booleanSweetieInfo(sweetieInfo)){
+            if (DataObject.booleanSweetieInfo(sweetieInfo)) {
                 Toast.makeText(this, "동일한 번호로 저장된 연락처가 있습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            }
-            else {
+            } else {
                 DataObject.addSweetieInfo(sweetieInfo)
                 finish()
             }

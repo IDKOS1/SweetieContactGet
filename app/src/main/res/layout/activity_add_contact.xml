@@ -340,70 +340,8 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="@id/cl_add_contact_phone_number_3"
                 app:layout_constraintTop_toBottomOf="@id/cl_add_contact_phone_number_3"
-                app:layout_constraintBottom_toTopOf="@id/cl_add_contact_event_information"/>
+                app:layout_constraintBottom_toTopOf="@id/cl_add_contact_phone_number_3"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_add_contact_event_information"
-                android:layout_width="300sp"
-                android:layout_height="80sp"
-                android:layout_marginTop="50sp"
-                android:background="@drawable/shape_corner_radius_15dp_bg_primary_transparent"
-                app:layout_constraintStart_toStartOf="@id/cl_add_contact_phone_number_3"
-                app:layout_constraintTop_toBottomOf="@id/cl_add_contact_phone_number_3">
-                <TextView
-                    android:id="@+id/tv_add_contact_event_information"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/common_event_information"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/yeonaesidae_r"
-                    android:paddingTop="12sp"
-                    android:paddingStart="20sp"
-                    app:layout_constraintTop_toTopOf="@id/cl_add_contact_event_information"
-                    app:layout_constraintStart_toStartOf="@id/cl_add_contact_event_information"/>
-                <ImageView
-                    android:id="@+id/iv_check_okay_event_information"
-                    android:layout_width="27sp"
-                    android:layout_height="18sp"
-                    android:src="@drawable/ic_check_okay"
-                    android:visibility="invisible"
-                    android:layout_marginTop="4sp"
-                    app:layout_constraintStart_toEndOf="@id/tv_add_contact_event_information"
-                    app:layout_constraintTop_toTopOf="@id/tv_add_contact_event_information"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_add_contact_event_information"/>
-
-                <EditText
-                    android:id="@+id/et_add_contact_event_information"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/add_contact_placeholder_event_information"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/gray"
-                    android:textSize="24sp"
-                    android:inputType="text"
-                    android:fontFamily="@font/yeonaesidae_b"
-                    android:paddingTop="8sp"
-                    android:paddingStart="20sp"
-                    android:paddingEnd="20sp"
-                    android:background="@android:color/transparent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_add_contact_event_information"
-                    app:layout_constraintStart_toStartOf="@id/tv_add_contact_event_information" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/tv_add_contact_wrong_event_information"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textColor="@color/primary"
-                android:textSize="12sp"
-                android:fontFamily="@font/yeonaesidae_r"
-                android:text="@string/add_contact_placeholder_wrong_event_information"
-                android:visibility="invisible"
-                android:layout_marginStart="3sp"
-                app:layout_constraintStart_toStartOf="@id/cl_add_contact_event_information"
-                app:layout_constraintTop_toBottomOf="@+id/cl_add_contact_event_information" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_add_contact_relationship"
@@ -411,8 +349,8 @@
                 android:layout_height="80sp"
                 android:layout_marginTop="20sp"
                 android:background="@drawable/shape_corner_radius_15dp_bg_primary_transparent"
-                app:layout_constraintStart_toStartOf="@id/cl_add_contact_event_information"
-                app:layout_constraintTop_toBottomOf="@id/cl_add_contact_event_information">
+                app:layout_constraintStart_toStartOf="@id/cl_add_contact_phone_number_3"
+                app:layout_constraintTop_toBottomOf="@id/cl_add_contact_phone_number_3">
                 <TextView
                     android:id="@+id/tv_add_contact_relationship"
                     android:layout_width="wrap_content"
