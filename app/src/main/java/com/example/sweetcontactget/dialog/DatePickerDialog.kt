@@ -1,29 +1,34 @@
 import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.Point
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import com.example.sweetcontactget.databinding.DialogDatePickerBinding
 import java.util.*
 
 class CustomDatePickerDialog(
+    context: Context,
     private val listener: (year: Int, month: Int, dayOfMonth: Int) -> Unit
-) : DialogFragment() {
+) : Dialog(context) {
 
     private var _binding: DialogDatePickerBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = Dialog(requireContext())
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         _binding = DialogDatePickerBinding.inflate(LayoutInflater.from(context))
-
-        dialog.setContentView(binding.root)
-        dialog.window?.setLayout(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        setContentView(binding.root)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val calendar = Calendar.getInstance()
         binding.dpPickerDatePicker.init(
@@ -41,18 +46,26 @@ class CustomDatePickerDialog(
                 binding.dpPickerDatePicker.month,
                 binding.dpPickerDatePicker.dayOfMonth
             )
-            dialog.dismiss()
+            dismiss()
         }
 
         binding.btnPickerCancle.setOnClickListener {
-            dialog.dismiss()
+            dismiss()
         }
 
-        return dialog
+        // Set the dialog size after the dialog has been created
+        window?.let {
+            setDialogSize(it, 0.8f, 0.35f)
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun setDialogSize(window: Window, widthRatio: Float, heightRatio: Float) {
+        val displayMetrics = DisplayMetrics()
+        window.windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+        val width = (displayMetrics.widthPixels * widthRatio).toInt()
+        val height = (displayMetrics.heightPixels * heightRatio).toInt()
+
+        window.setLayout(width, height)
     }
 }
