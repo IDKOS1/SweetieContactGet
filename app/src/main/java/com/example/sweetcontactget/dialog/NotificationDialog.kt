@@ -1,65 +1,64 @@
+package com.example.sweetcontactget.dialog
+
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
-import android.widget.DatePicker
-import androidx.fragment.app.DialogFragment
-import com.example.sweetcontactget.databinding.DialogDatePickerBinding
-import java.util.*
+import com.example.sweetcontactget.databinding.DialogNotificationBinding
+import java.time.LocalDateTime
+import java.util.Calendar
 
-class CustomDatePickerDialog(
+class NotificationDialog(
     context: Context,
-    private val listener: (year: Int, month: Int, dayOfMonth: Int) -> Unit
+    private val listener: (notificationDate: LocalDateTime) -> Unit
 ) : Dialog(context) {
 
-    private var _binding: DialogDatePickerBinding? = null
+    private var _binding: DialogNotificationBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _binding = DialogDatePickerBinding.inflate(LayoutInflater.from(context))
+        _binding = DialogNotificationBinding.inflate(LayoutInflater.from(context))
         setContentView(binding.root)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        // Set the dialog size
+        setDialogSize(0.95f, 0.85f)
+
         val calendar = Calendar.getInstance()
-        binding.dpPickerDatePicker.init(
+        binding.dpNotificationDatePicker.init(
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH),
             null
         )
 
-        binding.dpPickerDatePicker.setCalendarViewShown(false)
-
-        binding.btnPickerConfirm.setOnClickListener {
+        binding.btnNotificationConfirm.setOnClickListener {
+            val notificationDate = LocalDateTime.of(
+                binding.dpNotificationDatePicker.year,
+                binding.dpNotificationDatePicker.month + 1,
+                binding.dpNotificationDatePicker.dayOfMonth,
+                binding.tpNotificationTimePicker.hour,
+                binding.tpNotificationTimePicker.minute
+            )
             listener(
-                binding.dpPickerDatePicker.year,
-                binding.dpPickerDatePicker.month,
-                binding.dpPickerDatePicker.dayOfMonth
+                notificationDate
             )
             dismiss()
         }
 
-        binding.btnPickerCancle.setOnClickListener {
+        binding.btnNotificationCancle.setOnClickListener {
             dismiss()
-        }
-
-        // Set the dialog size after the dialog has been created
-        window?.let {
-            setDialogSize(it, 0.8f, 0.35f)
         }
     }
 
-    private fun setDialogSize(window: Window, widthRatio: Float, heightRatio: Float) {
+    private fun setDialogSize(widthRatio: Float, heightRatio: Float) {
+        val window = window ?: return
+
         val displayMetrics = DisplayMetrics()
         window.windowManager.defaultDisplay.getMetrics(displayMetrics)
 

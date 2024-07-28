@@ -83,7 +83,7 @@ class MyPageFragment : Fragment() {
             }
 
             llMypageBirthday.setOnClickListener {
-                val datePickerFragment = CustomDatePickerDialog {selectedYear, selectedMonth, selectedDay ->
+                val datePickerFragment = CustomDatePickerDialog(requireContext()) {selectedYear, selectedMonth, selectedDay ->
                     // 선택된 날짜를 처리
                     val selectedDate = String.format(
                         "%04d-%02d-%02d",
@@ -99,7 +99,7 @@ class MyPageFragment : Fragment() {
                     Util.showToast(requireContext(), "생년월일이 수정되었습니다.")
                 }
 
-                datePickerFragment.show(parentFragmentManager, "datePicker")
+                datePickerFragment.show()
             }
 
             llMypageAddress.setOnClickListener {
