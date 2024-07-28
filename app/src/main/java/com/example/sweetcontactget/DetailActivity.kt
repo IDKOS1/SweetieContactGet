@@ -126,7 +126,8 @@ class DetailActivity : AppCompatActivity() {
                                     notificationDate.hour,
                                     notificationDate.minute,
                                     sweetie.name,
-                                    "${sweetie.name}님 의 알림"
+                                    "${sweetie.name}님 의 알림",
+                                    sweetieId
                                 )
                             }
 
@@ -156,7 +157,7 @@ class DetailActivity : AppCompatActivity() {
 
             sweetie?.let { sweetie ->
                 tvDetailMessage.setOnClickListener {
-                    Util.sendMessage(this@DetailActivity, sweetie.number)
+                    Util.sendMessage(this@DetailActivity, sweetieId, sweetie.number)
                 }
 
                 tvDetailCall.setOnClickListener {

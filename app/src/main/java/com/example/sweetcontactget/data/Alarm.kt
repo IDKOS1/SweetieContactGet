@@ -5,6 +5,8 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import java.util.Calendar
 
 class Alarm : BroadcastReceiver() {
@@ -12,7 +14,8 @@ class Alarm : BroadcastReceiver() {
         if (intent != null) {
             val title = intent.getStringExtra("title") ?: "알림"
             val message = intent.getStringExtra("message") ?: "알림입니다."
-            MyNotification(context!!).deliverNotification(title, message)
+            val id = intent.getIntExtra("id", 0)
+            MyNotification(context!!).deliverNotification(title, message, id)
         }
     }
 
@@ -24,12 +27,14 @@ class Alarm : BroadcastReceiver() {
         selectedHour: Int,
         selectedMinute: Int,
         title: String,
-        content: String
+        content: String,
+        sweetieId: Int
     ) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, Alarm::class.java).apply {
             putExtra("title", title)
             putExtra("message", content)
+            putExtra("id", sweetieId)
         }
         val pIntent = PendingIntent.getBroadcast(
             context, 0, intent,
