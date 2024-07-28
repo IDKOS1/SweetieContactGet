@@ -44,7 +44,7 @@ class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
 
     override fun onResume() {
         super.onResume()
-        if (::bookmarkAdapter.isInitialized) bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, SweetieInfo>))
+        refresh()
     }
 
     private fun initView() = with(binding) {
@@ -61,5 +61,13 @@ class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
 
     override fun updateLayoutManager(isGridLayout: Boolean) {
         Util.switchLayoutManager(requireContext(), rvBookmark, bookmarkAdapter, isGridLayout)
+    }
+
+    fun refresh() {
+        val newList = groupByIndex(bookmarkData as MutableMap<Int, SweetieInfo>)
+        if (::bookmarkAdapter.isInitialized) {
+            bookmarkAdapter.submitList(newList)
+            bookmarkAdapter.notifyItemRangeChanged(0, newList.size)
+        }
     }
 }

@@ -42,6 +42,12 @@ class ContactFragment : Fragment() {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        selectedSet.clear()
+        handleToolbarVisibility(false)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -91,17 +97,20 @@ class ContactFragment : Fragment() {
         binding.tvSelectAllBtn.setOnClickListener {
             selectAllOrClear()
             (vpAdapter.fragments[0] as AllContactFragment).refresh()
+            (vpAdapter.fragments[1] as BookmarkFragment).refresh()
         }
         binding.tvBookmarkBtn.setOnClickListener {
             changedBookmark(selectedSet)
+            selectedSet.clear()
             (vpAdapter.fragments[0] as AllContactFragment).refresh()
+            (vpAdapter.fragments[1] as BookmarkFragment).refresh()
             handleToolbarVisibility(false)
             binding.vpContactViewPager.currentItem = 1
         }
         binding.tvDeleteBtn.setOnClickListener {
             deleteSweetieInfo(selectedSet)
             (vpAdapter.fragments[0] as AllContactFragment).refresh()
-            (vpAdapter.fragments[1] as BookmarkFragment).onResume()
+            (vpAdapter.fragments[1] as BookmarkFragment).refresh()
             handleToolbarVisibility(false)
         }
     }
