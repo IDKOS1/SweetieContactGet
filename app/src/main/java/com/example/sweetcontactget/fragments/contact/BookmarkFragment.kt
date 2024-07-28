@@ -34,7 +34,6 @@ class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        bookmarkAdapter = ContactAdapter(requireContext())
         rvBookmark = binding.rvBookmark
     }
 
@@ -45,10 +44,11 @@ class BookmarkFragment : Fragment(), ContactFragment.LayoutManagerSwitchable {
 
     override fun onResume() {
         super.onResume()
-        bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, SweetieInfo>))
+        if (::bookmarkAdapter.isInitialized) bookmarkAdapter.submitList(groupByIndex(bookmarkData as MutableMap<Int, SweetieInfo>))
     }
 
     private fun initView() = with(binding) {
+        bookmarkAdapter = ContactAdapter(requireContext())
         rvBookmark.apply {
             adapter = bookmarkAdapter
             layoutManager = LinearLayoutManager(this.context)

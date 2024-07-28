@@ -39,7 +39,11 @@ class MainActivity : AppCompatActivity() {
         requestPermissions()
 
         binding.bottomNavigationView.selectedItemId = R.id.contactsItem
-
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) getContactList()
     }
 
     private fun initNavigationBar() {
@@ -111,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 val id =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
                 val sweetie = hashMap[id] ?: SweetieInfo(
-                    null, "", "", "", "", "",0, "", 0, false
+                    null, "", "", "", "", "", 0, "", 0, false
                 )
 
                 when (mimeType) {
@@ -214,7 +218,7 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 0 && grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED)
+        if (requestCode == 0 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
             getContactList()
     }
 }
