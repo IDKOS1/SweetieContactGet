@@ -117,6 +117,9 @@ class DetailActivity : AppCompatActivity() {
                     NotificationDialog(this@DetailActivity) { notificationDate ->
                         // 선택된 날짜를 처리
                         if (notificationDate >= LocalDateTime.now()) {
+
+                            val mentList = listOf(R.string.notification_1,R.string.notification_2,R.string.notification_3,R.string.notification_4,R.string.notification_5,R.string.notification_6)
+
                             sweetie?.let { sweetie ->
                                 Alarm().addAlarm(
                                     this@DetailActivity,
@@ -126,7 +129,7 @@ class DetailActivity : AppCompatActivity() {
                                     notificationDate.hour,
                                     notificationDate.minute,
                                     sweetie.name,
-                                    "${sweetie.name}님 의 알림"
+                                    getString(mentList.random(),DataObject.myProfileData.name.takeLast(2))
                                 )
                             }
 
