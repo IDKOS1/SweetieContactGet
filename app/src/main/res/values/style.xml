@@ -67,6 +67,8 @@
 
     <style name="BirthdayDatePicker" parent="android:Widget.Material.DatePicker">
         <item name="android:datePickerMode">spinner</item>
+        <item name="colorControlNormal">@color/secondary</item>
+        <item name="android:textColorPrimary">@color/primary</item>
     </style>
 
     <style name="EventDatePicker" parent="android:Widget.Material.DatePicker">
