@@ -7,15 +7,16 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import com.example.sweetcontactget.R
 import java.util.Calendar
 
 class Alarm : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent != null) {
-            val title = intent.getStringExtra("title") ?: "알림"
-            val message = intent.getStringExtra("message") ?: "알림입니다."
+            val title = intent.getStringExtra("title") ?: context?.getString(R.string.notificate)
+            val message = intent.getStringExtra("message") ?: context?.getString(R.string.notification)
             val id = intent.getIntExtra("id", 0)
-            MyNotification(context!!).deliverNotification(title, message, id)
+            MyNotification(context!!).deliverNotification(title!!, message!!, id)
         }
     }
 
