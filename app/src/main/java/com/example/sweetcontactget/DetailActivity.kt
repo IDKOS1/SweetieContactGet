@@ -117,6 +117,9 @@ class DetailActivity : AppCompatActivity() {
                     NotificationDialog(this@DetailActivity) { notificationDate ->
                         // 선택된 날짜를 처리
                         if (notificationDate >= LocalDateTime.now()) {
+
+                            val mentList = listOf(R.string.notification_1,R.string.notification_2,R.string.notification_3,R.string.notification_4,R.string.notification_5,R.string.notification_6)
+
                             sweetie?.let { sweetie ->
                                 Alarm().addAlarm(
                                     this@DetailActivity,
@@ -126,12 +129,12 @@ class DetailActivity : AppCompatActivity() {
                                     notificationDate.hour,
                                     notificationDate.minute,
                                     sweetie.name,
-                                    "${sweetie.name}님 의 알림"
+                                    getString(mentList.random(),DataObject.myProfileData.name.takeLast(2))
                                 )
                             }
 
                             "${notificationDate.year}년 ${notificationDate.monthValue}월 ${notificationDate.dayOfMonth}일 ${notificationDate.hour}시 ${notificationDate.minute}분".also {
-                                tvDetailEvent.text = it
+                                sweetie?.event = it
                             }
 
                             updateDetail()
@@ -216,6 +219,7 @@ class DetailActivity : AppCompatActivity() {
                 tvDetailNumber.text = sweetie.number
                 tvDetailNumber2.text = sweetie.secondNumber
                 tvDetailNumber3.text = sweetie.thirdNumber
+                tvDetailEvent.text = sweetie.event
                 rbHeartRating.rating = sweetie.heart / 20.toFloat()
                 tvDetailMemo.text = sweetie.memo
                 tbDetailMark.isChecked = sweetie.isMarked
