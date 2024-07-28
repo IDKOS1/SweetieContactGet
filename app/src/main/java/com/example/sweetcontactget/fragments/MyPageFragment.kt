@@ -70,6 +70,10 @@ class MyPageFragment : Fragment() {
         binding.run {
             updateMyInfo()
 
+            ivMypageSetting.setOnClickListener {
+                Util.showToast(requireContext(), "준비중입니다.")
+            }
+
             ivMypageProfile.setOnClickListener {
                 pickImageLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             }
