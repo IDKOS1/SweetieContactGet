@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetcontactget.DetailActivity
 import com.example.sweetcontactget.R
 import com.example.sweetcontactget.data.Contact
-import com.example.sweetcontactget.data.DataObject.addSelection
-import com.example.sweetcontactget.data.DataObject.contactData
-import com.example.sweetcontactget.data.DataObject.removeSelection
+import com.example.sweetcontactget.data.DataObject.contactList
 import com.example.sweetcontactget.data.DataObject.selectedSet
 import com.example.sweetcontactget.util.KoreanMatcher
 import com.example.sweetcontactget.databinding.IndexHolderBinding
@@ -96,7 +94,7 @@ class ContactAdapter(private val context: Context) :
         }
 
         private fun handleSelection(id: Int) = with(binding) {
-            if (cbSelect.isChecked) removeSelection(id) else addSelection(id)
+            if (cbSelect.isChecked) selectedSet.remove(id) else selectedSet.add(id)
             isSelectionMode = selectedSet.size > 0
             cbSelect.isChecked = !cbSelect.isChecked
             itemClickListener?.onItemLongClick(isSelectionMode)
@@ -206,8 +204,8 @@ class ContactAdapter(private val context: Context) :
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
                 return FilterResults().apply {
-                    values = if (charSequence.isNullOrBlank()) contactData else onFilter(
-                        contactData,
+                    values = if (charSequence.isNullOrBlank()) contactList else onFilter(
+                        contactList,
                         charSequence.toString()
                     )
                 }
