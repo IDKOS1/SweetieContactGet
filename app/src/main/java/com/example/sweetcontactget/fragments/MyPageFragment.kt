@@ -135,7 +135,7 @@ class MyPageFragment : Fragment() {
             ivMypageProfile.setImageResource(userData.imgSrc)
             tvMypageName.text = userData.name
             tvMypageNumber.text =
-                userData.phone_number.replace(Regex("(\\d{3})(\\d{4})(\\d{4})"), "$1-$2-$3")
+                userData.phoneNumber.replace(Regex("(\\d{3})(\\d{4})(\\d{4})"), "$1-$2-$3")
             tvMypageBirthday.text =
                 "${birthday.year}년 ${birthday.monthValue}월 ${birthday.dayOfMonth}일"
             tvMypageAddres.text = userData.address
