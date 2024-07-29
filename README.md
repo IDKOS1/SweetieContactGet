@@ -80,6 +80,17 @@
 
 ✨ 리니어, 그리드 레이아웃 토글 기능
 
+<table align="center">
+<tr>
+<th><b>전체 연락처 목록</b></td>
+<th><b>즐겨찾기 연락처 목록</b></td>
+</tr>
+<tr>
+<td><img src="{전체 연락처 목록 gif 링크}" width="320px" /></td>
+<td><img src="{즐겨찾기 연락처 목록 gif 링크}" width="320px" /></td>
+</tr>
+</table>
+
 ### 💌 연락처 추가
 
 ✨ 새로운 미소녀의 연락처를 추가
@@ -91,6 +102,17 @@
 ✨ 최대 3가지의 전화번호 저장 가능
 
 ✨ 어떤 관계인지 설정 가능
+
+<table align="center">
+<tr>
+<th><b>연락처 추가</b></td>
+<th><b>사진 편집</b></td>
+</tr>
+<tr>
+<td><img src="{연락처 추가 gif 링크}" width="320px" /></td>
+<td><img src="{사진 편집집 gif 링크}" width="320px" /></td>
+</tr>
+</table>
 
 ### 💌 상세 정보
 
@@ -108,6 +130,17 @@
 
 ✨ 미소녀에게 직접 연락이 오는 듯한 알림 받기 가능
 
+<table align="center">
+<tr>
+<th><b>상세 정보</b></td>
+<th><b>알림</b></td>
+</tr>
+<tr>
+<td><img src="{상세 정보 gif 링크}" width="320px" /></td>
+<td><img src="{알림 gif 링크}" width="320px" /></td>
+</tr>
+</table>
+
 ### 💌 내 정보
 
 ✨ 사용자 정보 편집
@@ -115,6 +148,17 @@
 ✨ 사용자의 이름을 알림에 추가해 몰입감 향상
 
 ✨ DatePicker를 통한 편리한 생일 설정
+
+<table align="center">
+<tr>
+<th><b>사용자 정보</b></td>
+<th><b>DatePicker</b></td>
+</tr>
+<tr>
+<td><img src="{사용자 정보 gif 링크}" width="320px" /></td>
+<td><img src="{DatePicker gif 링크}" width="320px" /></td>
+</tr>
+</table>
 
 ### 💌 랜덤 전화
 
@@ -126,6 +170,16 @@
 
 ✨ 랜덤으로 전화를 걸었던 미소녀들의 목록 확인 가능
 
+<table align="center">
+<tr>
+<th><b>랜덤 전화</b></td>
+<th><b>랜덤 전화 기록</b></td>
+</tr>
+<tr>
+<td><img src="{랜덤 전화 gif 링크}" width="320px" /></td>
+<td><img src="{랜덤 전화 기록 gif 링크}" width="320px" /></td>
+</tr>
+</table>
 
 ## 💖 기술 스택
 
