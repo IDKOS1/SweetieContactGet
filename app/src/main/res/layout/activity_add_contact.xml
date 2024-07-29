@@ -14,7 +14,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="1000dp">
+            android:layout_height="1000sp">
 
             <ImageView
                 android:id="@+id/iv_add_contact_image"
@@ -476,9 +476,9 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:fontFamily="@font/yeonaesidae_b"
-                android:layout_width="125dp"
-                android:layout_height="50dp"
-                android:paddingTop="5dp"
+                android:layout_width="125sp"
+                android:layout_height="50sp"
+                android:paddingTop="5sp"
                 android:background="@drawable/btn"
                 app:layout_constraintTop_toTopOf="@id/btn_add_contact_cancel"
                 app:layout_constraintEnd_toEndOf="@id/cl_add_contact_memo"/>

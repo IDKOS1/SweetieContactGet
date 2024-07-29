@@ -99,6 +99,9 @@ class AddContactActivity : AppCompatActivity() {
             count--
             if (count == 1) {
                 binding.clAddContactPhoneNumber3.visibility = View.GONE
+                binding.etAddContactPhoneNumber3.text = null
+                binding.tvAddContactWrongNumber3.visibility = View.GONE
+                isPhoneNumber3 = true
                 binding.tvAddContactAddPhoneNumber.visibility = View.VISIBLE
                 isPhoneNumber3 = true
                 binding.etAddContactPhoneNumber3.text.clear()
@@ -106,6 +109,9 @@ class AddContactActivity : AppCompatActivity() {
 
             if (count == 0) {
                 binding.clAddContactPhoneNumber2.visibility = View.GONE
+                binding.etAddContactPhoneNumber2.text = null
+                binding.tvAddContactWrongNumber2.visibility = View.GONE
+                isPhoneNumber2 = true
                 binding.tvAddContactDeletePhoneNumber.visibility = View.GONE
                 isPhoneNumber2 = true
                 binding.etAddContactPhoneNumber2.text.clear()
