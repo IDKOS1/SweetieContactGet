@@ -35,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
 
             pickImageUri = result.uriContent
             binding.ivDetailProfile.setImageURI(pickImageUri)
-
+            sweetie?.imgSrc = binding.ivDetailProfile.drawable
         } else {
             val exception = result.error
         }
@@ -118,7 +118,14 @@ class DetailActivity : AppCompatActivity() {
                         // 선택된 날짜를 처리
                         if (notificationDate >= LocalDateTime.now()) {
 
-                            val mentList = listOf(R.string.notification_1,R.string.notification_2,R.string.notification_3,R.string.notification_4,R.string.notification_5,R.string.notification_6)
+                            val mentList = listOf(
+                                R.string.notification_1,
+                                R.string.notification_2,
+                                R.string.notification_3,
+                                R.string.notification_4,
+                                R.string.notification_5,
+                                R.string.notification_6
+                            )
 
                             sweetie?.let { sweetie ->
                                 Alarm().addAlarm(
@@ -129,7 +136,10 @@ class DetailActivity : AppCompatActivity() {
                                     notificationDate.hour,
                                     notificationDate.minute,
                                     sweetie.name,
-                                    getString(mentList.random(),DataObject.myProfileData.name.takeLast(2)),
+                                    getString(
+                                        mentList.random(),
+                                        DataObject.myProfileData.name.takeLast(2)
+                                    ),
                                     sweetieId
                                 )
                             }
