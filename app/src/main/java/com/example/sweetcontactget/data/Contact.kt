@@ -20,4 +20,5 @@ data class SweetieInfo(
     var memo: String,
     var heart: Int,
     var isMarked: Boolean,
+    var isCleared: Boolean = false
 ) : Contact()

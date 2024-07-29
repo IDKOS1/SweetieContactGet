@@ -8,10 +8,11 @@ import com.example.sweetcontactget.util.KoreanMatcher.groupByIndex
 import com.example.sweetcontactget.util.Util.removeAll
 import com.example.sweetcontactget.util.Util.sortedByName
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 object DataObject {
     private val context: Context by lazy { ContactApplication.applicationContext() }
-    
+
     fun getValidKeys(): List<Int> {
         return contactMap.keys.toList()
     }
@@ -65,8 +66,39 @@ object DataObject {
     fun increaseHeart(sweetieId: Int, heart: Int) {
         contactMap[sweetieId]?.let {
             it.heart += heart
-            if (it.heart >= 100) it.heart = 100
+            if (it.heart >= 100) {
+                it.heart = 100
+
+                if(!it.isCleared) {
+                    it.isCleared = true
+                    val mentList = listOf(
+                        R.string.clear_notification_1,
+                        R.string.clear_notification_2,
+                        R.string.clear_notification_3,
+                        R.string.clear_notification_4,
+                        R.string.clear_notification_5,
+                        R.string.clear_notification_6
+                    )
+
+                    val currentTime = LocalDateTime.now()
+                    Alarm().addAlarm(
+                        context,
+                        currentTime.year,
+                        currentTime.monthValue,
+                        currentTime.dayOfMonth,
+                        currentTime.hour,
+                        currentTime.minute + 1,
+                        it.name,
+                        context.getString(
+                            mentList.random(),
+                            myProfileData.name.takeLast(2)
+                        ),
+                        sweetieId
+                    )
+                }
+            }
         }
+
     }
 
     fun editProfile(editTarget: String, content: String) {
@@ -101,7 +133,7 @@ object DataObject {
 
     val myProfileData: MyProfile = MyProfile(
         R.drawable.img_kangjin,
-        "이강진",
+        "김윤재",
         "01078984555",
         "경기도 오산시 너구리구",
         LocalDate.of(1999, 5, 11),
@@ -359,7 +391,7 @@ object DataObject {
             thirdNumber = null,
             relationship = 0,
             memo = "효율적이다.",
-            heart = 0,
+            heart = 80,
             isMarked = false
         ),
         19 to SweetieInfo(

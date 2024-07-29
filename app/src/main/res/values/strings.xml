@@ -122,6 +122,13 @@
     <string name="notification_4">야! 지금 나한테 빨리 전화해</string>
     <string name="notification_5">혹시..뭐 잊은거 없어..?</string>
     <string name="notification_6">%s.. 보고 싶어</string>
+
+    <string name="clear_notification_1">%s.. 나 이제 니가 좋아진거같애..</string>
+    <string name="clear_notification_2">%s! 우리 오늘 부터 1일 인거야!</string>
+    <string name="clear_notification_3">%s 우리 무슨 사이야..?</string>
+    <string name="clear_notification_4">%s. 오늘 너를 갖고 말거야</string>
+    <string name="clear_notification_5">%s.. 사실 나 오랫동안 너를..</string>
+    <string name="clear_notification_6">혹시 무슨 요일이 가장 좋아? 네가 가장 좋아하는 요일에 우리 사귀면 좋겠어</string>
     <string name="notification">알림입니다.</string>
     <string name="notificate">알림</string>
     <string name="invalid_input">유효하지 않은 입력 입니다. 다시 확인해 주세요</string>
