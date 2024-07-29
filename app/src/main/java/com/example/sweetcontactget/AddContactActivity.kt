@@ -100,11 +100,15 @@ class AddContactActivity : AppCompatActivity() {
             if (count == 1) {
                 binding.clAddContactPhoneNumber3.visibility = View.GONE
                 binding.tvAddContactAddPhoneNumber.visibility = View.VISIBLE
+                isPhoneNumber3 = true
+                binding.etAddContactPhoneNumber3.text.clear()
             }
 
             if (count == 0) {
                 binding.clAddContactPhoneNumber2.visibility = View.GONE
                 binding.tvAddContactDeletePhoneNumber.visibility = View.GONE
+                isPhoneNumber2 = true
+                binding.etAddContactPhoneNumber2.text.clear()
             }
         }
 
