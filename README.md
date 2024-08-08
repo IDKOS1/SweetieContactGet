@@ -63,10 +63,9 @@
 </tr>
 <tr>
 <td><img src="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fe056959e-0d34-4961-abff-aedb29af1a85%2Fe49747b0-7593-49fc-8756-b7b1fa700df1%2FUntitled.png?table=block&id=f8b34b12-cbde-4e2f-ac42-a0d104c35bbe&spaceId=e056959e-0d34-4961-abff-aedb29af1a85&width=2000&userId=aff6a4cb-6a70-4741-9c38-f6b264847827&cache=v2" width="320px" /></td>
-<td><img src="https://file.notion.so/f/f/e056959e-0d34-4961-abff-aedb29af1a85/c9fe39b4-482e-4a20-9d53-ee4b587d4435/start-activity.gif?id=f64ad620-e858-43f6-80d0-1538b7e7f5e3&table=block&spaceId=e056959e-0d34-4961-abff-aedb29af1a85&expirationTimestamp=1722319200000&signature=Y0KWBDMWDXLbNes-_N1zVfVgpGj7MYFs-Xwnu5LFiBU" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/4e7b7880-f6dd-4ba2-adfb-bb174f978fb4" width="320px" /></td>
 </tr>
 </table>
-
 
 ### 💌 연락처 목록 조회
 
@@ -86,8 +85,8 @@
 <th><b>즐겨찾기 연락처 목록</b></td>
 </tr>
 <tr>
-<td><img src="{전체 연락처 목록 gif 링크}" width="320px" /></td>
-<td><img src="{즐겨찾기 연락처 목록 gif 링크}" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/ea72a51d-310c-4b6d-b9bd-57cb97ac618f" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/a35a84d7-cee1-4db7-9ed0-aea4f2599c12" width="320px" /></td>
 </tr>
 </table>
 
@@ -109,8 +108,8 @@
 <th><b>사진 편집</b></td>
 </tr>
 <tr>
-<td><img src="{연락처 추가 gif 링크}" width="320px" /></td>
-<td><img src="{사진 편집집 gif 링크}" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/b7f0fb9f-98ee-4672-beba-9837f39b0ec2" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/ae9c11bf-0fd9-4fec-b953-39f2bee334d6" width="320px" /></td>
 </tr>
 </table>
 
@@ -136,8 +135,8 @@
 <th><b>알림</b></td>
 </tr>
 <tr>
-<td><img src="{상세 정보 gif 링크}" width="320px" /></td>
-<td><img src="{알림 gif 링크}" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/f15991af-d793-460e-b235-38aa4eac14c2" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/dff1b826-e92c-4afd-96ed-5795c3a3ff01" width="320px" /></td>
 </tr>
 </table>
 
@@ -155,8 +154,8 @@
 <th><b>DatePicker</b></td>
 </tr>
 <tr>
-<td><img src="{사용자 정보 gif 링크}" width="320px" /></td>
-<td><img src="{DatePicker gif 링크}" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/160f7933-e03c-4adb-b7c4-3e97b28b5d21" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/d46ae138-c14d-47a7-a6ff-aa9470551e86" width="320px" /></td>
 </tr>
 </table>
 
@@ -176,8 +175,8 @@
 <th><b>랜덤 전화 기록</b></td>
 </tr>
 <tr>
-<td><img src="{랜덤 전화 gif 링크}" width="320px" /></td>
-<td><img src="{랜덤 전화 기록 gif 링크}" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/96000e54-2c20-4e9f-b5a8-7d0c4841dd01" width="320px" /></td>
+<td><img src="https://github.com/user-attachments/assets/857eac4c-7ed3-45bd-9779-1c545cc7bab1" width="320px" /></td>
 </tr>
 </table>
 
